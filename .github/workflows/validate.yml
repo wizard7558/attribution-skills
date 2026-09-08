@@ -1,0 +1,39 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref
+        run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
+
+      - name: Validate every skill
+        run: |
+          shopt -s nullglob
+          dirs=(skills/*/)
+          if [ "${#dirs[@]}" -eq 0 ]; then
+            echo "No skills found under skills/ yet — nothing to validate."
+            exit 0
+          fi
+          for d in "${dirs[@]}"; do
+            echo "Validating $d"
+            skills-ref validate "$d"
+          done
+
+  confidentiality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for confidential data
+        run: bash scripts/check-confidential.sh
