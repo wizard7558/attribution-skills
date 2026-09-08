@@ -1,6 +1,10 @@
-# Attribution skills
+# Attribution Skills by Bellaso
+
+Teach your agent to do attribution on the data you already have.
 
 Agent skills for marketing attribution, revenue operations, and marketing measurement, written by Riley Sorenson from production work. The skills work with source exports and infrastructure you control, without depending on a particular analytics product.
+
+Created by Riley Sorenson, the founder of [Bellaso](https://bellaso.app). These skills bring the same focus on clear attribution rules and inspectable evidence to agents working with the data and tools you already use. Use them independently without a Bellaso account.
 
 ## Install
 
