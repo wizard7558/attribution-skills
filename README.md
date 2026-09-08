@@ -21,6 +21,7 @@ npx skills add wizard7558/attribution-skills --skill ga4-bigquery-export
 | Skill | What it does | Status |
 | --- | --- | --- |
 | [`ga4-bigquery-export`](skills/ga4-bigquery-export) | Sessionize and attribute raw GA4 BigQuery export events | Draft |
+| [`first-party-pixel`](skills/first-party-pixel) | Intake-driven setup of a first-party pixel, collector, and Postgres schema the site owner controls | Draft |
 
 ## Conventions
 
