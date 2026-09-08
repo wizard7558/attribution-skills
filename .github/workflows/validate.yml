@@ -6,29 +6,56 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Pixel upgrade coverage loads the legacy schema from commit 2c240a3.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Install skills-ref
         run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
 
-      - name: Validate every skill
+      - name: Validate every skill and enforce the document limit
         run: |
           shopt -s nullglob
           dirs=(skills/*/)
           if [ "${#dirs[@]}" -eq 0 ]; then
-            echo "No skills found under skills/ yet — nothing to validate."
-            exit 0
+            echo "No skills found under skills/."
+            exit 1
           fi
           for d in "${dirs[@]}"; do
-            echo "Validating $d"
             skills-ref validate "$d"
           done
+          python3 - <<'PY'
+          from pathlib import Path
+          for skill in sorted(Path("skills").glob("*/SKILL.md")):
+              lines = len(skill.read_text().splitlines())
+              if lines >= 500:
+                  raise SystemExit(f"{skill}: {lines} lines; must stay under 500")
+              print(f"PASS {skill}: {lines} lines")
+          PY
+
+      - name: Check generated artifacts, classifiers, GA4 fixtures, and model scorer
+        run: bash scripts/run-tests.sh --offline
+
+      - name: Install PostgreSQL for the disposable runtime test
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql postgresql-client libpq-dev
+          pg_config --bindir >> "$GITHUB_PATH"
+
+      - name: Verify standalone collector and repository migration against PostgreSQL
+        # initdb runs as the regular runner user. Each roundtrip creates and removes its own cluster.
+        run: env -u DATABASE_URL PGPORT_TEST=55439 COLLECTOR_PORT=8799 bash scripts/run-tests.sh --postgres
 
   confidentiality:
     runs-on: ubuntu-latest

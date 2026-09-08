@@ -4,7 +4,7 @@ description: Help a website owner stand up a first-party tracking pixel, a colle
 license: MIT
 metadata:
   author: Riley Sorenson
-  version: "0.1"
+  version: "0.2.0"
 ---
 
 # First-party pixel
@@ -162,12 +162,28 @@ nightly export to a warehouse rather than scaling Postgres compute indefinitely.
 patterns in the `ga4-bigquery-export` skill so the output shapes match; if it is `none`, skip
 this and revisit if event volume grows.
 
+## Attribution taxonomy integration
+
+The collector imports the shared `channel-taxonomy.mjs` module and exposes only the compatibility
+wrapper `deriveChannel(input)`, which returns `classifyChannel(input)`. New touchpoints persist
+`taxonomy_version`; `srsltid` is retained as raw evidence and never establishes paid traffic.
+Sessions expose `source_system`, `source_scope`, `visitor_key`, `is_new_user`, `attribution_basis`,
+`native_channel`, `taxonomy_version`, and complete `click_ids`. Pixel attribution is
+`first_touch`; GA4 attribution is session last-click, so these outputs are not parity claims.
+
+Existing touchpoints with legacy labels are mapped in the session view (`Display` → Paid Other,
+`Affiliates` → Affiliate, `Unassigned` → Other), retain the raw label as `native_channel`, and
+are marked `taxonomy_version = 'legacy'`. Sessions without a touchpoint use only a demonstrably
+valid, signal-free landing URL for Direct and are marked `legacy/unclassified`.
+
 ## Outputs
 
-The schema exposes two views for downstream use, matching the column names and channel labels
-(Display, Paid Search, Paid Social, Paid Other, Organic Search, Email, SMS, Affiliates,
-Referral, Organic Social, Direct, Unassigned) of the `ga4-bigquery-export` skill's outputs, so
-downstream attribution work is source-agnostic:
+The schema exposes two views for downstream use. Canonical channels are Paid Search, Paid Social,
+Paid Other, Organic Search, Organic Social, Email, SMS, Direct, Referral, Affiliate, and Other.
+The daily view is scoped by site and UTC event date, and appends `new_users`, `key_events`,
+`source_system`, `source_scope`, `taxonomy_version`, `attribution_basis`, `currency`, and
+`conversion_value_status`. Monetary values remain pixel-native `conversion_value`; unknown or
+mixed currency is NULL with a status. No GA4 purchase equivalence is fabricated.
 
 - **`sessions`** - one row per session: visitor, timing, landing/exit pages, source, medium,
   channel, click ids.

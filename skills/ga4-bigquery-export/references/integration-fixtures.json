@@ -1,0 +1,1643 @@
+{
+  "click_id_names": [
+    "gclid",
+    "dclid",
+    "gbraid",
+    "wbraid",
+    "msclkid",
+    "fbclid",
+    "ttclid",
+    "rdt_cid",
+    "li_fat_id",
+    "twclid",
+    "epik",
+    "sccid",
+    "srsltid"
+  ],
+  "events": [
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/?gclid=synthetic-gclid&dclid=synthetic-dclid&gbraid=synthetic-gbraid&wbraid=synthetic-wbraid&msclkid=synthetic-msclkid&fbclid=synthetic-fbclid&ttclid=synthetic-ttclid&rdt_cid=synthetic-rdt_cid&li_fat_id=synthetic-li_fat_id&twclid=synthetic-twclid&epik=synthetic-epik&sccid=synthetic-sccid&srsltid=synthetic-srsltid",
+      "source": "newsletter",
+      "medium": "email",
+      "campaign": "first",
+      "native": "Email",
+      "gclid": "synthetic-gclid",
+      "srsltid": "synthetic-srsltid"
+    },
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000001,
+      "event": "purchase",
+      "transaction": "one",
+      "revenue": 10,
+      "source": "different",
+      "medium": "cpc",
+      "campaign": "late",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000002,
+      "event": "purchase",
+      "transaction": "one",
+      "revenue": 10,
+      "source": "different",
+      "medium": "cpc",
+      "campaign": "late",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000003,
+      "event": "purchase",
+      "transaction": "two",
+      "revenue": 20,
+      "source": "different",
+      "medium": "cpc",
+      "campaign": "late",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000004,
+      "event": "generate_lead",
+      "transaction": null,
+      "revenue": null,
+      "source": "different",
+      "medium": "cpc",
+      "campaign": "late",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-multi",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000005,
+      "event": "sign_up",
+      "transaction": null,
+      "revenue": null,
+      "source": "different",
+      "medium": "cpc",
+      "campaign": "late",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-unknown-revenue",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/video",
+      "native": "Paid Video"
+    },
+    {
+      "visitor": "synthetic-unknown-revenue",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000001,
+      "event": "purchase",
+      "transaction": "three"
+    },
+    {
+      "visitor": "synthetic-unknown-revenue",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000002,
+      "event": "purchase",
+      "transaction": "four",
+      "revenue": 5
+    },
+    {
+      "visitor": "synthetic-display",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/display",
+      "native": "Display"
+    },
+    {
+      "visitor": "synthetic-direct-late",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/",
+      "source": "(direct)",
+      "medium": "(none)",
+      "native": "Direct"
+    },
+    {
+      "visitor": "synthetic-direct-late",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000001,
+      "event": "page_view",
+      "url": "https://example.test/?gclid=late",
+      "gclid": "late",
+      "source": "google",
+      "medium": "cpc",
+      "native": "Paid Search"
+    },
+    {
+      "visitor": "synthetic-unknown",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "source": "(not set)",
+      "medium": "(not set)",
+      "native": "Unassigned"
+    },
+    {
+      "visitor": "synthetic-direct",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/"
+    },
+    {
+      "visitor": "synthetic-email",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/",
+      "medium": "email"
+    },
+    {
+      "visitor": "synthetic-midnight",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/",
+      "referrer": "https://www.google.com/"
+    },
+    {
+      "visitor": "synthetic-midnight",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260902",
+      "timestamp": 1788307200000000,
+      "event": "page_view",
+      "url": "https://example.test/next"
+    },
+    {
+      "visitor": "synthetic-excluded",
+      "session": 100,
+      "number": 1,
+      "event_date": "20260831",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/"
+    },
+    {
+      "visitor": "synthetic-missing-id",
+      "session": null,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "url": "https://example.test/"
+    },
+    {
+      "visitor": "synthetic-email",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000001,
+      "event": "purchase",
+      "medium": "email",
+      "transaction": "email-duplicate",
+      "revenue": null
+    },
+    {
+      "visitor": "synthetic-email",
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000002,
+      "event": "purchase",
+      "medium": "email",
+      "transaction": "email-duplicate",
+      "revenue": 50
+    },
+    {
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "visitor": "synthetic-fragment",
+      "url": "https://example.test/#?gclid=forged"
+    },
+    {
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "visitor": "synthetic-invalid",
+      "url": "not-url?gclid=forged"
+    },
+    {
+      "session": 100,
+      "number": 2,
+      "event_date": "20260901",
+      "timestamp": 1788220800000000,
+      "event": "page_view",
+      "visitor": "synthetic-encoded",
+      "url": "https://example.test/?%64clid=encoded"
+    },
+    {
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000001,
+      "event": "purchase",
+      "visitor": "synthetic-unknown",
+      "transaction": null,
+      "revenue": 25
+    },
+    {
+      "session": 100,
+      "number": 1,
+      "event_date": "20260901",
+      "timestamp": 1788220800000002,
+      "event": "purchase",
+      "visitor": "synthetic-unknown",
+      "transaction": "",
+      "revenue": 25
+    }
+  ],
+  "classifier_cases": [
+    {
+      "id": "null",
+      "input": null,
+      "expected": "Other"
+    },
+    {
+      "id": "empty",
+      "input": {},
+      "expected": "Other"
+    },
+    {
+      "id": "dclid",
+      "input": {
+        "click_ids": {
+          "dclid": "x"
+        }
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "gclid",
+      "input": {
+        "click_ids": {
+          "gclid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "gbraid",
+      "input": {
+        "click_ids": {
+          "gbraid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "wbraid",
+      "input": {
+        "click_ids": {
+          "wbraid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "msclkid",
+      "input": {
+        "click_ids": {
+          "msclkid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "fbclid",
+      "input": {
+        "click_ids": {
+          "fbclid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "ttclid",
+      "input": {
+        "click_ids": {
+          "ttclid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "rdt_cid",
+      "input": {
+        "click_ids": {
+          "rdt_cid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "li_fat_id",
+      "input": {
+        "click_ids": {
+          "li_fat_id": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "twclid",
+      "input": {
+        "click_ids": {
+          "twclid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "epik",
+      "input": {
+        "click_ids": {
+          "epik": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "sccid",
+      "input": {
+        "click_ids": {
+          "sccid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "srsltid-not-paid",
+      "input": {
+        "click_ids": {
+          "srsltid": "x"
+        },
+        "landing_url": "https://example.test/?srsltid=x"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "bogus-null",
+      "input": {
+        "click_ids": {
+          "gclid": "null"
+        }
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "bogus-undefined",
+      "input": {
+        "click_ids": {
+          "gclid": "undefined"
+        }
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "bogus-object",
+      "input": {
+        "click_ids": {
+          "gclid": "[object Object]"
+        }
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "click-conflict-search-social",
+      "input": {
+        "click_ids": {
+          "gclid": "x",
+          "fbclid": "y"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "click-conflict-dclid-search",
+      "input": {
+        "click_ids": {
+          "dclid": "x",
+          "gclid": "y"
+        }
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "click-in-url",
+      "input": {
+        "landing_url": "https://example.test/?fbclid=abc"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "encoded-source-medium",
+      "input": {
+        "utm_source": "%67oogle",
+        "utm_medium": "%63pc"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-google",
+      "input": {
+        "network_id": "google_ads"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-pmax",
+      "input": {
+        "network_id": "google_ads_pmax"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-bing",
+      "input": {
+        "network_id": "bingads"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-facebook",
+      "input": {
+        "network_id": "facebook_ads"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "network-linkedin",
+      "input": {
+        "network_id": "linkedin_ads"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "network-reddit",
+      "input": {
+        "network_id": "reddit"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "network-tiktok",
+      "input": {
+        "network_id": "tiktok_campaign"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "network-stackadapt",
+      "input": {
+        "network_id": "stackadapt_ads"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "network-affiliate",
+      "input": {
+        "network_id": "affiliate"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "unknown-network-does-not-block",
+      "input": {
+        "network_id": "mystery",
+        "utm_medium": "email"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "paid-search-medium",
+      "input": {
+        "utm_source": "engine",
+        "utm_medium": "paid_search"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "paid-social-medium",
+      "input": {
+        "utm_source": "network",
+        "utm_medium": "paid-social"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "paid-social-source",
+      "input": {
+        "utm_source": "facebook",
+        "utm_medium": "paid"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "paid-search-source",
+      "input": {
+        "utm_source": "google.com",
+        "utm_medium": "paid"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "display",
+      "input": {
+        "utm_source": "google",
+        "utm_medium": "display"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "banner",
+      "input": {
+        "utm_source": "facebook",
+        "utm_medium": "banner"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "cpm",
+      "input": {
+        "utm_medium": "cpm"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "native-paid",
+      "input": {
+        "native_channel": "Audio"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "unpaid-native",
+      "input": {
+        "native_channel": "Organic Search"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "native-direct-after-paid",
+      "input": {
+        "native_channel": "Direct",
+        "utm_medium": "email"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "email",
+      "input": {
+        "utm_medium": "email"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "sms",
+      "input": {
+        "utm_medium": "SMS"
+      },
+      "expected": "SMS"
+    },
+    {
+      "id": "affiliate-medium",
+      "input": {
+        "utm_medium": "affiliates"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "organic-search",
+      "input": {
+        "utm_source": "google",
+        "utm_medium": "organic"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "organic-social",
+      "input": {
+        "utm_source": "instagram",
+        "utm_medium": "social"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "referral-medium",
+      "input": {
+        "utm_medium": "referral"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "source-google",
+      "input": {
+        "utm_source": "google.com"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "source-instagram",
+      "input": {
+        "utm_source": "instagram"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "shopify-email",
+      "input": {
+        "shopify_source_type": "email"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "shopify-sms",
+      "input": {
+        "shopify_source_type": "sms"
+      },
+      "expected": "SMS"
+    },
+    {
+      "id": "shopify-affiliate",
+      "input": {
+        "shopify_source_type": "affiliate"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "shopify-search",
+      "input": {
+        "shopify_source_type": "search"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "shopify-social",
+      "input": {
+        "shopify_source_type": "social"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "shopify-ad-no-platform",
+      "input": {
+        "shopify_source_type": "ad",
+        "shopify_source": "unknown"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "shopify-ad-google",
+      "input": {
+        "shopify_source_type": "ad",
+        "shopify_source": "google"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "shopify-ad-facebook",
+      "input": {
+        "shopify_source_type": "ad",
+        "shopify_source": "facebook"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "shopify-source-search",
+      "input": {
+        "shopify_source": "google"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "shopify-source-social",
+      "input": {
+        "shopify_source": "facebook"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "shopify-source-other",
+      "input": {
+        "shopify_source": "partner.example"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "referrer-search",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "https://www.google.com/search?q=x"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "referrer-social",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "https://m.facebook.com/post"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "referrer-external",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "https://partner.example/article"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "self-referrer",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "https://blog.shop.example/old"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "spoof-google-host",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "https://google.com.evil.test/x"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "malformed-referrer",
+      "input": {
+        "landing_url": "https://shop.example/path",
+        "referrer": "not a url"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "direct-valid",
+      "input": {
+        "landing_url": "https://shop.example/path"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "direct-native",
+      "input": {
+        "native_channel": "Direct"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "malformed-landing",
+      "input": {
+        "landing_url": "not a url"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "unknown-source",
+      "input": {
+        "utm_source": "mystery"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "unpaid-substring",
+      "input": {
+        "utm_medium": "unpaid"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "native-affiliates",
+      "input": {
+        "native_channel": "Affiliates"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "native-cross-network",
+      "input": {
+        "native_channel": "Cross-network"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "native-organic-video",
+      "input": {
+        "native_channel": "Organic Video"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "native-shopping",
+      "input": {
+        "native_channel": "Organic Shopping"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "native-ai",
+      "input": {
+        "native_channel": "AI Assistant"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "native-unassigned",
+      "input": {
+        "native_channel": "Unassigned"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "case-insensitive",
+      "input": {
+        "utm_source": "GOOGLE",
+        "utm_medium": "CPC"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "same-signal-a",
+      "input": {
+        "utm_source": "google",
+        "utm_medium": "cpc",
+        "click_ids": {
+          "gclid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "same-signal-b",
+      "input": {
+        "utm_medium": "cpc",
+        "utm_source": "google",
+        "click_ids": {
+          "gclid": "x"
+        }
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "ga4-direct-none",
+      "input": {
+        "utm_source": "(direct)",
+        "utm_medium": "(none)"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "ga4-direct-not-set",
+      "input": {
+        "utm_source": "(direct)",
+        "utm_medium": "(not set)"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "source-before-referrer",
+      "input": {
+        "utm_source": "google.com",
+        "referrer": "https://facebook.com/post"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "source-email",
+      "input": {
+        "utm_source": "mailchimp"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "source-newsletter",
+      "input": {
+        "utm_source": "newsletter"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "source-sms",
+      "input": {
+        "utm_source": "attentive"
+      },
+      "expected": "SMS"
+    },
+    {
+      "id": "source-affiliate-cj",
+      "input": {
+        "utm_source": "cj"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "network-affiliate-impact",
+      "input": {
+        "network_id": "impact"
+      },
+      "expected": "Affiliate"
+    },
+    {
+      "id": "source-google-uk",
+      "input": {
+        "utm_source": "google.co.uk"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "source-yahoo",
+      "input": {
+        "utm_source": "yahoo.com"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "source-tco",
+      "input": {
+        "utm_source": "t.co"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "spoof-google-uk",
+      "input": {
+        "utm_source": "google.co.uk.evil.test"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "shopify-seo",
+      "input": {
+        "shopify_source_type": "seo"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "shopify-post",
+      "input": {
+        "shopify_source_type": "post"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "shopify-referral",
+      "input": {
+        "shopify_source_type": "referral"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "shopify-direct",
+      "input": {
+        "shopify_source_type": "direct"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "shopify-unknown",
+      "input": {
+        "shopify_source_type": "unknown",
+        "shopify_source": "partner"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "utm-fallback-from-valid-landing",
+      "input": {
+        "landing_url": "https://example.test/?utm_source=google&utm_medium=cpc"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "malformed-landing-does-not-supply-click",
+      "input": {
+        "landing_url": "not a url?gclid=abc"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "referrer-without-landing",
+      "input": {
+        "referrer": "https://www.google.co.uk/search?q=x"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "referrer-without-landing-social",
+      "input": {
+        "referrer": "https://linkedin.com/post"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "click-beats-explicit-direct",
+      "input": {
+        "utm_source": "(direct)",
+        "utm_medium": "(none)",
+        "native_channel": "Direct",
+        "click_ids": {
+          "fbclid": "x"
+        }
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "paid-cpa-search-source",
+      "input": {
+        "utm_source": "google",
+        "utm_medium": "cpa"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "paid-video-other",
+      "input": {
+        "utm_source": "google",
+        "utm_medium": "paid_video"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "explicit-paid-search-beats-social",
+      "input": {
+        "utm_medium": "paid_search",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "explicit-paid-search-hyphen",
+      "input": {
+        "utm_medium": "paid-search",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "explicit-paid-search-space",
+      "input": {
+        "utm_medium": "paid search",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "explicit-paid-social-beats-search",
+      "input": {
+        "utm_medium": "paid social",
+        "utm_source": "google"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "explicit-paid-other-hyphen",
+      "input": {
+        "utm_medium": "paid-other",
+        "utm_source": "google"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "explicit-paid-other-space",
+      "input": {
+        "utm_medium": "paid other",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "explicit-paid-video-hyphen",
+      "input": {
+        "utm_medium": "paid-video",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "retargeting-search",
+      "input": {
+        "utm_medium": "retargeting",
+        "utm_source": "google"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "remarketing-social",
+      "input": {
+        "utm_medium": "remarketing",
+        "utm_source": "facebook"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "retargeting-unknown",
+      "input": {
+        "utm_medium": "retargeting",
+        "utm_source": "mystery"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "native-direct-defers-referrer",
+      "input": {
+        "native_channel": "Direct",
+        "referrer": "https://partner.test/"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "ga4-direct-defers-referrer",
+      "input": {
+        "utm_source": "(direct)",
+        "utm_medium": "(none)",
+        "referrer": "https://google.com/"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "shopify-direct-defers-source",
+      "input": {
+        "shopify_source_type": "direct",
+        "utm_source": "google"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "shopify-direct-defers-referrer",
+      "input": {
+        "shopify_source_type": "direct",
+        "referrer": "https://partner.test/"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "shopify-ad-before-search-source",
+      "input": {
+        "shopify_source_type": "ad",
+        "shopify_source": "facebook",
+        "utm_source": "google"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "shopify-ad-before-email-source",
+      "input": {
+        "shopify_source_type": "ad",
+        "shopify_source": "google",
+        "utm_source": "mailchimp"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "shopify-unknown-defers-referrer",
+      "input": {
+        "shopify_source_type": "odd",
+        "shopify_source": "odd",
+        "referrer": "https://partner.test/"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "shopify-unknown-defers-source",
+      "input": {
+        "shopify_source_type": "odd",
+        "shopify_source": "odd",
+        "utm_source": "google"
+      },
+      "expected": "Organic Search"
+    },
+    {
+      "id": "nonpaid-medium-before-shopify",
+      "input": {
+        "utm_medium": "email",
+        "shopify_source_type": "ad",
+        "shopify_source": "google"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "native-before-nonpaid-medium",
+      "input": {
+        "native_channel": "Referral",
+        "utm_medium": "email"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "paid-before-native",
+      "input": {
+        "utm_medium": "paid search",
+        "native_channel": "Email"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-before-paid-medium",
+      "input": {
+        "network_id": "facebook_ads",
+        "utm_medium": "paid search"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "click-before-network",
+      "input": {
+        "click_ids": {
+          "dclid": "yes"
+        },
+        "network_id": "facebook_ads"
+      },
+      "expected": "Paid Other"
+    },
+    {
+      "id": "organic-social-source",
+      "input": {
+        "utm_medium": "organic",
+        "utm_source": "facebook"
+      },
+      "expected": "Organic Social"
+    },
+    {
+      "id": "referral-medium-search-source",
+      "input": {
+        "utm_medium": "referral",
+        "utm_source": "google"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "referral-medium-self-host",
+      "input": {
+        "utm_medium": "referral",
+        "landing_url": "https://shop.test",
+        "referrer": "https://shop.test"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "native-decoded",
+      "input": {
+        "native_channel": "%20Paid%20Search%20"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "network-decoded",
+      "input": {
+        "network_id": "%20GOOGLE_ADS%20"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "shopify-decoded",
+      "input": {
+        "shopify_source_type": "%20AD%20",
+        "shopify_source": "%20FACEBOOK%20"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "click-placeholder-case",
+      "input": {
+        "click_ids": {
+          "gclid": "[OBJECT OBJECT]"
+        }
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "click-placeholder-decoded",
+      "input": {
+        "click_ids": {
+          "gclid": "%20%5Bobject%20object%5D%20"
+        }
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "click-array-skips-placeholder",
+      "input": {
+        "click_ids": [
+          {
+            "name": "gclid",
+            "value": "null"
+          },
+          {
+            "name": "gclid",
+            "value": "valid"
+          }
+        ]
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "landing-utm-null-fallback",
+      "input": {
+        "utm_source": null,
+        "utm_medium": null,
+        "landing_url": "https://shop.test/?utm_source=google&utm_medium=cpc"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "landing-utm-whitespace-fallback",
+      "input": {
+        "utm_source": "  ",
+        "utm_medium": "\t",
+        "landing_url": "https://shop.test/?utm_source=google&utm_medium=cpc"
+      },
+      "expected": "Paid Search"
+    },
+    {
+      "id": "landing-utm-explicit-wins",
+      "input": {
+        "utm_source": "facebook",
+        "utm_medium": "paid",
+        "landing_url": "https://shop.test/?utm_source=google&utm_medium=email"
+      },
+      "expected": "Paid Social"
+    },
+    {
+      "id": "malformed-host-no-click",
+      "input": {
+        "landing_url": "https://bad host/?gclid=abc"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "malformed-port-no-click",
+      "input": {
+        "landing_url": "https://shop.test:bad/?gclid=abc"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "malformed-referrer-host",
+      "input": {
+        "landing_url": "https://shop.test/",
+        "referrer": "https://bad host/"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "nonweb-landing-no-click",
+      "input": {
+        "landing_url": "ftp://shop.test/?gclid=abc"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "self-referrer-lookalike",
+      "input": {
+        "landing_url": "https://shop.test",
+        "referrer": "https://notshop.test"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "self-referrer-suffix-spoof",
+      "input": {
+        "landing_url": "https://shop.test",
+        "referrer": "https://shop.test.evil.test"
+      },
+      "expected": "Referral"
+    },
+    {
+      "id": "unknown-shopify-not-captured-direct",
+      "input": {
+        "landing_url": "https://shop.test",
+        "shopify_source_type": "odd"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "unknown-network-not-captured-direct",
+      "input": {
+        "landing_url": "https://shop.test",
+        "network_id": "odd"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "unknown-native-not-captured-direct",
+      "input": {
+        "landing_url": "https://shop.test",
+        "native_channel": "unknown"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "campaign-not-captured-direct",
+      "input": {
+        "landing_url": "https://shop.test/?utm_campaign=launch"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "malformed-encoding-preserved",
+      "input": {
+        "utm_medium": "%ZZemail"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "unknown-paid-substring",
+      "input": {
+        "utm_medium": "unpaid_social",
+        "utm_source": "mystery"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "fragment-not-click-evidence",
+      "input": {
+        "landing_url": "https://shop.test/#?gclid=abc"
+      },
+      "expected": "Direct"
+    },
+    {
+      "id": "malformed-source-host",
+      "input": {
+        "utm_source": "bad..google.com"
+      },
+      "expected": "Other"
+    },
+    {
+      "id": "source-literal-email",
+      "input": {
+        "utm_source": "email"
+      },
+      "expected": "Email"
+    },
+    {
+      "id": "source-literal-e-mail",
+      "input": {
+        "utm_source": "e-mail"
+      },
+      "expected": "Email"
+    }
+  ],
+  "expected": {
+    "sessions": 11,
+    "visitors": {
+      "synthetic-multi": {
+        "channel": "Paid Other",
+        "session_source": "newsletter",
+        "session_medium": "email",
+        "session_campaign": "first",
+        "events": "6",
+        "key_events": "5"
+      },
+      "synthetic-direct-late": {
+        "channel": "Direct"
+      },
+      "synthetic-unknown": {
+        "channel": "Other"
+      },
+      "synthetic-midnight": {
+        "channel": "Organic Search",
+        "event_date": "2026-09-01",
+        "events": "2"
+      },
+      "synthetic-fragment": {
+        "channel": "Direct"
+      },
+      "synthetic-invalid": {
+        "channel": "Other"
+      },
+      "synthetic-encoded": {
+        "channel": "Paid Other"
+      }
+    },
+    "daily": [
+      {
+        "event_date": "2026-09-01",
+        "channel": "Paid Other",
+        "sessions": "4",
+        "engaged_sessions": "2",
+        "new_users": "1",
+        "key_events": "7",
+        "purchases": "4",
+        "purchase_revenue_usd": null,
+        "revenue_status": "unknown",
+        "native_channel_groups": [
+          "Display",
+          "Email",
+          "Paid Video"
+        ],
+        "purchase_events_without_transaction_id": "0"
+      },
+      {
+        "event_date": "2026-09-01",
+        "channel": "Direct",
+        "sessions": "3",
+        "engaged_sessions": "1",
+        "new_users": "2",
+        "key_events": "0",
+        "purchases": "0",
+        "purchase_revenue_usd": "0.0",
+        "revenue_status": "no_purchases",
+        "native_channel_groups": [
+          "Direct"
+        ],
+        "purchase_events_without_transaction_id": "0"
+      },
+      {
+        "event_date": "2026-09-01",
+        "channel": "Other",
+        "sessions": "2",
+        "engaged_sessions": "1",
+        "new_users": "1",
+        "key_events": "2",
+        "purchases": "0",
+        "purchase_revenue_usd": null,
+        "revenue_status": "unkeyed_purchases",
+        "native_channel_groups": [
+          "Unassigned"
+        ],
+        "purchase_events_without_transaction_id": "2"
+      },
+      {
+        "event_date": "2026-09-01",
+        "channel": "Email",
+        "sessions": "1",
+        "engaged_sessions": "1",
+        "new_users": "0",
+        "key_events": "2",
+        "purchases": "1",
+        "purchase_revenue_usd": "50.0",
+        "revenue_status": "complete",
+        "native_channel_groups": [],
+        "purchase_events_without_transaction_id": "0"
+      },
+      {
+        "event_date": "2026-09-01",
+        "channel": "Organic Search",
+        "sessions": "1",
+        "engaged_sessions": "1",
+        "new_users": "0",
+        "key_events": "0",
+        "purchases": "0",
+        "purchase_revenue_usd": "0.0",
+        "revenue_status": "no_purchases",
+        "native_channel_groups": [],
+        "purchase_events_without_transaction_id": "0"
+      }
+    ]
+  }
+}

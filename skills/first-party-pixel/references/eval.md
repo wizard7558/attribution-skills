@@ -59,3 +59,17 @@ Pass requires all of:
 Fail on: proceeding straight to Step 1 of the build workflow without surfacing the three
 options; recommending a redundant pixel install when the user's stated need matches Option C
 (attribution fields only).
+
+## 4. "Verify the pixel attribution output"
+
+Pass requires all of:
+
+- [ ] The collector imports the shared taxonomy module and `deriveChannel` is a compatibility
+  wrapper, with no second channel-rule implementation in the pixel skill.
+- [ ] New touchpoints retain `taxonomy_version`, raw click IDs including `srsltid`, and legacy
+  rows remain identifiable with `native_channel` and version `legacy`.
+- [ ] Sessions state `attribution_basis = first_touch`, expose source-scoped identity fields,
+  and use `legacy/unclassified` for no-touch fallback unless a valid signal-free landing URL
+  proves Direct.
+- [ ] `channel_daily` is site-scoped and UTC-grained; two conversions in one session do not
+  duplicate sessions, and unknown or mixed currencies produce NULL value with an explicit status.

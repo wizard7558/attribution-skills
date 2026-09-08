@@ -19,6 +19,8 @@
 // module runs unmodified on Node 20+, Deno, Cloudflare Workers, and in a
 // browser, no runtime-specific crypto import.
 
+import { classify, classifyChannel, TAXONOMY_VERSION } from "./channel-taxonomy.mjs";
+
 const CLICK_ID_PARAMS = [
   "gclid",
   "gbraid",
@@ -32,6 +34,7 @@ const CLICK_ID_PARAMS = [
   "twclid",
   "epik",
   "sccid",
+  "srsltid",
 ];
 
 const PLATFORM_COOKIE_KEYS = ["_fbp", "_fbc", "_rdt_uuid", "_ttp"];
@@ -47,71 +50,8 @@ const TOUCHPOINT_DEDUPE_WINDOW_MINUTES = 30;
 const MAX_STRING_LEN = 2048;
 const MAX_PROPERTIES_JSON_LEN = 20000;
 
-// ---------------------------------------------------------------------------
-// Channel derivation (also exported standalone for unit testing)
-// ---------------------------------------------------------------------------
-
-const SEARCH_ENGINE_SOURCES = new Set([
-  "google",
-  "bing",
-  "yahoo",
-  "duckduckgo",
-  "baidu",
-  "yandex",
-  "ecosia",
-  "ask",
-  "aol",
-]);
-
-const SEARCH_ENGINE_HOST_FRAGMENTS = [
-  "google.",
-  "bing.com",
-  "yahoo.",
-  "duckduckgo.com",
-  "baidu.com",
-  "yandex.",
-  "ecosia.org",
-  "ask.com",
-  "aol.com",
-];
-
-const SOCIAL_SOURCES = new Set([
-  "facebook",
-  "instagram",
-  "meta",
-  "ig",
-  "tiktok",
-  "linkedin",
-  "pinterest",
-  "reddit",
-  "twitter",
-  "x",
-  "snapchat",
-  "threads",
-]);
-
-const SOCIAL_HOST_FRAGMENTS = [
-  "facebook.com",
-  "instagram.com",
-  "tiktok.com",
-  "linkedin.com",
-  "pinterest.com",
-  "reddit.com",
-  "twitter.com",
-  "t.co",
-  "x.com",
-  "snapchat.com",
-  "threads.net",
-];
-
-const AFFILIATE_NETWORK_SOURCES = new Set(["cj", "rakuten", "impact", "shareasale", "awin", "partnerize"]);
-
-const PAID_MEDIUM_RE = /^(.*cp.*|ppc|retargeting|paid.*)$/;
-
-function normalizeLower(value) {
-  return typeof value === "string" ? value.trim().toLowerCase() : "";
-}
-
+// URL host extraction used only for touchpoint signal detection. Channel
+// semantics remain exclusively in the shared taxonomy module.
 function hostOf(url) {
   if (!url || typeof url !== "string") return null;
   try {
@@ -124,87 +64,10 @@ function hostOf(url) {
   }
 }
 
-function hostMatchesAny(host, fragments) {
-  if (!host) return false;
-  return fragments.some((fragment) => host.indexOf(fragment) !== -1);
-}
-
-/**
- * Derives one of the 12 fixed channel labels from a touch's raw signals.
- * Deterministic precedence, evaluated in order, first match wins:
- *
- *  1. dclid                                          -> Display
- *  2. gclid/gbraid/wbraid/msclkid                     -> Paid Search
- *  3. fbclid/ttclid/li_fat_id/rdt_cid/twclid/epik/sccid -> Paid Social
- *  4. medium matches /^(.*cp.*|ppc|retargeting|paid.*)$/
- *       -> Paid Search (source is a search engine)
- *       -> Paid Social (source is a social platform)
- *       -> Paid Other  (anything else)
- *  5. medium = organic                                -> Organic Search
- *  6. medium = email                                  -> Email
- *  7. medium = sms                                    -> SMS
- *  8. medium contains "affiliate", or source is a known affiliate network
- *                                                      -> Affiliates
- *  9. medium = referral, or an external referrer with no utm params at all
- *       -> Organic Search (referrer host is a search engine)
- *       -> Organic Social (referrer host is a social platform)
- *       -> Referral (anything else)
- * 10. no signal whatsoever                             -> Direct
- * 11. everything else                                  -> Unassigned
- *
- * input: {
- *   utm_source, utm_medium: string | null,
- *   click_ids: { <12 click-id names>: string | null },
- *   referrer, landing_url: string | null,
- * }
- */
+// The shared taxonomy is the only channel implementation. This compatibility
+// wrapper keeps the collector's public helper stable for existing callers.
 export function deriveChannel(input) {
-  const params = input || {};
-  const source = normalizeLower(params.utm_source);
-  const medium = normalizeLower(params.utm_medium);
-  const clickIds = params.click_ids || {};
-
-  if (clickIds.dclid) return "Display";
-  if (clickIds.gclid || clickIds.gbraid || clickIds.wbraid || clickIds.msclkid) return "Paid Search";
-  if (
-    clickIds.fbclid ||
-    clickIds.ttclid ||
-    clickIds.li_fat_id ||
-    clickIds.rdt_cid ||
-    clickIds.twclid ||
-    clickIds.epik ||
-    clickIds.sccid
-  ) {
-    return "Paid Social";
-  }
-
-  if (medium && PAID_MEDIUM_RE.test(medium)) {
-    if (SEARCH_ENGINE_SOURCES.has(source)) return "Paid Search";
-    if (SOCIAL_SOURCES.has(source)) return "Paid Social";
-    return "Paid Other";
-  }
-
-  if (medium === "organic") return "Organic Search";
-  if (medium === "email") return "Email";
-  if (medium === "sms") return "SMS";
-  if ((medium && medium.indexOf("affiliate") !== -1) || AFFILIATE_NETWORK_SOURCES.has(source)) return "Affiliates";
-
-  const referrerHost = hostOf(params.referrer);
-  const pageHost = hostOf(params.landing_url);
-  const externalReferrer = !!referrerHost && referrerHost !== pageHost;
-  const noUtmAtAll = !source && !medium;
-
-  if (medium === "referral" || (externalReferrer && noUtmAtAll)) {
-    if (hostMatchesAny(referrerHost, SEARCH_ENGINE_HOST_FRAGMENTS)) return "Organic Search";
-    if (hostMatchesAny(referrerHost, SOCIAL_HOST_FRAGMENTS)) return "Organic Social";
-    return "Referral";
-  }
-
-  const hasAnyClickId = Object.keys(clickIds).some((key) => clickIds[key]);
-  const hasAnySignal = !!(source || medium || externalReferrer || hasAnyClickId);
-  if (!hasAnySignal) return "Direct";
-
-  return "Unassigned";
+  return classifyChannel(input);
 }
 
 // ---------------------------------------------------------------------------
@@ -236,6 +99,12 @@ function canonicalizePhone(phone) {
   const digits = trimmed.replace(/\D/g, "");
   if (!digits) return null;
   return (hasPlus ? "+" : "") + digits;
+}
+
+function normalizeCurrency(currency) {
+  if (typeof currency !== "string") return null;
+  const normalized = currency.trim().toUpperCase();
+  return /^[A-Z]{3}$/.test(normalized) ? normalized : null;
 }
 
 // ---------------------------------------------------------------------------
@@ -462,13 +331,15 @@ export async function handleCollect(payload, ctx, db) {
     const startsNewSession = priorEventInWindow.length === 0;
 
     if (carriesSourceSignal || startsNewSession) {
-      const channel = deriveChannel({
+      const classification = classify({
         utm_source: utm.source,
         utm_medium: utm.medium,
+        utm_campaign: utm.campaign,
         click_ids: clickIds,
         referrer: payload.referrer,
         landing_url: payload.url,
       });
+      const channel = classification.channel;
 
       const existing = (
         await db.query(
@@ -487,14 +358,14 @@ export async function handleCollect(payload, ctx, db) {
           `INSERT INTO pixel.touchpoints (
              site_key, visitor_id, contact_id, event_id, channel,
              utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-             gclid, gbraid, wbraid, dclid, fbclid, ttclid, rdt_cid, li_fat_id, msclkid, twclid, epik, sccid,
-             referrer, landing_url, occurred_at
+             gclid, gbraid, wbraid, dclid, fbclid, ttclid, rdt_cid, li_fat_id, msclkid, twclid, epik, sccid, srsltid,
+             referrer, landing_url, occurred_at, taxonomy_version
            )
            VALUES (
              $1, $2, $3, $4, $5,
              $6, $7, $8, $9, $10,
              $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22,
-             $23, $24, $25
+             $23, $24, $25, $26, $27
            )`,
           [
             payload.site_key,
@@ -519,9 +390,11 @@ export async function handleCollect(payload, ctx, db) {
             clickIds.twclid || null,
             clickIds.epik || null,
             clickIds.sccid || null,
+            clickIds.srsltid || null,
             payload.referrer || null,
             payload.url || null,
             occurredAt.toISOString(),
+            classification.taxonomy_version || TAXONOMY_VERSION,
           ]
         );
       }
@@ -543,7 +416,7 @@ export async function handleCollect(payload, ctx, db) {
 
   if (isConversion) {
     const value = typeof properties.value === "number" ? properties.value : null;
-    const currency = typeof properties.currency === "string" ? properties.currency : null;
+    const currency = normalizeCurrency(properties.currency);
     await db.query(
       `INSERT INTO pixel.conversion_events (site_key, visitor_id, contact_id, event_id, event_name, occurred_at, value, currency, page_url)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
@@ -570,5 +443,6 @@ export const __internal = {
   hostOf,
   canonicalizeEmail,
   canonicalizePhone,
+  normalizeCurrency,
   sha256Hex,
 };

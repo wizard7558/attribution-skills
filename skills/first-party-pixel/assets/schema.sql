@@ -186,10 +186,19 @@ CREATE TABLE IF NOT EXISTS pixel.touchpoints (
   twclid        text,
   epik          text,
   sccid         text,
+  srsltid       text,
+  native_channel text,
+  taxonomy_version text,
   referrer      text,
   landing_url   text,
   occurred_at   timestamptz NOT NULL
 );
+
+-- Upgrade path for installations created before the shared taxonomy. Existing
+-- rows remain NULL so a session view can identify them as legacy evidence.
+ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS srsltid text;
+ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS native_channel text;
+ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS taxonomy_version text;
 
 CREATE INDEX IF NOT EXISTS idx_pixel_touchpoints_visitor_occurred ON pixel.touchpoints (visitor_id, occurred_at);
 CREATE INDEX IF NOT EXISTS idx_pixel_touchpoints_contact ON pixel.touchpoints (contact_id) WHERE contact_id IS NOT NULL;
@@ -346,10 +355,8 @@ exit_page AS (
   WHERE n.event_type = 'pageview'
   ORDER BY n.visitor_id, n.session_number, n.occurred_at DESC, n.id DESC
 ),
--- The first touchpoint recorded inside the session window, if any. Sessions
--- with no marketing signal at all (repeat direct visits) have no touchpoint
--- row, see the channel CASE expression below for the Direct/Unassigned
--- fallback that covers that case.
+-- The first touchpoint recorded inside the session window, if any. Legacy
+-- touchpoints retain their native label and receive an explicit legacy version.
 session_touchpoint AS (
   SELECT DISTINCT ON (sb.visitor_id, sb.session_number)
     sb.visitor_id,
@@ -360,7 +367,19 @@ session_touchpoint AS (
     t.utm_campaign,
     t.gclid,
     t.fbclid,
-    t.ttclid
+    t.ttclid,
+    t.gbraid,
+    t.wbraid,
+    t.dclid,
+    t.rdt_cid,
+    t.li_fat_id,
+    t.msclkid,
+    t.twclid,
+    t.epik,
+    t.sccid,
+    t.srsltid,
+    t.native_channel,
+    t.taxonomy_version
   FROM session_bounds sb
   JOIN pixel.touchpoints t
     ON t.visitor_id = sb.visitor_id
@@ -395,23 +414,42 @@ SELECT
     OR COALESCE(cv.conversions, 0) > 0
   ) AS engaged,
   extract(epoch FROM (sb.session_end_ts - sb.session_start_ts))::numeric AS engagement_time_sec,
-  regexp_replace(coalesce(l.landing_page_location, ''), '^[a-zA-Z][a-zA-Z0-9+.-]*://[^/]+', '') AS landing_page_path,
+  regexp_replace(regexp_replace(coalesce(l.landing_page_location, ''), '^[a-zA-Z][a-zA-Z0-9+.-]*://[^/]+', ''), '[?#].*$', '') AS landing_page_path,
   l.landing_page_location,
   l.first_referrer,
-  regexp_replace(coalesce(ep.exit_page_url, ''), '^[a-zA-Z][a-zA-Z0-9+.-]*://[^/]+', '') AS exit_page_path,
+  regexp_replace(regexp_replace(coalesce(ep.exit_page_url, ''), '^[a-zA-Z][a-zA-Z0-9+.-]*://[^/]+', ''), '[?#].*$', '') AS exit_page_path,
   st.utm_source AS session_source,
   st.utm_medium AS session_medium,
   st.utm_campaign AS session_campaign,
   CASE
-    WHEN st.channel IS NOT NULL THEN st.channel
-    WHEN (l.first_referrer IS NULL OR l.first_referrer = ''
-          OR pixel.url_host(l.first_referrer) = pixel.url_host(l.landing_page_location))
+    WHEN st.channel = 'Display' THEN 'Paid Other'
+    WHEN st.channel = 'Affiliates' THEN 'Affiliate'
+    WHEN st.channel = 'Unassigned' THEN 'Other'
+    WHEN st.channel IN ('Paid Search', 'Paid Social', 'Paid Other', 'Organic Search', 'Organic Social', 'Email', 'SMS', 'Direct', 'Referral', 'Affiliate', 'Other') THEN st.channel
+    WHEN st.channel IS NOT NULL THEN 'Other'
+    WHEN pixel.url_host(l.landing_page_location) IS NOT NULL
+         AND l.landing_page_location !~* '[?&](utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|gbraid|wbraid|dclid|fbclid|ttclid|rdt_cid|li_fat_id|msclkid|twclid|epik|sccid|srsltid)='
+         AND (l.first_referrer IS NULL OR l.first_referrer = ''
+              OR (pixel.url_host(l.first_referrer) IS NOT NULL
+                  AND pixel.url_host(l.first_referrer) = pixel.url_host(l.landing_page_location)))
       THEN 'Direct'
-    ELSE 'Unassigned'
+    ELSE 'Other'
   END AS channel,
   st.gclid AS landing_gclid,
   st.fbclid AS landing_fbclid,
-  st.ttclid AS landing_ttclid
+  st.ttclid AS landing_ttclid,
+  COALESCE(st.native_channel, st.channel) AS native_channel,
+  CASE WHEN st.channel IS NULL THEN 'legacy/unclassified' ELSE COALESCE(st.taxonomy_version, 'legacy') END AS taxonomy_version,
+  'first_touch' AS attribution_basis,
+  'first_party_pixel' AS source_system,
+  sb.site_key AS source_scope,
+  sb.visitor_id::text AS visitor_key,
+  (sb.session_number = 1) AS is_new_user,
+  jsonb_build_object(
+    'gclid', st.gclid, 'gbraid', st.gbraid, 'wbraid', st.wbraid, 'dclid', st.dclid,
+    'fbclid', st.fbclid, 'ttclid', st.ttclid, 'rdt_cid', st.rdt_cid, 'li_fat_id', st.li_fat_id,
+    'msclkid', st.msclkid, 'twclid', st.twclid, 'epik', st.epik, 'sccid', st.sccid, 'srsltid', st.srsltid
+  ) AS click_ids
 FROM session_bounds sb
 LEFT JOIN landing l ON l.visitor_id = sb.visitor_id AND l.session_number = sb.session_number
 LEFT JOIN exit_page ep ON ep.visitor_id = sb.visitor_id AND ep.session_number = sb.session_number
@@ -419,25 +457,61 @@ LEFT JOIN session_touchpoint st ON st.visitor_id = sb.visitor_id AND st.session_
 LEFT JOIN conversions_in_session cv ON cv.visitor_id = sb.visitor_id AND cv.session_number = sb.session_number;
 
 -- ===========================================================================
--- channel_daily: one row per (event_date, channel)
+-- channel_daily: one row per (site/source scope, UTC event_date, channel)
 -- ===========================================================================
 CREATE OR REPLACE VIEW pixel.channel_daily AS
-SELECT
-  (s.session_start_ts AT TIME ZONE 'UTC')::date AS event_date,
-  s.channel,
-  COUNT(*) AS sessions,
-  COUNT(*) FILTER (WHERE s.engaged) AS engaged_sessions,
-  COUNT(*) FILTER (WHERE s.is_new_visitor) AS new_visitors,
-  COALESCE(SUM(conv.conversions), 0)::bigint AS conversions,
-  COALESCE(SUM(conv.conversion_value), 0) AS conversion_value
-FROM pixel.sessions s
-LEFT JOIN LATERAL (
+WITH session_conversions AS (
   SELECT
-    COUNT(*) AS conversions,
-    SUM(COALESCE(ce.value, 0)) AS conversion_value
-  FROM pixel.conversion_events ce
-  WHERE ce.visitor_id = s.visitor_id
-    AND ce.occurred_at >= s.session_start_ts
-    AND ce.occurred_at <= s.session_end_ts
-) conv ON true
-GROUP BY 1, 2;
+    s.session_key,
+    COUNT(ce.id)::bigint AS conversions,
+    SUM(ce.value) AS conversion_value,
+    COUNT(*) FILTER (WHERE ce.id IS NOT NULL AND (ce.value IS NULL OR ce.currency IS NULL))::bigint AS unknown_values,
+    COUNT(DISTINCT ce.currency) FILTER (WHERE ce.id IS NOT NULL)::bigint AS currency_count,
+    MIN(ce.currency) FILTER (WHERE ce.id IS NOT NULL) AS currency
+  FROM pixel.sessions s
+  LEFT JOIN pixel.conversion_events ce
+    ON ce.visitor_id = s.visitor_id
+   AND ce.occurred_at >= s.session_start_ts
+   AND ce.occurred_at <= s.session_end_ts
+  GROUP BY s.session_key
+), daily AS (
+  SELECT
+    s.source_scope,
+    (s.session_start_ts AT TIME ZONE 'UTC')::date AS event_date,
+    s.channel,
+    COUNT(*) AS sessions,
+    COUNT(*) FILTER (WHERE s.engaged) AS engaged_sessions,
+    COUNT(*) FILTER (WHERE s.is_new_visitor) AS new_visitors,
+    SUM(sc.conversions)::bigint AS conversions,
+    SUM(sc.conversion_value) AS conversion_value,
+    SUM(sc.unknown_values)::bigint AS unknown_values,
+    MAX(sc.currency_count)::bigint AS max_currency_count,
+    COUNT(DISTINCT sc.currency) FILTER (WHERE sc.currency IS NOT NULL)::bigint AS daily_currency_count,
+    MIN(sc.currency) FILTER (WHERE sc.currency IS NOT NULL) AS currency,
+    CASE WHEN COUNT(DISTINCT s.taxonomy_version) = 1 THEN MIN(s.taxonomy_version) ELSE 'mixed' END AS taxonomy_version
+  FROM pixel.sessions s
+  JOIN session_conversions sc ON sc.session_key = s.session_key
+  GROUP BY s.source_scope, 2, s.channel
+)
+SELECT
+  event_date,
+  channel,
+  sessions,
+  engaged_sessions,
+  new_visitors,
+  conversions,
+  CASE WHEN conversions = 0 THEN 0::numeric
+       WHEN unknown_values > 0 OR daily_currency_count > 1 OR max_currency_count > 1 THEN NULL::numeric
+       ELSE conversion_value END AS conversion_value,
+  new_visitors AS new_users,
+  conversions AS key_events,
+  'first_party_pixel' AS source_system,
+  source_scope,
+  taxonomy_version,
+  'first_touch' AS attribution_basis,
+  CASE WHEN conversions = 0 OR unknown_values > 0 OR daily_currency_count > 1 OR max_currency_count > 1 THEN NULL ELSE currency END AS currency,
+  CASE WHEN conversions = 0 THEN 'no_conversions'
+       WHEN daily_currency_count > 1 OR max_currency_count > 1 THEN 'mixed_currency'
+       WHEN unknown_values > 0 THEN 'unknown'
+       ELSE 'known' END AS conversion_value_status
+FROM daily;

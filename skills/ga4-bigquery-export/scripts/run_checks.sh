@@ -5,6 +5,7 @@
 #
 # Usage:
 #   scripts/run_checks.sh PROJECT DATASET START_YYYYMMDD END_YYYYMMDD
+#   scripts/run_checks.sh --synthetic  # actual templates, synthetic events only
 #
 # Example:
 #   scripts/run_checks.sh my-gcp-project analytics_PROPERTY_ID 20260829 20260831
@@ -19,8 +20,12 @@
 
 set -euo pipefail
 
+if [[ "${1:-}" == "--synthetic" && $# -eq 1 ]]; then
+  exec node "$(dirname "${BASH_SOURCE[0]}")/test-integration.mjs" --bigquery
+fi
+
 if [[ $# -ne 4 ]]; then
-  echo "Usage: $0 PROJECT DATASET START_YYYYMMDD END_YYYYMMDD" >&2
+  echo "Usage: $0 PROJECT DATASET START_YYYYMMDD END_YYYYMMDD | --synthetic" >&2
   exit 1
 fi
 
