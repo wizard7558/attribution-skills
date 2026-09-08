@@ -18,8 +18,15 @@
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PGPORT_TEST="${PGPORT_TEST:-55432}"
-COLLECTOR_PORT="${COLLECTOR_PORT:-8787}"
+MIGRATION_MODE=0
+if [[ "${1:-}" == "--migration" ]]; then
+  MIGRATION_MODE=1
+elif [[ -n "${1:-}" ]]; then
+  echo "usage: $0 [--migration]" >&2
+  exit 2
+fi
+PGPORT_TEST="${PGPORT_TEST:-$((55000 + RANDOM % 1000))}"
+COLLECTOR_PORT="${COLLECTOR_PORT:-$((18000 + RANDOM % 1000))}"
 COLLECTOR_URL="http://127.0.0.1:${COLLECTOR_PORT}/collect"
 
 PASS_COUNT=0
@@ -28,6 +35,7 @@ SERVER_PID=""
 STARTED_CLUSTER=0
 PGDATA_DIR=""
 RUNTIME_DIR=""
+BASELINE_SCHEMA_PATH=""
 
 log() { echo "[roundtrip] $*"; }
 
@@ -50,6 +58,9 @@ cleanup() {
   fi
   if [[ -n "$RUNTIME_DIR" ]]; then
     rm -rf "$RUNTIME_DIR"
+  fi
+  if [[ -n "$BASELINE_SCHEMA_PATH" ]]; then
+    rm -f "$BASELINE_SCHEMA_PATH"
   fi
 }
 trap cleanup EXIT
@@ -95,10 +106,62 @@ fi
 PSQL=("$PSQL_BIN" "$DATABASE_URL" -v ON_ERROR_STOP=1 -q)
 
 # ---------------------------------------------------------------------------
-# 2. Schema + partitions + test site
+# 2. Current schema + partitions + test sites; --migration adds a historical upgrade proof
 # ---------------------------------------------------------------------------
+if [[ "$MIGRATION_MODE" == "1" ]]; then
+  if ! git -C "$SKILL_DIR" rev-parse --verify 2c240a3^{commit} >/dev/null 2>&1; then
+    echo "--migration requires git history containing commit 2c240a3" >&2
+    exit 2
+  fi
+  BASELINE_SCHEMA_PATH="$(mktemp "${TMPDIR:-/tmp}/pixel-baseline-schema-XXXXXX.sql")"
+  git -C "$SKILL_DIR" show 2c240a3:skills/first-party-pixel/assets/schema.sql > "$BASELINE_SCHEMA_PATH"
+  log "applying baseline schema for migration proof"
+  "${PSQL[@]}" -f "$BASELINE_SCHEMA_PATH" >/dev/null
+  "${PSQL[@]}" -c "SELECT pixel.ensure_month_partitions();" >/dev/null
+  "${PSQL[@]}" -c "
+    INSERT INTO pixel.sites (site_key, domain, allowed_origins) VALUES ('site_legacy', 'legacy.example.com', '{}');
+    INSERT INTO pixel.visitors (site_key, visitor_uid, first_seen_at, last_seen_at)
+    VALUES ('site_legacy', 'visitor-legacy', '2026-09-01T12:00:00Z', '2026-09-01T12:00:00Z');
+    INSERT INTO pixel.events (site_key, visitor_id, event_type, url, occurred_at)
+    SELECT 'site_legacy', id, 'pageview', 'https://legacy.example.com/', '2026-09-01T12:00:00Z'
+    FROM pixel.visitors WHERE site_key = 'site_legacy' AND visitor_uid = 'visitor-legacy';
+    INSERT INTO pixel.touchpoints (site_key, visitor_id, channel, occurred_at)
+    SELECT 'site_legacy', id, 'Display', '2026-09-01T12:00:00Z'
+    FROM pixel.visitors WHERE site_key = 'site_legacy' AND visitor_uid = 'visitor-legacy';
+  " >/dev/null
+fi
 log "applying schema.sql"
 "${PSQL[@]}" -f "$SKILL_DIR/assets/schema.sql" >/dev/null
+log "reapplying schema.sql for idempotence"
+"${PSQL[@]}" -f "$SKILL_DIR/assets/schema.sql" >/dev/null
+
+assert_migration_sql() {
+  local description="$1"
+  local sql="$2"
+  local result
+  result="$(${PSQL[@]} -tA -c "$sql" | tr -d '[:space:]')"
+  if [[ "$result" == "t" ]]; then
+    PASS_COUNT=$((PASS_COUNT + 1)); echo "PASS: $description"
+  else
+    FAIL_COUNT=$((FAIL_COUNT + 1)); echo "FAIL: $description (query returned: $result)"
+  fi
+}
+if [[ "$MIGRATION_MODE" == "1" ]]; then
+  assert_migration_sql "legacy row remains NULL and maps Display to Paid Other" \
+    "SELECT (t.taxonomy_version IS NULL AND s.channel = 'Paid Other' AND s.native_channel = 'Display' AND s.taxonomy_version = 'legacy')
+     FROM pixel.touchpoints t JOIN pixel.sessions s ON s.source_scope = 'site_legacy' AND s.visitor_key = t.visitor_id::text
+     WHERE t.site_key = 'site_legacy' AND t.channel = 'Display';"
+  assert_migration_sql "historical session columns remain first and new aliases append" \
+    "SELECT (min(ordinal_position) FILTER (WHERE column_name = 'session_key') = 1
+             AND min(ordinal_position) FILTER (WHERE column_name = 'visitor_id') = 2
+             AND min(ordinal_position) FILTER (WHERE column_name = 'session_number') = 3
+             AND min(ordinal_position) FILTER (WHERE column_name = 'is_new_visitor') = 4
+             AND min(ordinal_position) FILTER (WHERE column_name = 'native_channel') = 22
+             AND min(ordinal_position) FILTER (WHERE column_name = 'taxonomy_version') = 23
+             AND min(ordinal_position) FILTER (WHERE column_name = 'attribution_basis') = 24
+             AND min(ordinal_position) FILTER (WHERE column_name = 'source_system') = 25)
+     FROM information_schema.columns WHERE table_schema = 'pixel' AND table_name = 'sessions';"
+fi
 
 log "running pixel.ensure_month_partitions()"
 "${PSQL[@]}" -c "SELECT pixel.ensure_month_partitions();" >/dev/null
@@ -106,7 +169,7 @@ log "running pixel.ensure_month_partitions()"
 log "seeding test site (empty allowlist)"
 "${PSQL[@]}" -c "
   INSERT INTO pixel.sites (site_key, domain, allowed_origins)
-  VALUES ('site_test', 'example.com', '{}')
+  VALUES ('site_test', 'example.com', '{}'), ('site_second', 'example.com', '{}'), ('site_mix', 'example.com', '{}'), ('site_mix_sessions', 'example.com', '{}'), ('site_unknown_currency', 'example.com', '{}')
   ON CONFLICT (site_key) DO UPDATE SET allowed_origins = EXCLUDED.allowed_origins;
 " >/dev/null
 
@@ -137,6 +200,7 @@ RUNTIME_DIR="$(mktemp -d "${TMPDIR:-/tmp}/pixel-roundtrip-runtime-XXXXXX")"
 mkdir -p "$RUNTIME_DIR/assets/collector/node"
 cp "$SKILL_DIR/assets/pixel.js" "$RUNTIME_DIR/assets/pixel.js"
 cp "$SKILL_DIR/assets/collector/core.js" "$RUNTIME_DIR/assets/collector/core.js"
+cp "$SKILL_DIR/assets/collector/channel-taxonomy.mjs" "$RUNTIME_DIR/assets/collector/channel-taxonomy.mjs"
 cp "$SKILL_DIR/assets/collector/node/server.js" "$RUNTIME_DIR/assets/collector/node/server.js"
 ln -s "$NODE_MODULES_SOURCE/node_modules" "$RUNTIME_DIR/node_modules"
 # core.js/server.js use `import`/`export` (ES modules); mark the scratch
@@ -168,6 +232,13 @@ fi
 log "running scripts/simulate.mjs"
 COLLECTOR_URL="$COLLECTOR_URL" node "$SKILL_DIR/scripts/simulate.mjs"
 
+# Simulate a pre-taxonomy row to prove the upgrade path keeps its version NULL
+# and lets the session view apply the documented legacy mapping.
+"${PSQL[@]}" -c "
+  INSERT INTO pixel.touchpoints (site_key, visitor_id, channel, occurred_at)
+  VALUES ('site_test', (SELECT id FROM pixel.visitors WHERE site_key = 'site_test' AND visitor_uid = 'visitor-unknown'), 'Display', '2026-09-02T12:00:00Z');
+" >/dev/null
+
 # ---------------------------------------------------------------------------
 # 6. Assertions
 # ---------------------------------------------------------------------------
@@ -188,7 +259,7 @@ assert_sql() {
 VISITOR_FILTER="(SELECT id FROM pixel.visitors WHERE site_key = 'site_test' AND visitor_uid = 'visitor-1')"
 
 assert_sql "visitors = 1" \
-  "SELECT (count(*) = 1) FROM pixel.visitors WHERE site_key = 'site_test';"
+  "SELECT (count(*) = 1) FROM pixel.visitors WHERE site_key = 'site_test' AND visitor_uid = 'visitor-1';"
 
 assert_sql "events = 5" \
   "SELECT (count(*) = 5) FROM pixel.events WHERE visitor_id = $VISITOR_FILTER;"
@@ -217,7 +288,47 @@ assert_sql "sessions = 2 rows: Paid Search (2 pageviews, gclid=TEST123) then Dir
 
 assert_sql "channel_daily: Paid Search + Direct conversions sum to 2, conversion_value = 49" \
   "SELECT (COALESCE(SUM(conversions), 0) = 2 AND COALESCE(SUM(conversion_value), 0) = 49)
-   FROM pixel.channel_daily WHERE channel IN ('Paid Search', 'Direct');"
+   FROM pixel.channel_daily WHERE source_scope = 'site_test' AND channel IN ('Paid Search', 'Direct');"
+
+assert_sql "dclid is Paid Other and srsltid is retained" \
+  "SELECT (channel = 'Paid Other' AND dclid = 'DCLID123' AND srsltid = 'SEARCH123' AND taxonomy_version = '0.1.0')
+   FROM pixel.touchpoints WHERE visitor_id = (SELECT id FROM pixel.visitors WHERE site_key = 'site_second' AND visitor_uid = 'visitor-dclid');"
+
+assert_sql "sessions retain all click IDs including srsltid" \
+  "SELECT (click_ids->>'gclid' = 'GCLID123' AND click_ids->>'gbraid' = 'GBRAID123' AND click_ids->>'wbraid' = 'WBRAID123'
+           AND click_ids->>'dclid' = 'DCLID123' AND click_ids->>'fbclid' = 'FBCLID123' AND click_ids->>'ttclid' = 'TTCLID123'
+           AND click_ids->>'rdt_cid' = 'RDTCID123' AND click_ids->>'li_fat_id' = 'LIFAT123' AND click_ids->>'msclkid' = 'MSCLKID123'
+           AND click_ids->>'twclid' = 'TWCLID123' AND click_ids->>'epik' = 'EPIK123' AND click_ids->>'sccid' = 'SCCID123'
+           AND click_ids->>'srsltid' = 'SEARCH123')
+   FROM pixel.sessions WHERE source_scope = 'site_second' AND visitor_key = (SELECT id::text FROM pixel.visitors WHERE site_key = 'site_second' AND visitor_uid = 'visitor-dclid');"
+
+assert_sql "legacy touchpoint version remains NULL" \
+  "SELECT (count(*) > 0 AND bool_and(taxonomy_version IS NULL)) FROM pixel.touchpoints WHERE channel = 'Display';"
+
+assert_sql "affiliate and unknown source channels use canonical labels" \
+  "SELECT (count(*) FILTER (WHERE channel = 'Affiliate') = 1 AND count(*) FILTER (WHERE channel = 'Other') = 1)
+   FROM pixel.touchpoints WHERE visitor_id IN (SELECT id FROM pixel.visitors WHERE visitor_uid IN ('visitor-affiliate', 'visitor-unknown'));"
+
+assert_sql "two conversions in one session do not fan out sessions" \
+  "SELECT (count(DISTINCT s.session_key) = 1 AND max(d.sessions) = 1 AND bool_or(s.engaged) AND bool_or(s.is_new_user) AND max(d.conversions) = 2) FROM pixel.sessions s
+   JOIN pixel.channel_daily d ON d.source_scope = 'site_mix' AND d.channel = s.channel
+   WHERE s.visitor_id = (SELECT id FROM pixel.visitors WHERE site_key = 'site_mix' AND visitor_uid = 'visitor-mix');"
+
+assert_sql "mixed USD/EUR value is NULL with mixed_currency status" \
+  "SELECT (conversion_value IS NULL AND conversion_value_status = 'mixed_currency' AND currency IS NULL)
+   FROM pixel.channel_daily WHERE source_scope = 'site_mix' AND channel = 'Paid Search';"
+
+assert_sql "known plus missing/blank currency is NULL with unknown status" \
+  "SELECT (sessions = 1 AND conversions = 2 AND conversion_value IS NULL AND conversion_value_status = 'unknown' AND currency IS NULL)
+   FROM pixel.channel_daily WHERE source_scope = 'site_unknown_currency' AND channel = 'Paid Search';"
+
+assert_sql "mixed currency across two sessions counts both sessions and conversions once" \
+  "SELECT (sessions = 2 AND conversions = 2 AND conversion_value IS NULL AND conversion_value_status = 'mixed_currency')
+   FROM pixel.channel_daily WHERE source_scope = 'site_mix_sessions' AND channel = 'Paid Search';"
+
+assert_sql "new shared aliases and source scope are present" \
+  "SELECT (new_users = 1 AND key_events = conversions AND source_system = 'first_party_pixel' AND attribution_basis = 'first_touch')
+   FROM pixel.channel_daily WHERE source_scope = 'site_test' AND channel = 'Paid Search';"
 
 echo ""
 echo "[roundtrip] $PASS_COUNT passed, $FAIL_COUNT failed"

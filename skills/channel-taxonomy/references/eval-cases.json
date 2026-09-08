@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "taxonomy_version": "0.1.0",
+  "groups": [
+    {
+      "id": "conflicting-acquisition-evidence",
+      "title": "Conflicting acquisition evidence",
+      "output_shape": "JSON object with channels (case id and canonical label), paid_evidence_proven (boolean), and preserve_raw (boolean)",
+      "cases": [
+        {"id":"click-medium-conflict","input":{"utm_source":"google","utm_medium":"email","click_ids":{"fbclid":"fb-123"},"native_channel":"Direct"},"expected":{"channel":"Paid Social"}},
+        {"id":"bogus-gclid","input":{"utm_source":"google","utm_medium":"organic","click_ids":{"gclid":null},"landing_url":"https://shop.example/search?q=shoes","referrer":"https://www.google.com/search?q=shoes"},"expected":{"channel":"Organic Search"}},
+        {"id":"paid-before-organic","input":{"utm_source":"newsletter","utm_medium":"organic","network_id":"google_ads","referrer":"https://www.google.com/search?q=coat"},"expected":{"channel":"Paid Search"}},
+        {"id":"dclid-display","input":{"utm_source":"display-partner","utm_medium":"referral","click_ids":{"dclid":"D-987"},"landing_url":"https://shop.example/"},"expected":{"channel":"Paid Other"}},
+        {"id":"srsltid-search","input":{"utm_source":"google","utm_medium":"organic","click_ids":{"srsltid":"SR-abc"},"referrer":"https://www.google.com/search?q=hat"},"expected":{"channel":"Organic Search"}},
+        {"id":"direct-vs-missing","input":{"landing_url":"https://shop.example/landing","native_channel":null,"utm_source":null,"utm_medium":null,"referrer":null},"expected":{"channel":"Direct"}},
+        {"id":"paid-click-preserves-native","input":{"utm_source":"facebook","utm_medium":"organic","click_ids":{"fbclid":"fb-456"},"native_channel":"Organic Social","raw_source":"facebook"},"expected":{"channel":"Paid Social"}},
+        {"id":"external-referral","input":{"landing_url":"https://shop.example/a","referrer":"https://partner.example/article","utm_source":"","utm_medium":""},"expected":{"channel":"Referral"}}
+      ],
+      "expected_contract":{"paid_evidence_proven":false,"preserve_raw":true}
+    },
+    {
+      "id": "native-shopify-network-normalization",
+      "title": "Native, Shopify, and network normalization",
+      "output_shape": "JSON object with channels (case id and canonical label), paid_evidence_proven (boolean), and preserve_raw (boolean)",
+      "cases": [
+        {"id":"cross-network-native","input":{"native_channel":"Cross-network","campaign_id":"pmax-1"},"expected":{"channel":"Paid Other"}},
+        {"id":"pmax-network","input":{"network_id":"google_ads_pmax","utm_medium":"paid_search","campaign":"Performance Max"},"expected":{"channel":"Paid Search"}},
+        {"id":"shopify-sms","input":{"shopify_source_type":"sms","shopify_source":"klaviyo","utm_medium":"sms"},"expected":{"channel":"SMS"}},
+        {"id":"shopify-affiliates","input":{"shopify_source_type":"affiliate","shopify_source":"partner-network"},"expected":{"channel":"Affiliate"}},
+        {"id":"shopify-search","input":{"shopify_source_type":"search","shopify_source":"google"},"expected":{"channel":"Organic Search"}},
+        {"id":"shopify-social","input":{"shopify_source_type":"social","shopify_source":"instagram"},"expected":{"channel":"Organic Social"}},
+        {"id":"unknown-data","input":{"native_channel":"unknown","shopify_source_type":"mystery","utm_source":"unmapped","utm_medium":"weird"},"expected":{"channel":"Other"}},
+        {"id":"ai-referral","input":{"native_channel":"AI Assistant","utm_source":"chatgpt","utm_medium":"referral"},"expected":{"channel":"Referral"}}
+      ],
+      "expected_contract":{"paid_evidence_proven":false,"preserve_raw":true}
+    },
+    {
+      "id": "cross-source-interoperability",
+      "title": "Cross-source interoperability contract",
+      "output_shape": "JSON object with source_identity_keys (array<string>), can_sum_overlapping_sessions (boolean), attribution_bases (object with ga4:string and first_party_pixel:string), daily_grain (array<string>), common_metrics (array<string>), unknown_revenue (object with value:number|null and status:string), and mixed_currency_total (number|null)",
+      "cases": [
+        {"id":"same-session-ids","input":{"ga4":{"source_scope":"web","session_key":"42","visitor_key":"g1"},"pixel":{"source_scope":"web","session_key":"42","visitor_key":"p1"},"currencies":["USD"]},"expected":{"variant":"base"}},
+        {"id":"different-scopes","input":{"ga4":{"source_scope":"web","session_key":"7"},"pixel":{"source_scope":"app","session_key":"7"},"currencies":["USD"]},"expected":{"variant":"base"}},
+        {"id":"overlap-ga4-pixel","input":{"ga4_population":"sessions A,B","pixel_population":"touchpoints A,B","overlap":true,"currencies":["USD"]},"expected":{"variant":"base"}},
+        {"id":"mixed-usd-eur","input":{"ga4_revenue":{"value":100,"currency":"USD"},"pixel_value":{"value":90,"currency":"EUR"},"currencies":["USD","EUR"]},"expected":{"variant":"base"}},
+        {"id":"unknown-currency","input":{"ga4_revenue":{"value":100,"currency":null},"pixel_value":{"value":null,"currency":null},"currencies":[]},"expected":{"variant":"base"}},
+        {"id":"attribution-parity","input":{"ga4":{"attribution":"session last-click"},"pixel":{"attribution":"first collected touch"},"same_session_id":true,"currencies":["USD"]},"expected":{"variant":"base"}},
+        {"id":"daily-channel-grain","input":{"event_dates":["2026-01-01","2026-01-02"],"channels":["Paid Search","Direct"],"sources":["ga4","first-party-pixel"]},"expected":{"variant":"base"}},
+        {"id":"required-metrics","input":{"available_metrics":["sessions","engaged_sessions","new_users","key_events","purchase_revenue_usd"],"source_scopes":["web","app"],"currencies":["USD","CAD"]},"expected":{"variant":"base"}}
+      ],
+      "expected_contract":{"source_identity_keys":["source_system","source_scope","session_key","visitor_key"],"can_sum_overlapping_sessions":false,"attribution_bases":{"ga4":"session_last_click","first_party_pixel":"first_touch"},"daily_grain":["source_system","source_scope","event_date","channel"],"common_metrics":["sessions","engaged_sessions","new_users","key_events"],"unknown_revenue":{"value":null,"status":"unknown_or_mixed_currency"},"mixed_currency_total":null}
+    }
+  ]
+}

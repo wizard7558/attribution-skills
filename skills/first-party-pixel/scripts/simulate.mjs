@@ -30,6 +30,7 @@ const EMPTY_CLICK_IDS = {
   twclid: null,
   epik: null,
   sccid: null,
+  srsltid: null,
 };
 const EMPTY_PLATFORM_COOKIES = { _fbp: null, _fbc: null, _rdt_uuid: null, _ttp: null };
 
@@ -123,7 +124,121 @@ async function main() {
     })
   );
 
-  console.log("simulate.mjs: all 5 events posted successfully");
+  // Additional isolated fixtures: dclid/raw srsltid, affiliate, unknown, and
+  // two same-session conversions with USD/EUR to verify value status without
+  // changing the primary visitor assertions.
+  await post(basePayload({
+    site_key: "site_second",
+    visitor_uid: "visitor-dclid",
+    event_type: "pageview",
+    url: "https://example.com/?dclid=DCLID123&srsltid=SEARCH123",
+    utm: { ...EMPTY_UTM },
+    click_ids: {
+      ...EMPTY_CLICK_IDS,
+      gclid: "GCLID123", gbraid: "GBRAID123", wbraid: "WBRAID123", dclid: "DCLID123",
+      fbclid: "FBCLID123", ttclid: "TTCLID123", rdt_cid: "RDTCID123", li_fat_id: "LIFAT123",
+      msclkid: "MSCLKID123", twclid: "TWCLID123", epik: "EPIK123", sccid: "SCCID123", srsltid: "SEARCH123",
+    },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_test",
+    visitor_uid: "visitor-affiliate",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=cj",
+    utm: { ...EMPTY_UTM, source: "cj" },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_test",
+    visitor_uid: "visitor-unknown",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=mystery",
+    utm: { ...EMPTY_UTM, source: "mystery" },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_mix",
+    visitor_uid: "visitor-mix",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=google&utm_medium=cpc",
+    utm: { ...EMPTY_UTM, source: "google", medium: "cpc" },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_mix",
+    visitor_uid: "visitor-mix",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: 10, currency: " usd " },
+    occurred_at: plus(60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_mix",
+    visitor_uid: "visitor-mix",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: 20, currency: "EUR" },
+    occurred_at: plus(2 * 60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_unknown_currency",
+    visitor_uid: "visitor-unknown-currency",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=google&utm_medium=cpc",
+    utm: { ...EMPTY_UTM, source: "google", medium: "cpc" },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_unknown_currency",
+    visitor_uid: "visitor-unknown-currency",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: 10, currency: "USD" },
+    occurred_at: plus(60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_unknown_currency",
+    visitor_uid: "visitor-unknown-currency",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: null, currency: "   " },
+    occurred_at: plus(2 * 60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_mix_sessions",
+    visitor_uid: "visitor-mix-a",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=google&utm_medium=cpc",
+    utm: { ...EMPTY_UTM, source: "google", medium: "cpc" },
+    occurred_at: plus(0),
+  }));
+  await post(basePayload({
+    site_key: "site_mix_sessions",
+    visitor_uid: "visitor-mix-a",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: 10, currency: "USD" },
+    occurred_at: plus(60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_mix_sessions",
+    visitor_uid: "visitor-mix-b",
+    event_type: "pageview",
+    url: "https://example.com/?utm_source=google&utm_medium=cpc",
+    utm: { ...EMPTY_UTM, source: "google", medium: "cpc" },
+    occurred_at: plus(3 * 60 * 60 * 1000),
+  }));
+  await post(basePayload({
+    site_key: "site_mix_sessions",
+    visitor_uid: "visitor-mix-b",
+    event_type: "track",
+    event_name: "purchase",
+    properties: { value: 20, currency: "EUR" },
+    occurred_at: plus(3 * 60 * 60 * 1000 + 60 * 1000),
+  }));
+
+  console.log("simulate.mjs: all 11 events posted successfully");
 }
 
 main().catch((err) => {

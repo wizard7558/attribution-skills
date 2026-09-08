@@ -33,7 +33,7 @@
  *     occurred_at, properties,
  *     utm: { source, medium, campaign, content, term },
  *     click_ids: { gclid, gbraid, wbraid, dclid, fbclid, ttclid, rdt_cid,
- *                  li_fat_id, msclkid, twclid, epik, sccid },
+ *                  li_fat_id, msclkid, twclid, epik, sccid, srsltid },
  *     platform_cookies: { _fbp, _fbc, _rdt_uuid, _ttp },
  *     identity: { email, phone } | null,
  *     consent: { analytics, ads } | null
@@ -92,6 +92,7 @@
     "twclid",
     "epik",
     "sccid",
+    "srsltid",
   ];
 
   var PLATFORM_COOKIES = ["_fbp", "_fbc", "_rdt_uuid", "_ttp"];

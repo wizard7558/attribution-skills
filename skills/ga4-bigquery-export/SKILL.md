@@ -4,7 +4,7 @@ description: Analyze and attribute the raw Google Analytics 4 BigQuery export (e
 license: MIT
 metadata:
   author: Riley Sorenson
-  version: "0.1"
+  version: "0.2.0"
 ---
 
 # GA4 BigQuery export
@@ -104,8 +104,10 @@ engaged-session flag as the `session_engaged` event param, equal to `'1'` on eve
 engaged session. Reconstruct it as:
 
 ```sql
-(LOGICAL_OR(session_engaged = '1') OR SUM(engagement_time_msec) >= 10000
-  OR COUNTIF(event_name = 'page_view') >= 2) AS engaged
+(COALESCE(LOGICAL_OR(session_engaged = '1'), FALSE)
+  OR COALESCE(SUM(engagement_time_msec), 0) >= 10000
+  OR COUNTIF(event_name = 'page_view') >= 2
+  OR COUNTIF(event_name IN UNNEST(key_event_names)) > 0) AS engaged
 ```
 
 `is_active_user` is a user-scoped flag (was this user active per GA4's activity
@@ -129,7 +131,7 @@ source/medium: `references/sql/sessions.sql`.
 |---|---|---|
 | `traffic_source.*` | User, first touch ever | Never for session attribution. Only for "what channel originally acquired this user." |
 | `collected_traffic_source.*` | Event, raw as-collected | Click-ID joins to ad platforms (`gclid`, `dclid`, `srsltid`) and manual UTM params (`manual_source`, `manual_medium`, etc.). Populated only on the events that actually carried these params. |
-| `session_traffic_source_last_click.*` | Session, GA4-computed last-non-direct click | Closest match to what the GA4 UI shows as session source/medium. Read `cross_channel_campaign.source` / `.medium` (fall back to `manual_campaign.source` / `.medium` when NULL); use `cross_channel_campaign.default_channel_group` for GA4's own channel label. `manual_campaign` alone cannot tell Direct from Unassigned - see "Channel grouping" below. Verify exact nested field names against `references/schema.md` - the struct has six platform-specific sub-structs, not one flat source/medium. |
+| `session_traffic_source_last_click.*` | Session, GA4-computed last-non-direct click | Closest match to what the GA4 UI shows as session source/medium. Read the whole `cross_channel_campaign` evidence struct (use the whole manual struct only when all cross-channel evidence fields are NULL); use `cross_channel_campaign.default_channel_group` for GA4's own channel label. `manual_campaign` alone cannot tell Direct from Unassigned - see "Channel grouping" below. Verify exact nested field names against `references/schema.md` - the struct has six platform-specific sub-structs, not one flat source/medium. |
 | Derived from the session's first `page_location` | Session, your own logic | First-touch questions at `ga_session_number = 1`, or when you need a click ID (`fbclid`, `ttclid`, `gbraid`, `wbraid`, etc.) that has no dedicated export column and only ever appears in the URL. |
 
 Precedence rule: default to `session_traffic_source_last_click` when the goal is parity with
@@ -145,27 +147,21 @@ how often the last-click struct and a naive UTM parse disagree.
 
 ## Channel grouping
 
-Prefer `session_traffic_source_last_click.cross_channel_campaign.default_channel_group` for
-parity with the GA4 UI - on the exports tested, it was populated on every event that had a
-`user_pseudo_id`, not just some. Rebuild a rule-based `channel` only when the user needs a
-custom taxonomy or consistency across non-GA4 platforms, not as a default replacement for
-`default_channel_group`.
+Use native `default_channel_group` for GA4 UI audits and the shared canonical `channel`
+for cross-source work. Both session and daily templates embed the same versioned classifier,
+so an installed GA4 skill works standalone. Read [channel rules](references/channel_rules.md)
+and the local [shared contract](references/channel-contract.md) before joining another source.
 
-When rebuilding, read `cross_channel_campaign.source` / `.medium`, never `manual_campaign` -
-`manual_campaign.source`/`.medium` read `(not set)`/`(not set)` for both `Direct` and
-`Unassigned` sessions and cannot tell them apart; `cross_channel_campaign` reads
-`(direct)`/`(none)` for `Direct` and `(not set)`/`(not set)` for `Unassigned`.
+The exact 11 canonical labels are `Paid Search`, `Paid Social`, `Paid Other`, `Organic Search`,
+`Organic Social`, `Email`, `SMS`, `Direct`, `Referral`, `Affiliate`, and `Other`.
+Paid click IDs override conflicting email/native labels. `dclid` maps to `Paid Other`;
+unknown evidence maps to `Other`. Native `Unassigned`, `Display`, and `Affiliates` remain
+available as raw labels, separate from the canonical buckets.
 
-Rule order (see `references/channel_rules.md` for the full table, social-source list,
-search-engine list, and click-ID → platform map): click ID present ⇒ Display/Paid Search/Paid
-Social by platform, then GA4's own paid-medium regex -
-`REGEXP_CONTAINS(LOWER(medium), r'^(.*cp.*|ppc|retargeting|paid.*)$')` - split by `source`
-into Paid Search / Paid Social / Paid Other, then organic/email/SMS/affiliate/referral/social
-medium-and-source checks, then `(direct)`/`(none)` ⇒ Direct, else `Unassigned`. Never leave
-channel NULL; label unknowns `Unassigned` (GA4's own term), not `Direct`.
-
-Implementation: `references/sql/channel_daily.sql`, which emits both `default_channel_group`
-and rule-based `channel` per row so the two can be compared.
+Both templates choose source, medium, campaign, and native label from one ordered evidence
+struct. Click signals and referrer come from the first landing event only, with the first
+observed event used when no page URL exists. Later clicks do not change the session channel.
+All 12 paid click IDs plus `srsltid` survive in `click_ids`; `srsltid` alone is not paid.
 
 ## Key events and conversions
 
@@ -214,19 +210,26 @@ NULL `user_pseudo_id` share, (3) share of sessions crossing midnight.
 For downstream attribution work, materialize two shapes rather than re-querying raw events
 each time:
 
-**`sessions`** (one row per session_key): `session_key`, `user_pseudo_id`, `ga_session_id`,
-`ga_session_number`, `is_new_user`, `session_start_ts`, `session_end_ts`, `pageviews`,
-`events`, `engaged`, `engagement_time_sec`, `landing_page_path`, `landing_page_location`,
-`first_referrer`, `exit_page_path`, `session_source`, `session_medium`, `session_campaign`,
-`default_channel_group`, `landing_gclid`, `landing_fbclid`, `landing_ttclid`. See
-`references/sql/sessions.sql`.
+**`sessions`** (one row per `session_key`): existing timing, engagement, landing/exit,
+source/medium/campaign, raw `default_channel_group`, and landing-click aliases, plus canonical
+`channel`, `taxonomy_version`, `source_system`, `source_scope`, `visitor_key`,
+`attribution_basis`, `event_date` (DATE), `reporting_timezone`, `date_basis`, structured
+`click_ids`, and `key_events`. See `references/sql/sessions.sql`.
 
-**`channel_daily`** (one row per date × `default_channel_group` × `channel`): `event_date`,
-`default_channel_group`, `channel`, `sessions`, `engaged_sessions`, `new_users`, `key_events`,
-`purchases`, `purchase_revenue_usd`. See `references/sql/channel_daily.sql`.
+**`channel_daily`** (one row per `source_system, source_scope, event_date, channel`):
+`sessions`, `engaged_sessions`, `new_users`, `key_events`, native `purchases`,
+`purchase_revenue_usd`, `revenue_status`, `purchase_events_without_transaction_id`, `currency`, version and attribution/date metadata.
+Daily native labels now use `native_channel_groups` ARRAY instead of scalar
+`default_channel_group`; do not unnest the array and duplicate daily metrics.
 
-Downstream attribution skills (multi-touch modeling, spend-join, MMM inputs) should consume
-these two shapes rather than re-deriving sessions and channels from raw events each time.
+`new_users` is the source-native first-session count. GA4 session-last-click and pixel
+first-touch bases remain explicit; their visitor keys are source-scoped, and overlapping
+session populations must not be summed. GA4 purchase revenue remains distinct from pixel
+conversion value. Deduped purchases aggregate per session before the daily join; any unkeyed purchase or unknown
+purchase amount makes the aggregate revenue NULL, while no purchase events gives zero. Read the
+[channel rules](references/channel_rules.md) for exact transaction dedupe, metric, date,
+and boundary semantics. The templates leave `reporting_timezone` NULL until the actual
+property timezone is supplied and assign sessions to their first observed property-local date.
 
 ## References
 
@@ -241,11 +244,17 @@ these two shapes rather than re-deriving sessions and channels from raw events e
 - `references/sql/sessions.sql` - full sessionization query.
 - `references/sql/traffic_source_compare.sql` - compares session last-click vs. derived UTM
   attribution for one window.
-- `references/sql/channel_daily.sql` - date × default_channel_group × channel ×
-  sessions/engagement/key events/purchases.
+- `references/sql/channel_daily.sql` - canonical source/date/channel grain with native-label audit array.
 - `references/sql/key_events.sql` - key events per session with an editable event-name list.
 - `references/sql/ecommerce.sql` - deduped purchases plus item-level unnest example.
 - `references/sql/ui_reconciliation.sql` - the three UI-reconciliation sanity checks.
 - `references/sql/landing_pages.sql` - landing page × sessions × engagement × key events.
 - `scripts/run_checks.sh` - substitutes placeholders into every file in `references/sql/` and
   runs them against a real dataset with `bq query`, printing pass/fail per file.
+
+- `scripts/test-integration.mjs` - local generated-UDF fixtures; `--bigquery` executes both
+  actual templates using synthetic nested GA4 events only, temporary tables, and a 20 MiB cap.
+- `scripts/session-ctes.sql` - shared session reduction source; in the repository regenerate
+  marked blocks with `node skills/channel-taxonomy/scripts/build-artifacts.mjs --repository`.
+- `scripts/test-artifacts.mjs` - repository-only generator regression: standalone isolation
+  and drift detection for all six generated artifacts; it uses temporary copies only.

@@ -1,150 +1,104 @@
-# Channel grouping rules
+# Shared channel grouping for GA4
 
-The raw GA4 BigQuery export carries a default channel group in exactly one place:
-`session_traffic_source_last_click.cross_channel_campaign.default_channel_group` (verified
-against the live schema - see `references/schema.md`). When that value is present and you
-only need it for the session's last-click traffic, use it directly and skip the rules below.
+The canonical taxonomy version is `0.1.0`, with exactly these 11 labels:
+`Paid Search`, `Paid Social`, `Paid Other`, `Organic Search`, `Organic Social`, `Email`,
+`SMS`, `Direct`, `Referral`, `Affiliate`, `Other`.
 
-Rebuild your own channel group when you need event-level classification, when
-`default_channel_group` is NULL or `(not set)` for the row, or when the user wants a custom
-grouping. Read source/medium from `cross_channel_campaign`, not `manual_campaign` - see "Why
-`cross_channel_campaign`, not `manual_campaign`" below. Apply the rules in order; stop at the
-first match. Never leave a session or event unclassified - anything that reaches the end
-unmatched gets labeled `Unassigned`, GA4's own term, never `Other`.
+Both standalone SQL templates embed the identical shared JavaScript classifier. Its source
+is maintained by the channel-taxonomy skill and copied during repository generation; installed
+GA4 skills do not need a sibling skill or external UDF. See the local
+[channel contract](channel-contract.md) for identity, grain, and metric boundaries.
 
-Normalize `source` before every list match: `LOWER()`, then strip a leading `www.`. `medium`
-is matched case-insensitively (`LOWER()`) throughout.
+## Precedence and native labels
 
-## Rule order
+Paid click IDs win over conflicting email, organic, or native-channel evidence. `dclid`
+maps to `Paid Other`; `gclid`, `gbraid`, `wbraid`, and `msclkid` map to `Paid Search`;
+`fbclid`, `ttclid`, `rdt_cid`, `li_fat_id`, `twclid`, `epik`, and `sccid` map to `Paid Social`.
+`srsltid` is retained but never establishes paid traffic by itself.
 
-1. **Click ID present** → Paid. Check `collected_traffic_source.gclid` /
-   `.dclid` first (dedicated export columns), then fall back to `REGEXP_EXTRACT` on
-   `page_location` for click IDs that only ever appear as URL params (see the click-ID map
-   below). Route to Display, Paid Search, or Paid Social per the platform - `dclid` (Campaign
-   Manager 360 / Display & Video 360) is Display, not Paid Search.
-2. **GA4's own paid-medium test** - `REGEXP_CONTAINS(LOWER(medium), r'^(.*cp.*|ppc|retargeting|paid.*)$')`
-   → Paid. This is GA4's own regex, not a short fixed list of literal values - it is what
-   catches `paid-social` (the hyphenated medium Meta, Reddit, and Pinterest paid traffic
-   arrives with) that a `medium IN ('cpc', 'ppc', 'paid', 'sem')` check misses (see pitfall
-   16). Split the match: `source` in the search-engine list → Paid Search; `source` in the
-   social-source list → Paid Social; anything else → **Paid Other**.
-3. **`medium = organic`** → Organic Search.
-4. **`medium = email`** → Email.
-5. **`medium = sms`** → SMS.
-6. **`medium` contains `affiliate`, or `source` in (`cj`, `rakuten`, `impact`, `shareasale`,
-   `awin`, `partnerize`)** → Affiliates.
-7. **`medium = referral`** → Referral.
-8. **`source` in the social-source list** → Organic Social.
-9. **`source = (direct)` and `medium = (none)`** → Direct.
-10. **Everything else**, including `(not set)`/`(not set)` → `Unassigned`. This is GA4's own
-    channel group for sessions with no usable source information. Do not emit NULL, and do not
-    label this case `Direct` - `Direct` is reserved for the explicit `(direct)`/`(none)` match
-    in rule 9.
+Next come paid network IDs and explicit paid-medium rules, then useful native labels,
+non-paid medium/source evidence, referrer evidence, explicit or justified inferred Direct,
+and finally `Other`. Empty or unknown evidence is not automatically Direct. Native GA4
+`Unassigned` maps to canonical `Other`. Native `Display`, `Paid Shopping`, `Cross-network`,
+`Paid Video`, and `Audio` collapse to `Paid Other`; `Organic Shopping` to `Organic Search`;
+`Organic Video` to `Organic Social`; `Affiliates` to `Affiliate`; `AI Assistant` to `Referral`.
+This shared classifier is a cross-source contract, not a reconstruction of every GA4 UI rule.
 
-## Click ID → platform map
+## Session evidence selection
 
-| Click ID param | Platform | Channel |
-|---|---|---|
-| `gclid` | Google Ads | Paid Search |
-| `gbraid` | Google Ads (iOS, privacy-safe) | Paid Search |
-| `wbraid` | Google Ads (web, privacy-safe) | Paid Search |
-| `dclid` | Google Campaign Manager 360 / Display & Video 360 | Display |
-| `fbclid` | Meta (Facebook/Instagram) | Paid Social |
-| `ttclid` | TikTok | Paid Social |
-| `li_fat_id` | LinkedIn | Paid Social |
-| `rdt_cid` | Reddit | Paid Social |
-| `msclkid` | Microsoft Ads | Paid Search |
-| `twclid` | X (Twitter) | Paid Social |
-| `epik` | Pinterest | Paid Social |
-| `sccid` | Snapchat | Paid Social |
+Use one ordered source/medium/campaign/native-label struct from
+`session_traffic_source_last_click.cross_channel_campaign`. Use the manual struct only when
+all four cross-channel fields are NULL. Choose the first nonempty evidence struct by event
+timestamp with a deterministic JSON tie-break. Never independently aggregate source and
+medium: that can manufacture a pair from different events or campaigns. No user-first-touch
+`traffic_source` fields participate.
 
-Only `gclid`, `dclid`, and `srsltid` have dedicated columns in
-`collected_traffic_source`; every other click ID in this table exists only as a URL query
-parameter on `page_location`. Extract with:
+The landing event is the first event carrying a non-NULL `page_location`; without one, it is
+the first observed event. Its referrer and collected `gclid`/`dclid`/`srsltid` stay attached to
+that event. The `click_ids` STRUCT retains those IDs (collected value takes priority) plus all
+12 paid URL IDs and `srsltid`. URL values remain raw for audit; classification normalizes
+values through the shared classifier. The legacy `landing_gclid`, `landing_fbclid`, and
+`landing_ttclid` aliases remain URL-only. Later URL or collected click IDs never reclassify
+the session. If a different evidence window is needed, define it explicitly in a new report.
 
-```sql
-REGEXP_EXTRACT(page_location, r'[?&]fbclid=([^&]+)')
-```
+Both queries use the same generated session reduction. It calls the UDF only after reducing
+events to sessions. `default_channel_group` remains the selected native scalar on session
+rows. Daily `native_channel_groups` is an audit ARRAY of distinct selected native labels;
+it does not split the canonical grain. Migration: replace daily scalar
+`default_channel_group` consumers with the audit array or use session rows for native-group
+analysis. Do not explode the array and sum the duplicated daily metrics.
 
-`srsltid` (Google Shopping's free-listing click id) is present as a dedicated
-`collected_traffic_source` column but does not by itself imply Paid - it appears on organic
-Shopping surfaces too. Do not add it to the paid-classification check without also verifying
-`medium`.
+## Dates, metrics, and interoperability
 
-## Social-source list
+The shared daily key is `source_system, source_scope, event_date, channel`.
+`source_system='ga4'`, `source_scope='PROJECT.analytics_PROPERTY_ID'` (replace with the actual
+scope), `visitor_key=user_pseudo_id`, and `attribution_basis='session_last_click'` retain
+source context. Pixel attribution uses its first collected touch and its own visitor IDs;
+these IDs do not identify the same people without an explicit bridge. Never sum overlapping
+GA4 and pixel populations or treat their attribution bases as equivalent.
 
-Use for the Paid Social split in rule 2 and the Organic Social match in rule 8. Match
-case-insensitively (normalize with `LOWER()` and strip a leading `www.`); GA4 sources appear
-both as bare platform names (`facebook`, `meta`, `ig`) and as hostnames (`facebook.com`,
-`l.instagram.com`, `lm.facebook.com`).
+`event_date` is a DATE parsed from the first observed session event's GA4 property-local
+`event_date`. `reporting_timezone` is NULL until the actual property IANA timezone is supplied;
+`date_basis` documents the basis without guessing UTC. Scan adjacent daily tables for sessions
+crossing midnight, then apply the desired reporting date filter after sessionization. A
+session already running before the bounded scan has a truncated start and first landing;
+these templates cannot recover events outside the scan. Late-arriving daily exports remain
+subject to GA4's update window.
 
-```
-facebook, facebook.com, m.facebook.com, l.facebook.com, lm.facebook.com,
-instagram, instagram.com, l.instagram.com, meta, ig,
-tiktok, tiktok.com,
-linkedin, linkedin.com,
-pinterest, pinterest.com,
-reddit, reddit.com, old.reddit.com,
-twitter, twitter.com, t.co, x, x.com,
-snapchat, snapchat.com
-```
+`sessions` counts session rows; `engaged_sessions` uses the exported engaged flag, at least
+10,000 engagement milliseconds, two page views, or an event in the declared key-event list.
+`new_users` counts first-session rows (`ga_session_number=1`), a source-native proxy rather
+than cross-source deduplicated people. `key_events` counts raw events in the editable
+`key_event_names` array, including repeated purchase events; agree that list before reporting.
 
-`meta` and `ig` are observed GA4 `source` values on live exports (not just documentation
-guesses) - add them alongside the hostname/platform-name forms, not in place of them.
+GA4-native `purchases` deduplicates nonempty transaction IDs within `(session_key,
+transaction_id)`. The same ID in another session remains a separate purchase. Duplicate
+amounts use the earliest non-NULL amount; if every copy lacks an amount, that transaction's
+revenue is unknown. Transactions aggregate to one session row before the join, preventing
+multiple purchases from multiplying sessions, engagement, new users, or key events.
+Missing/empty transaction IDs are excluded from deduped `purchases` but exposed as
+`purchase_events_without_transaction_id`. Any such event makes daily revenue NULL with
+`revenue_status='unkeyed_purchases'`, because it cannot safely be deduplicated. These events
+can still be key events.
 
-Extend this list per property - some properties see additional social referrers (Threads,
-Mastodon instances, YouTube community posts) that are not universally present.
+`purchase_revenue_usd` uses GA4's USD amounts and declares `currency='USD'`. When all purchase events have transaction IDs, it is zero for
+no purchases (`revenue_status='no_purchases'`), the sum for fully known deduped purchases
+(`complete`), and NULL if any deduped purchase amount is unknown (`unknown`), even when other
+amounts are known. This is distinct from pixel `conversion_value`; there is no automatic
+purchase equivalence or implied FX conversion.
 
-## Search-engine list
+## Reproducible checks
 
-Use to sanity-check `medium = organic` rows and to decide Paid Search vs. Paid Social vs. Paid
-Other for rows that match the paid-medium regex in rule 2 (a `source` on this list with a
-paid medium is Paid Search, never Paid Social or Paid Other).
+Run `node scripts/test-integration.mjs` from this installed skill for generated-UDF fixture
+checks. Run `bash scripts/run_checks.sh --synthetic` with authenticated `bq` for both actual
+SQL templates against synthetic nested events, a 20 MiB billed-bytes cap, and temporary tables
+only. No customer tables or persistent datasets are read or written.
 
-```
-google, google.com, bing, bing.com, yahoo, duckduckgo, baidu, yandex, ecosia, ask, aol
-```
+In the repository, regenerate all shared copies with
+`node skills/channel-taxonomy/scripts/build-artifacts.mjs --repository`; add `--check` to detect drift in
+both queries, the standalone classifier copies, and the copied contract documents.
 
-## GA4's default channel groups
-
-`cross_channel_campaign.default_channel_group` was non-NULL on 100% of events with a
-`user_pseudo_id` on the day checked, across both verification properties. Distinct values
-observed:
-
-```
-Direct, Paid Search, Paid Social, Paid Shopping, Cross-network, Organic Search,
-Organic Social, Organic Shopping, Organic Video, Email, SMS, Referral, Affiliates,
-AI Assistant, Unassigned
-```
-
-Documented GA4 channel groups not observed on the verification day, but that can still appear:
-`Display`, `Paid Video`, `Paid Other`, `Audio`, `Mobile Push Notifications`. `AI Assistant` is
-a newer group (traffic from AI chat/assistant surfaces, e.g. `chatgpt.com` with medium
-`ai-assistant`) observed in live exports in 2026 - GA4's channel-group list grows over time;
-do not treat either list here as exhaustive or final.
-
-## Why `cross_channel_campaign`, not `manual_campaign`
-
-`session_traffic_source_last_click.manual_campaign.source`/`.medium` read `(not set)`/
-`(not set)` for both GA4 `Direct` sessions and GA4 `Unassigned` sessions - the two cannot be
-told apart from `manual_campaign` alone. `cross_channel_campaign.source`/`.medium` read
-`(direct)`/`(none)` for Direct sessions and `(not set)`/`(not set)` for Unassigned, so it is
-the field pair that actually distinguishes them.
-
-## Notes
-
-- `medium` and `source` values are inconsistent across properties and over time - GA4 has
-  changed default medium values (`organic` vs `(organic)`, presence/absence of parentheses)
-  across SDK versions. Normalize with `LOWER()` and strip surrounding parentheses before
-  comparing, or match on `LIKE '%organic%'` style patterns if a property shows drift.
-- `(not set)`/`(not set)` on `cross_channel_campaign.source`/`.medium` resolves to
-  `Unassigned`, not `Direct` - see "Why `cross_channel_campaign`, not `manual_campaign`" above.
-  `(not set)` and `(not provided)` are distinct GA4 sentinel values, not the same as NULL;
-  treat both as unclassified input that should still resolve to a channel via the rules above.
-  Typical `Unassigned` residents: custom affiliate/influencer link mediums (e.g.
-  `Affiliate_link_25p`), affiliate networks with a NULL medium or a publisher name as the
-  source, programmatic traffic (medium `Programmatic`), and QR-code traffic (`qrcode`). This
-  is exactly where a custom rule table earns its keep over reading `default_channel_group`
-  as-is.
-- See `references/sql/channel_daily.sql` for the rule table implemented as a single `CASE`
-  expression, tested against two live GA4 export datasets.
+Run `node skills/ga4-bigquery-export/scripts/test-artifacts.mjs` from the repository to verify
+standalone generator isolation and drift detection using temporary copies. Without
+`--repository`, the channel-taxonomy generator only updates its own reference UDF and never
+requires or creates sibling installed skills.

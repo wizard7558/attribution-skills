@@ -5,6 +5,27 @@ channel derivation, identity model, sessionization, and how to run and
 interpret the verification scripts. It assumes you have `assets/schema.sql`,
 `assets/pixel.js`, `assets/collector/**`, and `scripts/**` open alongside it.
 
+## Shared taxonomy and output contract
+
+`assets/collector/core.js` imports the generated sibling `channel-taxonomy.mjs`; it does not
+contain a second classifier. `deriveChannel(input)` remains the public compatibility wrapper and
+returns `classifyChannel(input)`. New touchpoints carry `taxonomy_version`, while `srsltid` is
+stored as raw evidence and never used as paid evidence. Pixel attribution is `first_touch`.
+
+The sessions view keeps its historical columns first and appends `native_channel`,
+`taxonomy_version`, `attribution_basis`, `source_system`, `source_scope`, `visitor_key`,
+`is_new_user`, and full `click_ids` JSON. Legacy `Display`, `Affiliates`, and `Unassigned`
+touchpoints map to `Paid Other`, `Affiliate`, and `Other`; raw labels remain in
+`native_channel` and receive version `legacy`. A no-touch session can infer Direct only from a
+valid captured landing URL with no source, medium, click ID, or external referrer; otherwise it
+is `Other` with `legacy/unclassified`.
+
+`channel_daily` is grouped by `source_scope` (site), UTC `event_date`, and channel. Its required
+metrics are sessions, engaged_sessions, new_users, and key_events (collector conversions).
+`conversion_value` is pixel-native and remains NULL when any conversion value/currency is
+unknown or currencies are mixed; `conversion_value_status` is `known`, `no_conversions`,
+`unknown`, or `mixed_currency`. Currency is normalized to trimmed uppercase and never mixed.
+
 ## Payload contract
 
 Every event the pixel sends is a JSON POST with this exact shape, whether
@@ -24,7 +45,7 @@ it's a `pageview`, `track`, `identify`, `form_submit`, or `consent`:
   "click_ids": {
     "gclid": "TEST123", "gbraid": null, "wbraid": null, "dclid": null,
     "fbclid": null, "ttclid": null, "rdt_cid": null, "li_fat_id": null,
-    "msclkid": null, "twclid": null, "epik": null, "sccid": null
+    "msclkid": null, "twclid": null, "epik": null, "sccid": null, "srsltid": null
   },
   "platform_cookies": { "_fbp": null, "_fbc": null, "_rdt_uuid": null, "_ttp": null },
   "identity": null,
@@ -80,32 +101,16 @@ package.json.
 
 ## Channel derivation
 
-`deriveChannel(input)` (exported from `core.js` for unit testing) picks
-exactly one of 12 fixed labels, in this order, first match wins:
+The numbered legacy description below is historical context only. Runtime classification now
+delegates to the shared `channel-taxonomy.mjs` module, whose 11-label contract and precedence
+are authoritative. `deriveChannel` remains a stable wrapper; it does not implement separate
+rules. `srsltid` is captured and stored but never establishes paid traffic.
 
-1. `dclid` present → **Display**
-2. `gclid`/`gbraid`/`wbraid`/`msclkid` present → **Paid Search**
-3. `fbclid`/`ttclid`/`li_fat_id`/`rdt_cid`/`twclid`/`epik`/`sccid` present →
-   **Paid Social**
-4. `utm_medium` matches `^(.*cp.*|ppc|retargeting|paid.*)$` → **Paid
-   Search** if `utm_source` is a known search engine, **Paid Social** if
-   it's a known social platform, else **Paid Other**
-5. `utm_medium = organic` → **Organic Search**
-6. `utm_medium = email` → **Email**
-7. `utm_medium = sms` → **SMS**
-8. `utm_medium` contains `affiliate`, or `utm_source` is a known affiliate
-   network → **Affiliates**
-9. `utm_medium = referral`, or an external referrer with **no** utm
-   parameters at all → **Organic Search** if the referrer host is a search
-   engine, **Organic Social** if it's a social platform, else **Referral**
-10. No signal whatsoever (no source, medium, click id, or external
-    referrer) → **Direct**
-11. Anything left over → **Unassigned**
-
-This label vocabulary - Display, Paid Search, Paid Social, Paid Other,
-Organic Search, Email, SMS, Affiliates, Referral, Organic Social, Direct,
-Unassigned - is fixed. Every touchpoint and every session row carries one of
-these 12 strings, never a raw source/medium pair and never NULL.
+The shared module returns exactly one of the 11 canonical labels: Paid Search, Paid Social,
+Paid Other, Organic Search, Organic Social, Email, SMS, Direct, Referral, Affiliate, or Other.
+It retains raw signals, maps legacy labels only in the session view, and never treats `srsltid`
+as paid evidence. Read the shared taxonomy skill's source mappings for the complete precedence
+and native-label mapping.
 
 ## Touchpoint derivation and dedup
 
@@ -116,14 +121,11 @@ session for that visitor: defined as no prior `pageview`/`track`/
 `form_submit` event for that visitor in the preceding 30 minutes, the same
 inactivity window `pixel.sessions` itself sessionizes on.
 
-That second condition is broader than "the visitor's very first event
-ever": a returning visitor's first pageview after a 30-minute gap also gets
-a touchpoint, even when it carries no signal at all (it resolves to
-**Direct**). This matters because `pixel.sessions.channel` joins against the
-first touchpoint inside each session's time window and only falls back to
-guessing Direct/Unassigned from referrer + URL params when no touchpoint
-exists at all, giving every session a real, stored touchpoint row is more
-useful downstream than relying on that fallback for every Direct session.
+That second condition is broader than "the visitor's very first event ever":
+a returning visitor's first pageview after a 30-minute gap also gets a
+touchpoint, even when it carries no signal. Legacy sessions without a
+touchpoint infer Direct only from a valid signal-free landing URL; otherwise
+they emit Other with `legacy/unclassified`.
 
 Once a touchpoint is going to be created, it's deduped: if an existing
 touchpoint for the same visitor and the same derived channel already exists
@@ -174,13 +176,12 @@ window: a new session starts on a visitor's first captured event, or after
 30 minutes with no captured event. Each session's `channel` comes from the
 first touchpoint whose `occurred_at` falls inside that session's time
 window; see "Touchpoint derivation and dedup" above for why that's normally
-present even for Direct sessions, and the Direct/Unassigned fallback in the
-view's `CASE` expression for the rare case where it isn't (an existing
-deployment enabling this schema against already-collected pageview data
-that predates the touchpoint-per-session behavior, for example).
+present even for Direct sessions. A legacy session with no touchpoint uses the
+valid signal-free landing fallback described above.
 
-`pixel.channel_daily` aggregates `pixel.sessions` to `(event_date, channel)`
-grain, `event_date` being the UTC calendar date of `session_start_ts`.
+`pixel.channel_daily` aggregates `pixel.sessions` to `(source_scope, event_date,
+channel)` grain, with `event_date` as the UTC calendar date of
+`session_start_ts`.
 
 ### Column-name parity with `ga4-bigquery-export`
 
@@ -196,8 +197,8 @@ a rename, not a rebuild:
 | Landing/exit page | `landing_page_path`, `landing_page_location`, `exit_page_path` | `landing_page_path` (see `landing_pages.sql`) |
 | Referrer | `first_referrer` | referrer fields off `session_traffic_source_last_click` |
 | Session-grain source/medium | `session_source`, `session_medium`, `session_campaign` | `source`, `medium` (see `sessions.sql`) |
-| Channel label | `channel` (12-value vocabulary in this doc) | `default_channel_group` / rebuilt channel (see `channel_rules.md`) |
-| Daily grain | `event_date`, `sessions`, `engaged_sessions`, `new_visitors` | `event_date`, `sessions`, `engaged_sessions`, `new_users` |
+| Channel label | `channel` (11-value shared vocabulary) | `default_channel_group` / rebuilt channel (see `channel_rules.md`) |
+| Daily grain | `source_scope`, `event_date`, `sessions`, `engaged_sessions`, `new_users` | `event_date`, `sessions`, `engaged_sessions`, `new_users` |
 | Conversion grain | `conversions`, `conversion_value` | `key_events`, `purchase_revenue_in_usd` |
 
 The channel label sets are close but not identical (GA4 also emits `Paid
@@ -209,7 +210,16 @@ rather than assuming a 1:1 join.
 
 ## Running the verification scripts
 
-`scripts/roundtrip.sh` is self-contained:
+`taxonomy-parity.mjs` is a repository-only parity check against the shared synthetic fixture
+file. The disposable `roundtrip.sh` smoke test is standalone: it copies the generated collector
+module and exercises the collector/Postgres chain without invoking the sibling fixture check.
+
+`scripts/roundtrip.sh` is self-contained and has no Git or sibling-skill dependency in its
+default mode. It copies the generated collector module from the skill directory. Run
+`scripts/roundtrip.sh --migration` separately when the checkout contains commit `2c240a3`; that
+mode applies the historical schema first and verifies the upgrade path.
+The default copied-skill smoke currently reports 18 assertions; repository `--migration` mode
+reports those 18 plus 2 historical-schema assertions.
 
 ```sh
 # Optional: point at an existing Postgres instead of a throwaway cluster.
@@ -220,6 +230,8 @@ rather than assuming a 1:1 join.
 # export NODE_PATH=/path/to/a/dir/containing/node_modules/pg
 
 bash scripts/roundtrip.sh
+# Repository-only historical migration proof:
+bash scripts/roundtrip.sh --migration
 ```
 
 It applies `assets/schema.sql`, runs `pixel.ensure_month_partitions()`,
