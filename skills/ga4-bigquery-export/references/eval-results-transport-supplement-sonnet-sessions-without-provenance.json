@@ -1,0 +1,64 @@
+{
+  "attempts": 1,
+  "context_hashes": {
+    "SKILL.md": "f4ef7556afa021a3fc03d78a68383d10d52ddd51de776b262f7a54dfbd38310d",
+    "references/evaluation-quick-reference.md": "d92a66bd384753c6b74f840f174e77f1c059711e1f4bb126032b5e30724d8fe0"
+  },
+  "finished_at": "2026-09-09T20:16:46.503338+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "5fb6868bc16429d77e7bb9ac2d6b1a3d68a377212e123a6f61c8dcc784556fe4",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "ga4-sonnet-sessions-without-raw.json",
+  "public_results_sha256": "7e9413708f82c537be12d672b350fff88c976ff988a4bd9444fc2f3f49d29fda",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "7e9413708f82c537be12d672b350fff88c976ff988a4bd9444fc2f3f49d29fda",
+  "started_at": "2026-09-09T20:06:46.481986+00:00",
+  "summaries": [
+    {
+      "checks": 0,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "usable_calls": 0
+    }
+  ],
+  "transport_failures": 1,
+  "usable_calls": 0,
+  "verified_cells": [
+    {
+      "checks": 341,
+      "completion_status": "transport_failure",
+      "condition": "without-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "sessions-and-source-evidence",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "7639d317c5a71cab0ca3e9f009057f741d5ba58a7430ea735900e1f4e6a86398",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": false
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": null,
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
