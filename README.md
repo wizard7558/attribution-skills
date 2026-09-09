@@ -37,10 +37,10 @@ The GA4 and pixel skills each bundle their classifier and contract, so a single-
 
 | Skill | Version | What it does | Status |
 | --- | --- | --- | --- |
-| [`channel-taxonomy`](skills/channel-taxonomy) | 0.1.0 | Shared 11-channel taxonomy, classifier, contract, fixtures, and shared evaluation harness | Deterministic suite passes; revised 18-cell live matrix recorded privately; in-repo results pending |
-| [`ga4-bigquery-export`](skills/ga4-bigquery-export) | 0.2.0 | Source-scoped GA4 BigQuery sessions and daily channel metrics from raw export events | Deterministic fixtures pass; private Claude+Qwen matrix recorded; in-repo results pending |
-| [`first-party-pixel`](skills/first-party-pixel) | 0.2.0 | Owner-controlled pixel, collector, and PostgreSQL session/daily reporting views | Deterministic tests pass; PostgreSQL roundtrip opt-in; hosted adapter smoke pending |
-| [`clickstream-identity-stitching`](skills/clickstream-identity-stitching) | 0.1.0 | Identity dedupe, non-destructive graph, and verified webhook resolution | Deterministic suite passes; original matrix preserved; Sonnet 600s supplements complete; Qwen graph still truncates |
+| [`channel-taxonomy`](skills/channel-taxonomy) | 0.1.0 | Shared 11-channel taxonomy, classifier, contract, fixtures, and shared evaluation harness | Deterministic suite passes; v2 matrix published (18/18 on manifest 1be1b437); v1 retained |
+| [`ga4-bigquery-export`](skills/ga4-bigquery-export) | 0.2.0 | Source-scoped GA4 BigQuery sessions and daily channel metrics from raw export events | Deterministic fixtures pass; model matrix published 14/18 usable; 4 transport supplements outstanding |
+| [`first-party-pixel`](skills/first-party-pixel) | 0.2.0 | Owner-controlled pixel, collector, and PostgreSQL session/daily reporting views | Deterministic tests pass; harness manifest authored; live matrix and hosted adapter smoke pending |
+| [`clickstream-identity-stitching`](skills/clickstream-identity-stitching) | 0.1.0 | Identity dedupe, non-destructive graph, and verified webhook resolution | Deterministic suite passes; Sonnet supplements published (4/4); Qwen graph truncated (n/a); corrected graph cells incomplete |
 | [`crm-attribution-profiler`](skills/crm-attribution-profiler) | 0.1.0 | Profile CRM attribution fields against ad-history keys with explicit thresholds | Deterministic suite passes |
 | [`crm-paid-attribution`](skills/crm-paid-attribution) | 0.1.0 | Resolve CRM leads to paid channel and ad evidence with scoped matching | Deterministic suite passes |
 | [`funnel-truth-and-cost-per-stage`](skills/funnel-truth-and-cost-per-stage) | 0.1.0 | CRM stage truth, cost buckets, and refresh partition planning from explicit bindings | Deterministic suite passes |
@@ -48,7 +48,7 @@ The GA4 and pixel skills each bundle their classifier and contract, so a single-
 | [`mmm-and-incrementality-framing`](skills/mmm-and-incrementality-framing) | 0.1.0 | Guarded weekly MMM, response curves, assumption bands, and share comparisons | Deterministic suite passes; recorded model matrix complete for fixed prompts |
 | [`capi-match-keys`](skills/capi-match-keys) | 0.1.0 | Conversion preparation, provider payloads, and transactional outbox delivery | Deterministic helpers pass; PostgreSQL outbox harness opt-in |
 | [`attribution-data-quality-tripwires`](skills/attribution-data-quality-tripwires) | 0.1.0 | Nine native quality checks plus schema and column population extractors | Deterministic suite passes; recorded model matrix complete for fixed prompts |
-| [`attribution-audit`](skills/attribution-audit) | 0.1.0 | Compose or invoke a bounded audit across upstream skills with explicit inventory and provenance | Offline compose/execute host verified; native BigQuery proof passed privately; model eval pending |
+| [`attribution-audit`](skills/attribution-audit) | 0.1.0 | Compose or invoke a bounded audit across upstream skills with explicit inventory and provenance | Offline compose/execute host verified; native BigQuery proof summarized; harness manifest authored; live matrix pending |
 
 ## How they work together
 
@@ -58,7 +58,18 @@ Native labels and raw evidence remain available for audit. GA4's session last-cl
 
 `attribution-audit` orchestrates the upstream skills through explicit installed roots and one-way entrypoints. It preserves native producer outputs separately from execution and quality reductions. GA4 SQL and PostgreSQL snapshot adapters remain unimplemented in the audit host. A bounded native BigQuery proof on owned synthetic fixtures has been recorded privately; publication of that evidence into the repository remains a separate step.
 
-Deterministic test results and model behavior evaluations are separate evidence. Private live matrices for taxonomy and GA4 are recorded outside the repository until redacted publication; the Qwen identity-graph cell still truncates at the 8192-token output cap and remains an outstanding blocker, not a knowledge score. Completed matrices for other skills apply only to their fixed prompts and do not establish universal model support.
+Deterministic test results and model behavior evaluations are separate evidence. Published matrices for taxonomy (18/18), GA4 (14/18), tripwires/MMM/funnel/CRM skills, and identity supplements are honest about transport and truncation gaps. The Qwen identity-graph cell still truncates at the 8192-token output cap and remains an outstanding blocker, not a knowledge score.
+
+## Outstanding blockers
+
+| Blocker | Skill | Owner action |
+| --- | --- | --- |
+| GA4 transport supplements (4 cells) | `ga4-bigquery-export` | Rerun failed cells with reviewed Sonnet 600s wrapper; never resume whole artifact under changed manifest |
+| Identity corrected graph (Fable ×2, Qwen without-skill never run; Qwen with-skill truncated) | `clickstream-identity-stitching` | Decide truncation policy; rerun only never-run or failed cells on manifest `71a0c119` |
+| Pixel live matrix (18 cells) | `first-party-pixel` | Launch review then `python3 scripts/run-skill-evals.py --skill skills/first-party-pixel --run ...` |
+| Audit live matrix (18 cells) | `attribution-audit` | Launch review after offline manifest review |
+| Hosted pixel adapter smoke | `first-party-pixel` | Disposable Vercel/Supabase/Neon/Cloudflare proof with teardown |
+| Catalog completion | all twelve | DoD requires every skill at 18/18 usable or explicit n/a with no fabricated scores |
 
 ## Conventions
 

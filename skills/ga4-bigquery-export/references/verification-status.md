@@ -1,6 +1,6 @@
 # Native verification status
 
-Reviewed 2026-09-09. This record separates synthetic contract checks, bounded live export compatibility and model evaluation. The current [model evaluation](eval.md) remains pending. No query or model was rerun for this documentation alignment.
+Reviewed 2026-09-09. This record separates synthetic contract checks, bounded live export compatibility and model evaluation. The current [model evaluation](eval.md) reports **14/18 usable** published cells with four transport supplements outstanding. No query or model was rerun for this documentation alignment.
 
 ## Current evidence boundaries
 

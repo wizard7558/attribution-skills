@@ -40,9 +40,9 @@ from its reviewed literal definitions with the same Node command plus `--write`.
 Node 18+ and Python 3.10+ are required. `tiktoken` is optional for a cl100k estimate; the test
 otherwise labels its conservative bytes/3 estimate. Neither is a claim about Qwen tokenization.
 
-All 18 cells for this revised manifest are **pending**: Fable 5.1, Sonnet 5, and Qwen3:4b,
-three groups, with and without skill context. No taxonomy inference has been run in this step.
-After separate launch review, the stock shared command is:
+All 18 cells for manifest `1be1b437` are **published** in [eval-results-v2.json](eval-results-v2.json) and [eval-results-v2.md](eval-results-v2.md). The historical v1 matrix on manifest `5ef36ee6` remains in [eval-results.json](eval-results.json) and [eval-results.md](eval-results.md) unchanged. See [eval-v2-provenance.json](eval-v2-provenance.json) for redaction and rescore metadata (`model_reruns_during_publication: 0`).
+
+After separate launch review, reruns must use a new output artifact:
 
 ```sh
 python3 scripts/run-skill-evals.py --skill skills/channel-taxonomy --run \

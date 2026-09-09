@@ -1,0 +1,1682 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/evaluation-quick-reference.md"
+  ],
+  "groups": [
+    {
+      "id": "touchpoint-channel-normalization",
+      "prompt": "Classify each supplied touchpoint input independently using the shared taxonomy. Return cases A onward in input order with channel and taxonomy_version only. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "utm_medium": "email"
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "landing_url": "https://shop.example/path"
+            }
+          },
+          {
+            "case_id": "D",
+            "input": {
+              "click_ids": {
+                "gclid": "x",
+                "fbclid": "y"
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "channel",
+                    "taxonomy_version"
+                  ],
+                  "properties": {
+                    "channel": {
+                      "type": "string"
+                    },
+                    "taxonomy_version": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/channel",
+          "op": "equals",
+          "expected": "Email",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/channel",
+          "op": "equals",
+          "expected": "Direct",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "D",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/output/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        }
+      ]
+    },
+    {
+      "id": "identity-projection",
+      "prompt": "Project identity for each supplied input independently. Return cases A onward in input order with exported_touch_count, graph_edge_count, suppressed_touch_count, and contact_diagnostic_count only. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-fixture-1",
+              "config": {
+                "invocation_key": "invocation-fixture-1",
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "site"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t1",
+                  "visitor_key": "v1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-fixture-1",
+              "config": {
+                "invocation_key": "invocation-fixture-1",
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "site"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t1",
+                  "visitor_key": "v1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t2",
+                  "visitor_key": "v2",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v2",
+                  "observation_key": "o2",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-fixture-1",
+              "config": {
+                "invocation_key": "invocation-fixture-1",
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "site"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t1",
+                  "visitor_key": "v1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o2",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "D",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-fixture-1",
+              "config": {
+                "invocation_key": "invocation-fixture-1",
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "site"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t1",
+                  "visitor_key": "v1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2",
+                  "email_hash": null,
+                  "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+                  "email_hash_format": null,
+                  "phone_hash_format": "canonical_sha256_v1",
+                  "email_hash_status": "missing",
+                  "phone_hash_status": "attested",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "exported_touch_count",
+                    "graph_edge_count",
+                    "suppressed_touch_count",
+                    "contact_diagnostic_count"
+                  ],
+                  "properties": {
+                    "exported_touch_count": {
+                      "type": "integer"
+                    },
+                    "graph_edge_count": {
+                      "type": "integer"
+                    },
+                    "suppressed_touch_count": {
+                      "type": "integer"
+                    },
+                    "contact_diagnostic_count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/exported_touch_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/graph_edge_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/exported_touch_count",
+          "op": "equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/graph_edge_count",
+          "op": "equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/exported_touch_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/graph_edge_count",
+          "op": "equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "D",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/output/exported_touch_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/graph_edge_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "manifest-literal"
+        }
+      ]
+    },
+    {
+      "id": "identity-snapshot-projection",
+      "prompt": "Project identity from each supplied snapshot input independently. Return cases A onward in input order with exported_touch_count, graph_edge_count, suppressed_touch_count, and contact_diagnostic_count only. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-native-fixture",
+              "config": {
+                "invocation_key": "snapshot-projection",
+                "as_of": "2026-09-03T01:00:00.000000001Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "snap_a",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "snap_a"
+                  },
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "snap_b",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "snap_b"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-shared",
+                  "visitor_key": "v-shared",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-a",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-b",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-form",
+                  "occurred_at": "2026-09-03T00:30:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-form",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-legacy",
+                  "email_hash": null,
+                  "phone_hash": null,
+                  "email_hash_format": null,
+                  "phone_hash_format": null,
+                  "email_hash_status": "legacy_unverified",
+                  "phone_hash_status": "missing",
+                  "capture_status": "no_attested_identity",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-native-fixture",
+              "config": {
+                "invocation_key": "snapshot-projection",
+                "as_of": "2026-09-03T01:00:00.000000001Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "snap_a",
+                    "contact_source_system": "crm",
+                    "contact_source_scope": "crm-snapshot"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-shared",
+                  "visitor_key": "v-shared",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-a",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-b",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-form",
+                  "occurred_at": "2026-09-03T00:30:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-form",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-legacy",
+                  "email_hash": null,
+                  "phone_hash": null,
+                  "email_hash_format": null,
+                  "phone_hash_format": null,
+                  "email_hash_status": "legacy_unverified",
+                  "phone_hash_status": "missing",
+                  "capture_status": "no_attested_identity",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                }
+              ],
+              "external_contacts": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": null
+                }
+              ],
+              "external_contact_evidence_ref": "external-crm-evidence"
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-native-fixture",
+              "config": {
+                "invocation_key": "snapshot-projection",
+                "as_of": "2026-09-03T01:00:00.000000001Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-shared",
+                  "visitor_key": "v-shared",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "touch_key": "t-unique",
+                  "visitor_key": "v-unique",
+                  "occurred_at": "2026-09-03T00:00:00.000000001Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": null,
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Snapshot+Click",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-a",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-b",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-shared",
+                  "observation_key": "o-shared-form",
+                  "occurred_at": "2026-09-03T00:30:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-form",
+                  "occurred_at": "2026-09-03T00:20:00.000000001Z",
+                  "source_event_type": "form_submit",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "visitor_key": "v-unique",
+                  "observation_key": "o-unique-identify",
+                  "occurred_at": "2026-09-03T00:10:00.000000001Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b",
+                  "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-legacy",
+                  "email_hash": null,
+                  "phone_hash": null,
+                  "email_hash_format": null,
+                  "phone_hash_format": null,
+                  "email_hash_status": "legacy_unverified",
+                  "phone_hash_status": "missing",
+                  "capture_status": "no_attested_identity",
+                  "native_created_at": "<native-created-at>"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "contact_key": "c-a",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "<native-created-at>"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "exported_touch_count",
+                    "graph_edge_count",
+                    "suppressed_touch_count",
+                    "contact_diagnostic_count"
+                  ],
+                  "properties": {
+                    "exported_touch_count": {
+                      "type": "integer"
+                    },
+                    "graph_edge_count": {
+                      "type": "integer"
+                    },
+                    "suppressed_touch_count": {
+                      "type": "integer"
+                    },
+                    "contact_diagnostic_count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/exported_touch_count",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/graph_edge_count",
+          "op": "equals",
+          "expected": 6,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 4,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/exported_touch_count",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/graph_edge_count",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 5,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/exported_touch_count",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/graph_edge_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/suppressed_touch_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/contact_diagnostic_count",
+          "op": "equals",
+          "expected": 4,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "manifest-literal"
+        }
+      ]
+    }
+  ]
+}

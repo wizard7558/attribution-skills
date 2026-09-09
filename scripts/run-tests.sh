@@ -38,7 +38,13 @@ for suite in "$@"; do
       node skills/funnel-truth-and-cost-per-stage/scripts/test-eval-cases.mjs
       node skills/capi-match-keys/scripts/test-eval-manifest.mjs
       node skills/attribution-data-quality-tripwires/scripts/test-eval-manifest.mjs
-      python3 -B skills/mmm-and-incrementality-framing/scripts/build-eval-cases.py --check
+      python3 scripts/test-publish-eval-matrix.py
+      bash scripts/test-standalone-install.sh
+
+      node skills/first-party-pixel/scripts/build-eval-cases.mjs --check
+      node skills/first-party-pixel/scripts/test-eval-manifest.mjs
+      node skills/attribution-audit/scripts/build-eval-cases.mjs --check
+      node skills/attribution-audit/scripts/test-eval-manifest.mjs
 
       node skills/attribution-audit/scripts/test-compose-audit.mjs
       node skills/attribution-audit/scripts/test-execute-audit.mjs
@@ -72,6 +78,7 @@ for suite in "$@"; do
       node skills/capi-match-keys/scripts/test-match-keys.mjs
       node skills/capi-match-keys/scripts/test-provider-payloads.mjs
 
+      python3 -B skills/mmm-and-incrementality-framing/scripts/build-eval-cases.py --check
       python3 -B skills/mmm-and-incrementality-framing/scripts/test-eval-cases.py
       python3 -B skills/mmm-and-incrementality-framing/scripts/test_weekly_mlr.py
       python3 -B skills/mmm-and-incrementality-framing/scripts/test_response_curves.py

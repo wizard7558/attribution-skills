@@ -39,7 +39,7 @@ const PINNED={
   "references/schema.md": "0fec76afa20f8b59bc372589094cd228998b37ea9f3113ec1484d0051ede6f02",
   "references/pitfalls.md": "7b11b48047e30ca7af122062755585b249467aedf2bac40b1620837c401cddff",
   "references/channel_rules.md": "990b49ab730461cb0780dfc5ef19d48fe60aed16499c5fcaafb4a9bc03363c07",
-  "references/verification-status.md": "3dc8b09f9dc66dcfed1d3950d75bd26f55673daf0c92df728be32bdb3378c18f"
+  "references/verification-status.md": "bc04d73f444d6f5f041b4ecf3f353f10b0d7e3c2389d909b8eb6a2149b22ce08"
 };
 for(const [relative,h] of Object.entries(PINNED))assert.equal(hash(fs.readFileSync(path.join(root,relative))),h,relative);
 const permitted=new Set(['--write','--evidence','--native-index','--standalone-child']);

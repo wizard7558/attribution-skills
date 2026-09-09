@@ -1,0 +1,158 @@
+{
+  "attempts": 4,
+  "context_hashes": {
+    "SKILL.md": "5d2a539b0342df5102114fd07dd73a07afcce132c2770b2aa72f57ae84a83f59",
+    "references/identity-quick-reference.md": "de64e9d6aeda9c9672df90b75bfc00ae79bd405d972dd683e24f922cd265a9cf"
+  },
+  "finished_at": "2026-09-09T17:23:00.056701+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "71a0c119cd2642e44e6372a18b72108a2cf6ddfccc0910b569e48e203985d2c6",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "sonnet-supplements-raw.json",
+  "public_results_sha256": "b8035677916a4c1b4cf0ce37c8947b41e3db59447c1aaefb6e8e2f886f3ddfd9",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "494fd2218cdbfef8e7f88c9d70b3aebd5ac74d5e51dd4fb27096fc7878b70355"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "04107bfc332b7407358531ea91b85d673eb52eb5b4e684f2c20ad764fa4fc0bf"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/webhook-stitch-and-receipts/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "9d0e177b83076d89beb914ffea30bcf1e9b3dfe56ce40a0741508ee336b24f31"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/webhook-stitch-and-receipts/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "126cc32a0b2e2d912e511573a2eae8bd3ce99c9ffb431f2a64ba485c1dbb867f"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "2a7e71e854b0af4810a6889bd31ec5803f65d39f1ec4cb2cd1cef322c9df7e38"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b85da5ea0c6c798bda50dae28a24dea7da509a6972fc8d345a6e2739dfd73005"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/webhook-stitch-and-receipts/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b0981bdec667d8ae2dc7461f5beed9b660aef895b1a6bc6f87b6632e58b83693"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/webhook-stitch-and-receipts/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "22b584fa3fb0fe214e3cb2cdc0902910e5908e5086a8656263d4c76feacd0813"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "c0a99a1f997137e2f84ff47c231143355fc9158268281b0033d7144c135f6d9d",
+  "started_at": "2026-09-09T16:57:49.156415+00:00",
+  "summaries": [
+    {
+      "checks": 1704,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 1697,
+      "usable_calls": 2
+    },
+    {
+      "checks": 1704,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 1552,
+      "usable_calls": 2
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 4,
+  "verified_cells": [
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-sonnet-5",
+      "passed": 1188,
+      "prompt_sha256": "aff1eb0517abb87343731438ea4cbc21404fbaf03beadfbe3505b7e676a65982",
+      "raw_model_content_sha256": "938a3807cc84abb7c73417343ed8979b26a39e09a2b8c1c22da070ce4397c635",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-sonnet-5",
+      "passed": 509,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "09d78b3f20743faacd98c3cdded75aa1ceaa3fb16001db225b58963dfb80596a",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-sonnet-5",
+      "passed": 1056,
+      "prompt_sha256": "aff1eb0517abb87343731438ea4cbc21404fbaf03beadfbe3505b7e676a65982",
+      "raw_model_content_sha256": "a42ec07d47faa1ec9116550bc689e3d2424aad3f6338100b1826657adc7e5dc9",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-sonnet-5",
+      "passed": 496,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "5c6dc27bac2b9a9cf133f5df2b58b893941e834b6f837869905a455045befe42",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.266 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": null,
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
