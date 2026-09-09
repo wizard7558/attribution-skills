@@ -1,0 +1,64 @@
+{
+  "attempts": 1,
+  "context_hashes": {
+    "SKILL.md": "f4ef7556afa021a3fc03d78a68383d10d52ddd51de776b262f7a54dfbd38310d",
+    "references/evaluation-quick-reference.md": "d92a66bd384753c6b74f840f174e77f1c059711e1f4bb126032b5e30724d8fe0"
+  },
+  "finished_at": "2026-09-09T20:26:47.734254+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "5fb6868bc16429d77e7bb9ac2d6b1a3d68a377212e123a6f61c8dcc784556fe4",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "ga4-sonnet-transactions-with-raw.json",
+  "public_results_sha256": "0f883ef1a0b8b3a37ac52f41ef780fcb2a0b9e8a49b994baaf1943e07e3bfb7d",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "468a3d26aa165f0799d1fd4561e42047471f4f4327361b2d761c6096841f7f31",
+  "started_at": "2026-09-09T20:16:47.710340+00:00",
+  "summaries": [
+    {
+      "checks": 0,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "usable_calls": 0
+    }
+  ],
+  "transport_failures": 1,
+  "usable_calls": 0,
+  "verified_cells": [
+    {
+      "checks": 451,
+      "completion_status": "transport_failure",
+      "condition": "with-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "transactions-and-execution",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "37015fd152d601f898cc6d98b4c657f9a978669d696aa1213eee32bee5da1953",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "057d8e0a18f7d072c6272aa7ef8c66dec571d29082ac6b85414a177818a14ec4",
+      "usable": false
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": null,
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
