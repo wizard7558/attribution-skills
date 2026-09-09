@@ -19,7 +19,10 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
+
+      - name: Install MMM Python dependencies
+        run: pip install -r skills/mmm-and-incrementality-framing/requirements.txt
 
       - name: Install skills-ref
         run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
@@ -44,7 +47,7 @@ jobs:
               print(f"PASS {skill}: {lines} lines")
           PY
 
-      - name: Check generated artifacts, classifiers, GA4 fixtures, and model scorer
+      - name: Check generated artifacts, classifiers, GA4 fixtures, and shared harness
         run: bash scripts/run-tests.sh --offline
 
       - name: Install PostgreSQL for the disposable runtime test

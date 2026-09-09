@@ -8,7 +8,7 @@ Created by Riley Sorenson, the founder of [Bellaso](https://bellaso.app). These 
 
 ## Install
 
-Install all skills:
+Install all twelve skills:
 
 ```bash
 npx skills add wizard7558/attribution-skills
@@ -20,17 +20,35 @@ Install a single skill by name:
 npx skills add wizard7558/attribution-skills --skill channel-taxonomy
 npx skills add wizard7558/attribution-skills --skill ga4-bigquery-export
 npx skills add wizard7558/attribution-skills --skill first-party-pixel
+npx skills add wizard7558/attribution-skills --skill clickstream-identity-stitching
+npx skills add wizard7558/attribution-skills --skill crm-attribution-profiler
+npx skills add wizard7558/attribution-skills --skill crm-paid-attribution
+npx skills add wizard7558/attribution-skills --skill funnel-truth-and-cost-per-stage
+npx skills add wizard7558/attribution-skills --skill multi-touch-models-sql
+npx skills add wizard7558/attribution-skills --skill mmm-and-incrementality-framing
+npx skills add wizard7558/attribution-skills --skill capi-match-keys
+npx skills add wizard7558/attribution-skills --skill attribution-data-quality-tripwires
+npx skills add wizard7558/attribution-skills --skill attribution-audit
 ```
 
-The GA4 and pixel skills each bundle their classifier and contract, so a single-skill installation does not need sibling skill directories.
+The GA4 and pixel skills each bundle their classifier and contract, so a single-skill installation does not need sibling skill directories. The audit skill requires explicitly installed upstream skill roots at invocation time.
 
 ## Skills
 
 | Skill | Version | What it does | Status |
 | --- | --- | --- | --- |
-| [`channel-taxonomy`](skills/channel-taxonomy) | 0.1.0 | Defines the shared 11-channel taxonomy, classifier, contract, fixtures, and evaluation harness | Published |
-| [`ga4-bigquery-export`](skills/ga4-bigquery-export) | 0.2.0 | Produces source-scoped sessions and daily channel metrics from raw GA4 export events | Published |
-| [`first-party-pixel`](skills/first-party-pixel) | 0.2.0 | Sets up an owner-controlled pixel, collector, and PostgreSQL session/daily reporting views | Published |
+| [`channel-taxonomy`](skills/channel-taxonomy) | 0.1.0 | Shared 11-channel taxonomy, classifier, contract, fixtures, and shared evaluation harness | Deterministic suite passes; revised 18-cell live matrix recorded privately; in-repo results pending |
+| [`ga4-bigquery-export`](skills/ga4-bigquery-export) | 0.2.0 | Source-scoped GA4 BigQuery sessions and daily channel metrics from raw export events | Deterministic fixtures pass; private Claude+Qwen matrix recorded; in-repo results pending |
+| [`first-party-pixel`](skills/first-party-pixel) | 0.2.0 | Owner-controlled pixel, collector, and PostgreSQL session/daily reporting views | Deterministic tests pass; PostgreSQL roundtrip opt-in; hosted adapter smoke pending |
+| [`clickstream-identity-stitching`](skills/clickstream-identity-stitching) | 0.1.0 | Identity dedupe, non-destructive graph, and verified webhook resolution | Deterministic suite passes; original matrix preserved; Sonnet 600s supplements complete; Qwen graph still truncates |
+| [`crm-attribution-profiler`](skills/crm-attribution-profiler) | 0.1.0 | Profile CRM attribution fields against ad-history keys with explicit thresholds | Deterministic suite passes |
+| [`crm-paid-attribution`](skills/crm-paid-attribution) | 0.1.0 | Resolve CRM leads to paid channel and ad evidence with scoped matching | Deterministic suite passes |
+| [`funnel-truth-and-cost-per-stage`](skills/funnel-truth-and-cost-per-stage) | 0.1.0 | CRM stage truth, cost buckets, and refresh partition planning from explicit bindings | Deterministic suite passes |
+| [`multi-touch-models-sql`](skills/multi-touch-models-sql) | 0.1.0 | BigQuery multi-touch credit ledgers and channel/day cost, CAC, and ROAS metrics | Deterministic suite passes |
+| [`mmm-and-incrementality-framing`](skills/mmm-and-incrementality-framing) | 0.1.0 | Guarded weekly MMM, response curves, assumption bands, and share comparisons | Deterministic suite passes; recorded model matrix complete for fixed prompts |
+| [`capi-match-keys`](skills/capi-match-keys) | 0.1.0 | Conversion preparation, provider payloads, and transactional outbox delivery | Deterministic helpers pass; PostgreSQL outbox harness opt-in |
+| [`attribution-data-quality-tripwires`](skills/attribution-data-quality-tripwires) | 0.1.0 | Nine native quality checks plus schema and column population extractors | Deterministic suite passes; recorded model matrix complete for fixed prompts |
+| [`attribution-audit`](skills/attribution-audit) | 0.1.0 | Compose or invoke a bounded audit across upstream skills with explicit inventory and provenance | Offline compose/execute host verified; native BigQuery proof passed privately; model eval pending |
 
 ## How they work together
 
@@ -38,7 +56,9 @@ The GA4 and pixel skills each bundle their classifier and contract, so a single-
 
 Native labels and raw evidence remain available for audit. GA4's session last-click basis and the pixel's first collected touch remain explicit, as do source-scoped session/visitor identities, reporting date basis, and currency. Matching channel names do not establish matching people or attribution. Never sum overlapping GA4 and pixel populations. GA4 purchase revenue and pixel conversion value retain their source-native meanings, including NULL/status for unknown monetary values.
 
-Future attribution, spend-join, or modeling skills are planned consumers of this contract; they are not implemented adapters or identity bridges in this repository. Deterministic test results and model behavior evaluations are separate evidence. In the [recorded model evaluation](skills/channel-taxonomy/references/eval-results.md), Fable and Sonnet passed all three with-skill groups. Qwen responses hit the configured output limit in both conditions; those truncation failures do not establish classification accuracy. The results do not imply universal model support.
+`attribution-audit` orchestrates the upstream skills through explicit installed roots and one-way entrypoints. It preserves native producer outputs separately from execution and quality reductions. GA4 SQL and PostgreSQL snapshot adapters remain unimplemented in the audit host. A bounded native BigQuery proof on owned synthetic fixtures has been recorded privately; publication of that evidence into the repository remains a separate step.
+
+Deterministic test results and model behavior evaluations are separate evidence. Private live matrices for taxonomy and GA4 are recorded outside the repository until redacted publication; the Qwen identity-graph cell still truncates at the 8192-token output cap and remains an outstanding blocker, not a knowledge score. Completed matrices for other skills apply only to their fixed prompts and do not establish universal model support.
 
 ## Conventions
 
@@ -61,7 +81,7 @@ The scanner reads tracked files; stage intended new files before the final scan.
 
 ## Validation
 
-CI uses Ubuntu 24.04, Python 3.12, Node 20, the official [skills-ref validator](https://github.com/agentskills/agentskills/tree/main/skills-ref), local fixtures, generated-artifact checks, and a disposable PostgreSQL/collector runtime test. It enforces the 500-line limit. Live BigQuery and actual model calls are opt-in and are not CI requirements without configured credentials.
+CI uses Ubuntu 24.04, Python 3.12, Node 22, the official [skills-ref validator](https://github.com/agentskills/agentskills/tree/main/skills-ref), local fixtures, generated-artifact checks, and a disposable PostgreSQL/collector runtime test. It enforces the 500-line limit. Live BigQuery and actual model calls are opt-in and are not CI requirements without configured credentials.
 
 Install and run the official frontmatter/spec validator:
 
@@ -70,24 +90,14 @@ pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=ski
 for skill in skills/*/; do skills-ref validate "$skill"; done
 ```
 
-Run all local deterministic checks, including the model scorer's self-tests:
+Run all local deterministic checks, including the shared evaluation harness self-tests:
 
 ```bash
+export PATH=/opt/homebrew/opt/node@22/bin:$PATH   # macOS Homebrew example; Node 22+ required
 bash scripts/run-tests.sh --offline
 ```
 
-The component commands are:
-
-```bash
-node skills/channel-taxonomy/scripts/build-artifacts.mjs --repository --check
-node skills/channel-taxonomy/scripts/run-checks.mjs
-node skills/ga4-bigquery-export/scripts/test-integration.mjs
-node skills/ga4-bigquery-export/scripts/test-artifacts.mjs
-node skills/first-party-pixel/scripts/taxonomy-parity.mjs
-python3 skills/channel-taxonomy/scripts/run-model-evals.py --self-test
-```
-
-These cover the core 156 fixtures and 142 matrix checks, both GA4 UDF copies (312 fixture checks), generator isolation and drift across all six artifacts, collector classifier parity, and model parser/scorer behavior. They do not execute database or live-model requests.
+The component commands include artifact checks, GA4 and pixel fixture suites, shared harness validation for every skill with `references/eval-cases.json`, audit compose/execute offline hosts, per-skill deterministic tests, and SQL rendering evidence. They do not execute live models, authenticated BigQuery jobs, or PostgreSQL roundtrips unless you add `--postgres` or `--bigquery`.
 
 To update shared artifacts, run the generator with `--repository` and omit `--check`. In a standalone channel-taxonomy installation, omit `--repository`; the generator then updates or checks only that skill's own reference SQL.
 
@@ -98,7 +108,7 @@ env -u DATABASE_URL PGPORT_TEST=55439 COLLECTOR_PORT=8799 \
   bash scripts/run-tests.sh --postgres
 ```
 
-The repository wrapper first runs `roundtrip.sh`, then `roundtrip.sh --migration`. Each run starts and cleans up its own database and collector, without reusing an inherited database connection. PostgreSQL server/client binaries and Node/npm are required; the test may install `pg` into temporary storage. Only the explicit `--migration` run needs repository history containing legacy schema commit `2c240a3`.
+The repository wrapper first runs `roundtrip.sh`, then `roundtrip.sh --migration`, then the CAPI conversion outbox harness when present. Each run starts and cleans up its own database and collector, without reusing an inherited database connection. PostgreSQL server/client binaries and Node/npm are required; the test may install `pg` into temporary storage. Only the explicit `--migration` run needs repository history containing legacy schema commit `2c240a3`.
 
 A standalone pixel installation can run its default roundtrip without git history:
 
@@ -119,10 +129,11 @@ bash skills/ga4-bigquery-export/scripts/run_checks.sh --synthetic
 
 The BigQuery test uses temporary tables, a 20 MiB billing cap, and no customer table scans. It checks session/daily agreement, purchase fanout, unknown and unkeyed revenue, click-ID preservation, and date boundaries.
 
-Actual model evaluation requires the configured Claude CLI credentials and local Ollama model described in the [evaluation instructions](skills/channel-taxonomy/references/eval.md). It performs live calls and records responses and scores; it is separate from `--self-test`:
+Actual model evaluation requires configured Claude CLI credentials and local Ollama for Qwen as described in each skill's [evaluation instructions](skills/channel-taxonomy/references/eval.md). It performs live calls and records responses and scores; it is separate from offline harness self-tests:
 
 ```bash
-python3 skills/channel-taxonomy/scripts/run-model-evals.py --run
+python3 scripts/run-skill-evals.py --skill skills/channel-taxonomy --run \
+  --models claude-fable-5-1 claude-sonnet-5 qwen3:4b --condition both
 ```
 
 Inspect the recorded scores and failures before drawing conclusions about model quality. Test flags select independent suites: combine `--offline --postgres` explicitly to run both, or use the default with no flags for local deterministic checks only.

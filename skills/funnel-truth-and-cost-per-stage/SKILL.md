@@ -1,9 +1,10 @@
 ---
 name: funnel-truth-and-cost-per-stage
 description: Reconcile CRM funnel stage truth, cost buckets, and refresh partitions from complete snapshots and explicit source bindings.
-version: 0.1.0
-author: Riley Sorenson
 license: MIT
+metadata:
+  author: Riley Sorenson
+  version: "0.1.0"
 ---
 
 # Funnel truth and cost per stage

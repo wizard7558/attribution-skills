@@ -18,7 +18,68 @@ for suite in "$@"; do
       node skills/ga4-bigquery-export/scripts/test-integration.mjs
       node skills/ga4-bigquery-export/scripts/test-artifacts.mjs
       node skills/first-party-pixel/scripts/taxonomy-parity.mjs
-      python3 skills/channel-taxonomy/scripts/run-model-evals.py --self-test
+
+      python3 scripts/run-skill-evals.py --self-test
+      python3 scripts/test-skill-evals.py
+      for skill in skills/*/; do
+        if [[ -f "${skill}references/eval-cases.json" ]]; then
+          python3 scripts/run-skill-evals.py --skill "$skill"
+        fi
+      done
+
+      node scripts/test-suite-contracts.mjs
+      node scripts/test-sql-rendering.mjs
+
+      node skills/channel-taxonomy/scripts/test-eval-manifest.mjs
+      node skills/ga4-bigquery-export/scripts/test-eval-manifest.mjs
+      node skills/clickstream-identity-stitching/scripts/test-eval-manifest.mjs
+      node skills/crm-attribution-profiler/scripts/test-eval-cases.mjs
+      node skills/crm-paid-attribution/scripts/test-eval-cases.mjs
+      node skills/funnel-truth-and-cost-per-stage/scripts/test-eval-cases.mjs
+      node skills/capi-match-keys/scripts/test-eval-manifest.mjs
+      node skills/attribution-data-quality-tripwires/scripts/test-eval-manifest.mjs
+      python3 -B skills/mmm-and-incrementality-framing/scripts/build-eval-cases.py --check
+
+      node skills/attribution-audit/scripts/test-compose-audit.mjs
+      node skills/attribution-audit/scripts/test-execute-audit.mjs
+      node skills/attribution-audit/scripts/test-execute-audit-bigquery.mjs
+      node skills/attribution-audit/scripts/test-execute-audit-python.mjs
+      node skills/attribution-audit/scripts/test-audit-bigquery-transport.mjs
+      node skills/attribution-audit/scripts/test-render-audit-sql.mjs
+
+      node skills/attribution-data-quality-tripwires/scripts/test-reconciliation.mjs
+      node skills/attribution-data-quality-tripwires/scripts/test-population-checks.mjs
+      node skills/attribution-data-quality-tripwires/scripts/test-schema-checks.mjs
+      node skills/attribution-data-quality-tripwires/scripts/test-empty-columns.mjs
+      node skills/attribution-data-quality-tripwires/scripts/test-deleted-ad-coverage.mjs
+
+      node skills/clickstream-identity-stitching/scripts/test-primitives.mjs
+      node skills/clickstream-identity-stitching/scripts/test-graph.mjs
+      node skills/clickstream-identity-stitching/scripts/test-webhook.mjs
+      node skills/clickstream-identity-stitching/scripts/test-identity-artifacts.mjs
+
+      node skills/crm-attribution-profiler/scripts/run-checks.mjs
+      node skills/crm-paid-attribution/scripts/test-sql.mjs
+
+      node skills/funnel-truth-and-cost-per-stage/scripts/test-stage-truth.mjs
+      node skills/funnel-truth-and-cost-per-stage/scripts/test-cost-per-stage.mjs
+      node skills/funnel-truth-and-cost-per-stage/scripts/test-refresh-partitions.mjs
+
+      node skills/multi-touch-models-sql/scripts/test-credit-ledger.mjs
+      node skills/multi-touch-models-sql/scripts/test-attribution-metrics.mjs
+
+      node skills/capi-match-keys/scripts/test-conversion-events.mjs
+      node skills/capi-match-keys/scripts/test-match-keys.mjs
+      node skills/capi-match-keys/scripts/test-provider-payloads.mjs
+
+      python3 -B skills/mmm-and-incrementality-framing/scripts/test-eval-cases.py
+      python3 -B skills/mmm-and-incrementality-framing/scripts/test_weekly_mlr.py
+      python3 -B skills/mmm-and-incrementality-framing/scripts/test_response_curves.py
+      python3 -B skills/mmm-and-incrementality-framing/scripts/test_framing.py
+
+      node skills/first-party-pixel/scripts/test-identity-projection.mjs
+      node skills/first-party-pixel/scripts/test-identity-snapshot.mjs
+      node skills/first-party-pixel/scripts/test-identity-capture.mjs
       ;;
     --postgres)
       # Make Linux PostgreSQL server binaries available without running initdb as root.
@@ -34,14 +95,17 @@ for suite in "$@"; do
       env -u DATABASE_URL \
         PGPORT_TEST="${PGPORT_TEST:-55439}" COLLECTOR_PORT="${COLLECTOR_PORT:-8799}" \
         bash skills/first-party-pixel/scripts/roundtrip.sh --migration
+      if [[ -f skills/capi-match-keys/scripts/test-conversion-outbox.sh ]]; then
+        bash skills/capi-match-keys/scripts/test-conversion-outbox.sh
+      fi
       ;;
     --bigquery)
       bash skills/ga4-bigquery-export/scripts/run_checks.sh --synthetic
       ;;
     --help|-h)
       echo 'Usage: bash scripts/run-tests.sh [--offline] [--postgres] [--bigquery]'
-      echo 'Default --offline: local fixtures, artifact checks, and model scorer self-tests.'
-      echo '--postgres: separate standalone and repository migration roundtrips; PostgreSQL, npm, and git history required.'
+      echo 'Default --offline: local fixtures, artifact checks, shared harness validation, and per-skill deterministic tests (Node 22+ recommended).'
+      echo '--postgres: separate standalone and repository migration roundtrips plus CAPI outbox harness; PostgreSQL, npm, and git history required.'
       echo '--bigquery: actual GA4 templates on synthetic events; authenticated bq required.'
       ;;
     *)
