@@ -2,10 +2,13 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-if ! command -v skills-ref >/dev/null 2>&1; then
-  echo "SKIP standalone install test: skills-ref not installed" >&2
-  exit 0
-fi
+skills_ref() {
+  if command -v skills-ref >/dev/null 2>&1; then
+    skills-ref "$@"
+  else
+    npx --yes skills-ref "$@"
+  fi
+}
 
 tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/attribution-skills-standalone.XXXXXX")"
 cleanup() { rm -rf "$tmpdir"; }
@@ -43,7 +46,7 @@ for skill in "${skills[@]}"; do
     attribution-audit)
       ;;
   esac
-  skills-ref validate "$target"
+  skills_ref validate "$target"
 done
 
 echo "PASS standalone install smoke for ${#skills[@]} skills"
