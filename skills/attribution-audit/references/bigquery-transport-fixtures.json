@@ -1,0 +1,704 @@
+{
+  "contract_version": "0.1.0",
+  "derivation": "Independent table-free parameter probe. Every ordered row repeats the declared scalar/array/null parameters; ordinal is the SQL integer 1 through 1006. Decimal and timestamp expectations are literal strings, not generated native answers.",
+  "input": {
+    "query": "SELECT ordinal, @text AS text, @labels AS labels, @missing_date AS missing_date, @flag AS flag, @amount AS amount, @moment AS moment FROM UNNEST(GENERATE_ARRAY(1,1006)) ordinal ORDER BY ordinal",
+    "queryParameters": [
+      {
+        "name": "text",
+        "parameterType": {
+          "type": "STRING"
+        },
+        "parameterValue": {
+          "value": "Dollar $' $& $$ $1; quote ' backslash \\ newline\ncontrol\u0001 雪😀"
+        }
+      },
+      {
+        "name": "labels",
+        "parameterType": {
+          "type": "ARRAY",
+          "arrayType": {
+            "type": "STRING"
+          }
+        },
+        "parameterValue": {
+          "arrayValues": [
+            {
+              "value": "Case+A"
+            },
+            {
+              "value": "case+a"
+            },
+            {
+              "value": ""
+            }
+          ]
+        }
+      },
+      {
+        "name": "missing_date",
+        "parameterType": {
+          "type": "DATE"
+        },
+        "parameterValue": {
+          "value": null
+        }
+      },
+      {
+        "name": "flag",
+        "parameterType": {
+          "type": "BOOL"
+        },
+        "parameterValue": {
+          "value": "false"
+        }
+      },
+      {
+        "name": "amount",
+        "parameterType": {
+          "type": "NUMERIC"
+        },
+        "parameterValue": {
+          "value": "9007199254740993.123456789"
+        }
+      },
+      {
+        "name": "moment",
+        "parameterType": {
+          "type": "TIMESTAMP"
+        },
+        "parameterValue": {
+          "value": "2026-01-01 00:00:00.000001+00"
+        }
+      }
+    ],
+    "parameterMode": "NAMED",
+    "resultKind": "rows"
+  },
+  "expected_pattern": {
+    "row_count": 1006,
+    "first_ordinal": "1",
+    "last_ordinal": "1006",
+    "shared_fields": {
+      "text": "Dollar $' $& $$ $1; quote ' backslash \\ newline\ncontrol\u0001 雪😀",
+      "labels": [
+        "Case+A",
+        "case+a",
+        ""
+      ],
+      "missing_date": null,
+      "flag": false,
+      "amount": "9007199254740993.123456789",
+      "moment": "1767225600000001"
+    }
+  },
+  "offline_schema": {
+    "fields": [
+      {
+        "name": "ordinal",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "text",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "labels",
+        "type": "STRING",
+        "mode": "REPEATED"
+      },
+      {
+        "name": "missing_date",
+        "type": "DATE",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "flag",
+        "type": "BOOLEAN",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "amount",
+        "type": "NUMERIC",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "moment",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "parameter_metadata_cases": [
+    {
+      "id": "omitted-null-date",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": true,
+      "equivalence_pointers": [
+        "/queryParameters/0/parameterValue"
+      ]
+    },
+    {
+      "id": "empty-object-is-not-omission",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {}
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "null-container-is-not-omission",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": null
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-null-is-not-null",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": "null"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "other-scalar-not-accepted",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "BOOL"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "BOOL"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "array-not-accepted",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "ARRAY",
+            "arrayType": {
+              "type": "DATE"
+            }
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "ARRAY",
+            "arrayType": {
+              "type": "DATE"
+            }
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "non-null-omission-rejected",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": "2026-01-01"
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "changed-name",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "other",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "changed-type",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "TIMESTAMP"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "unexpected-field",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "unexpected": false
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "changed-order",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        },
+        {
+          "name": "second",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "second",
+          "parameterType": {
+            "type": "DATE"
+          }
+        },
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "array-length-mismatch",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "mode-mismatch",
+      "sent": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "missing_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "received_mode": "POSITIONAL",
+      "matches": false,
+      "equivalence_pointers": [
+        "/queryParameters/0/parameterValue"
+      ]
+    },
+    {
+      "id": "omitted-null-string",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          }
+        }
+      ],
+      "matches": true,
+      "equivalence_pointers": [
+        "/queryParameters/0/parameterValue"
+      ]
+    },
+    {
+      "id": "mixed-extractor-three-nulls",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        },
+        {
+          "name": "start_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        },
+        {
+          "name": "end_date",
+          "parameterType": {
+            "type": "DATE"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          }
+        },
+        {
+          "name": "start_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        },
+        {
+          "name": "end_date",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": true,
+      "equivalence_pointers": [
+        "/queryParameters/0/parameterValue",
+        "/queryParameters/1/parameterValue",
+        "/queryParameters/2/parameterValue"
+      ]
+    },
+    {
+      "id": "string-nonnull-omission-rejected",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": "event_date"
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-null-text-omission-rejected",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": "null"
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-wrong-received-type",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "DATE"
+          }
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-empty-object-rejected",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {}
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-null-container-rejected",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": null
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    },
+    {
+      "id": "string-unexpected-field-rejected",
+      "sent": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "parameterValue": {
+            "value": null
+          }
+        }
+      ],
+      "received": [
+        {
+          "name": "date_column",
+          "parameterType": {
+            "type": "STRING"
+          },
+          "unexpected": false
+        }
+      ],
+      "matches": false,
+      "equivalence_pointers": []
+    }
+  ]
+}

@@ -102,7 +102,7 @@ async function main() {
     })
   );
 
-  // 4. Three hours later, a fresh direct pageview -> new session, no touchpoint.
+  // 4. Three hours later, a fresh direct pageview -> new session, native Direct touchpoint.
   await post(
     basePayload({
       event_type: "pageview",

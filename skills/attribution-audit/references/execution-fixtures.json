@@ -1,0 +1,4923 @@
+{
+  "contract_version": "0.1.0",
+  "derivation": {
+    "kind": "independent_full_native_goldens",
+    "note": "Existing independently accepted literal expected outputs copied unchanged where full; taxonomy full rule object, empty profile, empty-tracking CRM row and no-click prepare output authored analytically from published contracts before executing host. Expected objects never become runtime inputs except explicit caller-input fixture literals. Run IDs/timestamps/snapshot paths are verified dynamically and are not falsely deterministic goldens.",
+    "upstream_fixture_hashes": [
+      {
+        "skill": "channel-taxonomy",
+        "path": "references/fixtures.json",
+        "id": "gclid",
+        "sha256": "5b8eabc48992eaa237356e68b9c4056fbcdaa4b9f9d2f23da5019b97d9fbbf44"
+      },
+      {
+        "skill": "clickstream-identity-stitching",
+        "path": "references/primitive-fixtures.json",
+        "id": "t0_t20_suppressed",
+        "sha256": "9a71d57d51e2c9dd5b368b297ebd4c4323d1374adb7ca836fecdb31b295217ea"
+      },
+      {
+        "skill": "clickstream-identity-stitching",
+        "path": "references/graph-fixtures.json",
+        "id": "shared_device_ambiguous",
+        "sha256": "8bd63505258b3b9630365585cda739a739a195538dac6e2a94885d9ded7731c6"
+      },
+      {
+        "skill": "clickstream-identity-stitching",
+        "path": "references/webhook-fixtures.json",
+        "id": "no_identity_creates_deterministic_visitor",
+        "sha256": "2f67ee9d6735a8717022f2fd521b4b6945c15f0b537403e48355f3fb919f080b"
+      },
+      {
+        "skill": "first-party-pixel",
+        "path": "references/identity-projection-fixtures.json",
+        "id": "email_phone_candidate_ambiguity",
+        "sha256": "8945f2cb3fc72ad95939460285c399537602227af40726d7ab6a74a2e9486110"
+      },
+      {
+        "skill": "crm-attribution-profiler",
+        "path": "references/fixtures.json",
+        "id": "authorized-cross-system",
+        "sha256": "2d5125afbcffb0ad165c3b928169a16b3f75eb0e72065c31e7c83ef711faf6b3"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/conversion-fixtures.json",
+        "id": "stage-unknown-currency",
+        "sha256": "deef32e14a02e5dd7c3d0b0b22f4aa498c0f2f168784d3803c1c828a1618daf5"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/conversion-fixtures.json",
+        "id": "prepare-allowlist-meta",
+        "sha256": "deef32e14a02e5dd7c3d0b0b22f4aa498c0f2f168784d3803c1c828a1618daf5"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/payload-fixtures.json",
+        "id": "google-click-only-unknown-omitted",
+        "sha256": "8a3b32171fcf82f3d8cb3b7f051613772260c75b94c9bfaf7dd4c4c61d6c67ce"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/payload-fixtures.json",
+        "id": "linkedin-email-click",
+        "sha256": "8a3b32171fcf82f3d8cb3b7f051613772260c75b94c9bfaf7dd4c4c61d6c67ce"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/payload-fixtures.json",
+        "id": "meta-website-all-context",
+        "sha256": "8a3b32171fcf82f3d8cb3b7f051613772260c75b94c9bfaf7dd4c4c61d6c67ce"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/payload-fixtures.json",
+        "id": "tiktok-custom-all-context",
+        "sha256": "8a3b32171fcf82f3d8cb3b7f051613772260c75b94c9bfaf7dd4c4c61d6c67ce"
+      },
+      {
+        "skill": "capi-match-keys",
+        "path": "references/payload-fixtures.json",
+        "id": "reddit-custom-ldu-qualified-url",
+        "sha256": "8a3b32171fcf82f3d8cb3b7f051613772260c75b94c9bfaf7dd4c4c61d6c67ce"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "actual-classifier",
+      "input": {
+        "audit_key": "actual-classifier",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "channel": "Paid Search",
+            "rule_id": "click_id_search",
+            "taxonomy_version": "0.1.0"
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-classifier-unknown",
+      "input": {
+        "audit_key": "actual-classifier-unknown",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": {},
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "channel": "Other",
+            "rule_id": "fallback_other",
+            "taxonomy_version": "0.1.0"
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-touch-dedupe",
+      "input": {
+        "audit_key": "actual-touch-dedupe",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "pixel",
+            "source_scope": "s",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "clickstream-identity-stitching",
+            "entrypoint": "dedupe_touches",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "dedupeTouches",
+            "input": {
+              "touches": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "touch_key": "a",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "x"
+                },
+                {
+                  "source_system": "pixel",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "touch_key": "b",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "x"
+                }
+              ],
+              "options": {
+                "existing_touches": []
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "s"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "clickstream-identity-stitching/scripts/identity-primitives.mjs": "4f6884670a3a56547cb1fe168ab8f80169844bfd5cd02102ce92d01c34e19311",
+              "clickstream-identity-stitching/scripts/identity-normalization.mjs": "ddabeb09777bfbdc8a9be884c2d92b18ee9e221b1ec2f5f5c5169900ca72c555"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "touches": [
+              {
+                "source_system": "pixel",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "touch_key": "a",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "channel": "Paid Search",
+                "taxonomy_version": "0.1.0",
+                "utm_campaign": "x"
+              }
+            ],
+            "suppressed": [
+              {
+                "source_system": "pixel",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "touch_key": "b",
+                "reason": "consecutive_duplicate_within_30_minutes"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-ambiguous-graph",
+      "input": {
+        "audit_key": "actual-ambiguous-graph",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-01-01T01:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "c",
+            "source_scope": "s",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "p",
+            "source_scope": "s",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "identity",
+            "from_source_system": "p",
+            "from_source_scope": "s",
+            "to_source_system": "c",
+            "to_source_scope": "s",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "clickstream-identity-stitching",
+            "entrypoint": "identity_graph",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "buildIdentityGraph",
+            "input": {
+              "contacts": [
+                {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "a",
+                  "email": "a@example.com"
+                },
+                {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "b",
+                  "email": "b@example.com"
+                }
+              ],
+              "identifies": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "observation_key": "a",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "email": "a@example.com"
+                },
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "observation_key": "b",
+                  "occurred_at": "2026-01-01T00:10:00Z",
+                  "email": "b@example.com"
+                }
+              ],
+              "touches": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "touch_key": "t",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "channel": "Referral",
+                  "taxonomy_version": "0.1.0"
+                }
+              ],
+              "identity_scope_bindings": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "contact_source_system": "c",
+                  "contact_source_scope": "s"
+                }
+              ],
+              "as_of": "2026-01-01T01:00:00Z",
+              "lookback_days": 1
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-01-01T01:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "c",
+                  "source_scope": "s"
+                },
+                {
+                  "source_system": "p",
+                  "source_scope": "s"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "clickstream-identity-stitching/scripts/identity-graph.mjs": "4a3558517e83bfc7bb1418fbc7b64f214f2882a22d3557df411d2ef9babeba74",
+              "clickstream-identity-stitching/scripts/identity-normalization.mjs": "ddabeb09777bfbdc8a9be884c2d92b18ee9e221b1ec2f5f5c5169900ca72c555",
+              "clickstream-identity-stitching/scripts/identity-primitives.mjs": "4f6884670a3a56547cb1fe168ab8f80169844bfd5cd02102ce92d01c34e19311"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "edges": [
+              {
+                "edge_key": "[\"p\",\"s\",\"v\",\"a\"]",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "contact": {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "a"
+                },
+                "evidence": {
+                  "email_hash": "08168cd80dfd534ab0f10af10f1303fe00af2d43ab5c1432360d137f8197e17a",
+                  "phone_hash": null
+                }
+              },
+              {
+                "edge_key": "[\"p\",\"s\",\"v\",\"b\"]",
+                "occurred_at": "2026-01-01T00:10:00Z",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "contact": {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "b"
+                },
+                "evidence": {
+                  "email_hash": "e8f39b3e1382367d6d41ab34dc270d4e7533f978c9e9a775dfe2185b2f96b96c",
+                  "phone_hash": null
+                }
+              }
+            ],
+            "observations": [
+              {
+                "status": "matched",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "observation_key": "a",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "candidates": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "a"
+                  }
+                ]
+              },
+              {
+                "status": "matched",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "observation_key": "b",
+                "occurred_at": "2026-01-01T00:10:00Z",
+                "candidates": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "b"
+                  }
+                ]
+              }
+            ],
+            "touch_links": [
+              {
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "touch_key": "t",
+                "occurred_at": "2026-01-01T00:20:00Z",
+                "status": "ambiguous",
+                "reason": "shared_device",
+                "contacts": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "a"
+                  },
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "b"
+                  }
+                ],
+                "edge_evidence_keys": [
+                  "[\"p\",\"s\",\"v\",\"a\"]",
+                  "[\"p\",\"s\",\"v\",\"b\"]"
+                ]
+              }
+            ],
+            "diagnostics": {
+              "as_of": "2026-01-01T01:00:00Z",
+              "lookback_days": 1,
+              "future_excluded": {
+                "identifies": 0,
+                "touches": 0
+              },
+              "shared_devices": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "contacts": [
+                    {
+                      "source_system": "c",
+                      "source_scope": "s",
+                      "contact_key": "a"
+                    },
+                    {
+                      "source_system": "c",
+                      "source_scope": "s",
+                      "contact_key": "b"
+                    }
+                  ]
+                }
+              ],
+              "retrospective_edge_use": true,
+              "no_ip_inference": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-webhook-resolution",
+      "input": {
+        "audit_key": "actual-webhook-resolution",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "clickstream-identity-stitching",
+            "entrypoint": "webhook_resolution",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "resolveWebhookStitch",
+            "input": {
+              "submission": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "provider": "form",
+                "submission_key": "s1",
+                "occurred_at": "2026-01-10T12:00:00Z"
+              },
+              "visitors": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "last_seen_at": "2026-01-10T11:50:00Z"
+                }
+              ],
+              "page_rule_events": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "page_rule_event_key": "p1",
+                  "event_at": "2026-01-10T11:55:00Z"
+                }
+              ],
+              "recent_identity_edges": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "evidence_key": "e1",
+                  "evidence_at": "2026-01-10T11:50:00Z",
+                  "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+                  "phone_hash": null
+                }
+              ],
+              "receipts": [],
+              "policy": {
+                "page_rule_window_minutes": 10,
+                "recent_visitor_window_minutes": 30,
+                "confidence": {
+                  "visitor_field": 1,
+                  "page_rule": 0.8,
+                  "recent_visitor": 0.8,
+                  "new_visitor": 0
+                }
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "clickstream-identity-stitching/scripts/webhook-stitch.mjs": "e0a57e1db895103f86a63f8513021f5578253df90db31feaf0421876afef25c9",
+              "clickstream-identity-stitching/scripts/identity-normalization.mjs": "ddabeb09777bfbdc8a9be884c2d92b18ee9e221b1ec2f5f5c5169900ca72c555",
+              "clickstream-identity-stitching/scripts/identity-primitives.mjs": "4f6884670a3a56547cb1fe168ab8f80169844bfd5cd02102ce92d01c34e19311"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+            "replayed": false,
+            "resolution": {
+              "status": "created",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+              },
+              "method": "new_visitor",
+              "confidence": 0,
+              "diagnostics": [
+                {
+                  "code": "identity_unavailable"
+                }
+              ]
+            },
+            "receipt": {
+              "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+              "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+              "resolution": {
+                "status": "created",
+                "visitor": {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+                },
+                "method": "new_visitor",
+                "confidence": 0,
+                "diagnostics": [
+                  {
+                    "code": "identity_unavailable"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-pixel-identity-projection",
+      "input": {
+        "audit_key": "actual-pixel-identity-projection",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-01-01T01:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "identity",
+            "from_source_system": "first_party_pixel",
+            "from_source_scope": "site",
+            "to_source_system": "first_party_pixel",
+            "to_source_scope": "site",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "first-party-pixel",
+            "entrypoint": "identity_projection",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "projectIdentity",
+            "input": {
+              "snapshot_evidence_ref": "snapshot-fixture-1",
+              "config": {
+                "invocation_key": "invocation-fixture-1",
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "identity_scope_bindings": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_source_system": "first_party_pixel",
+                    "contact_source_scope": "site"
+                  }
+                ],
+                "identity_input_format": "canonical_sha256_v1",
+                "identity_normalization_version": "0.1.0"
+              },
+              "touches": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "touch_key": "t1",
+                  "visitor_key": "v1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "utm_campaign": "Campaign+Raw",
+                  "click_ids": {
+                    "dclid": null,
+                    "gclid": "Click%2B+Raw",
+                    "gbraid": null,
+                    "wbraid": null,
+                    "msclkid": null,
+                    "fbclid": null,
+                    "ttclid": null,
+                    "rdt_cid": null,
+                    "li_fat_id": null,
+                    "twclid": null,
+                    "epik": null,
+                    "sccid": null,
+                    "srsltid": null
+                  },
+                  "native_contact_id": null,
+                  "export_status": "eligible"
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "source_event_type": "identify",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+                  "identity_input_format": "canonical_sha256_v1",
+                  "identity_normalization_version": "0.1.0",
+                  "capture_status": "eligible"
+                }
+              ],
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1",
+                  "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                  "phone_hash": null,
+                  "email_hash_format": "canonical_sha256_v1",
+                  "phone_hash_format": null,
+                  "email_hash_status": "attested",
+                  "phone_hash_status": "missing",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2",
+                  "email_hash": null,
+                  "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+                  "email_hash_format": null,
+                  "phone_hash_format": "canonical_sha256_v1",
+                  "email_hash_status": "missing",
+                  "phone_hash_status": "attested",
+                  "capture_status": "eligible",
+                  "native_created_at": "2000-01-01T00:00:00.000000Z"
+                }
+              ]
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-01-01T01:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "first-party-pixel/scripts/project-identity.mjs": "b4388f00050bf6f570c6aa2a41211c3295b618237f992e011948827117dcb236",
+              "clickstream-identity-stitching/scripts/identity-graph.mjs": "4a3558517e83bfc7bb1418fbc7b64f214f2882a22d3557df411d2ef9babeba74",
+              "clickstream-identity-stitching/scripts/identity-primitives.mjs": "4f6884670a3a56547cb1fe168ab8f80169844bfd5cd02102ce92d01c34e19311",
+              "clickstream-identity-stitching/scripts/identity-normalization.mjs": "ddabeb09777bfbdc8a9be884c2d92b18ee9e221b1ec2f5f5c5169900ca72c555"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "contract_version": "0.1.0",
+            "invocation_key": "invocation-fixture-1",
+            "snapshot_evidence_ref": "snapshot-fixture-1",
+            "external_contact_evidence_ref": null,
+            "graph": {
+              "edges": [],
+              "observations": [
+                {
+                  "status": "ambiguous",
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "observation_key": "o1",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "candidates": [
+                    {
+                      "source_system": "first_party_pixel",
+                      "source_scope": "site",
+                      "contact_key": "c1"
+                    },
+                    {
+                      "source_system": "first_party_pixel",
+                      "source_scope": "site",
+                      "contact_key": "c2"
+                    }
+                  ]
+                }
+              ],
+              "touch_links": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1",
+                  "touch_key": "t1",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "status": "unresolved",
+                  "contacts": [],
+                  "edge_evidence_keys": []
+                }
+              ],
+              "diagnostics": {
+                "as_of": "2026-01-01T01:00:00Z",
+                "lookback_days": 1,
+                "future_excluded": {
+                  "identifies": 0,
+                  "touches": 0
+                },
+                "shared_devices": [],
+                "retrospective_edge_use": true,
+                "no_ip_inference": true
+              }
+            },
+            "touches": [
+              {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "touch_key": "t1",
+                "visitor_key": "v1",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "channel": "Paid Search",
+                "taxonomy_version": "0.1.0",
+                "utm_campaign": "Campaign+Raw",
+                "click_ids": {
+                  "dclid": null,
+                  "gclid": "Click%2B+Raw",
+                  "gbraid": null,
+                  "wbraid": null,
+                  "msclkid": null,
+                  "fbclid": null,
+                  "ttclid": null,
+                  "rdt_cid": null,
+                  "li_fat_id": null,
+                  "twclid": null,
+                  "epik": null,
+                  "sccid": null,
+                  "srsltid": null
+                },
+                "native_contact_id": null,
+                "export_status": "eligible",
+                "invocation_key": "invocation-fixture-1",
+                "identity_status": "unresolved",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null
+              }
+            ],
+            "suppressed_touches": [],
+            "excluded_touches": [],
+            "excluded_observations": [],
+            "contact_diagnostics": [
+              {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1",
+                "email_hash_status": "attested",
+                "phone_hash_status": "missing"
+              },
+              {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c2",
+                "email_hash_status": "missing",
+                "phone_hash_status": "attested"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-empty-profiler",
+      "input": {
+        "audit_key": "actual-empty-profiler",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "crm-attribution-profiler",
+            "entrypoint": "profile",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "profileCrmAttribution",
+            "input": {
+              "source": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "rows": [],
+                "timestampField": "created_at"
+              },
+              "candidates": [],
+              "adHistory": [],
+              "ad_scope_bindings": [],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "crm-attribution-profiler/scripts/profile.mjs": "2707ce2b8d9a7665dc046237fe5c50e3eeb1a6d422b2fd567962486677dc950d"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "candidates": [],
+            "archetype": null,
+            "archetypeEvidence": {
+              "anyPaidCapturePopulated": false,
+              "outboundObservationCount": 0,
+              "outboundExcludedCount": 0,
+              "outboundDominance": 0
+            },
+            "rowCounts": {
+              "input": 0,
+              "validInWindow": 0,
+              "malformedTimestamp": 0,
+              "outsideWindow": 0
+            },
+            "diagnostics": [],
+            "window": {
+              "startInclusive": "2026-01-01T00:00:00Z",
+              "endExclusive": "2026-02-01T00:00:00Z",
+              "timezone": "UTC"
+            },
+            "config": {
+              "thresholds": {
+                "populationPctFloor": 1,
+                "populationRowFloor": 20,
+                "proposeWeighted": 0.5,
+                "proposeDistinct": 0.7,
+                "rejectExactFloor": 0.25,
+                "preWindowDistinct": 0.7,
+                "highWeighted": 0.75,
+                "highDistinct": 0.9,
+                "outboundDominanceFloor": 0.6
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-unattributed-crm-row",
+      "input": {
+        "audit_key": "actual-unattributed-crm-row",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "crm-paid-attribution",
+            "entrypoint": "attribute_leads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "attributeLeads",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "lead_key": "Lead+Case",
+                  "created_at": null
+                }
+              ],
+              "options": {}
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "crm-paid-attribution/scripts/attribute-leads.mjs": "e469d858bb227d3cae359a2114be2a4fe17b23ce561caa8c5cabaa5fb89e4bc5",
+              "crm-paid-attribution/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": [
+            {
+              "source_system": "crm",
+              "source_scope": "scope",
+              "lead_key": "Lead+Case",
+              "created_at": null,
+              "channel": "Other",
+              "taxonomy_version": "0.1.0",
+              "rule": "fallback_other",
+              "attribution_basis": "crm_paid_resolution",
+              "match_key": "none",
+              "confidence": "UNMATCHED",
+              "quality_status": "unattributed",
+              "raw_evidence": {
+                "click_ids": {
+                  "dclid": null,
+                  "gclid": null,
+                  "gbraid": null,
+                  "wbraid": null,
+                  "msclkid": null,
+                  "fbclid": null,
+                  "ttclid": null,
+                  "rdt_cid": null,
+                  "li_fat_id": null,
+                  "twclid": null,
+                  "epik": null,
+                  "sccid": null,
+                  "srsltid": null
+                },
+                "current_utm": {
+                  "utm_source": null,
+                  "utm_medium": null,
+                  "utm_campaign": null,
+                  "utm_content": null,
+                  "utm_term": null
+                },
+                "first_touch_utm": {
+                  "utm_source": null,
+                  "utm_medium": null,
+                  "utm_campaign": null,
+                  "utm_content": null,
+                  "utm_term": null
+                },
+                "first_touch_click_ids": {
+                  "dclid": null,
+                  "gclid": null,
+                  "gbraid": null,
+                  "wbraid": null,
+                  "msclkid": null,
+                  "fbclid": null,
+                  "ttclid": null,
+                  "rdt_cid": null,
+                  "li_fat_id": null,
+                  "twclid": null,
+                  "epik": null,
+                  "sccid": null,
+                  "srsltid": null
+                },
+                "native_channel": null
+              },
+              "is_attribution_primary": true,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_match_method": "none",
+              "ad_scope_method": "none",
+              "ad_confidence": "UNMATCHED",
+              "ad_match_status": "unmatched",
+              "candidate_ads": [],
+              "candidate_ad_keys": [],
+              "network_id": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "actual-stage-unknown-money",
+      "input": {
+        "audit_key": "actual-stage-unknown-money",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "org-a",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "conversionFromStage",
+            "input": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "lead_key": "Lead+7",
+              "stage_key": "won",
+              "achieved": true,
+              "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+              "is_attribution_primary": true,
+              "value": null,
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "eligible",
+            "conversion": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "conversion_key": "[\"Lead+7\",\"won\"]",
+              "occurred_at": "2026-01-02T00:00:00.123456789Z",
+              "subject_source_system": null,
+              "subject_source_scope": null,
+              "subject_key": null,
+              "value": null,
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-conversion-prepare",
+      "input": {
+        "audit_key": "actual-conversion-prepare",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "org-a",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "org-a",
+            "to_source_system": "web",
+            "to_source_scope": "site-a",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "prepareConversion",
+            "input": {
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "org-a",
+                "conversion_key": "Order+7",
+                "occurred_at": "2026-01-02T00:00:00.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": null,
+                "currency": null,
+                "value_status": "unknown"
+              },
+              "platform": "meta",
+              "click_observations": [
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-dclid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "dclid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-gclid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "gclid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-gbraid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "gbraid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-wbraid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "wbraid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-msclkid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "msclkid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-fbclid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "fbclid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-ttclid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "ttclid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-rdt_cid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "rdt_cid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-li_fat_id",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "li_fat_id",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-twclid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "twclid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-epik",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "epik",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-sccid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "sccid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-srsltid",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "kind": "srsltid",
+                  "value": "Ab+C%252B",
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "conversion_key": "Order+7"
+                }
+              ],
+              "policy": {
+                "as_of": "2026-01-03T00:00:00.123456789Z",
+                "max_event_age_days": 7,
+                "click_lookback_days": 7,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "org-a",
+                    "click_source_system": "web",
+                    "click_source_scope": "site-a"
+                  }
+                ]
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-01-03T00:00:00.123456789Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+            "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+            "conversion": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "conversion_key": "Order+7",
+              "occurred_at": "2026-01-02T00:00:00.123456789Z",
+              "subject_source_system": null,
+              "subject_source_scope": null,
+              "subject_key": null,
+              "value": null,
+              "currency": null,
+              "value_status": "unknown"
+            },
+            "selected_clicks": [
+              {
+                "kind": "fbclid",
+                "value": "Ab+C%252B",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "source_system": "web",
+                "source_scope": "site-a",
+                "click_key": "click-fbclid"
+              }
+            ],
+            "click_diagnostics": {
+              "input_count": 13,
+              "unique_count": 13,
+              "duplicate_count": 0,
+              "selected_count": 1,
+              "excluded_count": 12,
+              "excluded": [
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-dclid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-epik",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-gbraid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-gclid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-li_fat_id",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-msclkid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-rdt_cid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-sccid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-srsltid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-ttclid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-twclid",
+                  "reason": "unsupported_platform_kind"
+                },
+                {
+                  "source_system": "web",
+                  "source_scope": "site-a",
+                  "click_key": "click-wbraid",
+                  "reason": "unsupported_platform_kind"
+                }
+              ],
+              "no_selected_clicks": false
+            },
+            "policy": {
+              "source": "caller_supplied",
+              "platform": "meta",
+              "as_of": "2026-01-03T00:00:00.123456789Z",
+              "max_event_age_days": 7,
+              "click_lookback_days": 7,
+              "click_scope_bindings": [
+                {
+                  "conversion_source_system": "crm",
+                  "conversion_source_scope": "org-a",
+                  "click_source_system": "web",
+                  "click_source_scope": "site-a"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-provider-google",
+      "input": {
+        "audit_key": "actual-provider-google",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-09-08T13:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "ads",
+            "source_scope": "ads-scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "scope",
+            "to_source_system": "ads",
+            "to_source_scope": "ads-scope",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "provider_payloads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "google",
+            "input": {
+              "preparation_input": {
+                "conversion": {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "conversion_key": "conversion-1",
+                  "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                  "subject_source_system": null,
+                  "subject_source_scope": null,
+                  "subject_key": null,
+                  "value": null,
+                  "currency": "USD",
+                  "value_status": "unknown"
+                },
+                "platform": "google",
+                "click_observations": [
+                  {
+                    "source_system": "ads",
+                    "source_scope": "ads-scope",
+                    "click_key": "click-gclid",
+                    "occurred_at": "2026-09-08T12:00:00Z",
+                    "kind": "gclid",
+                    "value": "gclid+Opaque%252F",
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "conversion_key": "conversion-1"
+                  }
+                ],
+                "policy": {
+                  "as_of": "2026-09-08T13:00:00Z",
+                  "max_event_age_days": 100,
+                  "click_lookback_days": 1,
+                  "click_scope_bindings": [
+                    {
+                      "conversion_source_system": "crm",
+                      "conversion_source_scope": "scope",
+                      "click_source_system": "ads",
+                      "click_source_scope": "ads-scope"
+                    }
+                  ]
+                }
+              },
+              "identity": {
+                "email": null,
+                "phone": null
+              },
+              "configuration": {
+                "account_id": "00123456789",
+                "money_policy": "omit_unknown",
+                "conversion_action_id": "00987654321",
+                "login_account_id": null,
+                "linked_account_id": null,
+                "event_source": "WEB",
+                "consent": null,
+                "validate_only": true
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-09-08T13:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                },
+                {
+                  "source_system": "ads",
+                  "source_scope": "ads-scope"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/provider-payloads.mjs": "b7ce8069627c07a24368e8f08fa438b3aab5ad54a7d18aeb5e460097978c6b6e",
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "preparation": {
+              "status": "ready",
+              "reasons": [],
+              "event_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "conversion_key": "conversion-1",
+                "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": null,
+                "currency": "USD",
+                "value_status": "unknown"
+              },
+              "selected_clicks": [
+                {
+                  "kind": "gclid",
+                  "value": "gclid+Opaque%252F",
+                  "occurred_at": "2026-09-08T12:00:00Z",
+                  "source_system": "ads",
+                  "source_scope": "ads-scope",
+                  "click_key": "click-gclid"
+                }
+              ],
+              "click_diagnostics": {
+                "input_count": 1,
+                "unique_count": 1,
+                "duplicate_count": 0,
+                "selected_count": 1,
+                "excluded_count": 0,
+                "excluded": [],
+                "no_selected_clicks": false
+              },
+              "policy": {
+                "source": "caller_supplied",
+                "platform": "google",
+                "as_of": "2026-09-08T13:00:00Z",
+                "max_event_age_days": 100,
+                "click_lookback_days": 1,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "click_source_system": "ads",
+                    "click_source_scope": "ads-scope"
+                  }
+                ]
+              }
+            },
+            "destination": {
+              "platform": "google",
+              "account_key": "00123456789",
+              "destination_key": "00987654321",
+              "event_type": "conversion"
+            },
+            "request": {
+              "method": "POST",
+              "url": "https://datamanager.googleapis.com/v1/events:ingest",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": {
+                "destinations": [
+                  {
+                    "operatingAccount": {
+                      "accountType": "GOOGLE_ADS",
+                      "accountId": "00123456789"
+                    },
+                    "productDestinationId": "00987654321",
+                    "reference": "ad_destination"
+                  }
+                ],
+                "events": [
+                  {
+                    "destinationReferences": [
+                      "ad_destination"
+                    ],
+                    "transactionId": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+                    "eventTimestamp": "2026-09-08T12:34:56.123456789Z",
+                    "eventSource": "WEB",
+                    "adIdentifiers": {
+                      "gclid": "gclid+Opaque%252F"
+                    }
+                  }
+                ],
+                "encoding": "HEX",
+                "validateOnly": true
+              },
+              "request_body": "{\"destinations\":[{\"operatingAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00123456789\"},\"productDestinationId\":\"00987654321\",\"reference\":\"ad_destination\"}],\"events\":[{\"destinationReferences\":[\"ad_destination\"],\"transactionId\":\"7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b\",\"eventTimestamp\":\"2026-09-08T12:34:56.123456789Z\",\"eventSource\":\"WEB\",\"adIdentifiers\":{\"gclid\":\"gclid+Opaque%252F\"}}],\"encoding\":\"HEX\",\"validateOnly\":true}"
+            },
+            "authorization": {
+              "mechanism": "oauth2_bearer",
+              "header": "Authorization",
+              "scopes": [
+                "https://www.googleapis.com/auth/datamanager"
+              ]
+            },
+            "diagnostics": {
+              "money_omitted": true,
+              "timestamp_precision_loss": false,
+              "warnings": [
+                "provider_value_defaults_may_apply"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-provider-linkedin",
+      "input": {
+        "audit_key": "actual-provider-linkedin",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-09-08T13:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "ads",
+            "source_scope": "ads-scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "scope",
+            "to_source_system": "ads",
+            "to_source_scope": "ads-scope",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "provider_payloads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "linkedin",
+            "input": {
+              "preparation_input": {
+                "conversion": {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "conversion_key": "conversion-1",
+                  "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                  "subject_source_system": null,
+                  "subject_source_scope": null,
+                  "subject_key": null,
+                  "value": "123.45",
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                "platform": "linkedin",
+                "click_observations": [
+                  {
+                    "source_system": "ads",
+                    "source_scope": "ads-scope",
+                    "click_key": "click-li_fat_id",
+                    "occurred_at": "2026-09-08T12:00:00Z",
+                    "kind": "li_fat_id",
+                    "value": "li_fat_id+Opaque%252F",
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "conversion_key": "conversion-1"
+                  }
+                ],
+                "policy": {
+                  "as_of": "2026-09-08T13:00:00Z",
+                  "max_event_age_days": 100,
+                  "click_lookback_days": 1,
+                  "click_scope_bindings": [
+                    {
+                      "conversion_source_system": "crm",
+                      "conversion_source_scope": "scope",
+                      "click_source_system": "ads",
+                      "click_source_scope": "ads-scope"
+                    }
+                  ]
+                },
+                "browser_event_id": "browser+opaque%252F"
+              },
+              "identity": {
+                "email": " Test.User+tag@gmail.com ",
+                "phone": "+1 (415) 555-2671 ext 9"
+              },
+              "configuration": {
+                "account_id": "00123456789",
+                "money_policy": "require_known",
+                "conversion_rule_id": "00987654321",
+                "api_version": "202608"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-09-08T13:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                },
+                {
+                  "source_system": "ads",
+                  "source_scope": "ads-scope"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/provider-payloads.mjs": "b7ce8069627c07a24368e8f08fa438b3aab5ad54a7d18aeb5e460097978c6b6e",
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "preparation": {
+              "status": "ready",
+              "reasons": [],
+              "event_id": "browser+opaque%252F",
+              "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "conversion_key": "conversion-1",
+                "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": "123.45",
+                "currency": "USD",
+                "value_status": "known"
+              },
+              "selected_clicks": [
+                {
+                  "kind": "li_fat_id",
+                  "value": "li_fat_id+Opaque%252F",
+                  "occurred_at": "2026-09-08T12:00:00Z",
+                  "source_system": "ads",
+                  "source_scope": "ads-scope",
+                  "click_key": "click-li_fat_id"
+                }
+              ],
+              "click_diagnostics": {
+                "input_count": 1,
+                "unique_count": 1,
+                "duplicate_count": 0,
+                "selected_count": 1,
+                "excluded_count": 0,
+                "excluded": [],
+                "no_selected_clicks": false
+              },
+              "policy": {
+                "source": "caller_supplied",
+                "platform": "linkedin",
+                "as_of": "2026-09-08T13:00:00Z",
+                "max_event_age_days": 100,
+                "click_lookback_days": 1,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "click_source_system": "ads",
+                    "click_source_scope": "ads-scope"
+                  }
+                ]
+              }
+            },
+            "destination": {
+              "platform": "linkedin",
+              "account_key": "00123456789",
+              "destination_key": "00987654321",
+              "event_type": "conversion"
+            },
+            "request": {
+              "method": "POST",
+              "url": "https://api.linkedin.com/rest/conversionEvents",
+              "headers": {
+                "Content-Type": "application/json",
+                "Linkedin-Version": "202608",
+                "X-Restli-Protocol-Version": "2.0.0"
+              },
+              "body": {
+                "conversion": "urn:lla:llaPartnerConversion:00987654321",
+                "conversionHappenedAt": 1788870896123,
+                "eventId": "browser+opaque%252F",
+                "user": {
+                  "userIds": [
+                    {
+                      "idType": "SHA256_EMAIL",
+                      "idValue": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                    },
+                    {
+                      "idType": "LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID",
+                      "idValue": "li_fat_id+Opaque%252F"
+                    }
+                  ]
+                },
+                "conversionValue": {
+                  "currencyCode": "USD",
+                  "amount": "123.45"
+                }
+              },
+              "request_body": "{\"conversion\":\"urn:lla:llaPartnerConversion:00987654321\",\"conversionHappenedAt\":1788870896123,\"eventId\":\"browser+opaque%252F\",\"user\":{\"userIds\":[{\"idType\":\"SHA256_EMAIL\",\"idValue\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"},{\"idType\":\"LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID\",\"idValue\":\"li_fat_id+Opaque%252F\"}]},\"conversionValue\":{\"currencyCode\":\"USD\",\"amount\":\"123.45\"}}"
+            },
+            "authorization": {
+              "mechanism": "oauth2_bearer",
+              "header": "Authorization",
+              "scopes": [
+                "rw_conversions",
+                "r_ads"
+              ]
+            },
+            "diagnostics": {
+              "money_omitted": false,
+              "timestamp_precision_loss": true,
+              "warnings": [
+                "timestamp_truncated_to_milliseconds"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-provider-meta",
+      "input": {
+        "audit_key": "actual-provider-meta",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-09-08T13:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "ads",
+            "source_scope": "ads-scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "scope",
+            "to_source_system": "ads",
+            "to_source_scope": "ads-scope",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "provider_payloads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "meta",
+            "input": {
+              "preparation_input": {
+                "conversion": {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "conversion_key": "conversion-1",
+                  "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                  "subject_source_system": null,
+                  "subject_source_scope": null,
+                  "subject_key": null,
+                  "value": "123.45",
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                "platform": "meta",
+                "click_observations": [
+                  {
+                    "source_system": "ads",
+                    "source_scope": "ads-scope",
+                    "click_key": "click-fbclid",
+                    "occurred_at": "2026-09-08T12:00:00Z",
+                    "kind": "fbclid",
+                    "value": "fbclid+Opaque%252F",
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "conversion_key": "conversion-1"
+                  }
+                ],
+                "policy": {
+                  "as_of": "2026-09-08T13:00:00Z",
+                  "max_event_age_days": 100,
+                  "click_lookback_days": 1,
+                  "click_scope_bindings": [
+                    {
+                      "conversion_source_system": "crm",
+                      "conversion_source_scope": "scope",
+                      "click_source_system": "ads",
+                      "click_source_scope": "ads-scope"
+                    }
+                  ]
+                },
+                "browser_event_id": "browser+opaque%252F"
+              },
+              "identity": {
+                "email": " Test.User+tag@gmail.com ",
+                "phone": "+1 (415) 555-2671 ext 9"
+              },
+              "configuration": {
+                "account_id": "00123456789",
+                "pixel_id": "00987654321",
+                "api_version": "v25.0",
+                "event_name": "Lead",
+                "action_source": "website",
+                "event_source_url": "https://example.test/lead?x=1",
+                "client_user_agent": "SyntheticBrowser/1.0",
+                "test_event_code": "TEST123",
+                "data_processing": {
+                  "options": [
+                    "LDU"
+                  ],
+                  "country": 0,
+                  "state": 0
+                },
+                "opt_out": false,
+                "advertiser_tracking_enabled": false,
+                "money_policy": "require_known"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-09-08T13:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                },
+                {
+                  "source_system": "ads",
+                  "source_scope": "ads-scope"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/provider-payloads.mjs": "b7ce8069627c07a24368e8f08fa438b3aab5ad54a7d18aeb5e460097978c6b6e",
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "preparation": {
+              "status": "ready",
+              "reasons": [],
+              "event_id": "browser+opaque%252F",
+              "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "conversion_key": "conversion-1",
+                "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": "123.45",
+                "currency": "USD",
+                "value_status": "known"
+              },
+              "selected_clicks": [
+                {
+                  "kind": "fbclid",
+                  "value": "fbclid+Opaque%252F",
+                  "occurred_at": "2026-09-08T12:00:00Z",
+                  "source_system": "ads",
+                  "source_scope": "ads-scope",
+                  "click_key": "click-fbclid"
+                }
+              ],
+              "click_diagnostics": {
+                "input_count": 1,
+                "unique_count": 1,
+                "duplicate_count": 0,
+                "selected_count": 1,
+                "excluded_count": 0,
+                "excluded": [],
+                "no_selected_clicks": false
+              },
+              "policy": {
+                "source": "caller_supplied",
+                "platform": "meta",
+                "as_of": "2026-09-08T13:00:00Z",
+                "max_event_age_days": 100,
+                "click_lookback_days": 1,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "click_source_system": "ads",
+                    "click_source_scope": "ads-scope"
+                  }
+                ]
+              }
+            },
+            "destination": {
+              "platform": "meta",
+              "account_key": "00123456789",
+              "destination_key": "00987654321",
+              "event_type": "Lead"
+            },
+            "request": {
+              "method": "POST",
+              "url": "https://graph.facebook.com/v25.0/00987654321/events",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              "body": {
+                "data": [
+                  {
+                    "event_name": "Lead",
+                    "event_time": 1788870896,
+                    "event_id": "browser+opaque%252F",
+                    "action_source": "website",
+                    "user_data": {
+                      "em": [
+                        "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                      ],
+                      "ph": [
+                        "758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0"
+                      ],
+                      "fbc": "fb.1.1788868800000.fbclid+Opaque%252F",
+                      "client_user_agent": "SyntheticBrowser/1.0"
+                    },
+                    "event_source_url": "https://example.test/lead?x=1",
+                    "custom_data": {
+                      "value": 123.45,
+                      "currency": "USD"
+                    },
+                    "data_processing_options": [
+                      "LDU"
+                    ],
+                    "data_processing_options_country": 0,
+                    "data_processing_options_state": 0,
+                    "opt_out": false,
+                    "advertiser_tracking_enabled": false
+                  }
+                ],
+                "test_event_code": "TEST123"
+              },
+              "request_body": "{\"data\":[{\"event_name\":\"Lead\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"action_source\":\"website\",\"user_data\":{\"em\":[\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"],\"ph\":[\"758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0\"],\"fbc\":\"fb.1.1788868800000.fbclid+Opaque%252F\",\"client_user_agent\":\"SyntheticBrowser/1.0\"},\"event_source_url\":\"https://example.test/lead?x=1\",\"custom_data\":{\"value\":123.45,\"currency\":\"USD\"},\"data_processing_options\":[\"LDU\"],\"data_processing_options_country\":0,\"data_processing_options_state\":0,\"opt_out\":false,\"advertiser_tracking_enabled\":false}],\"test_event_code\":\"TEST123\"}"
+            },
+            "authorization": {
+              "mechanism": "graph_access_token",
+              "parameter": "access_token",
+              "scopes": []
+            },
+            "diagnostics": {
+              "money_omitted": false,
+              "timestamp_precision_loss": true,
+              "warnings": [
+                "timestamp_truncated_to_seconds"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-provider-tiktok",
+      "input": {
+        "audit_key": "actual-provider-tiktok",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-09-08T13:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "ads",
+            "source_scope": "ads-scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "scope",
+            "to_source_system": "ads",
+            "to_source_scope": "ads-scope",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "provider_payloads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "tiktok",
+            "input": {
+              "preparation_input": {
+                "conversion": {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "conversion_key": "conversion-1",
+                  "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                  "subject_source_system": null,
+                  "subject_source_scope": null,
+                  "subject_key": null,
+                  "value": "123.45",
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                "platform": "tiktok",
+                "click_observations": [
+                  {
+                    "source_system": "ads",
+                    "source_scope": "ads-scope",
+                    "click_key": "click-ttclid",
+                    "occurred_at": "2026-09-08T12:00:00Z",
+                    "kind": "ttclid",
+                    "value": "ttclid+Opaque%252F",
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "conversion_key": "conversion-1"
+                  }
+                ],
+                "policy": {
+                  "as_of": "2026-09-08T13:00:00Z",
+                  "max_event_age_days": 100,
+                  "click_lookback_days": 1,
+                  "click_scope_bindings": [
+                    {
+                      "conversion_source_system": "crm",
+                      "conversion_source_scope": "scope",
+                      "click_source_system": "ads",
+                      "click_source_scope": "ads-scope"
+                    }
+                  ]
+                },
+                "browser_event_id": "browser+opaque%252F"
+              },
+              "identity": {
+                "email": " Test.User+tag@gmail.com ",
+                "phone": "+1 (415) 555-2671 ext 9"
+              },
+              "configuration": {
+                "account_id": "account+alpha",
+                "pixel_id": "PIXEL-Abc123",
+                "event_name": "Custom Signup ✨",
+                "page_url": "https://example.test/signup?ttclid=Unqualified",
+                "page_referrer": "https://example.test/start",
+                "client_user_agent": "SyntheticBrowser/1.0",
+                "test_event_code": "TEST123",
+                "limited_data_use": false,
+                "money_policy": "require_known"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-09-08T13:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                },
+                {
+                  "source_system": "ads",
+                  "source_scope": "ads-scope"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/provider-payloads.mjs": "b7ce8069627c07a24368e8f08fa438b3aab5ad54a7d18aeb5e460097978c6b6e",
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "preparation": {
+              "status": "ready",
+              "reasons": [],
+              "event_id": "browser+opaque%252F",
+              "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "conversion_key": "conversion-1",
+                "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": "123.45",
+                "currency": "USD",
+                "value_status": "known"
+              },
+              "selected_clicks": [
+                {
+                  "kind": "ttclid",
+                  "value": "ttclid+Opaque%252F",
+                  "occurred_at": "2026-09-08T12:00:00Z",
+                  "source_system": "ads",
+                  "source_scope": "ads-scope",
+                  "click_key": "click-ttclid"
+                }
+              ],
+              "click_diagnostics": {
+                "input_count": 1,
+                "unique_count": 1,
+                "duplicate_count": 0,
+                "selected_count": 1,
+                "excluded_count": 0,
+                "excluded": [],
+                "no_selected_clicks": false
+              },
+              "policy": {
+                "source": "caller_supplied",
+                "platform": "tiktok",
+                "as_of": "2026-09-08T13:00:00Z",
+                "max_event_age_days": 100,
+                "click_lookback_days": 1,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "click_source_system": "ads",
+                    "click_source_scope": "ads-scope"
+                  }
+                ]
+              }
+            },
+            "destination": {
+              "platform": "tiktok",
+              "account_key": "account+alpha",
+              "destination_key": "PIXEL-Abc123",
+              "event_type": "Custom Signup ✨"
+            },
+            "request": {
+              "method": "POST",
+              "url": "https://business-api.tiktok.com/open_api/v1.3/event/track/",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              "body": {
+                "event_source": "web",
+                "event_source_id": "PIXEL-Abc123",
+                "data": [
+                  {
+                    "event": "Custom Signup ✨",
+                    "event_time": 1788870896,
+                    "event_id": "browser+opaque%252F",
+                    "user": {
+                      "email": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd",
+                      "phone": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                      "ttclid": "ttclid+Opaque%252F",
+                      "user_agent": "SyntheticBrowser/1.0"
+                    },
+                    "page": {
+                      "url": "https://example.test/signup?ttclid=Unqualified",
+                      "referrer": "https://example.test/start"
+                    },
+                    "properties": {
+                      "value": 123.45,
+                      "currency": "USD"
+                    },
+                    "limited_data_use": false
+                  }
+                ],
+                "test_event_code": "TEST123"
+              },
+              "request_body": "{\"event_source\":\"web\",\"event_source_id\":\"PIXEL-Abc123\",\"data\":[{\"event\":\"Custom Signup ✨\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"user\":{\"email\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\",\"phone\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"ttclid\":\"ttclid+Opaque%252F\",\"user_agent\":\"SyntheticBrowser/1.0\"},\"page\":{\"url\":\"https://example.test/signup?ttclid=Unqualified\",\"referrer\":\"https://example.test/start\"},\"properties\":{\"value\":123.45,\"currency\":\"USD\"},\"limited_data_use\":false}],\"test_event_code\":\"TEST123\"}"
+            },
+            "authorization": {
+              "mechanism": "access_token",
+              "header": "Access-Token",
+              "scopes": []
+            },
+            "diagnostics": {
+              "money_omitted": false,
+              "timestamp_precision_loss": true,
+              "warnings": [
+                "timestamp_truncated_to_seconds"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-provider-reddit",
+      "input": {
+        "audit_key": "actual-provider-reddit",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-09-08T13:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "ads",
+            "source_scope": "ads-scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "ad_scope",
+            "from_source_system": "crm",
+            "from_source_scope": "scope",
+            "to_source_system": "ads",
+            "to_source_scope": "ads-scope",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "capi-match-keys",
+            "entrypoint": "provider_payloads",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "reddit",
+            "input": {
+              "preparation_input": {
+                "conversion": {
+                  "source_system": "crm",
+                  "source_scope": "scope",
+                  "conversion_key": "conversion-1",
+                  "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                  "subject_source_system": null,
+                  "subject_source_scope": null,
+                  "subject_key": null,
+                  "value": "123.45",
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                "platform": "reddit",
+                "click_observations": [
+                  {
+                    "source_system": "ads",
+                    "source_scope": "ads-scope",
+                    "click_key": "click-rdt_cid",
+                    "occurred_at": "2026-09-08T12:00:00Z",
+                    "kind": "rdt_cid",
+                    "value": "rdt+Opaque%252F",
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "conversion_key": "conversion-1"
+                  }
+                ],
+                "policy": {
+                  "as_of": "2026-09-08T13:00:00Z",
+                  "max_event_age_days": 100,
+                  "click_lookback_days": 1,
+                  "click_scope_bindings": [
+                    {
+                      "conversion_source_system": "crm",
+                      "conversion_source_scope": "scope",
+                      "click_source_system": "ads",
+                      "click_source_scope": "ads-scope"
+                    }
+                  ]
+                },
+                "browser_event_id": "browser+opaque%252F"
+              },
+              "identity": {
+                "email": " Test.User+tag@gmail.com ",
+                "phone": "+1 (415) 555-2671 ext 9"
+              },
+              "configuration": {
+                "account_id": "account+alpha",
+                "pixel_id": "pixel/a+b?c",
+                "tracking_type": "CUSTOM",
+                "custom_event_name": "Custom Signup ✨",
+                "action_source": "WEBSITE",
+                "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+                "test_id": "TEST123",
+                "data_processing": {
+                  "modes": [
+                    "LDU"
+                  ],
+                  "country": "US",
+                  "region": "US-CA"
+                },
+                "money_policy": "require_known"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-09-08T13:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "scope"
+                },
+                {
+                  "source_system": "ads",
+                  "source_scope": "ads-scope"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/provider-payloads.mjs": "b7ce8069627c07a24368e8f08fa438b3aab5ad54a7d18aeb5e460097978c6b6e",
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "status": "ready",
+            "reasons": [],
+            "preparation": {
+              "status": "ready",
+              "reasons": [],
+              "event_id": "browser+opaque%252F",
+              "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+              "conversion": {
+                "source_system": "crm",
+                "source_scope": "scope",
+                "conversion_key": "conversion-1",
+                "occurred_at": "2026-09-08T12:34:56.123456789Z",
+                "subject_source_system": null,
+                "subject_source_scope": null,
+                "subject_key": null,
+                "value": "123.45",
+                "currency": "USD",
+                "value_status": "known"
+              },
+              "selected_clicks": [
+                {
+                  "kind": "rdt_cid",
+                  "value": "rdt+Opaque%252F",
+                  "occurred_at": "2026-09-08T12:00:00Z",
+                  "source_system": "ads",
+                  "source_scope": "ads-scope",
+                  "click_key": "click-rdt_cid"
+                }
+              ],
+              "click_diagnostics": {
+                "input_count": 1,
+                "unique_count": 1,
+                "duplicate_count": 0,
+                "selected_count": 1,
+                "excluded_count": 0,
+                "excluded": [],
+                "no_selected_clicks": false
+              },
+              "policy": {
+                "source": "caller_supplied",
+                "platform": "reddit",
+                "as_of": "2026-09-08T13:00:00Z",
+                "max_event_age_days": 100,
+                "click_lookback_days": 1,
+                "click_scope_bindings": [
+                  {
+                    "conversion_source_system": "crm",
+                    "conversion_source_scope": "scope",
+                    "click_source_system": "ads",
+                    "click_source_scope": "ads-scope"
+                  }
+                ]
+              }
+            },
+            "destination": {
+              "platform": "reddit",
+              "account_key": "account+alpha",
+              "destination_key": "pixel/a+b?c",
+              "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+            },
+            "request": {
+              "method": "POST",
+              "url": "https://ads-api.reddit.com/api/v3/pixels/pixel%2Fa%2Bb%3Fc/conversion_events",
+              "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              "body": {
+                "data": {
+                  "events": [
+                    {
+                      "event_at": 1788870896123,
+                      "action_source": "WEBSITE",
+                      "type": {
+                        "tracking_type": "CUSTOM",
+                        "custom_event_name": "Custom Signup ✨"
+                      },
+                      "click_id": "rdt+Opaque%252F",
+                      "user": {
+                        "email": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e",
+                        "phone_number": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                        "data_processing_options": {
+                          "modes": [
+                            "LDU"
+                          ],
+                          "country": "US",
+                          "region": "US-CA"
+                        }
+                      },
+                      "metadata": {
+                        "conversion_id": "browser+opaque%252F",
+                        "value": 123.45,
+                        "currency": "USD"
+                      },
+                      "event_source_url": "https://example.test/signup?rdt_cid=Unqualified"
+                    }
+                  ],
+                  "test_id": "TEST123"
+                }
+              },
+              "request_body": "{\"data\":{\"events\":[{\"event_at\":1788870896123,\"action_source\":\"WEBSITE\",\"type\":{\"tracking_type\":\"CUSTOM\",\"custom_event_name\":\"Custom Signup ✨\"},\"click_id\":\"rdt+Opaque%252F\",\"user\":{\"email\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\",\"phone_number\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"data_processing_options\":{\"modes\":[\"LDU\"],\"country\":\"US\",\"region\":\"US-CA\"}},\"metadata\":{\"conversion_id\":\"browser+opaque%252F\",\"value\":123.45,\"currency\":\"USD\"},\"event_source_url\":\"https://example.test/signup?rdt_cid=Unqualified\"}],\"test_id\":\"TEST123\"}}"
+            },
+            "authorization": {
+              "mechanism": "conversion_access_token",
+              "header": "Authorization",
+              "scheme": "Bearer",
+              "scopes": []
+            },
+            "diagnostics": {
+              "money_omitted": false,
+              "timestamp_precision_loss": true,
+              "warnings": [
+                "timestamp_truncated_to_milliseconds"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "actual-stage-to-prepare-chain",
+      "input": {
+        "audit_key": "actual-stage-to-prepare-chain",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "org-a",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "stage",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "stage-output"
+          },
+          {
+            "step_id": "prepare",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": true,
+            "depends_on": [
+              "stage"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "stage-output"
+            ],
+            "artifact_ref": "prepare-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "stage",
+            "operation": "conversionFromStage",
+            "input": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "lead_key": "Lead+7",
+              "stage_key": "won",
+              "achieved": true,
+              "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+              "is_attribution_primary": true,
+              "value": null,
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          },
+          {
+            "step_id": "prepare",
+            "operation": "prepareConversion",
+            "input": {
+              "platform": "meta",
+              "conversion": null,
+              "click_observations": [],
+              "policy": {
+                "as_of": "2026-02-01T00:00:00Z",
+                "max_event_age_days": 365,
+                "click_lookback_days": 30,
+                "click_scope_bindings": []
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/conversion",
+                "evidence_ref": "stage-output",
+                "source_pointer": "/conversion"
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 2,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "stage",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          },
+          {
+            "step_id": "prepare",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "stage-output": {
+            "status": "eligible",
+            "conversion": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "conversion_key": "[\"Lead+7\",\"won\"]",
+              "occurred_at": "2026-01-02T00:00:00.123456789Z",
+              "subject_source_system": null,
+              "subject_source_scope": null,
+              "subject_key": null,
+              "value": null,
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+          },
+          "prepare-output": {
+            "status": "ready",
+            "reasons": [],
+            "event_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef",
+            "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef",
+            "conversion": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "conversion_key": "[\"Lead+7\",\"won\"]",
+              "occurred_at": "2026-01-02T00:00:00.123456789Z",
+              "subject_source_system": null,
+              "subject_source_scope": null,
+              "subject_key": null,
+              "value": null,
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "selected_clicks": [],
+            "click_diagnostics": {
+              "input_count": 0,
+              "unique_count": 0,
+              "duplicate_count": 0,
+              "selected_count": 0,
+              "excluded_count": 0,
+              "excluded": [],
+              "no_selected_clicks": true
+            },
+            "policy": {
+              "source": "caller_supplied",
+              "platform": "meta",
+              "as_of": "2026-02-01T00:00:00Z",
+              "max_event_age_days": 365,
+              "click_lookback_days": 30,
+              "click_scope_bindings": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "catalog-explicit-binding",
+      "input": {
+        "audit_key": "catalog-explicit-binding",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          },
+          {
+            "evidence_ref": "tracking-input",
+            "kind": "source_input",
+            "value": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            },
+            "sha256": "29240e41077525c585bd99cd9ed5489f5d695ec1d817d3f0c7c95c0dd05e7200"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation",
+              "tracking-input"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": null,
+            "bindings": [
+              {
+                "target_pointer": "",
+                "evidence_ref": "tracking-input",
+                "source_pointer": ""
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "channel": "Paid Search",
+            "rule_id": "click_id_search",
+            "taxonomy_version": "0.1.0"
+          }
+        }
+      }
+    },
+    {
+      "id": "explicit-sql-adapter-unavailable",
+      "input": {
+        "audit_key": "explicit-sql-adapter-unavailable",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "attribution-data-quality-tripwires",
+            "entrypoint": "spend_conservation",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "executeSql",
+            "input": {},
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "attribution-data-quality-tripwires/scripts/spend-conservation.sql": "1243c093c40f857678df9b73071a268a0bce2591e1729d636503944bbffb2a24",
+              "ga4-bigquery-export/scripts/run-export-checks.mjs": "9eaedf7ec9e30895195196dfd6f0d7447f175c9e58255c907b92a3f1b6494f14"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 0,
+        "execution_status": "partial",
+        "quality_status": "unknown",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": null,
+            "execution_status": "unavailable",
+            "reason_codes": [
+              "bigquery_not_configured"
+            ]
+          }
+        ],
+        "native_outputs": {
+          "s0-output": null
+        }
+      }
+    },
+    {
+      "id": "missing-installed-root",
+      "input": {
+        "audit_key": "missing-installed-root",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 0,
+        "execution_status": "partial",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": false,
+            "execution_status": "unavailable",
+            "reason_codes": [
+              "installed_source_missing"
+            ]
+          }
+        ],
+        "native_outputs": {
+          "s0-output": null
+        }
+      },
+      "omit_skill_roots": [
+        "channel-taxonomy"
+      ]
+    },
+    {
+      "id": "source-hash-mismatch",
+      "input": {
+        "audit_key": "source-hash-mismatch",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "0000000000000000000000000000000000000000000000000000000000000000"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 0,
+        "execution_status": "failed",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": false,
+            "execution_status": "failed",
+            "reason_codes": [
+              "source_hash_mismatch"
+            ]
+          }
+        ],
+        "native_outputs": {
+          "s0-output": null
+        }
+      }
+    },
+    {
+      "id": "failed-optional-producer-gates-required-consumer",
+      "input": {
+        "audit_key": "failed-optional-producer-gates-required-consumer",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "crm",
+            "source_scope": "org-a",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "stage",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": false,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "stage-output"
+          },
+          {
+            "step_id": "prepare",
+            "skill": "capi-match-keys",
+            "entrypoint": "conversion_preparation",
+            "required": true,
+            "depends_on": [
+              "stage"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "stage-output"
+            ],
+            "artifact_ref": "prepare-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "stage",
+            "operation": "conversionFromStage",
+            "input": {
+              "source_system": "crm",
+              "source_scope": "org-a",
+              "lead_key": "Lead+7",
+              "stage_key": "won",
+              "achieved": true,
+              "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+              "is_attribution_primary": true,
+              "value": "malformed-decimal",
+              "currency": "USD",
+              "value_status": "unknown"
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          },
+          {
+            "step_id": "prepare",
+            "operation": "prepareConversion",
+            "input": {
+              "platform": "meta",
+              "conversion": null,
+              "click_observations": [],
+              "policy": {
+                "as_of": "2026-02-01T00:00:00Z",
+                "max_event_age_days": 365,
+                "click_lookback_days": 30,
+                "click_scope_bindings": []
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/conversion",
+                "evidence_ref": "stage-output",
+                "source_pointer": "/conversion"
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "org-a"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "capi-match-keys/scripts/conversion-events.mjs": "5b32a25672af2c06c6006a1bd15e3ff1a9a3371124f30d8cc62c6d0c4cd9bae6",
+              "capi-match-keys/scripts/match-keys.mjs": "0788eb59ec7150a67ca256744a36159758d9750e237027826d0b85a879d05580"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "failed",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "stage",
+            "function_entered": true,
+            "execution_status": "failed",
+            "reason_codes": [
+              "native_invocation_failed"
+            ]
+          },
+          {
+            "step_id": "prepare",
+            "function_entered": false,
+            "execution_status": "failed",
+            "reason_codes": [
+              "dependency_failed"
+            ]
+          }
+        ],
+        "native_outputs": {
+          "stage-output": null,
+          "prepare-output": null
+        }
+      }
+    },
+    {
+      "id": "explicit-null-artifact-ref",
+      "input": {
+        "audit_key": "explicit-null-artifact-ref",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-02-01T00:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "channel-taxonomy",
+            "entrypoint": "classify",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": null
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "classify",
+            "input": {
+              "click_ids": {
+                "gclid": "x"
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-02-01T00:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "channel-taxonomy/scripts/channel-taxonomy.mjs": "c2d0034a533385cf1aa6475009f47d11d3f8a60ce5be96e629ea340e78a69299"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 0,
+        "execution_status": "partial",
+        "quality_status": "not_requested",
+        "data_coverage_status": "complete",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": false,
+            "execution_status": "unavailable",
+            "reason_codes": [
+              "artifact_ref_missing"
+            ]
+          }
+        ],
+        "native_outputs": {}
+      }
+    },
+    {
+      "id": "partial-source-ambiguous-graph",
+      "input": {
+        "audit_key": "partial-source-ambiguous-graph",
+        "boundary": {
+          "report_scope": "synthetic-execution",
+          "timezone": "UTC",
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "date_mode": "cohort",
+          "as_of": "2026-01-01T01:00:00Z",
+          "outcome_name": "declared actions",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "c",
+            "source_scope": "s",
+            "coverage_status": "partial",
+            "evidence_ref": "attestation"
+          },
+          {
+            "source_system": "p",
+            "source_scope": "s",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [
+          {
+            "bridge_key": "bridge-0",
+            "kind": "identity",
+            "from_source_system": "p",
+            "from_source_scope": "s",
+            "to_source_system": "c",
+            "to_source_scope": "s",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "clickstream-identity-stitching",
+            "entrypoint": "identity_graph",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "buildIdentityGraph",
+            "input": {
+              "contacts": [
+                {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "a",
+                  "email": "a@example.com"
+                },
+                {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "b",
+                  "email": "b@example.com"
+                }
+              ],
+              "identifies": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "observation_key": "a",
+                  "occurred_at": "2026-01-01T00:00:00Z",
+                  "email": "a@example.com"
+                },
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "observation_key": "b",
+                  "occurred_at": "2026-01-01T00:10:00Z",
+                  "email": "b@example.com"
+                }
+              ],
+              "touches": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "touch_key": "t",
+                  "occurred_at": "2026-01-01T00:20:00Z",
+                  "channel": "Referral",
+                  "taxonomy_version": "0.1.0"
+                }
+              ],
+              "identity_scope_bindings": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "contact_source_system": "c",
+                  "contact_source_scope": "s"
+                }
+              ],
+              "as_of": "2026-01-01T01:00:00Z",
+              "lookback_days": 1
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-execution",
+                "timezone": "UTC",
+                "start": "2026-01-01",
+                "end": "2026-12-31",
+                "date_mode": "cohort",
+                "as_of": "2026-01-01T01:00:00Z",
+                "outcome_name": "declared actions",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "c",
+                  "source_scope": "s"
+                },
+                {
+                  "source_system": "p",
+                  "source_scope": "s"
+                }
+              ],
+              "bridge_keys": [
+                "bridge-0"
+              ]
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "clickstream-identity-stitching/scripts/identity-graph.mjs": "4a3558517e83bfc7bb1418fbc7b64f214f2882a22d3557df411d2ef9babeba74",
+              "clickstream-identity-stitching/scripts/identity-normalization.mjs": "ddabeb09777bfbdc8a9be884c2d92b18ee9e221b1ec2f5f5c5169900ca72c555",
+              "clickstream-identity-stitching/scripts/identity-primitives.mjs": "4f6884670a3a56547cb1fe168ab8f80169844bfd5cd02102ce92d01c34e19311"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "fresh_upstream_calls": 1,
+        "execution_status": "complete",
+        "quality_status": "not_requested",
+        "data_coverage_status": "partial",
+        "steps": [
+          {
+            "step_id": "s0",
+            "function_entered": true,
+            "execution_status": "succeeded",
+            "reason_codes": []
+          }
+        ],
+        "native_outputs": {
+          "s0-output": {
+            "edges": [
+              {
+                "edge_key": "[\"p\",\"s\",\"v\",\"a\"]",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "contact": {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "a"
+                },
+                "evidence": {
+                  "email_hash": "08168cd80dfd534ab0f10af10f1303fe00af2d43ab5c1432360d137f8197e17a",
+                  "phone_hash": null
+                }
+              },
+              {
+                "edge_key": "[\"p\",\"s\",\"v\",\"b\"]",
+                "occurred_at": "2026-01-01T00:10:00Z",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "contact": {
+                  "source_system": "c",
+                  "source_scope": "s",
+                  "contact_key": "b"
+                },
+                "evidence": {
+                  "email_hash": "e8f39b3e1382367d6d41ab34dc270d4e7533f978c9e9a775dfe2185b2f96b96c",
+                  "phone_hash": null
+                }
+              }
+            ],
+            "observations": [
+              {
+                "status": "matched",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "observation_key": "a",
+                "occurred_at": "2026-01-01T00:00:00Z",
+                "candidates": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "a"
+                  }
+                ]
+              },
+              {
+                "status": "matched",
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "observation_key": "b",
+                "occurred_at": "2026-01-01T00:10:00Z",
+                "candidates": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "b"
+                  }
+                ]
+              }
+            ],
+            "touch_links": [
+              {
+                "source_system": "p",
+                "source_scope": "s",
+                "visitor_key": "v",
+                "touch_key": "t",
+                "occurred_at": "2026-01-01T00:20:00Z",
+                "status": "ambiguous",
+                "reason": "shared_device",
+                "contacts": [
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "a"
+                  },
+                  {
+                    "source_system": "c",
+                    "source_scope": "s",
+                    "contact_key": "b"
+                  }
+                ],
+                "edge_evidence_keys": [
+                  "[\"p\",\"s\",\"v\",\"a\"]",
+                  "[\"p\",\"s\",\"v\",\"b\"]"
+                ]
+              }
+            ],
+            "diagnostics": {
+              "as_of": "2026-01-01T01:00:00Z",
+              "lookback_days": 1,
+              "future_excluded": {
+                "identifies": 0,
+                "touches": 0
+              },
+              "shared_devices": [
+                {
+                  "source_system": "p",
+                  "source_scope": "s",
+                  "visitor_key": "v",
+                  "contacts": [
+                    {
+                      "source_system": "c",
+                      "source_scope": "s",
+                      "contact_key": "a"
+                    },
+                    {
+                      "source_system": "c",
+                      "source_scope": "s",
+                      "contact_key": "b"
+                    }
+                  ]
+                }
+              ],
+              "retrospective_edge_use": true,
+              "no_ip_inference": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}

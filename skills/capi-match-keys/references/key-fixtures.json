@@ -1,0 +1,2905 @@
+{
+  "version": "0.2.0",
+  "golden_hash_provenance": "Python 3 hashlib.sha256 over literal expected canonical UTF-8 strings; no implementation output used. Published Reddit vectors separately asserted.",
+  "identity": [
+    {
+      "id": "meta-email-alias",
+      "platform": "meta",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Gmail.com ",
+      "expected": "alice.smith+ads@gmail.com",
+      "expected_hash": "a06a60e0b1ec51e6cdc57f721122f1ef6363871b6cc6bcac1fd1703191c000c9"
+    },
+    {
+      "id": "meta-email-non-gmail",
+      "platform": "meta",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Example.org ",
+      "expected": "alice.smith+ads@example.org",
+      "expected_hash": "f65e832493b5bb5dce39621a3dc36dcc3a1396afca6af8dc4072c6711e9b09e7"
+    },
+    {
+      "id": "meta-email-googlemail",
+      "platform": "meta",
+      "kind": "email",
+      "value": " A.Lice+ads@Googlemail.com ",
+      "expected": "a.lice+ads@googlemail.com",
+      "expected_hash": "84d7f583b9a3f06a0679183dc99bd22c16e1ef4a5e900083e6a6dcdd87d08fcc"
+    },
+    {
+      "id": "meta-email-trim-controls",
+      "platform": "meta",
+      "kind": "email",
+      "value": "\tAlice@Example.com\r\n",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "meta-email-spaces",
+      "platform": "meta",
+      "kind": "email",
+      "value": "A l i c e@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-tab-newline",
+      "platform": "meta",
+      "kind": "email",
+      "value": "A\tli\nce@Exam\rple.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-unicode-whitespace",
+      "platform": "meta",
+      "kind": "email",
+      "value": "A\u00a0li\u2003ce@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-extra-at-alias",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a+bad@gmail.com@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-extra-at",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-missing-local",
+      "platform": "meta",
+      "kind": "email",
+      "value": "@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-missing-domain",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-undotted-domain",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@localhost",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-empty-domain-label",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@example..com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-leading-domain-dot",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@.example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-trailing-domain-dot",
+      "platform": "meta",
+      "kind": "email",
+      "value": "a@example.com.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-control",
+      "platform": "meta",
+      "kind": "email",
+      "value": "ali\u0000ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-delete-control",
+      "platform": "meta",
+      "kind": "email",
+      "value": "ali\u007fce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-c1-control",
+      "platform": "meta",
+      "kind": "email",
+      "value": "ali\u0085ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-non-email",
+      "platform": "meta",
+      "kind": "email",
+      "value": "not-an-email",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-empty-after-plus",
+      "platform": "meta",
+      "kind": "email",
+      "value": "+ads@gmail.com",
+      "expected": "+ads@gmail.com",
+      "expected_hash": "d1962adae4b28595ddc8592e1247adf857c9f86c35119c21b5cf2c7b29fb01cc"
+    },
+    {
+      "id": "meta-email-empty-after-dots",
+      "platform": "meta",
+      "kind": "email",
+      "value": "...@gmail.com",
+      "expected": "...@gmail.com",
+      "expected_hash": "1d71b556e9ad71cd48461e0b5504ce4c18cda9796494f3695c6d58fb5fb939dc"
+    },
+    {
+      "id": "meta-phone-baseline",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234",
+      "expected": "15554441234",
+      "expected_hash": "5e0e5aa7d521589a79e6de0d18a65fa43456cb4cda554fb69667691a34f3e2c0"
+    },
+    {
+      "id": "meta-phone-ext",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234 ext 9",
+      "expected": "15554441234",
+      "expected_hash": "5e0e5aa7d521589a79e6de0d18a65fa43456cb4cda554fb69667691a34f3e2c0"
+    },
+    {
+      "id": "meta-phone-ext-dot",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1.555.444.1234 EXT. 99 ",
+      "expected": "15554441234",
+      "expected_hash": "5e0e5aa7d521589a79e6de0d18a65fa43456cb4cda554fb69667691a34f3e2c0"
+    },
+    {
+      "id": "meta-phone-x",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234x99",
+      "expected": "15554441234",
+      "expected_hash": "5e0e5aa7d521589a79e6de0d18a65fa43456cb4cda554fb69667691a34f3e2c0"
+    },
+    {
+      "id": "meta-phone-x-spaced",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234 X 99",
+      "expected": "15554441234",
+      "expected_hash": "5e0e5aa7d521589a79e6de0d18a65fa43456cb4cda554fb69667691a34f3e2c0"
+    },
+    {
+      "id": "meta-phone-minimum",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+12345678",
+      "expected": "12345678",
+      "expected_hash": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f"
+    },
+    {
+      "id": "meta-phone-maximum",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+123456789012345",
+      "expected": "123456789012345",
+      "expected_hash": "e27a7686b8028cfee7b57d954c3abccfb2a701968925f52bbd482e77be5de0bb"
+    },
+    {
+      "id": "meta-phone-local",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "5554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-country-without-plus",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-international-prefix",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "0015554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-short",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1234567",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-long",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1234567890123456",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-zero-first",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+05554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-unicode-digits",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+\u0661\u0665\u0665\u0665\u0664\u0664\u0664\u0661\u0662\u0663\u0664",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-extension-name",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234 extension 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-extension-hash",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234 #9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-extension-empty",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234 ext.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-extension-after",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234x9junk",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-extension-decimal",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+15554441234x9.1",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-double-plus",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "++15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-control",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1555\n4441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-letters",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "+1555CALL1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-null",
+      "platform": "meta",
+      "kind": "email",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-boolean",
+      "platform": "meta",
+      "kind": "email",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-number",
+      "platform": "meta",
+      "kind": "email",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-object",
+      "platform": "meta",
+      "kind": "email",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-array",
+      "platform": "meta",
+      "kind": "email",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-empty",
+      "platform": "meta",
+      "kind": "email",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-blank",
+      "platform": "meta",
+      "kind": "email",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-placeholder",
+      "platform": "meta",
+      "kind": "email",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-email-prehashed",
+      "platform": "meta",
+      "kind": "email",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-null",
+      "platform": "meta",
+      "kind": "phone",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-boolean",
+      "platform": "meta",
+      "kind": "phone",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-number",
+      "platform": "meta",
+      "kind": "phone",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-object",
+      "platform": "meta",
+      "kind": "phone",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-array",
+      "platform": "meta",
+      "kind": "phone",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-empty",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-blank",
+      "platform": "meta",
+      "kind": "phone",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-placeholder",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "meta-phone-prehashed",
+      "platform": "meta",
+      "kind": "phone",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-alias",
+      "platform": "google",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Gmail.com ",
+      "expected": "alicesmith@gmail.com",
+      "expected_hash": "49da89ea7f43bdcea1b59f6cdc646f247e55a389912115a91283b36617667838"
+    },
+    {
+      "id": "google-email-non-gmail",
+      "platform": "google",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Example.org ",
+      "expected": "alice.smith+ads@example.org",
+      "expected_hash": "f65e832493b5bb5dce39621a3dc36dcc3a1396afca6af8dc4072c6711e9b09e7"
+    },
+    {
+      "id": "google-email-googlemail",
+      "platform": "google",
+      "kind": "email",
+      "value": " A.Lice+ads@Googlemail.com ",
+      "expected": "alice@googlemail.com",
+      "expected_hash": "a2a2bcf9b39a564dd3fe017665e85d222afb19eaae6e81ce82fff6faedf9355d"
+    },
+    {
+      "id": "google-email-trim-controls",
+      "platform": "google",
+      "kind": "email",
+      "value": "\tAlice@Example.com\r\n",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "google-email-spaces",
+      "platform": "google",
+      "kind": "email",
+      "value": "A l i c e@Example.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "google-email-tab-newline",
+      "platform": "google",
+      "kind": "email",
+      "value": "A\tli\nce@Exam\rple.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "google-email-unicode-whitespace",
+      "platform": "google",
+      "kind": "email",
+      "value": "A\u00a0li\u2003ce@Example.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "google-email-extra-at-alias",
+      "platform": "google",
+      "kind": "email",
+      "value": "a+bad@gmail.com@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-extra-at",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-missing-local",
+      "platform": "google",
+      "kind": "email",
+      "value": "@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-missing-domain",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-undotted-domain",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@localhost",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-empty-domain-label",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@example..com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-leading-domain-dot",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@.example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-trailing-domain-dot",
+      "platform": "google",
+      "kind": "email",
+      "value": "a@example.com.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-control",
+      "platform": "google",
+      "kind": "email",
+      "value": "ali\u0000ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-delete-control",
+      "platform": "google",
+      "kind": "email",
+      "value": "ali\u007fce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-c1-control",
+      "platform": "google",
+      "kind": "email",
+      "value": "ali\u0085ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-non-email",
+      "platform": "google",
+      "kind": "email",
+      "value": "not-an-email",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-empty-after-plus",
+      "platform": "google",
+      "kind": "email",
+      "value": "+ads@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-empty-after-dots",
+      "platform": "google",
+      "kind": "email",
+      "value": "...@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-baseline",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "google-phone-ext",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234 ext 9",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "google-phone-ext-dot",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1.555.444.1234 EXT. 99 ",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "google-phone-x",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234x99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "google-phone-x-spaced",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234 X 99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "google-phone-minimum",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+12345678",
+      "expected": "+12345678",
+      "expected_hash": "d67e65887d056ad8eb86c1e371c04db410752a767211bdbd6d3734cee9c9154e"
+    },
+    {
+      "id": "google-phone-maximum",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+123456789012345",
+      "expected": "+123456789012345",
+      "expected_hash": "1b4baed9795e95210d08a51886e9d33e5da06189403c2a823c9d92e222ad55e8"
+    },
+    {
+      "id": "google-phone-local",
+      "platform": "google",
+      "kind": "phone",
+      "value": "5554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-country-without-plus",
+      "platform": "google",
+      "kind": "phone",
+      "value": "15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-international-prefix",
+      "platform": "google",
+      "kind": "phone",
+      "value": "0015554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-short",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1234567",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-long",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1234567890123456",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-zero-first",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+05554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-unicode-digits",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+\u0661\u0665\u0665\u0665\u0664\u0664\u0664\u0661\u0662\u0663\u0664",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-extension-name",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234 extension 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-extension-hash",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234 #9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-extension-empty",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234 ext.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-extension-after",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234x9junk",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-extension-decimal",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+15554441234x9.1",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-double-plus",
+      "platform": "google",
+      "kind": "phone",
+      "value": "++15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-control",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1555\n4441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-letters",
+      "platform": "google",
+      "kind": "phone",
+      "value": "+1555CALL1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-null",
+      "platform": "google",
+      "kind": "email",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-boolean",
+      "platform": "google",
+      "kind": "email",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-number",
+      "platform": "google",
+      "kind": "email",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-object",
+      "platform": "google",
+      "kind": "email",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-array",
+      "platform": "google",
+      "kind": "email",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-empty",
+      "platform": "google",
+      "kind": "email",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-blank",
+      "platform": "google",
+      "kind": "email",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-placeholder",
+      "platform": "google",
+      "kind": "email",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-email-prehashed",
+      "platform": "google",
+      "kind": "email",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-null",
+      "platform": "google",
+      "kind": "phone",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-boolean",
+      "platform": "google",
+      "kind": "phone",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-number",
+      "platform": "google",
+      "kind": "phone",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-object",
+      "platform": "google",
+      "kind": "phone",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-array",
+      "platform": "google",
+      "kind": "phone",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-empty",
+      "platform": "google",
+      "kind": "phone",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-blank",
+      "platform": "google",
+      "kind": "phone",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-placeholder",
+      "platform": "google",
+      "kind": "phone",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "google-phone-prehashed",
+      "platform": "google",
+      "kind": "phone",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-alias",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Gmail.com ",
+      "expected": "alice.smith+ads@gmail.com",
+      "expected_hash": "a06a60e0b1ec51e6cdc57f721122f1ef6363871b6cc6bcac1fd1703191c000c9"
+    },
+    {
+      "id": "tiktok-email-non-gmail",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Example.org ",
+      "expected": "alice.smith+ads@example.org",
+      "expected_hash": "f65e832493b5bb5dce39621a3dc36dcc3a1396afca6af8dc4072c6711e9b09e7"
+    },
+    {
+      "id": "tiktok-email-googlemail",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": " A.Lice+ads@Googlemail.com ",
+      "expected": "a.lice+ads@googlemail.com",
+      "expected_hash": "84d7f583b9a3f06a0679183dc99bd22c16e1ef4a5e900083e6a6dcdd87d08fcc"
+    },
+    {
+      "id": "tiktok-email-trim-controls",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "\tAlice@Example.com\r\n",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "tiktok-email-spaces",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "A l i c e@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-tab-newline",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "A\tli\nce@Exam\rple.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-unicode-whitespace",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "A\u00a0li\u2003ce@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-extra-at-alias",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a+bad@gmail.com@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-extra-at",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-missing-local",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-missing-domain",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-undotted-domain",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@localhost",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-empty-domain-label",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@example..com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-leading-domain-dot",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@.example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-trailing-domain-dot",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "a@example.com.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-control",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "ali\u0000ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-delete-control",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "ali\u007fce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-c1-control",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "ali\u0085ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-non-email",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "not-an-email",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-empty-after-plus",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "+ads@gmail.com",
+      "expected": "+ads@gmail.com",
+      "expected_hash": "d1962adae4b28595ddc8592e1247adf857c9f86c35119c21b5cf2c7b29fb01cc"
+    },
+    {
+      "id": "tiktok-email-empty-after-dots",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "...@gmail.com",
+      "expected": "...@gmail.com",
+      "expected_hash": "1d71b556e9ad71cd48461e0b5504ce4c18cda9796494f3695c6d58fb5fb939dc"
+    },
+    {
+      "id": "tiktok-phone-baseline",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "tiktok-phone-ext",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234 ext 9",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "tiktok-phone-ext-dot",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1.555.444.1234 EXT. 99 ",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "tiktok-phone-x",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234x99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "tiktok-phone-x-spaced",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234 X 99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "tiktok-phone-minimum",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+12345678",
+      "expected": "+12345678",
+      "expected_hash": "d67e65887d056ad8eb86c1e371c04db410752a767211bdbd6d3734cee9c9154e"
+    },
+    {
+      "id": "tiktok-phone-maximum",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+123456789012345",
+      "expected": "+123456789012345",
+      "expected_hash": "1b4baed9795e95210d08a51886e9d33e5da06189403c2a823c9d92e222ad55e8"
+    },
+    {
+      "id": "tiktok-phone-local",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "5554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-country-without-plus",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-international-prefix",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "0015554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-short",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1234567",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-long",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1234567890123456",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-zero-first",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+05554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-unicode-digits",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+\u0661\u0665\u0665\u0665\u0664\u0664\u0664\u0661\u0662\u0663\u0664",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-extension-name",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234 extension 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-extension-hash",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234 #9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-extension-empty",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234 ext.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-extension-after",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234x9junk",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-extension-decimal",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+15554441234x9.1",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-double-plus",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "++15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-control",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1555\n4441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-letters",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "+1555CALL1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-null",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-boolean",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-number",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-object",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-array",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-empty",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-blank",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-placeholder",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-email-prehashed",
+      "platform": "tiktok",
+      "kind": "email",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-null",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-boolean",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-number",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-object",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-array",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-empty",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-blank",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-placeholder",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "tiktok-phone-prehashed",
+      "platform": "tiktok",
+      "kind": "phone",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-alias",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Gmail.com ",
+      "expected": "alice.smith+ads@gmail.com",
+      "expected_hash": "a06a60e0b1ec51e6cdc57f721122f1ef6363871b6cc6bcac1fd1703191c000c9"
+    },
+    {
+      "id": "linkedin-email-non-gmail",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Example.org ",
+      "expected": "alice.smith+ads@example.org",
+      "expected_hash": "f65e832493b5bb5dce39621a3dc36dcc3a1396afca6af8dc4072c6711e9b09e7"
+    },
+    {
+      "id": "linkedin-email-googlemail",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": " A.Lice+ads@Googlemail.com ",
+      "expected": "a.lice+ads@googlemail.com",
+      "expected_hash": "84d7f583b9a3f06a0679183dc99bd22c16e1ef4a5e900083e6a6dcdd87d08fcc"
+    },
+    {
+      "id": "linkedin-email-trim-controls",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "\tAlice@Example.com\r\n",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "linkedin-email-spaces",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "A l i c e@Example.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "linkedin-email-tab-newline",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "A\tli\nce@Exam\rple.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "linkedin-email-unicode-whitespace",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "A\u00a0li\u2003ce@Example.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "linkedin-email-extra-at-alias",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a+bad@gmail.com@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-extra-at",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-missing-local",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-missing-domain",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-undotted-domain",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@localhost",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-empty-domain-label",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@example..com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-leading-domain-dot",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@.example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-trailing-domain-dot",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "a@example.com.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-control",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "ali\u0000ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-delete-control",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "ali\u007fce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-c1-control",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "ali\u0085ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-non-email",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "not-an-email",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-empty-after-plus",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "+ads@gmail.com",
+      "expected": "+ads@gmail.com",
+      "expected_hash": "d1962adae4b28595ddc8592e1247adf857c9f86c35119c21b5cf2c7b29fb01cc"
+    },
+    {
+      "id": "linkedin-email-empty-after-dots",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "...@gmail.com",
+      "expected": "...@gmail.com",
+      "expected_hash": "1d71b556e9ad71cd48461e0b5504ce4c18cda9796494f3695c6d58fb5fb939dc"
+    },
+    {
+      "id": "linkedin-phone-baseline",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-ext",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234 ext 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-ext-dot",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1.555.444.1234 EXT. 99 ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-x",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234x99",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-x-spaced",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234 X 99",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-minimum",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+12345678",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-maximum",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+123456789012345",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-local",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "5554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-country-without-plus",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-international-prefix",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "0015554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-short",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1234567",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-long",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1234567890123456",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-zero-first",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+05554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-unicode-digits",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+\u0661\u0665\u0665\u0665\u0664\u0664\u0664\u0661\u0662\u0663\u0664",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-extension-name",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234 extension 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-extension-hash",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234 #9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-extension-empty",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234 ext.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-extension-after",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234x9junk",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-extension-decimal",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+15554441234x9.1",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-double-plus",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "++15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-control",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1555\n4441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-letters",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "+1555CALL1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-null",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-boolean",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-number",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-object",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-array",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-empty",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-blank",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-placeholder",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-email-prehashed",
+      "platform": "linkedin",
+      "kind": "email",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-null",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-boolean",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-number",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-object",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-array",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-empty",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-blank",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-placeholder",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "linkedin-phone-prehashed",
+      "platform": "linkedin",
+      "kind": "phone",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-alias",
+      "platform": "reddit",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Gmail.com ",
+      "expected": "alicesmith@gmail.com",
+      "expected_hash": "49da89ea7f43bdcea1b59f6cdc646f247e55a389912115a91283b36617667838"
+    },
+    {
+      "id": "reddit-email-non-gmail",
+      "platform": "reddit",
+      "kind": "email",
+      "value": " Alice.Smith+ads@Example.org ",
+      "expected": "alicesmith@example.org",
+      "expected_hash": "80991d306deca06c2b59f49fb37141f761437a378b6c6970843e73d5e27179dc"
+    },
+    {
+      "id": "reddit-email-googlemail",
+      "platform": "reddit",
+      "kind": "email",
+      "value": " A.Lice+ads@Googlemail.com ",
+      "expected": "alice@googlemail.com",
+      "expected_hash": "a2a2bcf9b39a564dd3fe017665e85d222afb19eaae6e81ce82fff6faedf9355d"
+    },
+    {
+      "id": "reddit-email-trim-controls",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "\tAlice@Example.com\r\n",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    },
+    {
+      "id": "reddit-email-spaces",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "A l i c e@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-tab-newline",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "A\tli\nce@Exam\rple.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-unicode-whitespace",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "A\u00a0li\u2003ce@Example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-extra-at-alias",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a+bad@gmail.com@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-extra-at",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-missing-local",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-missing-domain",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-undotted-domain",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@localhost",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-empty-domain-label",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@example..com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-leading-domain-dot",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@.example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-trailing-domain-dot",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "a@example.com.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-control",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "ali\u0000ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-delete-control",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "ali\u007fce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-c1-control",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "ali\u0085ce@example.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-non-email",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "not-an-email",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-empty-after-plus",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "+ads@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-empty-after-dots",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "...@gmail.com",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-baseline",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "reddit-phone-ext",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1 (555) 444-1234 ext 9",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "reddit-phone-ext-dot",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1.555.444.1234 EXT. 99 ",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "reddit-phone-x",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234x99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "reddit-phone-x-spaced",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234 X 99",
+      "expected": "+15554441234",
+      "expected_hash": "e5b124c58580eb16bd959b8d0cac12b12c952e2ceae0203d416cff94f10b994a"
+    },
+    {
+      "id": "reddit-phone-minimum",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+12345678",
+      "expected": "+12345678",
+      "expected_hash": "d67e65887d056ad8eb86c1e371c04db410752a767211bdbd6d3734cee9c9154e"
+    },
+    {
+      "id": "reddit-phone-maximum",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+123456789012345",
+      "expected": "+123456789012345",
+      "expected_hash": "1b4baed9795e95210d08a51886e9d33e5da06189403c2a823c9d92e222ad55e8"
+    },
+    {
+      "id": "reddit-phone-local",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "5554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-country-without-plus",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-international-prefix",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "0015554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-short",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1234567",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-long",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1234567890123456",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-zero-first",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+05554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-unicode-digits",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+\u0661\u0665\u0665\u0665\u0664\u0664\u0664\u0661\u0662\u0663\u0664",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-extension-name",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234 extension 9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-extension-hash",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234 #9",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-extension-empty",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234 ext.",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-extension-after",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234x9junk",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-extension-decimal",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+15554441234x9.1",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-double-plus",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "++15554441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-control",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1555\n4441234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-letters",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "+1555CALL1234",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-null",
+      "platform": "reddit",
+      "kind": "email",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-boolean",
+      "platform": "reddit",
+      "kind": "email",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-number",
+      "platform": "reddit",
+      "kind": "email",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-object",
+      "platform": "reddit",
+      "kind": "email",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-array",
+      "platform": "reddit",
+      "kind": "email",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-empty",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-blank",
+      "platform": "reddit",
+      "kind": "email",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-placeholder",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-prehashed",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-null",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": null,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-boolean",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": true,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-number",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": 15554441234,
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-object",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": {},
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-array",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": [],
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-empty",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-blank",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": " \t ",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-placeholder",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "null",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-phone-prehashed",
+      "platform": "reddit",
+      "kind": "phone",
+      "value": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "expected": null,
+      "expected_hash": null
+    },
+    {
+      "id": "reddit-email-published-vector",
+      "platform": "reddit",
+      "kind": "email",
+      "value": "alice@example.com",
+      "expected": "alice@example.com",
+      "expected_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+    }
+  ],
+  "fbc": [
+    {
+      "id": "capture",
+      "fbclid": " Ab+C ",
+      "observed_at": "2026-01-02T03:04:05.678Z",
+      "expected": "fb.1.1767323045678.Ab+C"
+    },
+    {
+      "id": "leap",
+      "fbclid": " Ab+C ",
+      "observed_at": "2024-02-29T23:59:59Z",
+      "expected": "fb.1.1709251199000.Ab+C"
+    },
+    {
+      "id": "century-leap",
+      "fbclid": " Ab+C ",
+      "observed_at": "2000-02-29T00:00:00Z",
+      "expected": "fb.1.951782400000.Ab+C"
+    },
+    {
+      "id": "offset-plus",
+      "fbclid": " Ab+C ",
+      "observed_at": "2026-01-02T17:04:05+14:00",
+      "expected": "fb.1.1767323045000.Ab+C"
+    },
+    {
+      "id": "offset-minus",
+      "fbclid": " Ab+C ",
+      "observed_at": "2026-01-01T13:04:05-14:00",
+      "expected": "fb.1.1767323045000.Ab+C"
+    },
+    {
+      "id": "fraction",
+      "fbclid": " Ab+C ",
+      "observed_at": "2026-01-02T03:04:05.1Z",
+      "expected": "fb.1.1767323045100.Ab+C"
+    },
+    {
+      "id": "positive-minimum",
+      "fbclid": " Ab+C ",
+      "observed_at": "1970-01-01T00:00:00.001Z",
+      "expected": "fb.1.1.Ab+C"
+    },
+    {
+      "id": "fraction-nanoseconds",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05.678999999Z",
+      "expected": "fb.1.1767323045678.Ab+C"
+    },
+    {
+      "id": "existing-sdk",
+      "existing_fbc": "fb.1.1700000000000.Ab+C.def.3",
+      "fbclid": null,
+      "observed_at": "invalid",
+      "expected": "fb.1.1700000000000.Ab+C.def.3"
+    },
+    {
+      "id": "existing-zero-subdomain",
+      "existing_fbc": "fb.0.1.Ab+C",
+      "fbclid": null,
+      "observed_at": "invalid",
+      "expected": "fb.0.1.Ab+C"
+    },
+    {
+      "id": "existing-leading-zeros",
+      "existing_fbc": "fb.01.0001.Ab+C",
+      "fbclid": null,
+      "observed_at": "invalid",
+      "expected": "fb.01.0001.Ab+C"
+    },
+    {
+      "id": "existing-safe-maximum",
+      "existing_fbc": "fb.9007199254740991.9007199254740991.Ab+C",
+      "fbclid": null,
+      "observed_at": "invalid",
+      "expected": "fb.9007199254740991.9007199254740991.Ab+C"
+    },
+    {
+      "id": "existing-null",
+      "existing_fbc": null,
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected": "fb.1.1767323045000.Ab+C"
+    },
+    {
+      "id": "invalid-existing-empty",
+      "existing_fbc": "",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-blank",
+      "existing_fbc": " ",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-number",
+      "existing_fbc": 123,
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-object",
+      "existing_fbc": {},
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-boolean",
+      "existing_fbc": true,
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-bad-epoch",
+      "existing_fbc": "fb.1.bad.cookie",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-placeholder-click",
+      "existing_fbc": "fb.1.1.null",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-empty-click",
+      "existing_fbc": "fb.1.1...",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-trailing-dot",
+      "existing_fbc": "fb.1.1.abc.",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "existing-opaque-sdk-suffix",
+      "existing_fbc": "fb.1.1.abc.null",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected": "fb.1.1.abc.null"
+    },
+    {
+      "id": "invalid-existing-zero-epoch",
+      "existing_fbc": "fb.1.0.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-negative-epoch",
+      "existing_fbc": "fb.1.-1.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-unsafe-epoch",
+      "existing_fbc": "fb.1.9007199254740992.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-huge-epoch",
+      "existing_fbc": "fb.1.9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-unsafe-subdomain",
+      "existing_fbc": "fb.9007199254740992.1.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-negative-subdomain",
+      "existing_fbc": "fb.-1.1.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-decimal-subdomain",
+      "existing_fbc": "fb.1.5.1.abc def",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-leading-whitespace",
+      "existing_fbc": " fb.1.1.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-internal-whitespace",
+      "existing_fbc": "fb.1.1.a b",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-control",
+      "existing_fbc": "fb.1.1.abc\u0000",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-existing-wrong-prefix",
+      "existing_fbc": "fp.1.1.abc",
+      "fbclid": "real",
+      "observed_at": "2026-01-02T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "absent-click-null",
+      "fbclid": null,
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-number",
+      "fbclid": 123,
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-object",
+      "fbclid": {},
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-boolean",
+      "fbclid": false,
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-blank",
+      "fbclid": " ",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-placeholder",
+      "fbclid": " null ",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-undefined-placeholder",
+      "fbclid": "undefined",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-object-placeholder",
+      "fbclid": "[object Object]",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-na-placeholder",
+      "fbclid": "n/a",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-none-placeholder",
+      "fbclid": "None",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-empty-segments",
+      "fbclid": "...",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-trailing-dot",
+      "fbclid": "abc.",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-internal-space",
+      "fbclid": "a b",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-internal-tab",
+      "fbclid": "a\tb",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-control",
+      "fbclid": "a\u0000b",
+      "observed_at": "invalid",
+      "expected": null
+    },
+    {
+      "id": "absent-click-undefined",
+      "expected": null
+    },
+    {
+      "id": "invalid-capture-invalid-day",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-02-30T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-invalid-leap",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-02-29T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-invalid-century-leap",
+      "fbclid": "Ab+C",
+      "observed_at": "2100-02-29T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-day-zero",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-00T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-april-31",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-04-31T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-month-zero",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-00-01T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-month-13",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-13-01T03:04:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-hour-24",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T24:00:00Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-minute-60",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:60:05Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-second-60",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:60Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-offset-hour",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05+15:00",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-offset-minute",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05+13:60",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-offset-14-minute",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05+14:01",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-offset-negative-14-minute",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05-14:01",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-no-offset",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-zero-epoch",
+      "fbclid": "Ab+C",
+      "observed_at": "1970-01-01T00:00:00Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-negative-epoch",
+      "fbclid": "Ab+C",
+      "observed_at": "1969-12-31T23:59:59Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-wrong-type",
+      "fbclid": "Ab+C",
+      "observed_at": 123,
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-null",
+      "fbclid": "Ab+C",
+      "observed_at": null,
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-bad-fraction",
+      "fbclid": "Ab+C",
+      "observed_at": "2026-01-02T03:04:05.1234567890Z",
+      "expected_error": true
+    },
+    {
+      "id": "invalid-capture-undefined",
+      "fbclid": "Ab+C",
+      "expected_error": true
+    }
+  ]
+}

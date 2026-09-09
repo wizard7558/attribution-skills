@@ -6,15 +6,10 @@
 //
 // Uses `pg` here because it is already a dependency of the node/ and
 // cloudflare/ adapters in this skill and works unmodified on Vercel's Node
-// runtime. On Vercel's Edge runtime (or when the database is Neon), swap it
-// for the serverless-friendly HTTP driver instead:
-//
-//   import { neon } from "@neondatabase/serverless";
-//   const sql = neon(process.env.DATABASE_URL);
-//   const db = { query: (text, params) => sql.query(text, params) };
-//
-// and add `export const config = { runtime: "edge" };` below.
+// runtime. Keep an interactive transaction-capable connection. A stateless
+// HTTP query driver is not a replacement for this pinned-client transaction.
 import pg from "pg";
+import { createPgDatabase } from "../../transaction-db.mjs";
 import { handleCollect } from "../../core.js";
 
 let pool;
@@ -56,7 +51,7 @@ export default async function handler(req, res) {
     }
   }
 
-  const db = { query: (text, params) => getPool().query(text, params) };
+  const db = createPgDatabase(getPool());
   const ctx = {
     ip: clientIp(req),
     userAgent: req.headers["user-agent"] || null,

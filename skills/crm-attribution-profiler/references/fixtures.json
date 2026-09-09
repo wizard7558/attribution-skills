@@ -1,0 +1,6375 @@
+{
+  "version": "0.2.0",
+  "policy": {
+    "populationPctFloor": 1,
+    "populationRowFloor": 20,
+    "proposeWeighted": 0.5,
+    "proposeDistinct": 0.7,
+    "rejectExactFloor": 0.25,
+    "preWindowDistinct": 0.7,
+    "highWeighted": 0.75,
+    "highDistinct": 0.9,
+    "outboundDominanceFloor": 0.6
+  },
+  "cases": [
+    {
+      "id": "authorized-cross-system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.weightedRate": 1
+      }
+    },
+    {
+      "id": "missing-crm-source_system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "source.source_system"
+    },
+    {
+      "id": "missing-crm-source_scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "source.source_scope"
+    },
+    {
+      "id": "missing-crm-timestampField",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "source.timestampField"
+    },
+    {
+      "id": "missing-ad-source_system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "adHistory.source_system"
+    },
+    {
+      "id": "missing-ad-source_scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "adHistory.source_scope"
+    },
+    {
+      "id": "missing-ad-platform",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "adHistory.platform"
+    },
+    {
+      "id": "missing-ad-entity_type",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "adHistory.entity_type"
+    },
+    {
+      "id": "missing-ad-key_kind",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "adHistory.key_kind"
+    },
+    {
+      "id": "missing-binding-crm_source_system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.crm_source_system"
+    },
+    {
+      "id": "missing-binding-crm_source_scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.crm_source_scope"
+    },
+    {
+      "id": "missing-binding-ad_source_system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.ad_source_system"
+    },
+    {
+      "id": "missing-binding-ad_source_scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.ad_source_scope"
+    },
+    {
+      "id": "missing-binding-platform",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.platform"
+    },
+    {
+      "id": "missing-binding-entity_type",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ad_scope_bindings.entity_type"
+    },
+    {
+      "id": "missing-candidate-rawField",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "candidates.rawField"
+    },
+    {
+      "id": "missing-candidate-kind",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "candidates.kind"
+    },
+    {
+      "id": "missing-candidate-platform",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "candidates.platform"
+    },
+    {
+      "id": "missing-candidate-entity_type",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "candidates.entity_type"
+    },
+    {
+      "id": "blank-scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "  ",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "nonempty string"
+    },
+    {
+      "id": "unauthorized-ad-source_system",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "other",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "unauthorized-ad-source_scope",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "other",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "unauthorized-ad-platform",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "other",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "unauthorized-ad-entity_type",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "other",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "unauthorized-ad-key_kind",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "unauthorized-crm-binding",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "other",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.diagnostics.0.code": "source_scope_mismatch"
+      }
+    },
+    {
+      "id": "empty-paid-population",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": []
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.population.populatedPct": 0
+      }
+    },
+    {
+      "id": "empty-zero-floors",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": []
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 0,
+            "populationRowFloor": 0,
+            "proposeWeighted": 0,
+            "proposeDistinct": 0,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "archetype": null
+      }
+    },
+    {
+      "id": "no-evidence-zero-proposal-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0,
+            "proposeDistinct": 0,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject"
+      }
+    },
+    {
+      "id": "malformed-outside-denominator",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            },
+            {
+              "at": "2026-01-15T12:00:00",
+              "property_utm_content": "bad"
+            },
+            {
+              "at": "2026-02-30T00:00:00Z",
+              "property_utm_content": "bad"
+            },
+            {
+              "at": "2026-02-01T00:00:00Z"
+            },
+            {
+              "at": "2025-12-31T23:59:59Z"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "rowCounts.validInWindow": 1,
+        "rowCounts.malformedTimestamp": 2,
+        "rowCounts.outsideWindow": 2,
+        "candidates.0.population.populatedPct": 100,
+        "candidates.0.joinRates.populatedPct": 100,
+        "diagnostics.0.count": 2
+      }
+    },
+    {
+      "id": "invalid-ad-calendar",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-02-30T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "diagnostics.0.code": "malformed_timestamp",
+        "diagnostics.0.source": "ad",
+        "diagnostics.0.count": 1
+      }
+    },
+    {
+      "id": "offset-start-inclusive",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2025-12-31T16:00:00-08:00",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-01T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "rowCounts.validInWindow": 1,
+        "candidates.0.joinRates.weightedRate": 1
+      }
+    },
+    {
+      "id": "ad-end-exclusive",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-02-01T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0,
+        "diagnostics.0.code": "outside_window"
+      }
+    },
+    {
+      "id": "population-percent-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.population.populatedPct": 1
+      }
+    },
+    {
+      "id": "population-both-below",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 2,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing"
+      }
+    },
+    {
+      "id": "population-row-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 90,
+            "populationRowFloor": 2,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose"
+      }
+    },
+    {
+      "id": "weighted-threshold-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "other"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "third"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.confidence": "medium",
+        "candidates.0.joinRates.weightedRate": 0.5,
+        "candidates.0.joinRates.distinctRate": 0.3333333333333333
+      }
+    },
+    {
+      "id": "distinct-threshold-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "other"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "third"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.9,
+            "proposeDistinct": 0.3333333333333333,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.distinctRate": 0.3333333333333333
+      }
+    },
+    {
+      "id": "high-weighted-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "other"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "third"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.5,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.confidence": "high"
+      }
+    },
+    {
+      "id": "high-distinct-boundary",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "other"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "third"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.3333333333333333,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.confidence": "high"
+      }
+    },
+    {
+      "id": "sf-internal-fk",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "701Dn00000ABCDeIAG"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "701Dn00000ABCDeIAG",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.excludedCount": 1,
+        "candidates.0.joinRates.sfInternalFkCount": 1,
+        "candidates.0.joinRates.weightedRate": 0,
+        "candidates.0.diagnostics.0.code": "sf_internal_fk"
+      }
+    },
+    {
+      "id": "outbound-label-excluded",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": " Apollo%252Eio "
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": " Apollo%252Eio ",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.excludedCount": 1,
+        "candidates.0.joinRates.outboundLabelExcludedCount": 1,
+        "candidates.0.diagnostics.0.code": "outbound_label_excluded"
+      }
+    },
+    {
+      "id": "sf-prefix-override",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "XYZDn00000ABCDeIAG"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "XYZDn00000ABCDeIAG",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          },
+          "sfNonAdPrefixes": [
+            "XYZ"
+          ]
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.sfInternalFkCount": 1
+      }
+    },
+    {
+      "id": "sf-prefix-empty-override",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "701Dn00000ABCDeIAG"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "701Dn00000ABCDeIAG",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          },
+          "sfNonAdPrefixes": []
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.excludedCount": 0
+      }
+    },
+    {
+      "id": "label-override",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Custom+Outbound"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "Custom+Outbound",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          },
+          "excludedLabelValues": [
+            "custom outbound"
+          ]
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.outboundLabelExcludedCount": 1
+      }
+    },
+    {
+      "id": "label-empty-override",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Apollo"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "Apollo",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          },
+          "excludedLabelValues": []
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.excludedCount": 0
+      }
+    },
+    {
+      "id": "conservative-exclusion-denominator",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Apollo"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "valid"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "Apollo",
+            "observed_at": "2026-01-15T00:00:00Z"
+          },
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "valid",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.joinRates.weightedRate": 0.5,
+        "candidates.0.joinRates.distinctRate": 0.5,
+        "candidates.0.joinRates.excludedCount": 1,
+        "candidates.0.joinRates.populatedCount": 2
+      }
+    },
+    {
+      "id": "opaque-plus-distinct-from-space",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "AbC+123"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "AbC 123",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0
+      }
+    },
+    {
+      "id": "opaque-plus-match",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "AbC%252B123"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "AbC+123",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.weightedRate": 1
+      }
+    },
+    {
+      "id": "opaque-case-difference",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "AbC+123"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "abc+123",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject"
+      }
+    },
+    {
+      "id": "safe-numeric-id",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": 12345
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": "12345",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose",
+        "candidates.0.joinRates.weightedRate": 1
+      }
+    },
+    {
+      "id": "invalid-object-both-sides",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": {
+                "private": "hidden"
+              }
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": {
+              "private": "hidden"
+            },
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.joinRates.invalidValueCount": 1,
+        "candidates.0.diagnostics.0.code": "invalid_join_value",
+        "diagnostics.0.code": "invalid_join_value"
+      }
+    },
+    {
+      "id": "invalid-array-both-sides",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": [
+                "hidden"
+              ]
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": [
+              "hidden"
+            ],
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.joinRates.invalidValueCount": 1,
+        "candidates.0.diagnostics.0.code": "invalid_join_value",
+        "diagnostics.0.code": "invalid_join_value"
+      }
+    },
+    {
+      "id": "invalid-boolean-both-sides",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": true
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": true,
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.joinRates.invalidValueCount": 1,
+        "candidates.0.diagnostics.0.code": "invalid_join_value",
+        "diagnostics.0.code": "invalid_join_value"
+      }
+    },
+    {
+      "id": "invalid-unsafe-integer-both-sides",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": 9007199254740992
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "id",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "id",
+            "value": 9007199254740992,
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.joinRates.invalidValueCount": 1,
+        "candidates.0.diagnostics.0.code": "invalid_join_value",
+        "diagnostics.0.code": "invalid_join_value"
+      }
+    },
+    {
+      "id": "property-wrapper",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.crmField": "property_utm_content",
+        "candidates.0.logicalField": "utm_content"
+      }
+    },
+    {
+      "id": "outbound-archetype-ip-irrelevant",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "lead_source": "Apollo",
+              "ip_address": "192.0.2.1"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "lead_source",
+            "kind": "enum",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "archetype": "outbound_bd",
+        "archetypeEvidence.outboundObservationCount": 1,
+        "candidates.0.verdict": "corroborate"
+      }
+    },
+    {
+      "id": "archetype-omitted-paid-field",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "lead_source": "Apollo",
+              "ip_address": "192.0.2.1",
+              "property_gclid": "OpaquePaidSignal"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "lead_source",
+            "kind": "enum",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "archetype": null,
+        "archetypeEvidence.anyPaidCapturePopulated": true
+      }
+    },
+    {
+      "id": "archetype-no-label-zero-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "lead_source": "",
+              "ip_address": "192.0.2.1"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "lead_source",
+            "kind": "enum",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0
+          }
+        }
+      },
+      "expected": {
+        "archetype": null,
+        "archetypeEvidence.outboundObservationCount": 0
+      }
+    },
+    {
+      "id": "archetype-nonoutbound-zero-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "lead_source": "organic",
+              "ip_address": "192.0.2.1"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "lead_source",
+            "kind": "enum",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0
+          }
+        }
+      },
+      "expected": {
+        "archetype": null
+      }
+    },
+    {
+      "id": "pre-window-real-recent-cohort",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "0"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "1"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "2"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "3"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        },
+        "recentWindow": {
+          "startInclusive": "2026-01-15T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "pre_window",
+        "candidates.0.joinRates.distinctRate": 0.2,
+        "candidates.0.joinRates.recentDistinctRate": 1,
+        "candidates.0.joinRates.recentPopulatedPct": 100,
+        "candidates.0.joinRates.recentPopulatedCount": 1
+      }
+    },
+    {
+      "id": "empty-recent-zero-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "0"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "1"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "2"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "3"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        },
+        "recentWindow": {
+          "startInclusive": "2026-01-20T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.recentPopulatedCount": 0,
+        "candidates.0.joinRates.recentDistinctRate": 0
+      }
+    },
+    {
+      "id": "recent-catalog-window-enforced",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "0"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "1"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "2"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "3"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-02T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        },
+        "recentWindow": {
+          "startInclusive": "2026-01-15T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.recentDistinctRate": 0,
+        "candidates.0.joinRates.distinctRate": 0.2
+      }
+    },
+    {
+      "id": "recent-not-contained",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "0"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "1"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "2"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "3"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        },
+        "recentWindow": {
+          "startInclusive": "2026-01-15T00:00:00Z",
+          "endExclusive": "2026-02-02T00:00:00Z",
+          "timezone": "UTC"
+        }
+      },
+      "expectedError": "contained"
+    },
+    {
+      "id": "recent-timezone-mismatch",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "0"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "1"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "2"
+            },
+            {
+              "at": "2026-01-02T00:00:00Z",
+              "property_utm_content": "3"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "summer sale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        },
+        "recentWindow": {
+          "startInclusive": "2026-01-15T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "America/Los_Angeles"
+        }
+      },
+      "expectedError": "same timezone"
+    },
+    {
+      "id": "false-fuzzy",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer Sales"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "Summer Sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "reject",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.diagnostics.0.code": "fuzzy_match_not_used"
+      }
+    },
+    {
+      "id": "missing-timezone",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "IANA"
+    },
+    {
+      "id": "invalid-timezone",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "Mars/Olympus"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "IANA"
+    },
+    {
+      "id": "naive-window",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "ISO"
+    },
+    {
+      "id": "invalid-calendar-window",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-02-30T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "calendar"
+    },
+    {
+      "id": "invalid-hour-window",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T24:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "calendar"
+    },
+    {
+      "id": "missing-policy",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {}
+      },
+      "expectedError": "thresholds"
+    },
+    {
+      "id": "missing-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "proposeWeighted"
+    },
+    {
+      "id": "invalid-threshold",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 2,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expectedError": "rate"
+    },
+    {
+      "id": "no-pii-output",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "fixture-sensitive-person@example.test",
+              "email": "fixture-private@example.test"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "fixture-sensitive-person@example.test",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "propose"
+      }
+    },
+    {
+      "id": "inference-order-and-wrapper",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "Summer%252BSale"
+            },
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "gclid": "click-key"
+            }
+          ]
+        },
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "summer sale",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.crmField": "gclid",
+        "candidates.1.logicalField": "utm_content",
+        "candidates.0.verdict": "reject",
+        "candidates.1.verdict": "reject"
+      }
+    },
+    {
+      "id": "decode-five",
+      "operation": "normalizeJoinValue",
+      "args": [
+        "%2525252543ampaign"
+      ],
+      "expected": {
+        "$": "campaign"
+      }
+    },
+    {
+      "id": "malformed-percent",
+      "operation": "normalizeJoinValue",
+      "args": [
+        "bad%2"
+      ],
+      "expected": {
+        "$": "bad%2"
+      }
+    },
+    {
+      "id": "plus-name",
+      "operation": "normalizeJoinValue",
+      "args": [
+        "Summer%252BSale"
+      ],
+      "expected": {
+        "$": "summer sale"
+      }
+    },
+    {
+      "id": "id-case-plus",
+      "operation": "normalizeJoinValue",
+      "args": [
+        "AbC+123",
+        "id"
+      ],
+      "expected": {
+        "$": "AbC+123"
+      }
+    },
+    {
+      "id": "one-wrapper",
+      "operation": "logicalFieldName",
+      "args": [
+        "property_property_x"
+      ],
+      "expected": {
+        "$": "property_x"
+      }
+    },
+    {
+      "id": "candidate",
+      "operation": "isCandidateField",
+      "args": [
+        "property_utm_content"
+      ],
+      "expected": {
+        "$": true
+      }
+    },
+    {
+      "id": "noncandidate",
+      "operation": "isCandidateField",
+      "args": [
+        "email"
+      ],
+      "expected": {
+        "$": false
+      }
+    },
+    {
+      "id": "excluded-label",
+      "operation": "isExcludedLabelValue",
+      "args": [
+        " Apollo "
+      ],
+      "expected": {
+        "$": true
+      }
+    },
+    {
+      "id": "meta-shape",
+      "operation": "classifyShape",
+      "args": [
+        "23851234567890123"
+      ],
+      "expected": {
+        "$": {
+          "bucket": "meta_id"
+        }
+      }
+    },
+    {
+      "id": "sf-shape",
+      "operation": "classifyShape",
+      "args": [
+        "701Dn00000ABCDeIAG"
+      ],
+      "expected": {
+        "$": {
+          "bucket": "sf_record_id",
+          "sfPrefix": "701"
+        }
+      }
+    },
+    {
+      "id": "fbclid-shape",
+      "operation": "classifyShape",
+      "args": [
+        "IwAR1a2b3c4d5e6f7g8h9i"
+      ],
+      "expected": {
+        "$": {
+          "bucket": "fbclid"
+        }
+      }
+    },
+    {
+      "id": "short-gclid",
+      "operation": "classifyShape",
+      "args": [
+        "Cj0short"
+      ],
+      "expected": {
+        "$": {
+          "bucket": "short_label"
+        }
+      }
+    },
+    {
+      "id": "free-text-shape",
+      "operation": "classifyShape",
+      "args": [
+        "Summer Sale - US"
+      ],
+      "expected": {
+        "$": {
+          "bucket": "free_text"
+        }
+      }
+    },
+    {
+      "id": "encoded-blank-does-not-match",
+      "operation": "profileCrmAttribution",
+      "input": {
+        "source": {
+          "source_system": "crm-system",
+          "source_scope": "crm-scope",
+          "timestampField": "at",
+          "rows": [
+            {
+              "at": "2026-01-15T12:00:00Z",
+              "property_utm_content": "%2520"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "rawField": "property_utm_content",
+            "kind": "name",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "adHistory": [
+          {
+            "source_system": "ad-system",
+            "source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign",
+            "key_kind": "name",
+            "value": "%2520",
+            "observed_at": "2026-01-15T00:00:00Z"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "crm-system",
+            "crm_source_scope": "crm-scope",
+            "ad_source_system": "ad-system",
+            "ad_source_scope": "ad-scope",
+            "platform": "meta",
+            "entity_type": "campaign"
+          }
+        ],
+        "window": {
+          "startInclusive": "2026-01-01T00:00:00Z",
+          "endExclusive": "2026-02-01T00:00:00Z",
+          "timezone": "UTC"
+        },
+        "config": {
+          "thresholds": {
+            "populationPctFloor": 1,
+            "populationRowFloor": 20,
+            "proposeWeighted": 0.5,
+            "proposeDistinct": 0.7,
+            "rejectExactFloor": 0.25,
+            "preWindowDistinct": 0.7,
+            "highWeighted": 0.75,
+            "highDistinct": 0.9,
+            "outboundDominanceFloor": 0.6
+          }
+        }
+      },
+      "expected": {
+        "candidates.0.verdict": "capture_missing",
+        "candidates.0.joinRates.matchedCount": 0,
+        "candidates.0.joinRates.invalidValueCount": 1
+      }
+    }
+  ]
+}

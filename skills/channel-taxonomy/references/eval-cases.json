@@ -1,54 +1,1571 @@
 {
-  "schema_version": 1,
-  "taxonomy_version": "0.1.0",
+  "context_files": [
+    "SKILL.md",
+    "references/channel-contract.md",
+    "references/source-mappings.md"
+  ],
   "groups": [
     {
       "id": "conflicting-acquisition-evidence",
-      "title": "Conflicting acquisition evidence",
-      "output_shape": "JSON object with channels (case id and canonical label), paid_evidence_proven (boolean), and preserve_raw (boolean)",
-      "cases": [
-        {"id":"click-medium-conflict","input":{"utm_source":"google","utm_medium":"email","click_ids":{"fbclid":"fb-123"},"native_channel":"Direct"},"expected":{"channel":"Paid Social"}},
-        {"id":"bogus-gclid","input":{"utm_source":"google","utm_medium":"organic","click_ids":{"gclid":null},"landing_url":"https://shop.example/search?q=shoes","referrer":"https://www.google.com/search?q=shoes"},"expected":{"channel":"Organic Search"}},
-        {"id":"paid-before-organic","input":{"utm_source":"newsletter","utm_medium":"organic","network_id":"google_ads","referrer":"https://www.google.com/search?q=coat"},"expected":{"channel":"Paid Search"}},
-        {"id":"dclid-display","input":{"utm_source":"display-partner","utm_medium":"referral","click_ids":{"dclid":"D-987"},"landing_url":"https://shop.example/"},"expected":{"channel":"Paid Other"}},
-        {"id":"srsltid-search","input":{"utm_source":"google","utm_medium":"organic","click_ids":{"srsltid":"SR-abc"},"referrer":"https://www.google.com/search?q=hat"},"expected":{"channel":"Organic Search"}},
-        {"id":"direct-vs-missing","input":{"landing_url":"https://shop.example/landing","native_channel":null,"utm_source":null,"utm_medium":null,"referrer":null},"expected":{"channel":"Direct"}},
-        {"id":"paid-click-preserves-native","input":{"utm_source":"facebook","utm_medium":"organic","click_ids":{"fbclid":"fb-456"},"native_channel":"Organic Social","raw_source":"facebook"},"expected":{"channel":"Paid Social"}},
-        {"id":"external-referral","input":{"landing_url":"https://shop.example/a","referrer":"https://partner.example/article","utm_source":"","utm_medium":""},"expected":{"channel":"Referral"}}
-      ],
-      "expected_contract":{"paid_evidence_proven":false,"preserve_raw":true}
+      "prompt": "Apply the supplied evidence and return the declared projection.\n\n# Evaluation output interface\n\nThis interface specifies projected answers, not a runtime API. Both conditions receive this\ninterface; only the with-skill condition receives the declared skill context files. Return\nexactly `{\"cases\":[{\"case\":\"…\",\"result\":…}]}` in input case order. Copy neutral case labels\nexactly. Object property order does not matter. Array order is defined below.\n\n## Classification\n\nFor each evidence object return `channel` (the chosen canonical label), `taxonomy_version`,\n`paid_evidence_proven` (does classification alone prove paid spend?), and `preserve_raw`\n(should native labels and all supplied evidence remain available beside the projection?).\nReturn these four fields; omit internal rule IDs and the evidence object itself.\n\n",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "input": {
+              "utm_source": "google",
+              "utm_medium": "email",
+              "click_ids": {
+                "fbclid": "fb-123"
+              },
+              "native_channel": "Direct"
+            }
+          },
+          {
+            "case": "B",
+            "input": {
+              "utm_source": "google",
+              "utm_medium": "organic",
+              "click_ids": {
+                "gclid": null
+              },
+              "landing_url": "https://shop.example/search?q=shoes",
+              "referrer": "https://www.google.com/search?q=shoes"
+            }
+          },
+          {
+            "case": "C",
+            "input": {
+              "utm_source": "newsletter",
+              "utm_medium": "organic",
+              "network_id": "google_ads",
+              "referrer": "https://www.google.com/search?q=coat"
+            }
+          },
+          {
+            "case": "D",
+            "input": {
+              "utm_source": "display-partner",
+              "utm_medium": "referral",
+              "click_ids": {
+                "dclid": "D-987"
+              },
+              "landing_url": "https://shop.example/"
+            }
+          },
+          {
+            "case": "E",
+            "input": {
+              "utm_source": "google",
+              "utm_medium": "organic",
+              "click_ids": {
+                "srsltid": "SR-abc"
+              },
+              "referrer": "https://www.google.com/search?q=hat"
+            }
+          },
+          {
+            "case": "F",
+            "input": {
+              "landing_url": "https://shop.example/landing",
+              "native_channel": null,
+              "utm_source": null,
+              "utm_medium": null,
+              "referrer": null
+            }
+          },
+          {
+            "case": "G",
+            "input": {
+              "utm_source": "facebook",
+              "utm_medium": "organic",
+              "click_ids": {
+                "fbclid": "fb-456"
+              },
+              "native_channel": "Organic Social",
+              "raw_source": "facebook"
+            }
+          },
+          {
+            "case": "H",
+            "input": {
+              "landing_url": "https://shop.example/a",
+              "referrer": "https://partner.example/article",
+              "utm_source": "",
+              "utm_medium": ""
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "channel": {
+                      "type": "string"
+                    },
+                    "taxonomy_version": {
+                      "type": "string"
+                    },
+                    "paid_evidence_proven": {
+                      "type": "boolean"
+                    },
+                    "preserve_raw": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "channel",
+                    "taxonomy_version",
+                    "paid_evidence_proven",
+                    "preserve_raw"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/0/case",
+          "op": "equals",
+          "expected": "A"
+        },
+        {
+          "path": "/cases/0/result/channel",
+          "op": "equals",
+          "expected": "Paid Social"
+        },
+        {
+          "path": "/cases/0/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/0/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/0/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/1/case",
+          "op": "equals",
+          "expected": "B"
+        },
+        {
+          "path": "/cases/1/result/channel",
+          "op": "equals",
+          "expected": "Organic Search"
+        },
+        {
+          "path": "/cases/1/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/1/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/1/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/2/case",
+          "op": "equals",
+          "expected": "C"
+        },
+        {
+          "path": "/cases/2/result/channel",
+          "op": "equals",
+          "expected": "Paid Search"
+        },
+        {
+          "path": "/cases/2/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/2/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/2/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/case",
+          "op": "equals",
+          "expected": "D"
+        },
+        {
+          "path": "/cases/3/result/channel",
+          "op": "equals",
+          "expected": "Paid Other"
+        },
+        {
+          "path": "/cases/3/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/3/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/3/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/4/case",
+          "op": "equals",
+          "expected": "E"
+        },
+        {
+          "path": "/cases/4/result/channel",
+          "op": "equals",
+          "expected": "Organic Search"
+        },
+        {
+          "path": "/cases/4/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/4/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/4/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/5/case",
+          "op": "equals",
+          "expected": "F"
+        },
+        {
+          "path": "/cases/5/result/channel",
+          "op": "equals",
+          "expected": "Direct"
+        },
+        {
+          "path": "/cases/5/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/5/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/5/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/6/case",
+          "op": "equals",
+          "expected": "G"
+        },
+        {
+          "path": "/cases/6/result/channel",
+          "op": "equals",
+          "expected": "Paid Social"
+        },
+        {
+          "path": "/cases/6/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/6/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/6/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/7/case",
+          "op": "equals",
+          "expected": "H"
+        },
+        {
+          "path": "/cases/7/result/channel",
+          "op": "equals",
+          "expected": "Referral"
+        },
+        {
+          "path": "/cases/7/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/7/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/7/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        }
+      ]
     },
     {
       "id": "native-shopify-network-normalization",
-      "title": "Native, Shopify, and network normalization",
-      "output_shape": "JSON object with channels (case id and canonical label), paid_evidence_proven (boolean), and preserve_raw (boolean)",
-      "cases": [
-        {"id":"cross-network-native","input":{"native_channel":"Cross-network","campaign_id":"pmax-1"},"expected":{"channel":"Paid Other"}},
-        {"id":"pmax-network","input":{"network_id":"google_ads_pmax","utm_medium":"paid_search","campaign":"Performance Max"},"expected":{"channel":"Paid Search"}},
-        {"id":"shopify-sms","input":{"shopify_source_type":"sms","shopify_source":"klaviyo","utm_medium":"sms"},"expected":{"channel":"SMS"}},
-        {"id":"shopify-affiliates","input":{"shopify_source_type":"affiliate","shopify_source":"partner-network"},"expected":{"channel":"Affiliate"}},
-        {"id":"shopify-search","input":{"shopify_source_type":"search","shopify_source":"google"},"expected":{"channel":"Organic Search"}},
-        {"id":"shopify-social","input":{"shopify_source_type":"social","shopify_source":"instagram"},"expected":{"channel":"Organic Social"}},
-        {"id":"unknown-data","input":{"native_channel":"unknown","shopify_source_type":"mystery","utm_source":"unmapped","utm_medium":"weird"},"expected":{"channel":"Other"}},
-        {"id":"ai-referral","input":{"native_channel":"AI Assistant","utm_source":"chatgpt","utm_medium":"referral"},"expected":{"channel":"Referral"}}
-      ],
-      "expected_contract":{"paid_evidence_proven":false,"preserve_raw":true}
+      "prompt": "Apply the supplied evidence and return the declared projection.\n\n# Evaluation output interface\n\nThis interface specifies projected answers, not a runtime API. Both conditions receive this\ninterface; only the with-skill condition receives the declared skill context files. Return\nexactly `{\"cases\":[{\"case\":\"…\",\"result\":…}]}` in input case order. Copy neutral case labels\nexactly. Object property order does not matter. Array order is defined below.\n\n## Classification\n\nFor each evidence object return `channel` (the chosen canonical label), `taxonomy_version`,\n`paid_evidence_proven` (does classification alone prove paid spend?), and `preserve_raw`\n(should native labels and all supplied evidence remain available beside the projection?).\nReturn these four fields; omit internal rule IDs and the evidence object itself.\n\n",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "input": {
+              "native_channel": "Cross-network",
+              "campaign_id": "pmax-1"
+            }
+          },
+          {
+            "case": "B",
+            "input": {
+              "network_id": "google_ads_pmax",
+              "utm_medium": "paid_search",
+              "campaign": "Performance Max"
+            }
+          },
+          {
+            "case": "C",
+            "input": {
+              "shopify_source_type": "sms",
+              "shopify_source": "klaviyo",
+              "utm_medium": "sms"
+            }
+          },
+          {
+            "case": "D",
+            "input": {
+              "shopify_source_type": "affiliate",
+              "shopify_source": "partner-network"
+            }
+          },
+          {
+            "case": "E",
+            "input": {
+              "shopify_source_type": "search",
+              "shopify_source": "google"
+            }
+          },
+          {
+            "case": "F",
+            "input": {
+              "shopify_source_type": "social",
+              "shopify_source": "instagram"
+            }
+          },
+          {
+            "case": "G",
+            "input": {
+              "native_channel": "unknown",
+              "shopify_source_type": "mystery",
+              "utm_source": "unmapped",
+              "utm_medium": "weird"
+            }
+          },
+          {
+            "case": "H",
+            "input": {
+              "native_channel": "AI Assistant",
+              "utm_source": "chatgpt",
+              "utm_medium": "referral"
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "channel": {
+                      "type": "string"
+                    },
+                    "taxonomy_version": {
+                      "type": "string"
+                    },
+                    "paid_evidence_proven": {
+                      "type": "boolean"
+                    },
+                    "preserve_raw": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "channel",
+                    "taxonomy_version",
+                    "paid_evidence_proven",
+                    "preserve_raw"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/0/case",
+          "op": "equals",
+          "expected": "A"
+        },
+        {
+          "path": "/cases/0/result/channel",
+          "op": "equals",
+          "expected": "Paid Other"
+        },
+        {
+          "path": "/cases/0/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/0/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/0/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/1/case",
+          "op": "equals",
+          "expected": "B"
+        },
+        {
+          "path": "/cases/1/result/channel",
+          "op": "equals",
+          "expected": "Paid Search"
+        },
+        {
+          "path": "/cases/1/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/1/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/1/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/2/case",
+          "op": "equals",
+          "expected": "C"
+        },
+        {
+          "path": "/cases/2/result/channel",
+          "op": "equals",
+          "expected": "SMS"
+        },
+        {
+          "path": "/cases/2/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/2/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/2/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/case",
+          "op": "equals",
+          "expected": "D"
+        },
+        {
+          "path": "/cases/3/result/channel",
+          "op": "equals",
+          "expected": "Affiliate"
+        },
+        {
+          "path": "/cases/3/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/3/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/3/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/4/case",
+          "op": "equals",
+          "expected": "E"
+        },
+        {
+          "path": "/cases/4/result/channel",
+          "op": "equals",
+          "expected": "Organic Search"
+        },
+        {
+          "path": "/cases/4/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/4/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/4/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/5/case",
+          "op": "equals",
+          "expected": "F"
+        },
+        {
+          "path": "/cases/5/result/channel",
+          "op": "equals",
+          "expected": "Organic Social"
+        },
+        {
+          "path": "/cases/5/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/5/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/5/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/6/case",
+          "op": "equals",
+          "expected": "G"
+        },
+        {
+          "path": "/cases/6/result/channel",
+          "op": "equals",
+          "expected": "Other"
+        },
+        {
+          "path": "/cases/6/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/6/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/6/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/7/case",
+          "op": "equals",
+          "expected": "H"
+        },
+        {
+          "path": "/cases/7/result/channel",
+          "op": "equals",
+          "expected": "Referral"
+        },
+        {
+          "path": "/cases/7/result/taxonomy_version",
+          "op": "equals",
+          "expected": "0.1.0"
+        },
+        {
+          "path": "/cases/7/result/paid_evidence_proven",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/7/result/preserve_raw",
+          "op": "equals",
+          "expected": true
+        }
+      ]
     },
     {
       "id": "cross-source-interoperability",
-      "title": "Cross-source interoperability contract",
-      "output_shape": "JSON object with source_identity_keys (array<string>), can_sum_overlapping_sessions (boolean), attribution_bases (object with ga4:string and first_party_pixel:string), daily_grain (array<string>), common_metrics (array<string>), unknown_revenue (object with value:number|null and status:string), and mixed_currency_total (number|null)",
-      "cases": [
-        {"id":"same-session-ids","input":{"ga4":{"source_scope":"web","session_key":"42","visitor_key":"g1"},"pixel":{"source_scope":"web","session_key":"42","visitor_key":"p1"},"currencies":["USD"]},"expected":{"variant":"base"}},
-        {"id":"different-scopes","input":{"ga4":{"source_scope":"web","session_key":"7"},"pixel":{"source_scope":"app","session_key":"7"},"currencies":["USD"]},"expected":{"variant":"base"}},
-        {"id":"overlap-ga4-pixel","input":{"ga4_population":"sessions A,B","pixel_population":"touchpoints A,B","overlap":true,"currencies":["USD"]},"expected":{"variant":"base"}},
-        {"id":"mixed-usd-eur","input":{"ga4_revenue":{"value":100,"currency":"USD"},"pixel_value":{"value":90,"currency":"EUR"},"currencies":["USD","EUR"]},"expected":{"variant":"base"}},
-        {"id":"unknown-currency","input":{"ga4_revenue":{"value":100,"currency":null},"pixel_value":{"value":null,"currency":null},"currencies":[]},"expected":{"variant":"base"}},
-        {"id":"attribution-parity","input":{"ga4":{"attribution":"session last-click"},"pixel":{"attribution":"first collected touch"},"same_session_id":true,"currencies":["USD"]},"expected":{"variant":"base"}},
-        {"id":"daily-channel-grain","input":{"event_dates":["2026-01-01","2026-01-02"],"channels":["Paid Search","Direct"],"sources":["ga4","first-party-pixel"]},"expected":{"variant":"base"}},
-        {"id":"required-metrics","input":{"available_metrics":["sessions","engaged_sessions","new_users","key_events","purchase_revenue_usd"],"source_scopes":["web","app"],"currencies":["USD","CAD"]},"expected":{"variant":"base"}}
-      ],
-      "expected_contract":{"source_identity_keys":["source_system","source_scope","session_key","visitor_key"],"can_sum_overlapping_sessions":false,"attribution_bases":{"ga4":"session_last_click","first_party_pixel":"first_touch"},"daily_grain":["source_system","source_scope","event_date","channel"],"common_metrics":["sessions","engaged_sessions","new_users","key_events"],"unknown_revenue":{"value":null,"status":"unknown_or_mixed_currency"},"mixed_currency_total":null}
+      "prompt": "Apply the supplied evidence and return the declared projection.\n\n# Evaluation output interface\n\nThis interface specifies projected answers, not a runtime API. Both conditions receive this\ninterface; only the with-skill condition receives the declared skill context files. Return\nexactly `{\"cases\":[{\"case\":\"…\",\"result\":…}]}` in input case order. Copy neutral case labels\nexactly. Object property order does not matter. Array order is defined below.\n\n## Contract review\n\nEach case's `review` selects a decision shape below. Every result has `decision` and `money`.\nDetermine each decision from the available evidence and any supplied source contract. The\ninput shorthand `pixel` names the `first_party_pixel` source.\n\n- `identity`: `identity_fields` lists the fields required to identify a session record;\n  `same_session_token` and `same_scope_token` compare the corresponding supplied strings\n  exactly; `identity_bridge_established` answers whether this evidence establishes a\n  cross-source identity bridge.\n- `population`: `source_measures` has `ga4` and `first_party_pixel` keys naming the units\n  in the supplied population descriptions. `can_sum_populations` asks whether those\n  populations can be added; `purchase_equivalence_established` asks whether the evidence\n  establishes equivalent purchase measurement.\n- `money`: `declared_currencies` copies input currencies in input order;\n  `fx_conversion_supplied` asks whether an actual FX conversion is supplied.\n- `attribution`: `attribution_bases` has `ga4` and `first_party_pixel` keys, naming each\n  source's basis. `parity_established` asks whether the two attribution measurements are\n  equivalent; `identity_bridge_established` asks whether an identity bridge is established.\n  Neutral basis tokens are `session_last_click`, `first_touch`, `last_touch`,\n  `multi_touch`, and `unknown`.\n- `daily_grain`: `daily_grain` lists required grouping fields; `can_sum_populations` asks\n  whether the given source populations can be added.\n- `metrics`: `common_metrics` lists the common required metrics; `new_users_basis` names\n  the meaning of new users; `cross_source_people_count` asks whether new users is a\n  cross-source people count. `declared_currencies` copies input currencies in input order.\n  `unconverted_currency_pool_status` classifies the declared currencies as a pool, rather\n  than reporting a measured amount. Neutral new-user tokens are\n  `source_native_first_observed_sessions`, `cross_source_deduplicated_people`,\n  `all_source_visitors`, and `unknown`.\n\nField-list serialization uses this candidate ordering: `source_system`, `source_scope`,\n`event_date`, `channel`, `session_key`, `visitor_key`, `campaign_key`, `network_id`.\nSelect the fields your decision requires, then order only those fields by this list.\nMetric-list serialization similarly uses `sessions`, `engaged_sessions`, `new_users`,\n`key_events`, `purchase_revenue_usd`, `conversion_value`. These candidate lists specify order,\nnot which members to select.\n\n`money` has `observations` and `total`. The observations project only supplied monetary\nrecords named `ga4_revenue` and `pixel_value`, ordered by their input field names in ascending\nUnicode order. Each projected record has `source_field`, `value`, `currency`, and `status`.\nDetermine its monetary representation and status. `available_metrics` and `currencies` are\ninput declarations, not additional observation records for this output interface.\n\nWith no records to project, serialize `observations: []` and `total: null` as the structural\nabsence convention. Otherwise total has `value`, `currency`, and `status`, expressing your\nassessment of a combined monetary result. Determine whether a total is available and which\nrepresentation the evidence supports. Status vocabulary for both money and currency-pool\nanswers is `known`, `unknown`, `mixed_currency`. Amounts are JSON numbers or null; currencies\nare strings or null. Do not return formatted numeric strings or additional explanations.\n\nSource policy references for the skill are [channel-contract.md](channel-contract.md),\n[source-mappings.md](source-mappings.md), and [the classifier](../scripts/channel-taxonomy.mjs).\nThis interface defines answer shapes and vocabulary; it does not prescribe the selected\ncases' classification, identity, attribution, aggregation, or monetary decisions.\n",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "review": "identity",
+            "input": {
+              "ga4": {
+                "source_scope": "web",
+                "session_key": "42",
+                "visitor_key": "g1"
+              },
+              "pixel": {
+                "source_scope": "web",
+                "session_key": "42",
+                "visitor_key": "p1"
+              },
+              "currencies": [
+                "USD"
+              ]
+            }
+          },
+          {
+            "case": "B",
+            "review": "identity",
+            "input": {
+              "ga4": {
+                "source_scope": "web",
+                "session_key": "7"
+              },
+              "pixel": {
+                "source_scope": "app",
+                "session_key": "7"
+              },
+              "currencies": [
+                "USD"
+              ]
+            }
+          },
+          {
+            "case": "C",
+            "review": "population",
+            "input": {
+              "ga4_population": "sessions A,B",
+              "pixel_population": "touchpoints A,B",
+              "overlap": true,
+              "currencies": [
+                "USD"
+              ]
+            }
+          },
+          {
+            "case": "D",
+            "review": "money",
+            "input": {
+              "ga4_revenue": {
+                "value": 100,
+                "currency": "USD"
+              },
+              "pixel_value": {
+                "value": 90,
+                "currency": "EUR"
+              },
+              "currencies": [
+                "USD",
+                "EUR"
+              ]
+            }
+          },
+          {
+            "case": "E",
+            "review": "money",
+            "input": {
+              "ga4_revenue": {
+                "value": 100,
+                "currency": null
+              },
+              "pixel_value": {
+                "value": null,
+                "currency": null
+              },
+              "currencies": []
+            }
+          },
+          {
+            "case": "F",
+            "review": "attribution",
+            "input": {
+              "ga4": {
+                "attribution": "session last-click"
+              },
+              "pixel": {
+                "attribution": "first collected touch"
+              },
+              "same_session_id": true,
+              "currencies": [
+                "USD"
+              ]
+            }
+          },
+          {
+            "case": "G",
+            "review": "daily_grain",
+            "input": {
+              "event_dates": [
+                "2026-01-01",
+                "2026-01-02"
+              ],
+              "channels": [
+                "Paid Search",
+                "Direct"
+              ],
+              "sources": [
+                "ga4",
+                "first-party-pixel"
+              ]
+            }
+          },
+          {
+            "case": "H",
+            "review": "metrics",
+            "input": {
+              "available_metrics": [
+                "sessions",
+                "engaged_sessions",
+                "new_users",
+                "key_events",
+                "purchase_revenue_usd"
+              ],
+              "source_scopes": [
+                "web",
+                "app"
+              ],
+              "currencies": [
+                "USD",
+                "CAD"
+              ]
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "decision": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "identity_fields": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "same_session_token": {
+                              "type": "boolean"
+                            },
+                            "same_scope_token": {
+                              "type": "boolean"
+                            },
+                            "identity_bridge_established": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "identity_fields",
+                            "same_session_token",
+                            "same_scope_token",
+                            "identity_bridge_established"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "source_measures": {
+                              "type": "object",
+                              "properties": {
+                                "ga4": {
+                                  "type": "string"
+                                },
+                                "first_party_pixel": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "ga4",
+                                "first_party_pixel"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "can_sum_populations": {
+                              "type": "boolean"
+                            },
+                            "purchase_equivalence_established": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "source_measures",
+                            "can_sum_populations",
+                            "purchase_equivalence_established"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "declared_currencies": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "fx_conversion_supplied": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "declared_currencies",
+                            "fx_conversion_supplied"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "attribution_bases": {
+                              "type": "object",
+                              "properties": {
+                                "ga4": {
+                                  "type": "string"
+                                },
+                                "first_party_pixel": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "ga4",
+                                "first_party_pixel"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "parity_established": {
+                              "type": "boolean"
+                            },
+                            "identity_bridge_established": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "attribution_bases",
+                            "parity_established",
+                            "identity_bridge_established"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "daily_grain": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "can_sum_populations": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "daily_grain",
+                            "can_sum_populations"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "common_metrics": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "new_users_basis": {
+                              "type": "string"
+                            },
+                            "cross_source_people_count": {
+                              "type": "boolean"
+                            },
+                            "declared_currencies": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "unconverted_currency_pool_status": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "common_metrics",
+                            "new_users_basis",
+                            "cross_source_people_count",
+                            "declared_currencies",
+                            "unconverted_currency_pool_status"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ]
+                    },
+                    "money": {
+                      "type": "object",
+                      "properties": {
+                        "observations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "source_field": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "currency": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "source_field",
+                              "value",
+                              "currency",
+                              "status"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "total": {
+                          "anyOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": [
+                                    "number",
+                                    "null"
+                                  ]
+                                },
+                                "currency": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                },
+                                "status": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "value",
+                                "currency",
+                                "status"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "observations",
+                        "total"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "decision",
+                    "money"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/0/case",
+          "op": "equals",
+          "expected": "A"
+        },
+        {
+          "path": "/cases/0/result/decision/identity_fields",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/0/result/decision/identity_fields/0",
+          "op": "equals",
+          "expected": "source_system"
+        },
+        {
+          "path": "/cases/0/result/decision/identity_fields/1",
+          "op": "equals",
+          "expected": "source_scope"
+        },
+        {
+          "path": "/cases/0/result/decision/identity_fields/2",
+          "op": "equals",
+          "expected": "session_key"
+        },
+        {
+          "path": "/cases/0/result/decision/identity_fields/3",
+          "op": "equals",
+          "expected": "visitor_key"
+        },
+        {
+          "path": "/cases/0/result/decision/same_session_token",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/0/result/decision/same_scope_token",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/0/result/decision/identity_bridge_established",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/0/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/0/result/money/total",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/1/case",
+          "op": "equals",
+          "expected": "B"
+        },
+        {
+          "path": "/cases/1/result/decision/identity_fields",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/1/result/decision/identity_fields/0",
+          "op": "equals",
+          "expected": "source_system"
+        },
+        {
+          "path": "/cases/1/result/decision/identity_fields/1",
+          "op": "equals",
+          "expected": "source_scope"
+        },
+        {
+          "path": "/cases/1/result/decision/identity_fields/2",
+          "op": "equals",
+          "expected": "session_key"
+        },
+        {
+          "path": "/cases/1/result/decision/identity_fields/3",
+          "op": "equals",
+          "expected": "visitor_key"
+        },
+        {
+          "path": "/cases/1/result/decision/same_session_token",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/1/result/decision/same_scope_token",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/1/result/decision/identity_bridge_established",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/1/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/1/result/money/total",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/2/case",
+          "op": "equals",
+          "expected": "C"
+        },
+        {
+          "path": "/cases/2/result/decision/source_measures/ga4",
+          "op": "equals",
+          "expected": "sessions"
+        },
+        {
+          "path": "/cases/2/result/decision/source_measures/first_party_pixel",
+          "op": "equals",
+          "expected": "touchpoints"
+        },
+        {
+          "path": "/cases/2/result/decision/can_sum_populations",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/2/result/decision/purchase_equivalence_established",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/2/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/2/result/money/total",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/case",
+          "op": "equals",
+          "expected": "D"
+        },
+        {
+          "path": "/cases/3/result/decision/declared_currencies",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/3/result/decision/declared_currencies/0",
+          "op": "equals",
+          "expected": "USD"
+        },
+        {
+          "path": "/cases/3/result/decision/declared_currencies/1",
+          "op": "equals",
+          "expected": "EUR"
+        },
+        {
+          "path": "/cases/3/result/decision/fx_conversion_supplied",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/3/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/3/result/money/observations/0/source_field",
+          "op": "equals",
+          "expected": "ga4_revenue"
+        },
+        {
+          "path": "/cases/3/result/money/observations/0/value",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/cases/3/result/money/observations/0/currency",
+          "op": "equals",
+          "expected": "USD"
+        },
+        {
+          "path": "/cases/3/result/money/observations/0/status",
+          "op": "equals",
+          "expected": "known"
+        },
+        {
+          "path": "/cases/3/result/money/observations/1/source_field",
+          "op": "equals",
+          "expected": "pixel_value"
+        },
+        {
+          "path": "/cases/3/result/money/observations/1/value",
+          "op": "approximately",
+          "expected": 90,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/cases/3/result/money/observations/1/currency",
+          "op": "equals",
+          "expected": "EUR"
+        },
+        {
+          "path": "/cases/3/result/money/observations/1/status",
+          "op": "equals",
+          "expected": "known"
+        },
+        {
+          "path": "/cases/3/result/money/total/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/result/money/total/currency",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/result/money/total/status",
+          "op": "equals",
+          "expected": "mixed_currency"
+        },
+        {
+          "path": "/cases/4/case",
+          "op": "equals",
+          "expected": "E"
+        },
+        {
+          "path": "/cases/4/result/decision/declared_currencies",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/4/result/decision/fx_conversion_supplied",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/4/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/4/result/money/observations/0/source_field",
+          "op": "equals",
+          "expected": "ga4_revenue"
+        },
+        {
+          "path": "/cases/4/result/money/observations/0/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/observations/0/currency",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/observations/0/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/4/result/money/observations/1/source_field",
+          "op": "equals",
+          "expected": "pixel_value"
+        },
+        {
+          "path": "/cases/4/result/money/observations/1/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/observations/1/currency",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/observations/1/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/4/result/money/total/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/total/currency",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/result/money/total/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/5/case",
+          "op": "equals",
+          "expected": "F"
+        },
+        {
+          "path": "/cases/5/result/decision/attribution_bases/ga4",
+          "op": "equals",
+          "expected": "session_last_click"
+        },
+        {
+          "path": "/cases/5/result/decision/attribution_bases/first_party_pixel",
+          "op": "equals",
+          "expected": "first_touch"
+        },
+        {
+          "path": "/cases/5/result/decision/parity_established",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/5/result/decision/identity_bridge_established",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/5/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/5/result/money/total",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/6/case",
+          "op": "equals",
+          "expected": "G"
+        },
+        {
+          "path": "/cases/6/result/decision/daily_grain",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/6/result/decision/daily_grain/0",
+          "op": "equals",
+          "expected": "source_system"
+        },
+        {
+          "path": "/cases/6/result/decision/daily_grain/1",
+          "op": "equals",
+          "expected": "source_scope"
+        },
+        {
+          "path": "/cases/6/result/decision/daily_grain/2",
+          "op": "equals",
+          "expected": "event_date"
+        },
+        {
+          "path": "/cases/6/result/decision/daily_grain/3",
+          "op": "equals",
+          "expected": "channel"
+        },
+        {
+          "path": "/cases/6/result/decision/can_sum_populations",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/6/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/6/result/money/total",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/7/case",
+          "op": "equals",
+          "expected": "H"
+        },
+        {
+          "path": "/cases/7/result/decision/common_metrics",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/7/result/decision/common_metrics/0",
+          "op": "equals",
+          "expected": "sessions"
+        },
+        {
+          "path": "/cases/7/result/decision/common_metrics/1",
+          "op": "equals",
+          "expected": "engaged_sessions"
+        },
+        {
+          "path": "/cases/7/result/decision/common_metrics/2",
+          "op": "equals",
+          "expected": "new_users"
+        },
+        {
+          "path": "/cases/7/result/decision/common_metrics/3",
+          "op": "equals",
+          "expected": "key_events"
+        },
+        {
+          "path": "/cases/7/result/decision/new_users_basis",
+          "op": "equals",
+          "expected": "source_native_first_observed_sessions"
+        },
+        {
+          "path": "/cases/7/result/decision/cross_source_people_count",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/7/result/decision/declared_currencies",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/7/result/decision/declared_currencies/0",
+          "op": "equals",
+          "expected": "USD"
+        },
+        {
+          "path": "/cases/7/result/decision/declared_currencies/1",
+          "op": "equals",
+          "expected": "CAD"
+        },
+        {
+          "path": "/cases/7/result/decision/unconverted_currency_pool_status",
+          "op": "equals",
+          "expected": "mixed_currency"
+        },
+        {
+          "path": "/cases/7/result/money/observations",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/7/result/money/total",
+          "op": "equals",
+          "expected": null
+        }
+      ]
     }
   ]
 }

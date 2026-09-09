@@ -1,0 +1,1938 @@
+{
+  "cases_sha256": "35b20930e1901ac330c7dbdd964842def2ef4b3bd1b2df54d47016dc7d4e41a5",
+  "claude_help": {
+    "exit_code": 0,
+    "json_schema": true
+  },
+  "cli_version": "2.1.263 (Claude Code)",
+  "conditions": [
+    "without-skill"
+  ],
+  "context_hashes": {
+    "SKILL.md": "421d4f894f90020f3651ff78ee73b5ed3b260dad207faafc35cb8a23d983ef64",
+    "references/cost-contract.md": "e809a95af709e173683d6817b49ea0f9bd2b83845cf8ad12eff492ff63c92d5e",
+    "references/refresh-contract.md": "468965f6cfb583f30a0a42f1c76d8c941ebe12bde41bedf8507d1ac88144a6ab",
+    "references/stage-contract.md": "e498dbfba65bdd5ac564703325b46d52f7b7d11a0dffbf4def905a15f059960d"
+  },
+  "finished_at": "2026-09-09T02:42:10.942001+00:00",
+  "groups": [
+    "cost-reconciliation"
+  ],
+  "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "models": {
+    "claude-sonnet-5": {
+      "without-skill": {
+        "cost-reconciliation": {
+          "cases_sha256": "35b20930e1901ac330c7dbdd964842def2ef4b3bd1b2df54d47016dc7d4e41a5",
+          "check_status": [
+            {
+              "actual": [
+                {
+                  "case_id": "A",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 20,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 20,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "unmatched",
+                        "campaign_key": "NoCatalog",
+                        "channel": "Paid Search",
+                        "cost_per_stage": null,
+                        "cost_status": "unknown",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": null,
+                        "spend_currency": null,
+                        "spend_status": "unknown",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Ambiguous",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 12,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 12,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "unattributed",
+                        "campaign_key": null,
+                        "channel": "Unknown",
+                        "cost_per_stage": null,
+                        "cost_status": "unknown",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": null,
+                        "spend_currency": null,
+                        "spend_status": "unknown",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      }
+                    ],
+                    "undated_stage_rows": 0
+                  }
+                },
+                {
+                  "case_id": "B",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 20,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-01",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 20,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      }
+                    ],
+                    "undated_stage_rows": 0
+                  }
+                },
+                {
+                  "case_id": "C",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 0,
+                        "cost_status": "known",
+                        "lead_count": 3,
+                        "report_date": null,
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 0,
+                        "spend_currency": null,
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 1
+                      }
+                    ],
+                    "undated_stage_rows": 1
+                  }
+                }
+              ],
+              "expected": 3,
+              "op": "array_length_equals",
+              "passed": true,
+              "path": "/cases",
+              "present": true
+            },
+            {
+              "actual": "A",
+              "expected": "A",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/case_id",
+              "present": true
+            },
+            {
+              "actual": [
+                {
+                  "bucket": "matched",
+                  "campaign_key": "Campaign+Case",
+                  "channel": "Paid Search",
+                  "cost_per_stage": 20,
+                  "cost_status": "known",
+                  "lead_count": 1,
+                  "report_date": "2026-01-02",
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": 20,
+                  "spend_currency": "USD",
+                  "spend_status": "known",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 0
+                },
+                {
+                  "bucket": "unmatched",
+                  "campaign_key": "NoCatalog",
+                  "channel": "Paid Search",
+                  "cost_per_stage": null,
+                  "cost_status": "unknown",
+                  "lead_count": 1,
+                  "report_date": "2026-01-02",
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": null,
+                  "spend_currency": null,
+                  "spend_status": "unknown",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 0
+                },
+                {
+                  "bucket": "matched",
+                  "campaign_key": "Ambiguous",
+                  "channel": "Paid Search",
+                  "cost_per_stage": 12,
+                  "cost_status": "known",
+                  "lead_count": 1,
+                  "report_date": "2026-01-02",
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": 12,
+                  "spend_currency": "USD",
+                  "spend_status": "known",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 0
+                },
+                {
+                  "bucket": "unattributed",
+                  "campaign_key": null,
+                  "channel": "Unknown",
+                  "cost_per_stage": null,
+                  "cost_status": "unknown",
+                  "lead_count": 1,
+                  "report_date": "2026-01-02",
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": null,
+                  "spend_currency": null,
+                  "spend_status": "unknown",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 0
+                }
+              ],
+              "expected": 6,
+              "op": "array_length_equals",
+              "passed": false,
+              "path": "/cases/0/output/report",
+              "present": true
+            },
+            {
+              "actual": "2026-01-02",
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Paid Search",
+              "expected": "Other",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/channel",
+              "present": true
+            },
+            {
+              "actual": "Campaign+Case",
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "matched",
+              "expected": "unattributed",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/bucket",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/0/revenue_status",
+              "present": true
+            },
+            {
+              "actual": 20,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/spend",
+              "present": true
+            },
+            {
+              "actual": "USD",
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/spend_status",
+              "present": true
+            },
+            {
+              "actual": 20,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "campaign_not_matched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/0/cost_status",
+              "present": true
+            },
+            {
+              "actual": "2026-01-02",
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Paid Search",
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/channel",
+              "present": true
+            },
+            {
+              "actual": "NoCatalog",
+              "expected": "Ambiguous",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/1/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "unmatched",
+              "expected": "ambiguous",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/1/bucket",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/revenue_status",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/spend",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/spend_status",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/1/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "campaign_not_matched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/1/cost_status",
+              "present": true
+            },
+            {
+              "actual": "2026-01-02",
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Paid Search",
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/channel",
+              "present": true
+            },
+            {
+              "actual": "Ambiguous",
+              "expected": "Campaign+Case",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/2/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "matched",
+              "expected": "matched",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/bucket",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/revenue_status",
+              "present": true
+            },
+            {
+              "actual": 12,
+              "expected": 20,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/output/report/2/spend",
+              "present": true
+            },
+            {
+              "actual": "USD",
+              "expected": "USD",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "known",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/spend_status",
+              "present": true
+            },
+            {
+              "actual": 12,
+              "expected": 20,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/output/report/2/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "known",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/2/cost_status",
+              "present": true
+            },
+            {
+              "actual": "2026-01-02",
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Unknown",
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/channel",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": "Ambiguous",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "unattributed",
+              "expected": "spend_only",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/bucket",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/revenue_status",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": 12,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/output/report/3/spend",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": "USD",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "known",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/spend_status",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/report/3/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "campaign_not_matched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/3/cost_status",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/report_date",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "won",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/stage_key",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/channel",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "NoCatalog",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/campaign_key",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "spend_only",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/bucket",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/lead_count",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/stage_count_total",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/stage_count_primary",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/stage_unknown_count",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/revenue",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/revenue_currency",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/revenue_status",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 9,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/output/report/4/spend",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "USD",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/spend_currency",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "known",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/spend_status",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/cost_per_stage",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "campaign_not_matched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/4/cost_status",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "2026-01-02",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/report_date",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "won",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/stage_key",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/channel",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "NoCatalog",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/campaign_key",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "unmatched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/bucket",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 1,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/lead_count",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 1,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/stage_count_total",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 1,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/stage_count_primary",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 0,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/stage_unknown_count",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/revenue",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/revenue_currency",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/revenue_status",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/spend",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/spend_currency",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/spend_status",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/cost_per_stage",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": "campaign_not_matched",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/output/report/5/cost_status",
+              "present": false
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/output/undated_stage_rows",
+              "present": true
+            },
+            {
+              "actual": "B",
+              "expected": "B",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/case_id",
+              "present": true
+            },
+            {
+              "actual": [
+                {
+                  "bucket": "matched",
+                  "campaign_key": "Campaign+Case",
+                  "channel": "Paid Search",
+                  "cost_per_stage": 20,
+                  "cost_status": "known",
+                  "lead_count": 1,
+                  "report_date": "2026-01-01",
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": 20,
+                  "spend_currency": "USD",
+                  "spend_status": "known",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 0
+                }
+              ],
+              "expected": 1,
+              "op": "array_length_equals",
+              "passed": true,
+              "path": "/cases/1/output/report",
+              "present": true
+            },
+            {
+              "actual": "2026-01-01",
+              "expected": "2026-01-01",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Paid Search",
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/channel",
+              "present": true
+            },
+            {
+              "actual": "Campaign+Case",
+              "expected": "Campaign+Case",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "matched",
+              "expected": "matched",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/bucket",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/revenue_status",
+              "present": true
+            },
+            {
+              "actual": 20,
+              "expected": 20,
+              "op": "approximately",
+              "passed": true,
+              "path": "/cases/1/output/report/0/spend",
+              "present": true
+            },
+            {
+              "actual": "USD",
+              "expected": "USD",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "known",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/spend_status",
+              "present": true
+            },
+            {
+              "actual": 20,
+              "expected": 20,
+              "op": "approximately",
+              "passed": true,
+              "path": "/cases/1/output/report/0/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "known",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/report/0/cost_status",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": 0,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/1/output/undated_stage_rows",
+              "present": true
+            },
+            {
+              "actual": "C",
+              "expected": "C",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/case_id",
+              "present": true
+            },
+            {
+              "actual": [
+                {
+                  "bucket": "matched",
+                  "campaign_key": "Campaign+Case",
+                  "channel": "Paid Search",
+                  "cost_per_stage": 0,
+                  "cost_status": "known",
+                  "lead_count": 3,
+                  "report_date": null,
+                  "revenue": null,
+                  "revenue_currency": null,
+                  "revenue_status": "unknown",
+                  "spend": 0,
+                  "spend_currency": null,
+                  "spend_status": "known",
+                  "stage_count_primary": 1,
+                  "stage_count_total": 1,
+                  "stage_key": "won",
+                  "stage_unknown_count": 1
+                }
+              ],
+              "expected": 1,
+              "op": "array_length_equals",
+              "passed": true,
+              "path": "/cases/2/output/report",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/report_date",
+              "present": true
+            },
+            {
+              "actual": "won",
+              "expected": "won",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/stage_key",
+              "present": true
+            },
+            {
+              "actual": "Paid Search",
+              "expected": "Paid Search",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/channel",
+              "present": true
+            },
+            {
+              "actual": "Campaign+Case",
+              "expected": "Campaign+Case",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/campaign_key",
+              "present": true
+            },
+            {
+              "actual": "matched",
+              "expected": "matched",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/bucket",
+              "present": true
+            },
+            {
+              "actual": 3,
+              "expected": 3,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/lead_count",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/stage_count_total",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/stage_count_primary",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 1,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/stage_unknown_count",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/revenue",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/revenue_currency",
+              "present": true
+            },
+            {
+              "actual": "unknown",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/revenue_status",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/2/output/report/0/spend",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": null,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/2/output/report/0/spend_currency",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/2/output/report/0/spend_status",
+              "present": true
+            },
+            {
+              "actual": 0,
+              "expected": null,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/2/output/report/0/cost_per_stage",
+              "present": true
+            },
+            {
+              "actual": "known",
+              "expected": "spend_unknown",
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/2/output/report/0/cost_status",
+              "present": true
+            },
+            {
+              "actual": 1,
+              "expected": 3,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/2/output/undated_stage_rows",
+              "present": true
+            }
+          ],
+          "completion_status": "complete",
+          "context_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "elapsed_seconds": 385.548398,
+          "errors": [],
+          "finished_at": "2026-09-09T02:42:10.941993+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "json_schema": true,
+            "max_budget_usd": 2,
+            "safe_mode": true,
+            "tools": false
+          },
+          "parsed": {
+            "cases": [
+              {
+                "case_id": "A",
+                "output": {
+                  "report": [
+                    {
+                      "bucket": "matched",
+                      "campaign_key": "Campaign+Case",
+                      "channel": "Paid Search",
+                      "cost_per_stage": 20,
+                      "cost_status": "known",
+                      "lead_count": 1,
+                      "report_date": "2026-01-02",
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": 20,
+                      "spend_currency": "USD",
+                      "spend_status": "known",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 0
+                    },
+                    {
+                      "bucket": "unmatched",
+                      "campaign_key": "NoCatalog",
+                      "channel": "Paid Search",
+                      "cost_per_stage": null,
+                      "cost_status": "unknown",
+                      "lead_count": 1,
+                      "report_date": "2026-01-02",
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": null,
+                      "spend_currency": null,
+                      "spend_status": "unknown",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 0
+                    },
+                    {
+                      "bucket": "matched",
+                      "campaign_key": "Ambiguous",
+                      "channel": "Paid Search",
+                      "cost_per_stage": 12,
+                      "cost_status": "known",
+                      "lead_count": 1,
+                      "report_date": "2026-01-02",
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": 12,
+                      "spend_currency": "USD",
+                      "spend_status": "known",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 0
+                    },
+                    {
+                      "bucket": "unattributed",
+                      "campaign_key": null,
+                      "channel": "Unknown",
+                      "cost_per_stage": null,
+                      "cost_status": "unknown",
+                      "lead_count": 1,
+                      "report_date": "2026-01-02",
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": null,
+                      "spend_currency": null,
+                      "spend_status": "unknown",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 0
+                    }
+                  ],
+                  "undated_stage_rows": 0
+                }
+              },
+              {
+                "case_id": "B",
+                "output": {
+                  "report": [
+                    {
+                      "bucket": "matched",
+                      "campaign_key": "Campaign+Case",
+                      "channel": "Paid Search",
+                      "cost_per_stage": 20,
+                      "cost_status": "known",
+                      "lead_count": 1,
+                      "report_date": "2026-01-01",
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": 20,
+                      "spend_currency": "USD",
+                      "spend_status": "known",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 0
+                    }
+                  ],
+                  "undated_stage_rows": 0
+                }
+              },
+              {
+                "case_id": "C",
+                "output": {
+                  "report": [
+                    {
+                      "bucket": "matched",
+                      "campaign_key": "Campaign+Case",
+                      "channel": "Paid Search",
+                      "cost_per_stage": 0,
+                      "cost_status": "known",
+                      "lead_count": 3,
+                      "report_date": null,
+                      "revenue": null,
+                      "revenue_currency": null,
+                      "revenue_status": "unknown",
+                      "spend": 0,
+                      "spend_currency": null,
+                      "spend_status": "known",
+                      "stage_count_primary": 1,
+                      "stage_count_total": 1,
+                      "stage_key": "won",
+                      "stage_unknown_count": 1
+                    }
+                  ],
+                  "undated_stage_rows": 1
+                }
+              }
+            ]
+          },
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            },\n            {\n              \"campaign_key\": \"Ambiguous\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"cohort\",\n            \"report_end\": \"2026-01-31\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"UTC\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Matched\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"NoCatalog\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Unmatched\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"ambiguous\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Ambiguous\",\n              \"candidate_ads\": [\n                {\n                  \"ad_key\": \"Ad+One\",\n                  \"campaign_key\": \"Ambiguous\",\n                  \"source_scope\": \"ads-a\",\n                  \"source_system\": \"synthetic_ads\"\n                }\n              ],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Ambiguous\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 20,\n              \"spend_key\": \"Spend+A\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"Ambiguous\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 12,\n              \"spend_key\": \"Spend+B\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"NoCatalog\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"unbound\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 9,\n              \"spend_key\": \"Spend+C\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Unmatched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Ambiguous\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Missing\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      },\n      {\n        \"case_id\": \"B\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"cohort\",\n            \"report_end\": \"2026-01-01\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"America/Los_Angeles\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Lead+A\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-01\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 20,\n              \"spend_key\": \"Spend+A\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2025-12-31\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 8,\n              \"spend_key\": \"Outside\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:30:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Lead+A\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-03T00:30:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      },\n      {\n        \"case_id\": \"C\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"activity\",\n            \"report_end\": \"2026-01-31\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"UTC\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Undated\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Unknown\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"NoActivity\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Undated\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved_undated\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": null,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Unknown\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"unknown\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": false,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"NoActivity\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"not_achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"additionalProperties\": false,\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"output\": {\n              \"additionalProperties\": false,\n              \"properties\": {\n                \"report\": {\n                  \"items\": {\n                    \"additionalProperties\": false,\n                    \"properties\": {\n                      \"bucket\": {\n                        \"type\": \"string\"\n                      },\n                      \"campaign_key\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"channel\": {\n                        \"type\": \"string\"\n                      },\n                      \"cost_per_stage\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"cost_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"lead_count\": {\n                        \"type\": \"integer\"\n                      },\n                      \"report_date\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue_currency\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"spend\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"spend_currency\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"spend_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"stage_count_primary\": {\n                        \"type\": \"integer\"\n                      },\n                      \"stage_count_total\": {\n                        \"type\": \"integer\"\n                      },\n                      \"stage_key\": {\n                        \"type\": \"string\"\n                      },\n                      \"stage_unknown_count\": {\n                        \"type\": \"integer\"\n                      }\n                    },\n                    \"required\": [\n                      \"report_date\",\n                      \"stage_key\",\n                      \"channel\",\n                      \"campaign_key\",\n                      \"bucket\",\n                      \"lead_count\",\n                      \"stage_count_total\",\n                      \"stage_count_primary\",\n                      \"stage_unknown_count\",\n                      \"revenue\",\n                      \"revenue_currency\",\n                      \"revenue_status\",\n                      \"spend\",\n                      \"spend_currency\",\n                      \"spend_status\",\n                      \"cost_per_stage\",\n                      \"cost_status\"\n                    ],\n                    \"type\": \"object\"\n                  },\n                  \"type\": \"array\"\n                },\n                \"undated_stage_rows\": {\n                  \"type\": \"integer\"\n                }\n              },\n              \"required\": [\n                \"report\",\n                \"undated_stage_rows\"\n              ],\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"output\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Reconcile each supplied funnel cost input independently. Return cases A onward in input order. For each case return the requested report rows and undated-row count, preserving row order, nulls, false values, and exact numbers. Return JSON only.\"\n}",
+          "prompt_sha256": "a230ce31b9c0ebec69ef5a505260b77c3b60d869c73ca74b9812da47ac162c4e",
+          "raw_envelope": {
+            "api_error_status": null,
+            "duration_api_ms": 385848,
+            "duration_ms": 384790,
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "fast_mode_state": "off",
+            "first_content_frame_ms": 1984,
+            "is_error": false,
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "cacheCreationInputTokens": 0,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "contextWindow": 200000,
+                "costBasis": "list",
+                "costUSD": 0.006878,
+                "inputTokens": 6803,
+                "maxOutputTokens": 32000,
+                "outputTokens": 15,
+                "provider": "firstParty",
+                "thinkingTokens": 0,
+                "webSearchRequests": 0
+              },
+              "claude-sonnet-5": {
+                "cacheCreationInputTokens": 47972,
+                "cacheReadInputTokens": 10129,
+                "canonicalModel": "claude-sonnet-5",
+                "contextWindow": 1000000,
+                "costBasis": "list",
+                "costUSD": 0.6081118000000001,
+                "inputTokens": 4,
+                "maxOutputTokens": 64000,
+                "outputTokens": 41419,
+                "provider": "firstParty",
+                "thinkingTokens": 38664,
+                "webSearchRequests": 0
+              }
+            },
+            "num_turns": 3,
+            "permission_denials": [],
+            "queued_turn_count": 0,
+            "result": "{\"cases\":[{\"case_id\":\"A\",\"output\":{\"report\":[{\"report_date\":\"2026-01-02\",\"stage_key\":\"won\",\"channel\":\"Paid Search\",\"campaign_key\":\"Campaign+Case\",\"bucket\":\"matched\",\"lead_count\":1,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":0,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":20,\"spend_currency\":\"USD\",\"spend_status\":\"known\",\"cost_per_stage\":20,\"cost_status\":\"known\"},{\"report_date\":\"2026-01-02\",\"stage_key\":\"won\",\"channel\":\"Paid Search\",\"campaign_key\":\"NoCatalog\",\"bucket\":\"unmatched\",\"lead_count\":1,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":0,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":null,\"spend_currency\":null,\"spend_status\":\"unknown\",\"cost_per_stage\":null,\"cost_status\":\"unknown\"},{\"report_date\":\"2026-01-02\",\"stage_key\":\"won\",\"channel\":\"Paid Search\",\"campaign_key\":\"Ambiguous\",\"bucket\":\"matched\",\"lead_count\":1,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":0,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":12,\"spend_currency\":\"USD\",\"spend_status\":\"known\",\"cost_per_stage\":12,\"cost_status\":\"known\"},{\"report_date\":\"2026-01-02\",\"stage_key\":\"won\",\"channel\":\"Unknown\",\"campaign_key\":null,\"bucket\":\"unattributed\",\"lead_count\":1,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":0,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":null,\"spend_currency\":null,\"spend_status\":\"unknown\",\"cost_per_stage\":null,\"cost_status\":\"unknown\"}],\"undated_stage_rows\":0}},{\"case_id\":\"B\",\"output\":{\"report\":[{\"report_date\":\"2026-01-01\",\"stage_key\":\"won\",\"channel\":\"Paid Search\",\"campaign_key\":\"Campaign+Case\",\"bucket\":\"matched\",\"lead_count\":1,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":0,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":20,\"spend_currency\":\"USD\",\"spend_status\":\"known\",\"cost_per_stage\":20,\"cost_status\":\"known\"}],\"undated_stage_rows\":0}},{\"case_id\":\"C\",\"output\":{\"report\":[{\"report_date\":null,\"stage_key\":\"won\",\"channel\":\"Paid Search\",\"campaign_key\":\"Campaign+Case\",\"bucket\":\"matched\",\"lead_count\":3,\"stage_count_total\":1,\"stage_count_primary\":1,\"stage_unknown_count\":1,\"revenue\":null,\"revenue_currency\":null,\"revenue_status\":\"unknown\",\"spend\":0,\"spend_currency\":null,\"spend_status\":\"known\",\"cost_per_stage\":0,\"cost_status\":\"known\"}],\"undated_stage_rows\":1}}]}",
+            "session_id": "1f87ed56-8592-4a36-a4b8-7342b7a1c526",
+            "stop_reason": "tool_use",
+            "structured_output": {
+              "cases": [
+                {
+                  "case_id": "A",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 20,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 20,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "unmatched",
+                        "campaign_key": "NoCatalog",
+                        "channel": "Paid Search",
+                        "cost_per_stage": null,
+                        "cost_status": "unknown",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": null,
+                        "spend_currency": null,
+                        "spend_status": "unknown",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Ambiguous",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 12,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 12,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      },
+                      {
+                        "bucket": "unattributed",
+                        "campaign_key": null,
+                        "channel": "Unknown",
+                        "cost_per_stage": null,
+                        "cost_status": "unknown",
+                        "lead_count": 1,
+                        "report_date": "2026-01-02",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": null,
+                        "spend_currency": null,
+                        "spend_status": "unknown",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      }
+                    ],
+                    "undated_stage_rows": 0
+                  }
+                },
+                {
+                  "case_id": "B",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 20,
+                        "cost_status": "known",
+                        "lead_count": 1,
+                        "report_date": "2026-01-01",
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 20,
+                        "spend_currency": "USD",
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 0
+                      }
+                    ],
+                    "undated_stage_rows": 0
+                  }
+                },
+                {
+                  "case_id": "C",
+                  "output": {
+                    "report": [
+                      {
+                        "bucket": "matched",
+                        "campaign_key": "Campaign+Case",
+                        "channel": "Paid Search",
+                        "cost_per_stage": 0,
+                        "cost_status": "known",
+                        "lead_count": 3,
+                        "report_date": null,
+                        "revenue": null,
+                        "revenue_currency": null,
+                        "revenue_status": "unknown",
+                        "spend": 0,
+                        "spend_currency": null,
+                        "spend_status": "known",
+                        "stage_count_primary": 1,
+                        "stage_count_total": 1,
+                        "stage_key": "won",
+                        "stage_unknown_count": 1
+                      }
+                    ],
+                    "undated_stage_rows": 1
+                  }
+                }
+              ]
+            },
+            "subagent_stats": {
+              "by_type": {},
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "system": 0,
+                "user": 0
+              },
+              "max_depth": 0,
+              "refused": {
+                "budget": 0,
+                "concurrency_limit": 0,
+                "depth_limit": 0
+              },
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "spawned": 0,
+              "spawned_by_subagents": 0,
+              "started_in_background": 0
+            },
+            "subtype": "success",
+            "terminal_reason": "completed",
+            "time_to_request_ms": 11,
+            "total_cost_usd": 0.6149898,
+            "ttft_ms": 366448,
+            "ttft_stream_ms": 1320,
+            "type": "result",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 47972,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 47972,
+              "cache_read_input_tokens": 10129,
+              "inference_geo": "not_available",
+              "input_tokens": 4,
+              "iterations": [
+                {
+                  "cache_creation": {
+                    "ephemeral_1h_input_tokens": 39965,
+                    "ephemeral_5m_input_tokens": 0
+                  },
+                  "cache_creation_input_tokens": 39965,
+                  "cache_read_input_tokens": 9068,
+                  "input_tokens": 2,
+                  "output_tokens": 1335,
+                  "type": "message"
+                }
+              ],
+              "output_tokens": 41419,
+              "output_tokens_details": {
+                "thinking_tokens": 38664
+              },
+              "server_tool_use": {
+                "web_fetch_requests": 0,
+                "web_search_requests": 0
+              },
+              "service_tier": "standard",
+              "speed": "standard"
+            },
+            "uuid": "2913875f-3fc8-4e6a-8f63-c8063865161b"
+          },
+          "requested_model": "claude-sonnet-5",
+          "resolved_model": "claude-sonnet-5",
+          "schema_sha256": "c8b869b514967db954a211cf4da33f5f40f20110f9f5ca9b35ceb4d960052e24",
+          "schema_status": {
+            "errors": [],
+            "passed": true
+          },
+          "started_at": "2026-09-09T02:35:45.389492+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+          "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+          "transport": {
+            "command": [
+              "claude",
+              "--safe-mode",
+              "--no-session-persistence",
+              "--disable-slash-commands",
+              "--tools",
+              "",
+              "--strict-mcp-config",
+              "--mcp-config",
+              "{\"mcpServers\":{}}",
+              "--model",
+              "claude-sonnet-5",
+              "--output-format",
+              "json",
+              "--max-budget-usd",
+              "2",
+              "--json-schema"
+            ],
+            "elapsed_seconds": 385.548398,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "json_schema": true,
+              "max_budget_usd": 2,
+              "safe_mode": true,
+              "tools": false
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            },\n            {\n              \"campaign_key\": \"Ambiguous\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"cohort\",\n            \"report_end\": \"2026-01-31\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"UTC\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Matched\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"NoCatalog\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Unmatched\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"ambiguous\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Ambiguous\",\n              \"candidate_ads\": [\n                {\n                  \"ad_key\": \"Ad+One\",\n                  \"campaign_key\": \"Ambiguous\",\n                  \"source_scope\": \"ads-a\",\n                  \"source_system\": \"synthetic_ads\"\n                }\n              ],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Ambiguous\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 20,\n              \"spend_key\": \"Spend+A\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"Ambiguous\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 12,\n              \"spend_key\": \"Spend+B\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"NoCatalog\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-02\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"unbound\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 9,\n              \"spend_key\": \"Spend+C\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Unmatched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Ambiguous\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Missing\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-04T00:00:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      },\n      {\n        \"case_id\": \"B\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"cohort\",\n            \"report_end\": \"2026-01-01\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"America/Los_Angeles\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Lead+A\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2026-01-01\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 20,\n              \"spend_key\": \"Spend+A\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"channel\": \"Paid Search\",\n              \"currency\": \"USD\",\n              \"event_date\": \"2025-12-31\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\",\n              \"spend\": 8,\n              \"spend_key\": \"Outside\",\n              \"spend_status\": \"known\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:30:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Lead+A\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": \"2026-01-03T00:30:00Z\",\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      },\n      {\n        \"case_id\": \"C\",\n        \"input\": {\n          \"account_currency_input\": [],\n          \"binding_input\": [\n            {\n              \"ad_source_scope\": \"ads-a\",\n              \"ad_source_system\": \"synthetic_ads\",\n              \"crm_source_scope\": \"crm-a\",\n              \"crm_source_system\": \"synthetic_crm\",\n              \"entity_type\": \"campaign\",\n              \"platform\": \"google_ads\"\n            }\n          ],\n          \"campaign_input\": [\n            {\n              \"campaign_key\": \"Campaign+Case\",\n              \"network_id\": \"google_ads\",\n              \"source_scope\": \"ads-a\",\n              \"source_system\": \"synthetic_ads\"\n            }\n          ],\n          \"configuration\": {\n            \"date_mode\": \"activity\",\n            \"report_end\": \"2026-01-31\",\n            \"report_start\": \"2026-01-01\",\n            \"report_timezone\": \"UTC\",\n            \"source_scope\": \"crm-a\",\n            \"source_system\": \"synthetic_crm\",\n            \"spend_complete\": true\n          },\n          \"crm_attribution_input\": [\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Undated\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"Unknown\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            },\n            {\n              \"ad_key\": null,\n              \"ad_match_status\": \"unmatched\",\n              \"ad_source_scope\": null,\n              \"ad_source_system\": null,\n              \"campaign_key\": \"Campaign+Case\",\n              \"candidate_ads\": [],\n              \"channel\": \"Paid Search\",\n              \"lead_key\": \"NoActivity\",\n              \"network_id\": \"google_ads\",\n              \"quality_status\": \"matched\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"taxonomy_version\": \"0.1.0\"\n            }\n          ],\n          \"spend_input\": [],\n          \"stage_input\": [\n            {\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70\n            }\n          ],\n          \"stage_ledger_input\": [\n            {\n              \"achieved\": true,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Undated\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"achieved_undated\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": null,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"Unknown\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"unknown\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            },\n            {\n              \"achieved\": false,\n              \"attribution\": {\n                \"ad_key\": null,\n                \"ad_source_scope\": null,\n                \"ad_source_system\": null,\n                \"campaign_key\": null,\n                \"channel\": null,\n                \"network_id\": null,\n                \"taxonomy_version\": null\n              },\n              \"cohort_at\": \"2026-01-02T00:00:00Z\",\n              \"currency\": null,\n              \"is_attribution_primary\": true,\n              \"lead_key\": \"NoActivity\",\n              \"source_scope\": \"crm-a\",\n              \"source_system\": \"synthetic_crm\",\n              \"stage_entered_at\": null,\n              \"stage_key\": \"won\",\n              \"stage_kind\": \"won\",\n              \"stage_order\": 70,\n              \"stage_truth_status\": \"not_achieved\",\n              \"value\": null,\n              \"value_status\": \"unknown\"\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"additionalProperties\": false,\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"output\": {\n              \"additionalProperties\": false,\n              \"properties\": {\n                \"report\": {\n                  \"items\": {\n                    \"additionalProperties\": false,\n                    \"properties\": {\n                      \"bucket\": {\n                        \"type\": \"string\"\n                      },\n                      \"campaign_key\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"channel\": {\n                        \"type\": \"string\"\n                      },\n                      \"cost_per_stage\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"cost_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"lead_count\": {\n                        \"type\": \"integer\"\n                      },\n                      \"report_date\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue_currency\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"revenue_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"spend\": {\n                        \"type\": [\n                          \"number\",\n                          \"null\"\n                        ]\n                      },\n                      \"spend_currency\": {\n                        \"type\": [\n                          \"string\",\n                          \"null\"\n                        ]\n                      },\n                      \"spend_status\": {\n                        \"type\": \"string\"\n                      },\n                      \"stage_count_primary\": {\n                        \"type\": \"integer\"\n                      },\n                      \"stage_count_total\": {\n                        \"type\": \"integer\"\n                      },\n                      \"stage_key\": {\n                        \"type\": \"string\"\n                      },\n                      \"stage_unknown_count\": {\n                        \"type\": \"integer\"\n                      }\n                    },\n                    \"required\": [\n                      \"report_date\",\n                      \"stage_key\",\n                      \"channel\",\n                      \"campaign_key\",\n                      \"bucket\",\n                      \"lead_count\",\n                      \"stage_count_total\",\n                      \"stage_count_primary\",\n                      \"stage_unknown_count\",\n                      \"revenue\",\n                      \"revenue_currency\",\n                      \"revenue_status\",\n                      \"spend\",\n                      \"spend_currency\",\n                      \"spend_status\",\n                      \"cost_per_stage\",\n                      \"cost_status\"\n                    ],\n                    \"type\": \"object\"\n                  },\n                  \"type\": \"array\"\n                },\n                \"undated_stage_rows\": {\n                  \"type\": \"integer\"\n                }\n              },\n              \"required\": [\n                \"report\",\n                \"undated_stage_rows\"\n              ],\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"output\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Reconcile each supplied funnel cost input independently. Return cases A onward in input order. For each case return the requested report rows and undated-row count, preserving row order, nulls, false values, and exact numbers. Return JSON only.\"\n}",
+            "requested_model": "claude-sonnet-5",
+            "schema_sha256": "c8b869b514967db954a211cf4da33f5f40f20110f9f5ca9b35ceb4d960052e24",
+            "stderr": "",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+            "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+            "transport_exit_code": 0
+          }
+        }
+      }
+    }
+  },
+  "recovery": {
+    "cause": "Python subprocess.TimeoutExpired after 300 seconds; no raw model envelope was available",
+    "command": "python3 skills/funnel-truth-and-cost-per-stage/references/eval-v2-recover-transport.py --run",
+    "failed_cell_sha256": "f8e4596c5a0668c782f2c3cd3fb33d181992af193173ce25e9a95060cc0de377",
+    "original_file": "eval-results-v2.json",
+    "original_sha256": "b99ce425f5d7cf74bf43ac1e47002e22ec78c761a94c464465739b18ebc79083",
+    "original_timeout_seconds": 300,
+    "override": "Only subprocess.run timeout=300 for the claude invocation is changed to600; restored in finally. On-disk harness unchanged.",
+    "override_restored": true,
+    "selection": [
+      "claude-sonnet-5",
+      "without-skill",
+      "cost-reconciliation"
+    ],
+    "supplemental_timeout_seconds": 600,
+    "wrapper_file": "eval-v2-recover-transport.py",
+    "wrapper_sha256": "0ee80e73f9fea3561026eff7129e615425869e7c9eb0b30744868dd50b27b26b"
+  },
+  "schema_hashes": {
+    "cost-reconciliation": "c8b869b514967db954a211cf4da33f5f40f20110f9f5ca9b35ceb4d960052e24",
+    "refresh-partitions": "070c2afe660f3a8d147135c7be92ed48f47dd396bb490be325e035af26b2f99c",
+    "stage-truth": "dbaf4cd2ce8ca01d5d785f0c338e56604aa50668f7be28f741665aa683017d0b"
+  },
+  "schema_version": 1,
+  "skill": "funnel-truth-and-cost-per-stage",
+  "started_at": "2026-09-09T02:35:45.389492+00:00"
+}

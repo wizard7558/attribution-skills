@@ -1,0 +1,777 @@
+{
+  "version": 1,
+  "derivation": "Three daily rows: one landing page_view and two separate known-zero orders in one qualified session. Missing September 2 and empty September 3 retain unknown completeness. An intraday duplicate and extra order, plus 1001 out-of-window rows whose event_date deceptively lies inside the window, must be excluded. Ecommerce expected derives from the previously independent all-zero literal golden with occurrence timestamps shifted one microsecond; no producer execution generated any answer.",
+  "window": {
+    "start": "20260901",
+    "end": "20260903"
+  },
+  "tables": [
+    {
+      "name": "events_20260901",
+      "events": [
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000000",
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": null,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": null,
+          "revenue_usd": null,
+          "tax_usd": null,
+          "shipping_usd": null,
+          "native_revenue": null,
+          "total_item_quantity": null,
+          "unique_items": null,
+          "items": []
+        },
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000001",
+          "event_name": "purchase",
+          "user_pseudo_id": "u",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": 0,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": "0",
+          "revenue_usd": 0,
+          "tax_usd": 0,
+          "shipping_usd": 0,
+          "native_revenue": 0,
+          "total_item_quantity": 0,
+          "unique_items": 0,
+          "items": []
+        },
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000002",
+          "event_name": "purchase",
+          "user_pseudo_id": "u",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": 0,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": "1",
+          "revenue_usd": 0,
+          "tax_usd": 0,
+          "shipping_usd": 0,
+          "native_revenue": 0,
+          "total_item_quantity": 0,
+          "unique_items": 0,
+          "items": []
+        }
+      ]
+    },
+    {
+      "name": "events_20260903",
+      "events": []
+    },
+    {
+      "name": "events_20260831",
+      "events": [
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000010",
+          "event_name": "excluded",
+          "user_pseudo_id": "outside",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": null,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": null,
+          "revenue_usd": null,
+          "tax_usd": null,
+          "shipping_usd": null,
+          "native_revenue": null,
+          "total_item_quantity": null,
+          "unique_items": null,
+          "items": []
+        }
+      ],
+      "repeat": 1001
+    },
+    {
+      "name": "events_intraday_20260901",
+      "events": [
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000001",
+          "event_name": "purchase",
+          "user_pseudo_id": "u",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": 0,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": "0",
+          "revenue_usd": 0,
+          "tax_usd": 0,
+          "shipping_usd": 0,
+          "native_revenue": 0,
+          "total_item_quantity": 0,
+          "unique_items": 0,
+          "items": []
+        },
+        {
+          "event_date": "20260901",
+          "event_timestamp": "1788220800000001",
+          "event_name": "purchase",
+          "user_pseudo_id": "intraday",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "event_value_in_usd": 99,
+          "event_params": [
+            {
+              "key": "ga_session_id",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "ga_session_number",
+              "value": {
+                "string_value": null,
+                "int_value": 1,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "page_location",
+              "value": {
+                "string_value": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            },
+            {
+              "key": "currency",
+              "value": {
+                "string_value": "USD",
+                "int_value": null,
+                "float_value": null,
+                "double_value": null
+              }
+            }
+          ],
+          "transaction_id": "99",
+          "revenue_usd": 99,
+          "tax_usd": 0,
+          "shipping_usd": 0,
+          "native_revenue": 0,
+          "total_item_quantity": 0,
+          "unique_items": 0,
+          "items": []
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "sessions.sql": [
+      {
+        "session_key": "u.1",
+        "user_pseudo_id": "u",
+        "ga_session_id": "1",
+        "ga_session_number": "1",
+        "is_new_user": true,
+        "event_date": "2026-09-01",
+        "session_start_ts": "1788220800000000",
+        "session_end_ts": "1788220800000002",
+        "pageviews": "1",
+        "events": "3",
+        "engaged": true,
+        "engagement_time_sec": 0,
+        "key_events": "2",
+        "purchase_events_without_transaction_id": "0",
+        "landing_page_location": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+        "landing_page_path": "/start",
+        "first_referrer": null,
+        "exit_page_path": "/start",
+        "session_source": null,
+        "session_medium": null,
+        "session_campaign": null,
+        "default_channel_group": null,
+        "click_ids": {
+          "gclid": null,
+          "dclid": null,
+          "gbraid": null,
+          "wbraid": null,
+          "msclkid": null,
+          "fbclid": null,
+          "ttclid": null,
+          "rdt_cid": null,
+          "li_fat_id": null,
+          "twclid": null,
+          "epik": null,
+          "sccid": null,
+          "srsltid": null
+        },
+        "landing_gclid": null,
+        "landing_fbclid": null,
+        "landing_ttclid": null,
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "visitor_key": "u",
+        "attribution_basis": "session_last_click",
+        "reporting_timezone": null,
+        "date_basis": "GA4 property event_date; first observed event in scan window",
+        "taxonomy_version": "0.1.0",
+        "channel": "Email"
+      }
+    ],
+    "channel_daily.sql": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "event_date": "2026-09-01",
+        "channel": "Email",
+        "taxonomy_version": "0.1.0",
+        "attribution_basis": "session_last_click",
+        "reporting_timezone": null,
+        "date_basis": "GA4 property event_date; first observed event in scan window",
+        "native_channel_groups": [],
+        "sessions": "1",
+        "engaged_sessions": "1",
+        "new_users": "1",
+        "key_events": "2",
+        "purchase_events_without_transaction_id": "0",
+        "purchases": "2",
+        "purchase_revenue_usd": 0,
+        "revenue_status": "complete",
+        "currency": "USD"
+      }
+    ],
+    "landing_pages.sql": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "landing_page_path": "/start",
+        "sessions": "1",
+        "engaged_sessions": "1",
+        "key_events": "2"
+      }
+    ],
+    "traffic_source_compare.sql": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_last_click_source": null,
+        "session_last_click_medium": null,
+        "landing_url_status": "valid",
+        "landing_utm_source": "Newsletter",
+        "landing_utm_medium": "email",
+        "landing_utm_campaign": null,
+        "sessions": "1"
+      }
+    ],
+    "params.sql": {
+      "inline_rows": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000000,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 1,
+          "page_location": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0
+        }
+      ],
+      "helper_rows": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000000,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 1,
+          "page_location": "https://example.test/start?utm_source=Newsletter&utm_medium=email",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0,
+          "session_engaged": null,
+          "engagement_time_msec": null,
+          "session_engaged_duplicate_count": 0,
+          "engagement_time_msec_duplicate_count": 0
+        }
+      ]
+    },
+    "key_events.sql": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": "1",
+        "event_date": "2026-09-01",
+        "event_name": "purchase",
+        "event_timestamp": "1788220800000001",
+        "event_ts": "1788220800000001",
+        "event_value_in_usd": 0,
+        "session_key": "u.1"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": "1",
+        "event_date": "2026-09-01",
+        "event_name": "purchase",
+        "event_timestamp": "1788220800000002",
+        "event_ts": "1788220800000002",
+        "event_value_in_usd": 0,
+        "session_key": "u.1"
+      }
+    ],
+    "ui_reconciliation.sql": {
+      "daily_observations": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-01",
+          "observed_event_rows": 3,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-02",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-03",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        }
+      ],
+      "identifier_observation": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_events": 3,
+        "null_user_pseudo_id_events": 0,
+        "missing_session_id_events": 0,
+        "pct_null_user": 0,
+        "missing_identifier_cause": "unknown",
+        "observation_scope": "all_observed_events_in_supplied_window",
+        "limitations": "identifier_absence_does_not_establish_consent_cause"
+      },
+      "session_date_spans": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_sessions": 1,
+        "sessions_crossing_midnight": 0,
+        "pct_crossing_midnight": 0,
+        "observation_scope": "qualified_sessions_observed_in_supplied_window",
+        "limitations": "window_censored_date_spans_do_not_establish_lifetime_sessions_or_explain_ui_differences"
+      }
+    },
+    "ecommerce.sql": {
+      "declaration": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "start_suffix": "20260901",
+        "end_suffix": "20260903",
+        "policy": "qualified_transaction_observed_window_v1",
+        "transaction_domain": "source_system/source_scope/platform/stream_id/user_pseudo_id/exact_transaction_id",
+        "date_assignment": "earliest observed event_timestamp/event_date/selected_evidence_json",
+        "money_basis": "FLOAT64 scaled approximate USD sums; no native-money aggregation",
+        "reporting_timezone": null,
+        "ga4_ui_parity": false
+      },
+      "daily_summary": [
+        {
+          "event_date": "2026-09-01",
+          "window_has_unkeyed_evidence": false,
+          "observed_purchase_events": 2,
+          "qualified_transaction_count": 2,
+          "accepted_transaction_count": 2,
+          "conflicting_transaction_count": 0,
+          "assigned_qualified_events": 2,
+          "collapsed_duplicate_events": 0,
+          "unkeyed_purchase_events": 0,
+          "item_line_count": 0,
+          "all_population_unique_purchase_count": 2,
+          "money": [
+            {
+              "metric": "revenue_usd",
+              "known_count": 2,
+              "unknown_count": 0,
+              "invalid_count": 0,
+              "conflict_count": 0,
+              "known_subtotal": 0,
+              "value": 0,
+              "reasons": []
+            },
+            {
+              "metric": "shipping_usd",
+              "known_count": 2,
+              "unknown_count": 0,
+              "invalid_count": 0,
+              "conflict_count": 0,
+              "known_subtotal": 0,
+              "value": 0,
+              "reasons": []
+            },
+            {
+              "metric": "tax_usd",
+              "known_count": 2,
+              "unknown_count": 0,
+              "invalid_count": 0,
+              "conflict_count": 0,
+              "known_subtotal": 0,
+              "value": 0,
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "qualified_transactions": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "user_pseudo_id": "u",
+          "transaction_id": "0",
+          "event_date": "2026-09-01",
+          "occurrence_count": 1,
+          "payload_variant_count": 1,
+          "collapsed_duplicate_events": 0,
+          "status": "accepted",
+          "accepted_payload_json": "{\"revenue_usd\":0,\"tax_usd\":0,\"shipping_usd\":0,\"native_revenue\":0,\"currency\":\"USD\",\"total_item_quantity\":0,\"unique_items\":0,\"items\":[]}",
+          "variants": [
+            {
+              "payload_json": "{\"revenue_usd\":0,\"tax_usd\":0,\"shipping_usd\":0,\"native_revenue\":0,\"currency\":\"USD\",\"total_item_quantity\":0,\"unique_items\":0,\"items\":[]}",
+              "occurrence_count": 1,
+              "occurrences": [
+                {
+                  "event_date": "2026-09-01",
+                  "event_timestamp_micros": "1788220800000001",
+                  "occurrence_count": 1
+                }
+              ]
+            }
+          ],
+          "money": [
+            {
+              "metric": "revenue_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            },
+            {
+              "metric": "shipping_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            },
+            {
+              "metric": "tax_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            }
+          ]
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "platform": "WEB",
+          "stream_id": "web1",
+          "user_pseudo_id": "u",
+          "transaction_id": "1",
+          "event_date": "2026-09-01",
+          "occurrence_count": 1,
+          "payload_variant_count": 1,
+          "collapsed_duplicate_events": 0,
+          "status": "accepted",
+          "accepted_payload_json": "{\"revenue_usd\":0,\"tax_usd\":0,\"shipping_usd\":0,\"native_revenue\":0,\"currency\":\"USD\",\"total_item_quantity\":0,\"unique_items\":0,\"items\":[]}",
+          "variants": [
+            {
+              "payload_json": "{\"revenue_usd\":0,\"tax_usd\":0,\"shipping_usd\":0,\"native_revenue\":0,\"currency\":\"USD\",\"total_item_quantity\":0,\"unique_items\":0,\"items\":[]}",
+              "occurrence_count": 1,
+              "occurrences": [
+                {
+                  "event_date": "2026-09-01",
+                  "event_timestamp_micros": "1788220800000002",
+                  "occurrence_count": 1
+                }
+              ]
+            }
+          ],
+          "money": [
+            {
+              "metric": "revenue_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            },
+            {
+              "metric": "shipping_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            },
+            {
+              "metric": "tax_usd",
+              "amount": {
+                "value": 0,
+                "status": "known"
+              }
+            }
+          ]
+        }
+      ],
+      "item_lines": [],
+      "unkeyed_evidence": [],
+      "diagnostics": {
+        "window_has_unkeyed_evidence": false,
+        "observed_purchase_events": 2,
+        "qualified_purchase_events": 2,
+        "unkeyed_purchase_events": 0,
+        "qualified_transaction_count": 2,
+        "all_population_unique_purchase_count": 2,
+        "accepted_transaction_count": 2,
+        "conflicting_transaction_count": 0,
+        "qualified_payload_variants": 2,
+        "collapsed_duplicate_events": 0,
+        "item_line_count": 0
+      }
+    }
+  },
+  "probes": {
+    "filtered_timestamps": [
+      "1788220800000000",
+      "1788220800000001",
+      "1788220800000002"
+    ],
+    "unrestricted_segments": [
+      {
+        "timestamp": "1788220800000000",
+        "count": 1
+      },
+      {
+        "timestamp": "1788220800000001",
+        "count": 3
+      },
+      {
+        "timestamp": "1788220800000002",
+        "count": 1
+      },
+      {
+        "timestamp": "1788220800000010",
+        "count": 1001
+      }
+    ],
+    "unrestricted_rows": 1006
+  }
+}

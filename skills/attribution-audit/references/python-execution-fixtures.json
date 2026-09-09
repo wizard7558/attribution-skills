@@ -1,0 +1,1557 @@
+{
+  "contract_version": "0.1.0",
+  "derivation": {
+    "kind": "independent_literal_outputs",
+    "notes": "Regression and share outputs copied byte-value-equivalent from accepted literal fixtures. Pipeline: y=2+3x, x=0,1,2,3 gives beta3 and mean1.5; a18,b1.5; spend1.5 to4.5 gives response9 to13.5 delta4.5, explicit multipliers .5/1.5 give2.25/6.75. Missing-week unavailable structures copied from accepted guard goldens with exact selected regression config/observed mean and explicit scenario. No producer execution was used to author these expected values. Tolerances retain each accepted module fixture declarations.",
+    "fixture_hashes": {
+      "skills/mmm-and-incrementality-framing/references/regression-fixtures.json": "23353fa1f4d4b733d792460ad6cff18984d63fac3c70540b59d49e9804099c6c",
+      "skills/mmm-and-incrementality-framing/references/response-curve-fixtures.json": "4eaef0de2c17f4a47f1a6b1164c462d6973da3c9dcf990f86f74abdc07d3ff3b",
+      "skills/mmm-and-incrementality-framing/references/framing-fixtures.json": "bfc4ca4b0088154afaa3e4792c16c71a90e267adce3359ded4d584b170a8faab"
+    }
+  },
+  "cases": [
+    {
+      "id": "complete-three-process-pipeline",
+      "input": {
+        "audit_key": "complete-three-process-pipeline",
+        "boundary": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start": "2026-01-05",
+          "end": "2026-01-26",
+          "date_mode": "cohort",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "weekly_mlr",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          },
+          {
+            "step_id": "s1",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "response_curves",
+            "required": true,
+            "depends_on": [
+              "s0"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "s0-output"
+            ],
+            "artifact_ref": "s1-output"
+          },
+          {
+            "step_id": "s2",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "framing",
+            "required": true,
+            "depends_on": [
+              "s1"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "s1-output"
+            ],
+            "artifact_ref": "s2-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "fit_weekly_mlr",
+            "input": {
+              "config": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start_week": "2026-01-05",
+                "end_week": "2026-01-26",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "channel_keys": [
+                  "Ads+Case"
+                ],
+                "control_keys": [],
+                "min_weeks": 4,
+                "min_residual_df": 1,
+                "max_condition_number": 1000000
+              },
+              "rows": [
+                {
+                  "week": "2026-01-05",
+                  "spend": {
+                    "Ads+Case": 0
+                  },
+                  "controls": {},
+                  "outcome": 2,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                {
+                  "week": "2026-01-12",
+                  "spend": {
+                    "Ads+Case": 1
+                  },
+                  "controls": {},
+                  "outcome": 5,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                {
+                  "week": "2026-01-19",
+                  "spend": {
+                    "Ads+Case": 2
+                  },
+                  "controls": {},
+                  "outcome": 8,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                {
+                  "week": "2026-01-26",
+                  "spend": {
+                    "Ads+Case": 3
+                  },
+                  "controls": {},
+                  "outcome": 11,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                }
+              ]
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/weekly_mlr.py": "6821f2bdb34fce79eddb1b15988cf5638d6f0f61fdb51c2c02a0bf216a89fd14"
+            }
+          },
+          {
+            "step_id": "s1",
+            "operation": "calibrate_and_scenario",
+            "input": {
+              "regression_result": null,
+              "scenario": {
+                "spend_by_channel": {
+                  "Ads+Case": {
+                    "baseline": 1.5,
+                    "proposed": 4.5
+                  }
+                }
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/regression_result",
+                "evidence_ref": "s0-output",
+                "source_pointer": ""
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/response_curves.py": "662d83fe5f6b7751ebf503be541f408272d1d3cbbc2787224e0694e3620439b4"
+            }
+          },
+          {
+            "step_id": "s2",
+            "operation": "project_bands",
+            "input": {
+              "scenario_result": null,
+              "assumption": {
+                "label": "Explicit planning assumption",
+                "lower_multiplier": 0.5,
+                "upper_multiplier": 1.5
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/scenario_result",
+                "evidence_ref": "s1-output",
+                "source_pointer": "/scenario"
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/framing.py": "6b74519eb343f97acbca592449cf85dd92a60112ef84ce0bfb88bfe0d4a9ff24"
+            }
+          }
+        ]
+      },
+      "expected_outputs": [
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-weekly-population",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "as_of": "2026-02-02T00:00:00Z",
+            "outcome_name": "declared_outcome",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "Ads+Case"
+            ],
+            "control_keys": [],
+            "min_weeks": 4,
+            "min_residual_df": 1,
+            "max_condition_number": 1000000
+          },
+          "status": "fitted",
+          "intercept": 2,
+          "channel_coefficients": [
+            {
+              "key": "Ads+Case",
+              "coefficient": 3,
+              "mean_spend": 1.5
+            }
+          ],
+          "control_coefficients": [],
+          "weeks": [
+            {
+              "week": "2026-01-05",
+              "actual": 2,
+              "predicted": 2,
+              "residual": 0
+            },
+            {
+              "week": "2026-01-12",
+              "actual": 5,
+              "predicted": 5,
+              "residual": 0
+            },
+            {
+              "week": "2026-01-19",
+              "actual": 8,
+              "predicted": 8,
+              "residual": 0
+            },
+            {
+              "week": "2026-01-26",
+              "actual": 11,
+              "predicted": 11,
+              "residual": 0
+            }
+          ],
+          "diagnostics": {
+            "n": 4,
+            "p": 1,
+            "residual_df": 2,
+            "rank": 2,
+            "singular_values": [
+              2,
+              2
+            ],
+            "condition_number": 1,
+            "r2": 1,
+            "rcond": 8.881784197001252e-16,
+            "missing_weeks": [],
+            "missing_fields": [],
+            "excluded_outside_window": [],
+            "excluded_incomplete": [],
+            "duplicate_weeks_collapsed": 0,
+            "zero_variance_predictors": [],
+            "negative_coefficients": [],
+            "flags": []
+          },
+          "limits": [
+            "observational_association",
+            "not_causal_lift",
+            "no_p_values_or_confidence_intervals",
+            "in_sample_fit_only"
+          ]
+        },
+        {
+          "curves": {
+            "contract_version": "0.1.0",
+            "status": "ready",
+            "regression_status": "fitted",
+            "config": {
+              "report_scope": "synthetic-weekly-population",
+              "timezone": "UTC",
+              "start_week": "2026-01-05",
+              "end_week": "2026-01-26",
+              "as_of": "2026-02-02T00:00:00Z",
+              "outcome_name": "declared_outcome",
+              "outcome_kind": "count",
+              "spend_currency": "USD",
+              "outcome_currency": null,
+              "channel_keys": [
+                "Ads+Case"
+              ],
+              "control_keys": [],
+              "min_weeks": 4,
+              "min_residual_df": 1,
+              "max_condition_number": 1000000
+            },
+            "channels": [
+              {
+                "key": "Ads+Case",
+                "coefficient": 3,
+                "mean_spend": 1.5,
+                "status": "ready",
+                "a": 18,
+                "b": 1.5
+              }
+            ],
+            "assumptions": [
+              "observational_association",
+              "local_marginal_calibration",
+              "hill_exponent_fixed_one",
+              "curve_at_mean_not_ols_contribution",
+              "no_intercept_or_control_allocation",
+              "not_causal_lift"
+            ]
+          },
+          "scenario": {
+            "contract_version": "0.1.0",
+            "status": "complete",
+            "config": {
+              "report_scope": "synthetic-weekly-population",
+              "timezone": "UTC",
+              "start_week": "2026-01-05",
+              "end_week": "2026-01-26",
+              "as_of": "2026-02-02T00:00:00Z",
+              "outcome_name": "declared_outcome",
+              "outcome_kind": "count",
+              "spend_currency": "USD",
+              "outcome_currency": null,
+              "channel_keys": [
+                "Ads+Case"
+              ],
+              "control_keys": [],
+              "min_weeks": 4,
+              "min_residual_df": 1,
+              "max_condition_number": 1000000
+            },
+            "channels": [
+              {
+                "key": "Ads+Case",
+                "baseline_spend": 1.5,
+                "proposed_spend": 4.5,
+                "status": "ready",
+                "baseline_response": 9,
+                "proposed_response": 13.5,
+                "response_delta": 4.5
+              }
+            ],
+            "totals": {
+              "baseline_response": 9,
+              "proposed_response": 13.5,
+              "response_delta": 4.5
+            },
+            "limits": [
+              "assumed_media_response_only",
+              "not_fitted_full_outcome",
+              "not_causal_lift",
+              "no_confidence_bands_or_budget_recommendations"
+            ]
+          }
+        },
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-weekly-population",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "as_of": "2026-02-02T00:00:00Z",
+            "outcome_name": "declared_outcome",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "Ads+Case"
+            ],
+            "control_keys": [],
+            "min_weeks": 4,
+            "min_residual_df": 1,
+            "max_condition_number": 1000000
+          },
+          "status": "available",
+          "label": "Explicit planning assumption",
+          "lower_multiplier": 0.5,
+          "upper_multiplier": 1.5,
+          "point_delta": 4.5,
+          "lower_delta": 2.25,
+          "upper_delta": 6.75,
+          "reason": null,
+          "limits": [
+            "user_supplied_assumption_range",
+            "not_confidence_or_credible_interval",
+            "not_causal_lift",
+            "media_response_change_only"
+          ]
+        }
+      ],
+      "numeric_tolerances": [
+        {
+          "relative": 1e-09,
+          "absolute": 1e-10
+        },
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        },
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        }
+      ]
+    },
+    {
+      "id": "guarded-missing-week-pipeline",
+      "input": {
+        "audit_key": "guarded-missing-week-pipeline",
+        "boundary": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start": "2026-01-05",
+          "end": "2026-01-26",
+          "date_mode": "cohort",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "weekly_mlr",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          },
+          {
+            "step_id": "s1",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "response_curves",
+            "required": true,
+            "depends_on": [
+              "s0"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "s0-output"
+            ],
+            "artifact_ref": "s1-output"
+          },
+          {
+            "step_id": "s2",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "framing",
+            "required": true,
+            "depends_on": [
+              "s1"
+            ],
+            "input_evidence_refs": [
+              "attestation",
+              "s1-output"
+            ],
+            "artifact_ref": "s2-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "fit_weekly_mlr",
+            "input": {
+              "config": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start_week": "2026-01-05",
+                "end_week": "2026-01-26",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "channel_keys": [
+                  "Ads+Case"
+                ],
+                "control_keys": [],
+                "min_weeks": 4,
+                "min_residual_df": 1,
+                "max_condition_number": 1000000
+              },
+              "rows": [
+                {
+                  "week": "2026-01-05",
+                  "spend": {
+                    "Ads+Case": 0
+                  },
+                  "controls": {},
+                  "outcome": 2,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                {
+                  "week": "2026-01-19",
+                  "spend": {
+                    "Ads+Case": 2
+                  },
+                  "controls": {},
+                  "outcome": 8,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                {
+                  "week": "2026-01-26",
+                  "spend": {
+                    "Ads+Case": 3
+                  },
+                  "controls": {},
+                  "outcome": 11,
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                }
+              ]
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/weekly_mlr.py": "6821f2bdb34fce79eddb1b15988cf5638d6f0f61fdb51c2c02a0bf216a89fd14"
+            }
+          },
+          {
+            "step_id": "s1",
+            "operation": "calibrate_and_scenario",
+            "input": {
+              "regression_result": null,
+              "scenario": {
+                "spend_by_channel": {
+                  "Ads+Case": {
+                    "baseline": 1.5,
+                    "proposed": 4.5
+                  }
+                }
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/regression_result",
+                "evidence_ref": "s0-output",
+                "source_pointer": ""
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/response_curves.py": "662d83fe5f6b7751ebf503be541f408272d1d3cbbc2787224e0694e3620439b4"
+            }
+          },
+          {
+            "step_id": "s2",
+            "operation": "project_bands",
+            "input": {
+              "scenario_result": null,
+              "assumption": {
+                "label": "Explicit planning assumption",
+                "lower_multiplier": 0.5,
+                "upper_multiplier": 1.5
+              }
+            },
+            "bindings": [
+              {
+                "target_pointer": "/scenario_result",
+                "evidence_ref": "s1-output",
+                "source_pointer": "/scenario"
+              }
+            ],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-weekly-population",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "declared_outcome",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/framing.py": "6b74519eb343f97acbca592449cf85dd92a60112ef84ce0bfb88bfe0d4a9ff24"
+            }
+          }
+        ]
+      },
+      "expected_outputs": [
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-weekly-population",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "as_of": "2026-02-02T00:00:00Z",
+            "outcome_name": "declared_outcome",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "Ads+Case"
+            ],
+            "control_keys": [],
+            "min_weeks": 4,
+            "min_residual_df": 1,
+            "max_condition_number": 1000000
+          },
+          "status": "insufficient_input",
+          "intercept": null,
+          "channel_coefficients": [
+            {
+              "key": "Ads+Case",
+              "coefficient": null,
+              "mean_spend": null
+            }
+          ],
+          "control_coefficients": [],
+          "weeks": [
+            {
+              "week": "2026-01-05",
+              "actual": 2,
+              "predicted": null,
+              "residual": null
+            },
+            {
+              "week": "2026-01-12",
+              "actual": null,
+              "predicted": null,
+              "residual": null
+            },
+            {
+              "week": "2026-01-19",
+              "actual": 8,
+              "predicted": null,
+              "residual": null
+            },
+            {
+              "week": "2026-01-26",
+              "actual": 11,
+              "predicted": null,
+              "residual": null
+            }
+          ],
+          "diagnostics": {
+            "n": 4,
+            "p": 1,
+            "residual_df": 2,
+            "rank": null,
+            "singular_values": null,
+            "condition_number": null,
+            "r2": null,
+            "rcond": 8.881784197001252e-16,
+            "missing_weeks": [
+              "2026-01-12"
+            ],
+            "missing_fields": [],
+            "excluded_outside_window": [],
+            "excluded_incomplete": [],
+            "duplicate_weeks_collapsed": 0,
+            "zero_variance_predictors": [],
+            "negative_coefficients": [],
+            "flags": [
+              "missing_weeks"
+            ]
+          },
+          "limits": [
+            "observational_association",
+            "not_causal_lift",
+            "no_p_values_or_confidence_intervals",
+            "in_sample_fit_only"
+          ]
+        },
+        {
+          "curves": {
+            "contract_version": "0.1.0",
+            "status": "regression_unavailable",
+            "regression_status": "insufficient_input",
+            "config": {
+              "report_scope": "synthetic-weekly-population",
+              "timezone": "UTC",
+              "start_week": "2026-01-05",
+              "end_week": "2026-01-26",
+              "as_of": "2026-02-02T00:00:00Z",
+              "outcome_name": "declared_outcome",
+              "outcome_kind": "count",
+              "spend_currency": "USD",
+              "outcome_currency": null,
+              "channel_keys": [
+                "Ads+Case"
+              ],
+              "control_keys": [],
+              "min_weeks": 4,
+              "min_residual_df": 1,
+              "max_condition_number": 1000000
+            },
+            "channels": [
+              {
+                "key": "Ads+Case",
+                "coefficient": null,
+                "mean_spend": null,
+                "status": "regression_unavailable",
+                "a": null,
+                "b": null
+              }
+            ],
+            "assumptions": [
+              "observational_association",
+              "local_marginal_calibration",
+              "hill_exponent_fixed_one",
+              "curve_at_mean_not_ols_contribution",
+              "no_intercept_or_control_allocation",
+              "not_causal_lift"
+            ]
+          },
+          "scenario": {
+            "contract_version": "0.1.0",
+            "status": "incomplete",
+            "config": {
+              "report_scope": "synthetic-weekly-population",
+              "timezone": "UTC",
+              "start_week": "2026-01-05",
+              "end_week": "2026-01-26",
+              "as_of": "2026-02-02T00:00:00Z",
+              "outcome_name": "declared_outcome",
+              "outcome_kind": "count",
+              "spend_currency": "USD",
+              "outcome_currency": null,
+              "channel_keys": [
+                "Ads+Case"
+              ],
+              "control_keys": [],
+              "min_weeks": 4,
+              "min_residual_df": 1,
+              "max_condition_number": 1000000
+            },
+            "channels": [
+              {
+                "key": "Ads+Case",
+                "baseline_spend": 1.5,
+                "proposed_spend": 4.5,
+                "status": "regression_unavailable",
+                "baseline_response": null,
+                "proposed_response": null,
+                "response_delta": null
+              }
+            ],
+            "totals": {
+              "baseline_response": null,
+              "proposed_response": null,
+              "response_delta": null
+            },
+            "limits": [
+              "assumed_media_response_only",
+              "not_fitted_full_outcome",
+              "not_causal_lift",
+              "no_confidence_bands_or_budget_recommendations"
+            ]
+          }
+        },
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-weekly-population",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "as_of": "2026-02-02T00:00:00Z",
+            "outcome_name": "declared_outcome",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "Ads+Case"
+            ],
+            "control_keys": [],
+            "min_weeks": 4,
+            "min_residual_df": 1,
+            "max_condition_number": 1000000
+          },
+          "status": "unavailable",
+          "label": "Explicit planning assumption",
+          "lower_multiplier": 0.5,
+          "upper_multiplier": 1.5,
+          "point_delta": null,
+          "lower_delta": null,
+          "upper_delta": null,
+          "reason": "scenario_incomplete",
+          "limits": [
+            "user_supplied_assumption_range",
+            "not_confidence_or_credible_interval",
+            "not_causal_lift",
+            "media_response_change_only"
+          ]
+        }
+      ],
+      "numeric_tolerances": [
+        {
+          "relative": 1e-09,
+          "absolute": 1e-10
+        },
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        },
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        }
+      ]
+    },
+    {
+      "id": "shares-factors-adjusted-cpa",
+      "input": {
+        "audit_key": "shares-factors-adjusted-cpa",
+        "boundary": {
+          "report_scope": "synthetic-window",
+          "timezone": "UTC",
+          "start": "2026-01-05",
+          "end": "2026-01-26",
+          "date_mode": "cohort",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "weighted_outcome_quantity",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope-one",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "framing",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "compare_shares",
+            "input": {
+              "config": {
+                "report_scope": "synthetic-window",
+                "timezone": "UTC",
+                "start_week": "2026-01-05",
+                "end_week": "2026-01-26",
+                "outcome_name": "weighted_outcome_quantity",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ]
+              },
+              "mmm": {
+                "metadata": {
+                  "report_scope": "synthetic-window",
+                  "timezone": "UTC",
+                  "start_week": "2026-01-05",
+                  "end_week": "2026-01-26",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "outcome_kind": "count",
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                "complete": true,
+                "rows": [
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "mA",
+                    "channel_key": "A+Case",
+                    "contribution": 60
+                  },
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "mB",
+                    "channel_key": "a+case",
+                    "contribution": 40
+                  }
+                ]
+              },
+              "crm": {
+                "metadata": {
+                  "report_scope": "synthetic-window",
+                  "timezone": "UTC",
+                  "start_week": "2026-01-05",
+                  "end_week": "2026-01-26",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "outcome_kind": "count",
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                "complete": true,
+                "rows": [
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "cA",
+                    "channel_key": "A+Case",
+                    "spend": 300,
+                    "outcome_quantity": 30
+                  },
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "cB",
+                    "channel_key": "a+case",
+                    "spend": 700,
+                    "outcome_quantity": 70
+                  }
+                ]
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-window",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "weighted_outcome_quantity",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope-one"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/framing.py": "6b74519eb343f97acbca592449cf85dd92a60112ef84ce0bfb88bfe0d4a9ff24"
+            }
+          }
+        ]
+      },
+      "expected_outputs": [
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-window",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "outcome_name": "weighted_outcome_quantity",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "A+Case",
+              "a+case"
+            ]
+          },
+          "status": "complete",
+          "channels": [
+            {
+              "key": "A+Case",
+              "mmm_contribution": {
+                "value": 60,
+                "reason": null
+              },
+              "crm_spend": {
+                "value": 300,
+                "reason": null
+              },
+              "crm_outcome_quantity": {
+                "value": 30,
+                "reason": null
+              },
+              "mmm_share": {
+                "value": 0.6,
+                "reason": null
+              },
+              "crm_share": {
+                "value": 0.3,
+                "reason": null
+              },
+              "factor": {
+                "value": 2,
+                "reason": null
+              },
+              "crm_cpa": {
+                "value": 10,
+                "reason": null
+              },
+              "adjusted_cpa": {
+                "value": 5,
+                "reason": null
+              }
+            },
+            {
+              "key": "a+case",
+              "mmm_contribution": {
+                "value": 40,
+                "reason": null
+              },
+              "crm_spend": {
+                "value": 700,
+                "reason": null
+              },
+              "crm_outcome_quantity": {
+                "value": 70,
+                "reason": null
+              },
+              "mmm_share": {
+                "value": 0.4,
+                "reason": null
+              },
+              "crm_share": {
+                "value": 0.7,
+                "reason": null
+              },
+              "factor": {
+                "value": 0.5714285714285714,
+                "reason": null
+              },
+              "crm_cpa": {
+                "value": 10,
+                "reason": null
+              },
+              "adjusted_cpa": {
+                "value": 17.5,
+                "reason": null
+              }
+            }
+          ],
+          "diagnostics": {
+            "mmm": {
+              "complete": true,
+              "denominator": {
+                "value": 100,
+                "reason": null
+              },
+              "share_reason": null,
+              "duplicate_rows_collapsed": 0,
+              "missing_channels": [],
+              "negative_contribution_keys": []
+            },
+            "crm": {
+              "complete": true,
+              "denominator": {
+                "value": 100,
+                "reason": null
+              },
+              "share_reason": null,
+              "duplicate_rows_collapsed": 0,
+              "missing_channels": []
+            }
+          },
+          "limits": [
+            "observational_share_ratio",
+            "not_causal_incrementality",
+            "no_budget_recommendation",
+            "no_population_join"
+          ]
+        }
+      ],
+      "numeric_tolerances": [
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        }
+      ]
+    },
+    {
+      "id": "unknown-money-keeps-count-shares",
+      "input": {
+        "audit_key": "unknown-money-keeps-count-shares",
+        "boundary": {
+          "report_scope": "synthetic-window",
+          "timezone": "UTC",
+          "start": "2026-01-05",
+          "end": "2026-01-26",
+          "date_mode": "cohort",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "weighted_outcome_quantity",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "currency_status": "known"
+        },
+        "inventory": [
+          {
+            "source_system": "synthetic",
+            "source_scope": "scope-one",
+            "coverage_status": "complete",
+            "evidence_ref": "attestation"
+          }
+        ],
+        "bridges": [],
+        "evidence_records": [
+          {
+            "evidence_ref": "attestation",
+            "kind": "attestation",
+            "value": {
+              "kind": "synthetic caller scope and explicit-binding attestation"
+            },
+            "sha256": "2d8096667da2f0e388c04685fd923c1eea53293ad2116248a7b82fc87b47badf"
+          }
+        ],
+        "steps": [
+          {
+            "step_id": "s0",
+            "skill": "mmm-and-incrementality-framing",
+            "entrypoint": "framing",
+            "required": true,
+            "depends_on": [],
+            "input_evidence_refs": [
+              "attestation"
+            ],
+            "artifact_ref": "s0-output"
+          }
+        ],
+        "invocations": [
+          {
+            "step_id": "s0",
+            "operation": "compare_shares",
+            "input": {
+              "config": {
+                "report_scope": "synthetic-window",
+                "timezone": "UTC",
+                "start_week": "2026-01-05",
+                "end_week": "2026-01-26",
+                "outcome_name": "weighted_outcome_quantity",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ]
+              },
+              "mmm": {
+                "metadata": {
+                  "report_scope": "synthetic-window",
+                  "timezone": "UTC",
+                  "start_week": "2026-01-05",
+                  "end_week": "2026-01-26",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "outcome_kind": "count",
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                "complete": true,
+                "rows": [
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "mA",
+                    "channel_key": "A+Case",
+                    "contribution": 60
+                  },
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "mB",
+                    "channel_key": "a+case",
+                    "contribution": 40
+                  }
+                ]
+              },
+              "crm": {
+                "metadata": {
+                  "report_scope": "synthetic-window",
+                  "timezone": "UTC",
+                  "start_week": "2026-01-05",
+                  "end_week": "2026-01-26",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "outcome_kind": "count",
+                  "spend_currency": "USD",
+                  "outcome_currency": null
+                },
+                "complete": true,
+                "rows": [
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "cA",
+                    "channel_key": "A+Case",
+                    "spend": null,
+                    "outcome_quantity": 30
+                  },
+                  {
+                    "source_system": "synthetic",
+                    "source_scope": "scope-one",
+                    "row_key": "cB",
+                    "channel_key": "a+case",
+                    "spend": 700,
+                    "outcome_quantity": 70
+                  }
+                ]
+              }
+            },
+            "bindings": [],
+            "declaration": {
+              "boundary": {
+                "report_scope": "synthetic-window",
+                "timezone": "UTC",
+                "start": "2026-01-05",
+                "end": "2026-01-26",
+                "date_mode": "cohort",
+                "as_of": "2026-02-02T00:00:00Z",
+                "outcome_name": "weighted_outcome_quantity",
+                "outcome_kind": "count",
+                "spend_currency": "USD",
+                "outcome_currency": null,
+                "currency_status": "known"
+              },
+              "sources": [
+                {
+                  "source_system": "synthetic",
+                  "source_scope": "scope-one"
+                }
+              ],
+              "bridge_keys": []
+            },
+            "observations": [],
+            "expected_source_hashes": {
+              "mmm-and-incrementality-framing/scripts/framing.py": "6b74519eb343f97acbca592449cf85dd92a60112ef84ce0bfb88bfe0d4a9ff24"
+            }
+          }
+        ]
+      },
+      "expected_outputs": [
+        {
+          "contract_version": "0.1.0",
+          "config": {
+            "report_scope": "synthetic-window",
+            "timezone": "UTC",
+            "start_week": "2026-01-05",
+            "end_week": "2026-01-26",
+            "outcome_name": "weighted_outcome_quantity",
+            "outcome_kind": "count",
+            "spend_currency": "USD",
+            "outcome_currency": null,
+            "channel_keys": [
+              "A+Case",
+              "a+case"
+            ]
+          },
+          "status": "incomplete",
+          "channels": [
+            {
+              "key": "A+Case",
+              "mmm_contribution": {
+                "value": 60,
+                "reason": null
+              },
+              "crm_spend": {
+                "value": null,
+                "reason": "unknown_value"
+              },
+              "crm_outcome_quantity": {
+                "value": 30,
+                "reason": null
+              },
+              "mmm_share": {
+                "value": 0.6,
+                "reason": null
+              },
+              "crm_share": {
+                "value": 0.3,
+                "reason": null
+              },
+              "factor": {
+                "value": 2,
+                "reason": null
+              },
+              "crm_cpa": {
+                "value": null,
+                "reason": "unknown_value"
+              },
+              "adjusted_cpa": {
+                "value": null,
+                "reason": "cpa_unavailable"
+              }
+            },
+            {
+              "key": "a+case",
+              "mmm_contribution": {
+                "value": 40,
+                "reason": null
+              },
+              "crm_spend": {
+                "value": 700,
+                "reason": null
+              },
+              "crm_outcome_quantity": {
+                "value": 70,
+                "reason": null
+              },
+              "mmm_share": {
+                "value": 0.4,
+                "reason": null
+              },
+              "crm_share": {
+                "value": 0.7,
+                "reason": null
+              },
+              "factor": {
+                "value": 0.5714285714285714,
+                "reason": null
+              },
+              "crm_cpa": {
+                "value": 10,
+                "reason": null
+              },
+              "adjusted_cpa": {
+                "value": 17.5,
+                "reason": null
+              }
+            }
+          ],
+          "diagnostics": {
+            "mmm": {
+              "complete": true,
+              "denominator": {
+                "value": 100,
+                "reason": null
+              },
+              "share_reason": null,
+              "duplicate_rows_collapsed": 0,
+              "missing_channels": [],
+              "negative_contribution_keys": []
+            },
+            "crm": {
+              "complete": true,
+              "denominator": {
+                "value": 100,
+                "reason": null
+              },
+              "share_reason": null,
+              "duplicate_rows_collapsed": 0,
+              "missing_channels": []
+            }
+          },
+          "limits": [
+            "observational_share_ratio",
+            "not_causal_incrementality",
+            "no_budget_recommendation",
+            "no_population_join"
+          ]
+        }
+      ],
+      "numeric_tolerances": [
+        {
+          "relative": 1e-12,
+          "absolute": 0
+        }
+      ]
+    }
+  ]
+}

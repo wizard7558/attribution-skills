@@ -1,0 +1,1280 @@
+{
+  "contract_version": "0.1.0",
+  "mode": "rendering_only_no_sql",
+  "cases": [
+    {
+      "id": "crm-paid-attribution/attribute_leads_sql",
+      "input": {
+        "leads": [
+          {
+            "source_system": "crm_system",
+            "source_scope": "crm-a",
+            "lead_key": "lead-a",
+            "created_at": "2026-01-02T00:00:00Z",
+            "utm_source": "search.example",
+            "utm_medium": "cpc",
+            "utm_content": "Ad+A"
+          }
+        ],
+        "options": {
+          "source_map": [
+            {
+              "source": "search.example",
+              "medium": "cpc",
+              "channel": "Paid Search",
+              "network_id": "google_ads",
+              "campaign_key": "MapCampaign+Case"
+            }
+          ],
+          "source_patterns": [],
+          "ad_catalog": [
+            {
+              "source_system": "ads_system",
+              "source_scope": "ads-a",
+              "network_id": "google_ads",
+              "ad_key": "Ad+A",
+              "campaign_key": "CatalogCampaign+Case",
+              "ad_name": "Summer Sale"
+            }
+          ],
+          "ad_scope_bindings": [
+            {
+              "crm_source_system": "crm_system",
+              "crm_source_scope": "crm-a",
+              "ad_source_system": "ads_system",
+              "ad_source_scope": "ads-a",
+              "platform": "google_ads",
+              "entity_type": "ad"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "path": "skills/crm-paid-attribution/references/fixtures.json",
+        "sha256": "2245a9ea07e0d9a6b4d69727bf61090ceef0144b1c2aca9e9bdf694316a50d1e",
+        "case_id": "qualified-catalog-campaign-output",
+        "transport_derivation": "Native leads/options input unchanged; options_json/lead_json serialized from whole captured objects and input_position is explicit array-order transport ordinal."
+      }
+    },
+    {
+      "id": "funnel-truth-and-cost-per-stage/stage_truth",
+      "input": {
+        "configuration": {
+          "invocation_key": "complete-snapshot-stage-gaps",
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/references/stage-fixtures.json",
+        "sha256": "e81c234cf21a8c591fe99b0b7d2c7b8cb548dd34f2f4ae073636116b261061ad",
+        "case_id": "complete-snapshot-stage-gaps",
+        "namespace_from_fixture_id": "complete-snapshot-stage-gaps",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "funnel-truth-and-cost-per-stage/cost_per_stage",
+      "input": {
+        "configuration": {
+          "invocation_key": "all-five-buckets",
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "spend_complete": true
+        },
+        "stage_input": [
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          }
+        ],
+        "stage_ledger_input": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Matched",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-02T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Unmatched",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-02T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Ambiguous",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-02T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Missing",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-02T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "crm_attribution_input": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Matched",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "quality_status": "matched",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null,
+            "ad_match_status": "unmatched",
+            "candidate_ads": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Unmatched",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "quality_status": "matched",
+            "network_id": "google_ads",
+            "campaign_key": "NoCatalog",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null,
+            "ad_match_status": "unmatched",
+            "candidate_ads": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Ambiguous",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "quality_status": "matched",
+            "network_id": "google_ads",
+            "campaign_key": "Ambiguous",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null,
+            "ad_match_status": "ambiguous",
+            "candidate_ads": [
+              {
+                "source_system": "synthetic_ads",
+                "source_scope": "ads-a",
+                "ad_key": "Ad+One",
+                "campaign_key": "Ambiguous"
+              }
+            ]
+          }
+        ],
+        "account_currency_input": [],
+        "campaign_input": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case"
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "network_id": "google_ads",
+            "campaign_key": "Ambiguous"
+          }
+        ],
+        "binding_input": [
+          {
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "platform": "google_ads",
+            "entity_type": "campaign"
+          }
+        ],
+        "spend_input": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "spend": 20,
+            "currency": "USD",
+            "spend_status": "known"
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+B",
+            "event_date": "2026-01-02",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "network_id": "google_ads",
+            "campaign_key": "Ambiguous",
+            "spend": 12,
+            "currency": "USD",
+            "spend_status": "known"
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "unbound",
+            "spend_key": "Spend+C",
+            "event_date": "2026-01-02",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "network_id": "google_ads",
+            "campaign_key": "NoCatalog",
+            "spend": 9,
+            "currency": "USD",
+            "spend_status": "known"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/references/cost-fixtures.json",
+        "sha256": "762ccbcebbeadf494d522f489fa45444abc69d9b875a0ca72394ac287c09f2bf",
+        "case_id": "all-five-buckets",
+        "namespace_from_fixture_id": "all-five-buckets",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "funnel-truth-and-cost-per-stage/refresh_partitions",
+      "input": {
+        "configuration": {
+          "invocation_key": "late-won-rewrite-preserves-unaffected",
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "prior_report_timezone": "UTC",
+          "prior_watermark": "2026-07-10T00:00:00Z",
+          "as_of": "2026-07-12T00:00:00Z",
+          "overlap_days": 2,
+          "change_feed_complete": true,
+          "prior_snapshot_complete": true,
+          "current_snapshot_complete": true
+        },
+        "prior_ledger_input": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Changed",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-05-10T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-05-10",
+            "is_attribution_primary": true,
+            "value": 10,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_opportunities",
+                "source_scope": "opportunity-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+Changed"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Unaffected",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-05-10T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-05-10",
+            "is_attribution_primary": true,
+            "value": 10,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_opportunities",
+                "source_scope": "opportunity-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+Unaffected"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "current_ledger_input": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Changed",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-07-11T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-07-11",
+            "is_attribution_primary": true,
+            "value": 15,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_opportunities",
+                "source_scope": "opportunity-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+Changed"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Unaffected",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-05-10T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-05-10",
+            "is_attribution_primary": true,
+            "value": 10,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_opportunities",
+                "source_scope": "opportunity-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+Unaffected"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "change_input": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Changed",
+            "change_key": "Change+A",
+            "changed_at": "2026-07-11T00:00:00Z",
+            "reason": "opportunity"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/references/refresh-fixtures.json",
+        "sha256": "852b558dfbab1eef9c6f7af07f9332fc2c4b713d74cf75da8ef8d0b372a7aa8f",
+        "case_id": "late-won-rewrite-preserves-unaffected",
+        "namespace_from_fixture_id": "late-won-rewrite-preserves-unaffected",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "multi-touch-models-sql/credit_ledger",
+      "input": {
+        "configuration": {
+          "invocation_key": "one-touch-all-models",
+          "report_timezone": "UTC",
+          "report_start_date": "2026-02-01",
+          "report_end_date": "2026-02-28",
+          "as_of": "2026-03-01T00:00:00Z",
+          "requested_lookback_days": 30,
+          "min_lookback_days": 1,
+          "max_lookback_days": 90,
+          "half_life_days": 30,
+          "conversion_window_mode": "full_lookback"
+        },
+        "touches": [
+          {
+            "source_system": "web",
+            "source_scope": "a",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-02-10T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "subject_source_system": "crm",
+            "subject_source_scope": "a",
+            "subject_key": "s1"
+          }
+        ],
+        "conversions": [
+          {
+            "source_system": "crm",
+            "source_scope": "a",
+            "conversion_key": "c1",
+            "occurred_at": "2026-02-10T00:00:00Z",
+            "subject_source_system": "crm",
+            "subject_source_scope": "a",
+            "subject_key": "s1",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/multi-touch-models-sql/references/ledger-fixtures.json",
+        "sha256": "00790a4c9b23b5185cc578004dab42a065e327d3faa321a9a8e2e6cf2e63230e",
+        "case_id": "one-touch-all-models",
+        "namespace_from_fixture_id": "one-touch-all-models",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "multi-touch-models-sql/attribution_metrics",
+      "input": {
+        "configuration": {
+          "invocation_key": "matched-two",
+          "report_scope": "synthetic-population",
+          "report_timezone": "UTC",
+          "report_start_date": "2026-02-01",
+          "report_end_date": "2026-02-28",
+          "as_of": "2026-03-01T00:00:00Z",
+          "selected_model": "linear",
+          "conversion_window_mode": "full_lookback",
+          "spend_complete": true,
+          "outcome_kind": "conversions",
+          "acquisition_history_complete": false
+        },
+        "conversion_scopes": [
+          {
+            "source_system": "crm",
+            "source_scope": "a"
+          }
+        ],
+        "spend_scopes": [
+          {
+            "source_system": "ads",
+            "source_scope": "a",
+            "currency": "USD"
+          }
+        ],
+        "ledger": [
+          {
+            "source_system": "crm",
+            "source_scope": "a",
+            "conversion_key": "c1",
+            "touch_source_system": "web",
+            "touch_source_scope": "a",
+            "touch_key": "t1",
+            "conversion_at": "2026-02-10T00:00:00Z",
+            "conversion_date": "2026-02-10",
+            "touch_at": "2026-02-09T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "model": "linear",
+            "credit": 0.5,
+            "value": "100",
+            "currency": "USD",
+            "value_status": "known",
+            "conversion_window_mode": "full_lookback",
+            "report_timezone": "UTC",
+            "report_start_date": "2026-02-01",
+            "report_end_date": "2026-02-28",
+            "as_of": "2026-03-01T00:00:00Z"
+          },
+          {
+            "source_system": "crm",
+            "source_scope": "a",
+            "conversion_key": "c1",
+            "touch_source_system": "web",
+            "touch_source_scope": "a",
+            "touch_key": "t2",
+            "conversion_at": "2026-02-10T00:00:00Z",
+            "conversion_date": "2026-02-10",
+            "touch_at": "2026-02-10T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "model": "linear",
+            "credit": 0.5,
+            "value": "100",
+            "currency": "USD",
+            "value_status": "known",
+            "conversion_window_mode": "full_lookback",
+            "report_timezone": "UTC",
+            "report_start_date": "2026-02-01",
+            "report_end_date": "2026-02-28",
+            "as_of": "2026-03-01T00:00:00Z"
+          }
+        ],
+        "coverage": [
+          {
+            "source_system": "crm",
+            "source_scope": "a",
+            "conversion_key": "c1",
+            "model": "linear",
+            "conversion_at": "2026-02-10T00:00:00Z",
+            "conversion_date": "2026-02-10",
+            "value": "100",
+            "currency": "USD",
+            "value_status": "known",
+            "conversion_window_mode": "full_lookback",
+            "eligible_touch_count": 2,
+            "total_credit": 1,
+            "status": "credited"
+          }
+        ],
+        "spend": [
+          {
+            "source_system": "ads",
+            "source_scope": "a",
+            "spend_key": "s1",
+            "event_date": "2026-02-10",
+            "date_timezone": "UTC",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "spend": "25",
+            "currency": "USD",
+            "spend_status": "known"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/multi-touch-models-sql/references/metrics-fixtures.json",
+        "sha256": "155698686803b61b2fb2278b473d8ebd1cf20eb34c04923980afbbd0d2db6bf9",
+        "case_id": "matched-two",
+        "namespace_from_fixture_id": "matched-two",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/spend_conservation",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/reconciliation-fixtures.json",
+        "sha256": "b6705f4bbd56012a8e0c0bf14c5bdfe99315b2006f888eabd311d457a5cc82e9",
+        "case_id": "spend-baseline",
+        "namespace_from_fixture_id": "spend-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/funnel_additivity",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/reconciliation-fixtures.json",
+        "sha256": "b6705f4bbd56012a8e0c0bf14c5bdfe99315b2006f888eabd311d457a5cc82e9",
+        "case_id": "funnel-baseline",
+        "namespace_from_fixture_id": "funnel-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/unmapped_share",
+      "input": {
+        "configuration": {
+          "invocation_key": "unmapped-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da",
+        "case_id": "unmapped-baseline",
+        "namespace_from_fixture_id": "unmapped-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/match_rate",
+      "input": {
+        "configuration": {
+          "invocation_key": "match-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da",
+        "case_id": "match-baseline",
+        "namespace_from_fixture_id": "match-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/primary_uniqueness",
+      "input": {
+        "configuration": {
+          "invocation_key": "primary-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da",
+        "case_id": "primary-baseline",
+        "namespace_from_fixture_id": "primary-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/source_parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "parity-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da",
+        "case_id": "parity-baseline",
+        "namespace_from_fixture_id": "parity-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/no_pii_columns",
+      "input": {
+        "configuration": {
+          "invocation_key": "schema-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/schema-fixtures.json",
+        "sha256": "5b5cbe7c67bc3e1769c3c847ac6e5e0f59489de87ff27d32cf47e518a4daabf1",
+        "case_id": "schema-baseline",
+        "namespace_from_fixture_id": "schema-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/empty_column_probe",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/empty-column-fixtures.json",
+        "sha256": "4adcc5533be8a71fa6d352d4ead1e3f8b784ab25a5a5b42828a4da460e2886a8",
+        "case_id": "empty-baseline",
+        "namespace_from_fixture_id": "empty-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/deleted_ad_coverage",
+      "input": {
+        "configuration": {
+          "invocation_key": "deleted-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-campaign",
+          "report_evidence_ref": "synthetic-ads",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "pair_key": "pair-a",
+            "ad_source_system": "ad_export",
+            "ad_source_scope": "account-a",
+            "reference_source_system": "campaign_export",
+            "reference_source_scope": "account-a",
+            "ad_complete": true,
+            "reference_complete": true,
+            "ad_timezone": "UTC",
+            "reference_timezone": "UTC",
+            "ad_history_start": "2026-01-01",
+            "reference_history_start": "2026-01-01",
+            "ad_includes_deleted": true,
+            "reference_includes_deleted": true,
+            "ad_status_filter": "all-statuses",
+            "reference_status_filter": "all-statuses",
+            "ad_capture_mode": "incremental_snapshot",
+            "reference_capture_mode": "incremental_snapshot",
+            "comparability_evidence_ref": "synthetic-comparability"
+          }
+        ],
+        "ads": [
+          {
+            "source_system": "ad_export",
+            "source_scope": "account-a",
+            "fact_key": "hour-1",
+            "event_date": "2026-01-01",
+            "campaign_key": "Campaign+A",
+            "spend": "10",
+            "currency": "USD",
+            "spend_status": "known",
+            "ad_key": "Ad+A"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "campaign_export",
+            "source_scope": "account-a",
+            "fact_key": "daily-1",
+            "event_date": "2026-01-01",
+            "campaign_key": "Campaign+A",
+            "spend": "10",
+            "currency": "USD",
+            "spend_status": "known"
+          }
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/deleted-ad-coverage-fixtures.json",
+        "sha256": "932e4dadbc9d6570b3e6bd5405fce22c4ac2d8727674b0358f9fa901308d267e",
+        "case_id": "deleted-baseline",
+        "namespace_from_fixture_id": "deleted-baseline",
+        "materialized_null_paths": [],
+        "transport_derivation": "Only original fixture.id copied into explicit configuration.invocation_key and missing nullable fields materialized as null exactly as accepted typed renderer did. No production renderer defaults."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/inspect_schema",
+      "input": {
+        "project": "synthetic-project",
+        "dataset": "synthetic_dataset",
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_keys": [
+          "clean_table",
+          "empty_table",
+          "missing_table",
+          "nested_table"
+        ]
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/schema-fixtures.json",
+        "sha256": "5b5cbe7c67bc3e1769c3c847ac6e5e0f59489de87ff27d32cf47e518a4daabf1",
+        "case_id": "integration",
+        "transport_derivation": "Accepted extractor integration parameter shape; explicit public synthetic project/dataset replace owned runtime-generated metadata identifiers."
+      }
+    },
+    {
+      "id": "attribution-data-quality-tripwires/inspect_column_population",
+      "input": {
+        "project": "synthetic-project",
+        "dataset": "synthetic_dataset",
+        "table_name": "population",
+        "column_names": [
+          "all_null",
+          "amount",
+          "complex",
+          "flag",
+          "json_cell",
+          "missing",
+          "text"
+        ],
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "population_mode": "report_window",
+        "report_timezone": "America/Los_Angeles",
+        "start_date": "2026-01-01",
+        "end_date": "2026-01-01",
+        "date_column": "event_ts"
+      },
+      "derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/empty-column-fixtures.json",
+        "sha256": "4adcc5533be8a71fa6d352d4ead1e3f8b784ab25a5a5b42828a4da460e2886a8",
+        "case_id": "actual-timestamp",
+        "transport_derivation": "Accepted extractor integration parameter shape; explicit public synthetic project/dataset replace owned runtime-generated metadata identifiers."
+      }
+    }
+  ]
+}

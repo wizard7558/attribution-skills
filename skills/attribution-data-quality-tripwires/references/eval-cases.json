@@ -1,0 +1,2523 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/quality-quick-reference.md",
+    "references/evaluation-output-contract.md",
+    "references/channel-contract.md"
+  ],
+  "groups": [
+    {
+      "id": "reconciliation",
+      "prompt": "Evaluate each supplied check independently from its explicit inputs. Return cases in input order, with the native finding check_id, overall status, sorted overall reasons, and the scalar values at exactly the requested native JSON paths in request order. Return only the specified compact JSON projection. Preserve decimal strings, booleans, and nulls.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "r1",
+            "check_id": "spend_conservation",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "r1",
+                "report_scope": "synthetic-window",
+                "crm_source_system": "synthetic_crm",
+                "crm_source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "cohort",
+                "stage_key": "won",
+                "source_complete": true,
+                "report_complete": true,
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "abs_tolerance": "0",
+                "relative_tolerance": "0"
+              },
+              "source": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Spend+A",
+                  "event_date": "2026-01-02",
+                  "spend": "20",
+                  "currency": "USD",
+                  "spend_status": "known",
+                  "included": true
+                }
+              ],
+              "report": [
+                {
+                  "report_date": "2026-01-02",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "channel": "Paid Search",
+                  "channel_status": "classified",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "bucket": "matched",
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "date_mode": "cohort",
+                  "report_timezone": "UTC",
+                  "taxonomy_version": "0.1.0",
+                  "spend_fact_count": 1,
+                  "observed_spend": "20",
+                  "observed_spend_currency": "USD",
+                  "observed_spend_status": "known"
+                },
+                {
+                  "report_date": "2026-01-02",
+                  "stage_key": "lead",
+                  "stage_order": 10,
+                  "stage_kind": "lead",
+                  "channel": "Paid Search",
+                  "channel_status": "classified",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "bucket": "matched",
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "date_mode": "cohort",
+                  "report_timezone": "UTC",
+                  "taxonomy_version": "0.1.0",
+                  "spend_fact_count": 1,
+                  "observed_spend": "20",
+                  "observed_spend_currency": "USD",
+                  "observed_spend_status": "known"
+                }
+              ],
+              "membership": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/source_fact_count",
+              "/details/0/report_fact_count",
+              "/details/0/currency_comparisons/0/source_known_amount",
+              "/details/0/currency_comparisons/0/report_known_amount",
+              "/details/0/currency_comparisons/0/amount_difference",
+              "/diagnostics/report_other_stage_rows"
+            ]
+          },
+          {
+            "case_id": "r2",
+            "check_id": "spend_conservation",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "r2",
+                "report_scope": "synthetic-window",
+                "crm_source_system": "synthetic_crm",
+                "crm_source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "cohort",
+                "stage_key": "won",
+                "source_complete": true,
+                "report_complete": true,
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "abs_tolerance": "0",
+                "relative_tolerance": "0"
+              },
+              "source": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Spend+A",
+                  "event_date": "2026-01-02",
+                  "spend": null,
+                  "currency": null,
+                  "spend_status": "unknown",
+                  "included": true
+                }
+              ],
+              "report": [],
+              "membership": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/source_fact_count",
+              "/details/0/report_fact_count",
+              "/details/0/fact_count_difference",
+              "/details/0/source_unknown_fact_count",
+              "/details/0/report_present"
+            ]
+          },
+          {
+            "case_id": "r3",
+            "check_id": "funnel_additivity",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "r3",
+                "report_scope": "synthetic-window",
+                "crm_source_system": "synthetic_crm",
+                "crm_source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "cohort",
+                "stage_key": "won",
+                "source_complete": true,
+                "report_complete": true,
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report"
+              },
+              "source": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Lead+A",
+                  "stage_key": "won",
+                  "report_date": null,
+                  "included": true,
+                  "achieved": true,
+                  "is_attribution_primary": false
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unknown",
+                  "stage_key": "won",
+                  "report_date": null,
+                  "included": true,
+                  "achieved": null,
+                  "is_attribution_primary": false
+                }
+              ],
+              "report": [
+                {
+                  "report_date": null,
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "channel": "Paid Search",
+                  "channel_status": "classified",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "bucket": "matched",
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "date_mode": "cohort",
+                  "report_timezone": "UTC",
+                  "taxonomy_version": "0.1.0",
+                  "lead_count": 2,
+                  "stage_count_total": 1,
+                  "stage_count_primary": 0,
+                  "stage_unknown_count": 1
+                }
+              ],
+              "membership": []
+            },
+            "requested_paths": [
+              "/details/0/report_date",
+              "/details/0/metrics/0/source_count",
+              "/details/0/metrics/0/report_count",
+              "/details/0/metrics/0/difference",
+              "/details/0/metrics/0/status",
+              "/details/0/metrics/1/source_count",
+              "/details/0/metrics/1/report_count",
+              "/details/0/metrics/1/difference",
+              "/details/0/metrics/1/status",
+              "/details/0/metrics/2/source_count",
+              "/details/0/metrics/2/report_count",
+              "/details/0/metrics/2/difference",
+              "/details/0/metrics/2/status",
+              "/details/0/metrics/3/source_count",
+              "/details/0/metrics/3/report_count",
+              "/details/0/metrics/3/difference",
+              "/details/0/metrics/3/status"
+            ]
+          },
+          {
+            "case_id": "r4",
+            "check_id": "funnel_additivity",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "r4",
+                "report_scope": "synthetic-window",
+                "crm_source_system": "synthetic_crm",
+                "crm_source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "cohort",
+                "stage_key": "won",
+                "source_complete": true,
+                "report_complete": true,
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report"
+              },
+              "source": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Lead+A",
+                  "stage_key": "won",
+                  "report_date": "2026-01-02",
+                  "included": true,
+                  "achieved": true,
+                  "is_attribution_primary": true
+                }
+              ],
+              "report": [],
+              "membership": []
+            },
+            "requested_paths": [
+              "/details/0/report_date",
+              "/details/0/metrics/0/source_count",
+              "/details/0/metrics/0/report_count",
+              "/details/0/metrics/0/difference",
+              "/details/0/metrics/0/status",
+              "/details/0/metrics/1/source_count",
+              "/details/0/metrics/1/report_count",
+              "/details/0/metrics/1/difference",
+              "/details/0/metrics/1/status",
+              "/details/0/metrics/2/source_count",
+              "/details/0/metrics/2/report_count",
+              "/details/0/metrics/2/difference",
+              "/details/0/metrics/2/status",
+              "/details/0/metrics/3/source_count",
+              "/details/0/metrics/3/report_count",
+              "/details/0/metrics/3/difference",
+              "/details/0/metrics/3/status"
+            ]
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "check_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": [
+                          "string",
+                          "boolean",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "check_id",
+                "status",
+                "reasons",
+                "values"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "r1"
+        },
+        {
+          "path": "/cases/0/check_id",
+          "op": "equals",
+          "expected": "spend_conservation"
+        },
+        {
+          "path": "/cases/0/status",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/0/reasons",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/0/values",
+          "op": "array_length_equals",
+          "expected": 6
+        },
+        {
+          "path": "/cases/0/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/source_fact_count"
+        },
+        {
+          "path": "/cases/0/values/0/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/report_fact_count"
+        },
+        {
+          "path": "/cases/0/values/1/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/currency_comparisons/0/source_known_amount"
+        },
+        {
+          "path": "/cases/0/values/2/value",
+          "op": "equals",
+          "expected": "20"
+        },
+        {
+          "path": "/cases/0/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/currency_comparisons/0/report_known_amount"
+        },
+        {
+          "path": "/cases/0/values/3/value",
+          "op": "equals",
+          "expected": "20"
+        },
+        {
+          "path": "/cases/0/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/currency_comparisons/0/amount_difference"
+        },
+        {
+          "path": "/cases/0/values/4/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/0/values/5/path",
+          "op": "equals",
+          "expected": "/diagnostics/report_other_stage_rows"
+        },
+        {
+          "path": "/cases/0/values/5/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "r2"
+        },
+        {
+          "path": "/cases/1/check_id",
+          "op": "equals",
+          "expected": "spend_conservation"
+        },
+        {
+          "path": "/cases/1/status",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/1/reasons",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/1/reasons/0",
+          "op": "equals",
+          "expected": "fact_count_mismatch"
+        },
+        {
+          "path": "/cases/1/reasons/1",
+          "op": "equals",
+          "expected": "unknown_money"
+        },
+        {
+          "path": "/cases/1/values",
+          "op": "array_length_equals",
+          "expected": 5
+        },
+        {
+          "path": "/cases/1/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/source_fact_count"
+        },
+        {
+          "path": "/cases/1/values/0/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/report_fact_count"
+        },
+        {
+          "path": "/cases/1/values/1/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/1/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/fact_count_difference"
+        },
+        {
+          "path": "/cases/1/values/2/value",
+          "op": "equals",
+          "expected": "-1"
+        },
+        {
+          "path": "/cases/1/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/source_unknown_fact_count"
+        },
+        {
+          "path": "/cases/1/values/3/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/report_present"
+        },
+        {
+          "path": "/cases/1/values/4/value",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "r3"
+        },
+        {
+          "path": "/cases/2/check_id",
+          "op": "equals",
+          "expected": "funnel_additivity"
+        },
+        {
+          "path": "/cases/2/status",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/2/reasons",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/2/values",
+          "op": "array_length_equals",
+          "expected": 17
+        },
+        {
+          "path": "/cases/2/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/report_date"
+        },
+        {
+          "path": "/cases/2/values/0/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/2/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/source_count"
+        },
+        {
+          "path": "/cases/2/values/1/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/2/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/report_count"
+        },
+        {
+          "path": "/cases/2/values/2/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/2/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/difference"
+        },
+        {
+          "path": "/cases/2/values/3/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/status"
+        },
+        {
+          "path": "/cases/2/values/4/value",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/2/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/source_count"
+        },
+        {
+          "path": "/cases/2/values/5/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/2/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/report_count"
+        },
+        {
+          "path": "/cases/2/values/6/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/2/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/difference"
+        },
+        {
+          "path": "/cases/2/values/7/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/8/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/status"
+        },
+        {
+          "path": "/cases/2/values/8/value",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/2/values/9/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/source_count"
+        },
+        {
+          "path": "/cases/2/values/9/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/10/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/report_count"
+        },
+        {
+          "path": "/cases/2/values/10/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/11/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/difference"
+        },
+        {
+          "path": "/cases/2/values/11/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/12/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/status"
+        },
+        {
+          "path": "/cases/2/values/12/value",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/2/values/13/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/source_count"
+        },
+        {
+          "path": "/cases/2/values/13/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/2/values/14/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/report_count"
+        },
+        {
+          "path": "/cases/2/values/14/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/2/values/15/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/difference"
+        },
+        {
+          "path": "/cases/2/values/15/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/16/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/status"
+        },
+        {
+          "path": "/cases/2/values/16/value",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "r4"
+        },
+        {
+          "path": "/cases/3/check_id",
+          "op": "equals",
+          "expected": "funnel_additivity"
+        },
+        {
+          "path": "/cases/3/status",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/reasons",
+          "op": "array_length_equals",
+          "expected": 1
+        },
+        {
+          "path": "/cases/3/reasons/0",
+          "op": "equals",
+          "expected": "count_mismatch"
+        },
+        {
+          "path": "/cases/3/values",
+          "op": "array_length_equals",
+          "expected": 17
+        },
+        {
+          "path": "/cases/3/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/report_date"
+        },
+        {
+          "path": "/cases/3/values/0/value",
+          "op": "equals",
+          "expected": "2026-01-02"
+        },
+        {
+          "path": "/cases/3/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/source_count"
+        },
+        {
+          "path": "/cases/3/values/1/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/3/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/report_count"
+        },
+        {
+          "path": "/cases/3/values/2/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/difference"
+        },
+        {
+          "path": "/cases/3/values/3/value",
+          "op": "equals",
+          "expected": "-1"
+        },
+        {
+          "path": "/cases/3/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/0/status"
+        },
+        {
+          "path": "/cases/3/values/4/value",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/source_count"
+        },
+        {
+          "path": "/cases/3/values/5/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/3/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/report_count"
+        },
+        {
+          "path": "/cases/3/values/6/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/difference"
+        },
+        {
+          "path": "/cases/3/values/7/value",
+          "op": "equals",
+          "expected": "-1"
+        },
+        {
+          "path": "/cases/3/values/8/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/1/status"
+        },
+        {
+          "path": "/cases/3/values/8/value",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/values/9/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/source_count"
+        },
+        {
+          "path": "/cases/3/values/9/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/3/values/10/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/report_count"
+        },
+        {
+          "path": "/cases/3/values/10/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/11/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/difference"
+        },
+        {
+          "path": "/cases/3/values/11/value",
+          "op": "equals",
+          "expected": "-1"
+        },
+        {
+          "path": "/cases/3/values/12/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/2/status"
+        },
+        {
+          "path": "/cases/3/values/12/value",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/values/13/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/source_count"
+        },
+        {
+          "path": "/cases/3/values/13/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/14/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/report_count"
+        },
+        {
+          "path": "/cases/3/values/14/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/15/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/difference"
+        },
+        {
+          "path": "/cases/3/values/15/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/16/path",
+          "op": "equals",
+          "expected": "/details/0/metrics/3/status"
+        },
+        {
+          "path": "/cases/3/values/16/value",
+          "op": "equals",
+          "expected": "pass"
+        }
+      ]
+    },
+    {
+      "id": "population",
+      "prompt": "Evaluate each supplied check independently from its explicit inputs. Return cases in input order, with the native finding check_id, overall status, sorted overall reasons, and the scalar values at exactly the requested native JSON paths in request order. Return only the specified compact JSON projection. Preserve decimal strings, booleans, and nulls.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "p1",
+            "check_id": "unmapped_share",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "p1",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "source_complete": true,
+                "threshold": "0.5",
+                "min_eligible_count": 1
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a"
+                }
+              ],
+              "source": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "record_key": "A",
+                  "included": true,
+                  "eligible": true,
+                  "meets_condition": null
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/eligible_count",
+              "/details/0/true_count",
+              "/details/0/false_count",
+              "/details/0/unknown_count",
+              "/details/0/point_rate",
+              "/details/0/lower_rate",
+              "/details/0/upper_rate",
+              "/details/0/unknown_conditions_present"
+            ]
+          },
+          {
+            "case_id": "p2",
+            "check_id": "match_rate",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "p2",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "source_complete": true,
+                "threshold": "0.5",
+                "min_eligible_count": 1
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a"
+                }
+              ],
+              "source": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "record_key": "A",
+                  "included": true,
+                  "eligible": true,
+                  "meets_condition": null
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "record_key": "B",
+                  "included": true,
+                  "eligible": true,
+                  "meets_condition": true
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/eligible_count",
+              "/details/0/true_count",
+              "/details/0/false_count",
+              "/details/0/unknown_count",
+              "/details/0/point_rate",
+              "/details/0/lower_rate",
+              "/details/0/upper_rate",
+              "/details/0/unknown_conditions_present"
+            ]
+          },
+          {
+            "case_id": "p3",
+            "check_id": "primary_uniqueness",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "p3",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "source_complete": false
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a"
+                }
+              ],
+              "source": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "record_key": "A",
+                  "included": true,
+                  "group_key": "G",
+                  "is_attribution_primary": true
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "record_key": "B",
+                  "included": true,
+                  "group_key": "G",
+                  "is_attribution_primary": true
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/source_system",
+              "/details/0/source_scope",
+              "/details/0/member_count",
+              "/details/0/primary_count",
+              "/details/0/status"
+            ]
+          },
+          {
+            "case_id": "p4",
+            "check_id": "source_parity",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "p4",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-source",
+                "report_evidence_ref": "synthetic-report",
+                "metric_name": "leads",
+                "unit": "count",
+                "abs_tolerance": "0",
+                "relative_tolerance": "0"
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "reference_complete": false,
+                  "observed_complete": true,
+                  "reference_evidence_ref": "reference-a",
+                  "observed_evidence_ref": "observed-a"
+                }
+              ],
+              "reference": [],
+              "observed": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "event_date": "2026-01-01",
+                  "count": 2,
+                  "report_scope": "synthetic-window",
+                  "report_timezone": "UTC",
+                  "date_mode": "cohort",
+                  "metric_name": "leads"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/reference_complete",
+              "/details/0/observed_complete",
+              "/details/0/reference_present",
+              "/details/0/observed_present",
+              "/details/0/reference_count",
+              "/details/0/observed_count",
+              "/details/0/difference",
+              "/details/0/allowed_difference"
+            ]
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "check_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": [
+                          "string",
+                          "boolean",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "check_id",
+                "status",
+                "reasons",
+                "values"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "p1"
+        },
+        {
+          "path": "/cases/0/check_id",
+          "op": "equals",
+          "expected": "unmapped_share"
+        },
+        {
+          "path": "/cases/0/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/0/reasons",
+          "op": "array_length_equals",
+          "expected": 1
+        },
+        {
+          "path": "/cases/0/reasons/0",
+          "op": "equals",
+          "expected": "condition_uncertainty"
+        },
+        {
+          "path": "/cases/0/values",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/0/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/eligible_count"
+        },
+        {
+          "path": "/cases/0/values/0/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/true_count"
+        },
+        {
+          "path": "/cases/0/values/1/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/0/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/false_count"
+        },
+        {
+          "path": "/cases/0/values/2/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/0/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/unknown_count"
+        },
+        {
+          "path": "/cases/0/values/3/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/point_rate"
+        },
+        {
+          "path": "/cases/0/values/4/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/0/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/lower_rate"
+        },
+        {
+          "path": "/cases/0/values/5/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/0/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/upper_rate"
+        },
+        {
+          "path": "/cases/0/values/6/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/unknown_conditions_present"
+        },
+        {
+          "path": "/cases/0/values/7/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "p2"
+        },
+        {
+          "path": "/cases/1/check_id",
+          "op": "equals",
+          "expected": "match_rate"
+        },
+        {
+          "path": "/cases/1/status",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/1/reasons",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/1/values",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/1/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/eligible_count"
+        },
+        {
+          "path": "/cases/1/values/0/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/1/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/true_count"
+        },
+        {
+          "path": "/cases/1/values/1/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/false_count"
+        },
+        {
+          "path": "/cases/1/values/2/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/1/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/unknown_count"
+        },
+        {
+          "path": "/cases/1/values/3/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/point_rate"
+        },
+        {
+          "path": "/cases/1/values/4/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/1/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/lower_rate"
+        },
+        {
+          "path": "/cases/1/values/5/value",
+          "op": "equals",
+          "expected": "0.5"
+        },
+        {
+          "path": "/cases/1/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/upper_rate"
+        },
+        {
+          "path": "/cases/1/values/6/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/unknown_conditions_present"
+        },
+        {
+          "path": "/cases/1/values/7/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "p3"
+        },
+        {
+          "path": "/cases/2/check_id",
+          "op": "equals",
+          "expected": "primary_uniqueness"
+        },
+        {
+          "path": "/cases/2/status",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/2/reasons",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/2/reasons/0",
+          "op": "equals",
+          "expected": "multiple_primary"
+        },
+        {
+          "path": "/cases/2/reasons/1",
+          "op": "equals",
+          "expected": "source_incomplete"
+        },
+        {
+          "path": "/cases/2/values",
+          "op": "array_length_equals",
+          "expected": 5
+        },
+        {
+          "path": "/cases/2/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/source_system"
+        },
+        {
+          "path": "/cases/2/values/0/value",
+          "op": "equals",
+          "expected": "synthetic_crm"
+        },
+        {
+          "path": "/cases/2/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/source_scope"
+        },
+        {
+          "path": "/cases/2/values/1/value",
+          "op": "equals",
+          "expected": "crm-a"
+        },
+        {
+          "path": "/cases/2/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/member_count"
+        },
+        {
+          "path": "/cases/2/values/2/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/2/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/primary_count"
+        },
+        {
+          "path": "/cases/2/values/3/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/2/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/status"
+        },
+        {
+          "path": "/cases/2/values/4/value",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "p4"
+        },
+        {
+          "path": "/cases/3/check_id",
+          "op": "equals",
+          "expected": "source_parity"
+        },
+        {
+          "path": "/cases/3/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/3/reasons",
+          "op": "array_length_equals",
+          "expected": 1
+        },
+        {
+          "path": "/cases/3/reasons/0",
+          "op": "equals",
+          "expected": "reference_incomplete"
+        },
+        {
+          "path": "/cases/3/values",
+          "op": "array_length_equals",
+          "expected": 8
+        },
+        {
+          "path": "/cases/3/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/reference_complete"
+        },
+        {
+          "path": "/cases/3/values/0/value",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/3/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/observed_complete"
+        },
+        {
+          "path": "/cases/3/values/1/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/reference_present"
+        },
+        {
+          "path": "/cases/3/values/2/value",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/3/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/observed_present"
+        },
+        {
+          "path": "/cases/3/values/3/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/reference_count"
+        },
+        {
+          "path": "/cases/3/values/4/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/observed_count"
+        },
+        {
+          "path": "/cases/3/values/5/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/3/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/difference"
+        },
+        {
+          "path": "/cases/3/values/6/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/allowed_difference"
+        },
+        {
+          "path": "/cases/3/values/7/value",
+          "op": "equals",
+          "expected": null
+        }
+      ]
+    },
+    {
+      "id": "schema_history",
+      "prompt": "Evaluate each supplied check independently from its explicit inputs. Return cases in input order, with the native finding check_id, overall status, sorted overall reasons, and the scalar values at exactly the requested native JSON paths in request order. Return only the specified compact JSON projection. Preserve decimal strings, booleans, and nulls.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "s1",
+            "check_id": "no_pii_columns",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "s1",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-schema",
+                "report_evidence_ref": "synthetic-policy"
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "safe_table",
+                  "schema_complete": false,
+                  "table_exists": true
+                }
+              ],
+              "columns": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "safe_table",
+                  "field_path": "email",
+                  "data_type": "STRING"
+                }
+              ],
+              "policy": [
+                {
+                  "rule_key": "email_leaf",
+                  "match_kind": "exact_leaf",
+                  "pattern": "email"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/schema_complete",
+              "/details/0/table_exists",
+              "/details/0/observed_column_count",
+              "/details/0/matching_paths/0/field_path",
+              "/details/0/matching_paths/0/matched_rule_ids/0"
+            ]
+          },
+          {
+            "case_id": "s2",
+            "check_id": "empty_column_probe",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "s2",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-schema",
+                "report_evidence_ref": "synthetic-population",
+                "population_mode": "full_table_snapshot"
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "sample_table",
+                  "column_key": "amount",
+                  "schema_complete": true,
+                  "table_exists": true,
+                  "column_exists": true,
+                  "scan_complete": true
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "sample_table",
+                  "column_key": "amount",
+                  "row_count": 2,
+                  "non_null_count": 1,
+                  "population_mode": "full_table_snapshot",
+                  "observed_start": null,
+                  "observed_end": null
+                }
+              ]
+            },
+            "requested_paths": [
+              "/configuration/population_mode",
+              "/details/0/row_count",
+              "/details/0/non_null_count",
+              "/details/0/observed_start",
+              "/details/0/observed_end",
+              "/details/0/scan_complete"
+            ]
+          },
+          {
+            "case_id": "s3",
+            "check_id": "empty_column_probe",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "s3",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-schema",
+                "report_evidence_ref": "synthetic-population",
+                "population_mode": "report_window"
+              },
+              "membership": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "sample_table",
+                  "column_key": "amount",
+                  "schema_complete": true,
+                  "table_exists": true,
+                  "column_exists": true,
+                  "scan_complete": true
+                }
+              ],
+              "observations": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "table_key": "sample_table",
+                  "column_key": "amount",
+                  "row_count": 0,
+                  "non_null_count": 0,
+                  "population_mode": "report_window",
+                  "observed_start": "2026-01-01",
+                  "observed_end": "2026-01-01"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/configuration/population_mode",
+              "/details/0/row_count",
+              "/details/0/non_null_count",
+              "/details/0/observed_start",
+              "/details/0/observed_end",
+              "/details/0/scan_complete"
+            ]
+          },
+          {
+            "case_id": "s4",
+            "check_id": "deleted_ad_coverage",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "s4",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-campaign",
+                "report_evidence_ref": "synthetic-ads",
+                "abs_tolerance": "0",
+                "relative_tolerance": "0"
+              },
+              "membership": [
+                {
+                  "pair_key": "pair-a",
+                  "ad_source_system": "ad_export",
+                  "ad_source_scope": "account-a",
+                  "reference_source_system": "campaign_export",
+                  "reference_source_scope": "account-a",
+                  "ad_complete": true,
+                  "reference_complete": true,
+                  "ad_timezone": "UTC",
+                  "reference_timezone": "UTC",
+                  "ad_history_start": "2026-01-01",
+                  "reference_history_start": "2026-01-01",
+                  "ad_includes_deleted": true,
+                  "reference_includes_deleted": true,
+                  "ad_status_filter": "all-statuses",
+                  "reference_status_filter": "all-statuses",
+                  "ad_capture_mode": "historical_backfill",
+                  "reference_capture_mode": "incremental_snapshot",
+                  "comparability_evidence_ref": "synthetic-comparability"
+                }
+              ],
+              "ads": [],
+              "reference": [
+                {
+                  "source_system": "campaign_export",
+                  "source_scope": "account-a",
+                  "fact_key": "daily-1",
+                  "event_date": "2026-01-01",
+                  "campaign_key": "Campaign+A",
+                  "spend": "10",
+                  "currency": "USD",
+                  "spend_status": "known"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/comparable",
+              "/details/0/ad_fact_count",
+              "/details/0/reference_fact_count",
+              "/details/0/comparisons/0/ad_known_spend",
+              "/details/0/comparisons/0/reference_known_spend",
+              "/details/0/comparisons/0/ad_spend",
+              "/details/0/comparisons/0/reference_spend",
+              "/details/0/comparisons/0/difference",
+              "/details/0/comparisons/0/allowed_tolerance",
+              "/details/0/comparisons/0/status"
+            ]
+          },
+          {
+            "case_id": "s5",
+            "check_id": "deleted_ad_coverage",
+            "inputs": {
+              "configuration": {
+                "invocation_key": "s5",
+                "report_scope": "synthetic-window",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "source_evidence_ref": "synthetic-campaign",
+                "report_evidence_ref": "synthetic-ads",
+                "abs_tolerance": "0",
+                "relative_tolerance": "0"
+              },
+              "membership": [
+                {
+                  "pair_key": "pair-a",
+                  "ad_source_system": "ad_export",
+                  "ad_source_scope": "account-a",
+                  "reference_source_system": "campaign_export",
+                  "reference_source_scope": "account-a",
+                  "ad_complete": true,
+                  "reference_complete": true,
+                  "ad_timezone": "UTC",
+                  "reference_timezone": "UTC",
+                  "ad_history_start": "2026-01-02",
+                  "reference_history_start": "2026-01-01",
+                  "ad_includes_deleted": true,
+                  "reference_includes_deleted": true,
+                  "ad_status_filter": "all-statuses",
+                  "reference_status_filter": "all-statuses",
+                  "ad_capture_mode": "historical_backfill",
+                  "reference_capture_mode": "incremental_snapshot",
+                  "comparability_evidence_ref": "synthetic-comparability"
+                }
+              ],
+              "ads": [
+                {
+                  "source_system": "ad_export",
+                  "source_scope": "account-a",
+                  "fact_key": "hour-1",
+                  "event_date": "2026-01-01",
+                  "campaign_key": "Campaign+A",
+                  "spend": "10",
+                  "currency": "USD",
+                  "spend_status": "known",
+                  "ad_key": "Ad+A"
+                }
+              ],
+              "reference": [
+                {
+                  "source_system": "campaign_export",
+                  "source_scope": "account-a",
+                  "fact_key": "daily-1",
+                  "event_date": "2026-01-01",
+                  "campaign_key": "Campaign+A",
+                  "spend": "10",
+                  "currency": "USD",
+                  "spend_status": "known"
+                }
+              ]
+            },
+            "requested_paths": [
+              "/details/0/comparable",
+              "/details/0/ad_fact_count",
+              "/details/0/reference_fact_count",
+              "/details/0/comparisons/0/ad_known_spend",
+              "/details/0/comparisons/0/reference_known_spend",
+              "/details/0/comparisons/0/ad_spend",
+              "/details/0/comparisons/0/reference_spend",
+              "/details/0/comparisons/0/difference",
+              "/details/0/comparisons/0/allowed_tolerance",
+              "/details/0/comparisons/0/status"
+            ]
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "check_id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": [
+                          "string",
+                          "boolean",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "case_id",
+                "check_id",
+                "status",
+                "reasons",
+                "values"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "additionalProperties": false
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 5
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "s1"
+        },
+        {
+          "path": "/cases/0/check_id",
+          "op": "equals",
+          "expected": "no_pii_columns"
+        },
+        {
+          "path": "/cases/0/status",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/0/reasons",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/0/reasons/0",
+          "op": "equals",
+          "expected": "forbidden_column_name"
+        },
+        {
+          "path": "/cases/0/reasons/1",
+          "op": "equals",
+          "expected": "schema_incomplete"
+        },
+        {
+          "path": "/cases/0/values",
+          "op": "array_length_equals",
+          "expected": 5
+        },
+        {
+          "path": "/cases/0/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/schema_complete"
+        },
+        {
+          "path": "/cases/0/values/0/value",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/0/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/table_exists"
+        },
+        {
+          "path": "/cases/0/values/1/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/0/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/observed_column_count"
+        },
+        {
+          "path": "/cases/0/values/2/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/0/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/matching_paths/0/field_path"
+        },
+        {
+          "path": "/cases/0/values/3/value",
+          "op": "equals",
+          "expected": "email"
+        },
+        {
+          "path": "/cases/0/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/matching_paths/0/matched_rule_ids/0"
+        },
+        {
+          "path": "/cases/0/values/4/value",
+          "op": "equals",
+          "expected": "email_leaf"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "s2"
+        },
+        {
+          "path": "/cases/1/check_id",
+          "op": "equals",
+          "expected": "empty_column_probe"
+        },
+        {
+          "path": "/cases/1/status",
+          "op": "equals",
+          "expected": "pass"
+        },
+        {
+          "path": "/cases/1/reasons",
+          "op": "array_length_equals",
+          "expected": 0
+        },
+        {
+          "path": "/cases/1/values",
+          "op": "array_length_equals",
+          "expected": 6
+        },
+        {
+          "path": "/cases/1/values/0/path",
+          "op": "equals",
+          "expected": "/configuration/population_mode"
+        },
+        {
+          "path": "/cases/1/values/0/value",
+          "op": "equals",
+          "expected": "full_table_snapshot"
+        },
+        {
+          "path": "/cases/1/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/row_count"
+        },
+        {
+          "path": "/cases/1/values/1/value",
+          "op": "equals",
+          "expected": "2"
+        },
+        {
+          "path": "/cases/1/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/non_null_count"
+        },
+        {
+          "path": "/cases/1/values/2/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/1/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/observed_start"
+        },
+        {
+          "path": "/cases/1/values/3/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/1/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/observed_end"
+        },
+        {
+          "path": "/cases/1/values/4/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/1/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/scan_complete"
+        },
+        {
+          "path": "/cases/1/values/5/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "s3"
+        },
+        {
+          "path": "/cases/2/check_id",
+          "op": "equals",
+          "expected": "empty_column_probe"
+        },
+        {
+          "path": "/cases/2/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/2/reasons",
+          "op": "array_length_equals",
+          "expected": 1
+        },
+        {
+          "path": "/cases/2/reasons/0",
+          "op": "equals",
+          "expected": "no_observed_rows"
+        },
+        {
+          "path": "/cases/2/values",
+          "op": "array_length_equals",
+          "expected": 6
+        },
+        {
+          "path": "/cases/2/values/0/path",
+          "op": "equals",
+          "expected": "/configuration/population_mode"
+        },
+        {
+          "path": "/cases/2/values/0/value",
+          "op": "equals",
+          "expected": "report_window"
+        },
+        {
+          "path": "/cases/2/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/row_count"
+        },
+        {
+          "path": "/cases/2/values/1/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/non_null_count"
+        },
+        {
+          "path": "/cases/2/values/2/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/2/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/observed_start"
+        },
+        {
+          "path": "/cases/2/values/3/value",
+          "op": "equals",
+          "expected": "2026-01-01"
+        },
+        {
+          "path": "/cases/2/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/observed_end"
+        },
+        {
+          "path": "/cases/2/values/4/value",
+          "op": "equals",
+          "expected": "2026-01-01"
+        },
+        {
+          "path": "/cases/2/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/scan_complete"
+        },
+        {
+          "path": "/cases/2/values/5/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "s4"
+        },
+        {
+          "path": "/cases/3/check_id",
+          "op": "equals",
+          "expected": "deleted_ad_coverage"
+        },
+        {
+          "path": "/cases/3/status",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/3/reasons",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/3/reasons/0",
+          "op": "equals",
+          "expected": "capture_mode_difference"
+        },
+        {
+          "path": "/cases/3/reasons/1",
+          "op": "equals",
+          "expected": "spend_coverage_gap"
+        },
+        {
+          "path": "/cases/3/values",
+          "op": "array_length_equals",
+          "expected": 10
+        },
+        {
+          "path": "/cases/3/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/comparable"
+        },
+        {
+          "path": "/cases/3/values/0/value",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/3/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/ad_fact_count"
+        },
+        {
+          "path": "/cases/3/values/1/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/reference_fact_count"
+        },
+        {
+          "path": "/cases/3/values/2/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/3/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/ad_known_spend"
+        },
+        {
+          "path": "/cases/3/values/3/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/3/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/reference_known_spend"
+        },
+        {
+          "path": "/cases/3/values/4/value",
+          "op": "equals",
+          "expected": "10"
+        },
+        {
+          "path": "/cases/3/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/ad_spend"
+        },
+        {
+          "path": "/cases/3/values/5/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/reference_spend"
+        },
+        {
+          "path": "/cases/3/values/6/value",
+          "op": "equals",
+          "expected": "10"
+        },
+        {
+          "path": "/cases/3/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/difference"
+        },
+        {
+          "path": "/cases/3/values/7/value",
+          "op": "equals",
+          "expected": "-10"
+        },
+        {
+          "path": "/cases/3/values/8/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/allowed_tolerance"
+        },
+        {
+          "path": "/cases/3/values/8/value",
+          "op": "equals",
+          "expected": "0"
+        },
+        {
+          "path": "/cases/3/values/9/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/status"
+        },
+        {
+          "path": "/cases/3/values/9/value",
+          "op": "equals",
+          "expected": "fail"
+        },
+        {
+          "path": "/cases/4/case_id",
+          "op": "equals",
+          "expected": "s5"
+        },
+        {
+          "path": "/cases/4/check_id",
+          "op": "equals",
+          "expected": "deleted_ad_coverage"
+        },
+        {
+          "path": "/cases/4/status",
+          "op": "equals",
+          "expected": "unknown"
+        },
+        {
+          "path": "/cases/4/reasons",
+          "op": "array_length_equals",
+          "expected": 2
+        },
+        {
+          "path": "/cases/4/reasons/0",
+          "op": "equals",
+          "expected": "ad_history_not_covered"
+        },
+        {
+          "path": "/cases/4/reasons/1",
+          "op": "equals",
+          "expected": "capture_mode_difference"
+        },
+        {
+          "path": "/cases/4/values",
+          "op": "array_length_equals",
+          "expected": 10
+        },
+        {
+          "path": "/cases/4/values/0/path",
+          "op": "equals",
+          "expected": "/details/0/comparable"
+        },
+        {
+          "path": "/cases/4/values/0/value",
+          "op": "equals",
+          "expected": false
+        },
+        {
+          "path": "/cases/4/values/1/path",
+          "op": "equals",
+          "expected": "/details/0/ad_fact_count"
+        },
+        {
+          "path": "/cases/4/values/1/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/4/values/2/path",
+          "op": "equals",
+          "expected": "/details/0/reference_fact_count"
+        },
+        {
+          "path": "/cases/4/values/2/value",
+          "op": "equals",
+          "expected": "1"
+        },
+        {
+          "path": "/cases/4/values/3/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/ad_known_spend"
+        },
+        {
+          "path": "/cases/4/values/3/value",
+          "op": "equals",
+          "expected": "10"
+        },
+        {
+          "path": "/cases/4/values/4/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/reference_known_spend"
+        },
+        {
+          "path": "/cases/4/values/4/value",
+          "op": "equals",
+          "expected": "10"
+        },
+        {
+          "path": "/cases/4/values/5/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/ad_spend"
+        },
+        {
+          "path": "/cases/4/values/5/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/values/6/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/reference_spend"
+        },
+        {
+          "path": "/cases/4/values/6/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/values/7/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/difference"
+        },
+        {
+          "path": "/cases/4/values/7/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/values/8/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/allowed_tolerance"
+        },
+        {
+          "path": "/cases/4/values/8/value",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/cases/4/values/9/path",
+          "op": "equals",
+          "expected": "/details/0/comparisons/0/status"
+        },
+        {
+          "path": "/cases/4/values/9/value",
+          "op": "equals",
+          "expected": "unknown"
+        }
+      ]
+    }
+  ]
+}

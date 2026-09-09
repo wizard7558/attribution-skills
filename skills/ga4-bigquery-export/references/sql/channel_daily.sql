@@ -136,6 +136,31 @@ function normalizeChannelLabel(value) {
   return direct[label] || 'Other';
 }
 
+// Select the original encoded tracking values without decoding them for storage.
+// Validation uses the same helpers as classification; callers still classify the
+// original input once, rather than feeding this projection back to the classifier.
+function extractRawTrackingEvidence(input) {
+  const value = input && typeof input === 'object' ? input : {};
+  const params = hostOf(value.landing_url) ? queryParams(value.landing_url) : {};
+  const result = {};
+  for (const field of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+    result[field] = text(value[field]) ? value[field] : text(params[field]) ? params[field] : null;
+  }
+  const clickNames = ['dclid', 'gclid', 'gbraid', 'wbraid', 'msclkid', 'fbclid', 'ttclid', 'rdt_cid', 'li_fat_id', 'twclid', 'epik', 'sccid', 'srsltid'];
+  result.click_ids = {};
+  for (const name of clickNames) {
+    let raw = null;
+    const clicks = value.click_ids;
+    if (Array.isArray(clicks)) {
+      for (const entry of clicks) {
+        if (entry && lower(entry.name) === name && validClickId(entry.value)) { raw = entry.value; break; }
+      }
+    } else if (clicks && typeof clicks === 'object' && validClickId(clicks[name])) raw = clicks[name];
+    result.click_ids[name] = raw !== null ? raw : validClickId(params[name]) ? params[name] : null;
+  }
+  return result;
+}
+
 function classify(input) {
   const value = input && typeof input === 'object' ? input : {};
   const landing = text(value.landing_url);
@@ -364,6 +389,31 @@ function normalizeChannelLabel(value) {
   return direct[label] || 'Other';
 }
 
+// Select the original encoded tracking values without decoding them for storage.
+// Validation uses the same helpers as classification; callers still classify the
+// original input once, rather than feeding this projection back to the classifier.
+function extractRawTrackingEvidence(input) {
+  const value = input && typeof input === 'object' ? input : {};
+  const params = hostOf(value.landing_url) ? queryParams(value.landing_url) : {};
+  const result = {};
+  for (const field of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+    result[field] = text(value[field]) ? value[field] : text(params[field]) ? params[field] : null;
+  }
+  const clickNames = ['dclid', 'gclid', 'gbraid', 'wbraid', 'msclkid', 'fbclid', 'ttclid', 'rdt_cid', 'li_fat_id', 'twclid', 'epik', 'sccid', 'srsltid'];
+  result.click_ids = {};
+  for (const name of clickNames) {
+    let raw = null;
+    const clicks = value.click_ids;
+    if (Array.isArray(clicks)) {
+      for (const entry of clicks) {
+        if (entry && lower(entry.name) === name && validClickId(entry.value)) { raw = entry.value; break; }
+      }
+    } else if (clicks && typeof clicks === 'object' && validClickId(clicks[name])) raw = clicks[name];
+    result.click_ids[name] = raw !== null ? raw : validClickId(params[name]) ? params[name] : null;
+  }
+  return result;
+}
+
 function classify(input) {
   const value = input && typeof input === 'object' ? input : {};
   const landing = text(value.landing_url);
@@ -466,12 +516,23 @@ return result;
 ''';
 -- END GENERATED CHANNEL TAXONOMY
 
+-- BEGIN GENERATED PARAMETER HELPERS
+-- Generated consumers copy this GA4-owned authority verbatim.
+-- Pick the first matching record by original offset, even when its selected value is NULL.
 CREATE TEMP FUNCTION param_string(params ANY TYPE, target_key STRING) AS ((
-  SELECT value.string_value FROM UNNEST(params) WHERE key = target_key LIMIT 1
+  SELECT p.value.string_value FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
 ));
 CREATE TEMP FUNCTION param_int(params ANY TYPE, target_key STRING) AS ((
-  SELECT value.int_value FROM UNNEST(params) WHERE key = target_key LIMIT 1
+  SELECT p.value.int_value FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
 ));
+CREATE TEMP FUNCTION param_number(params ANY TYPE, target_key STRING) AS ((
+  SELECT COALESCE(p.value.float_value, p.value.double_value, CAST(p.value.int_value AS FLOAT64))
+  FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
+));
+-- END GENERATED PARAMETER HELPERS
 
 -- BEGIN GENERATED SESSION CTES
 -- Generated shared session reduction: edit scripts/session-ctes.sql, then regenerate.

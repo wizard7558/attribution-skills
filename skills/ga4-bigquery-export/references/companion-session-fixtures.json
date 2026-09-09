@@ -1,0 +1,711 @@
+{
+  "version": 1,
+  "window": {
+    "start": "20260901",
+    "end": "20260902"
+  },
+  "events": [
+    {
+      "visitor": "same",
+      "session": 1,
+      "timestamp": "1788220800000001",
+      "event_date": "20260901",
+      "event": "generate_lead",
+      "url": "https://example.test/key?utm_source=Lead&utm_medium=email",
+      "source": "Lead",
+      "medium": "email"
+    },
+    {
+      "visitor": "same",
+      "session": 2,
+      "timestamp": "1788220800000002",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/second"
+    },
+    {
+      "visitor": "tie",
+      "session": 3,
+      "timestamp": "1788220800000003",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/z?utm_source=Z&utm_medium=cpc",
+      "source": "Z",
+      "medium": "cpc"
+    },
+    {
+      "visitor": "tie",
+      "session": 3,
+      "timestamp": "1788220800000003",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/a?utm_source=A&utm_medium=cpc",
+      "source": "A",
+      "medium": "cpc"
+    },
+    {
+      "visitor": "partial",
+      "session": 4,
+      "timestamp": "1788220800000004",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/partial?utm_source=URL",
+      "source": "Cross",
+      "manual_source": "Manual",
+      "manual_medium": "paid_social",
+      "manual_campaign": "temptation"
+    },
+    {
+      "visitor": "cross",
+      "session": 5,
+      "timestamp": "1788220800000005",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/cross",
+      "source": "First"
+    },
+    {
+      "visitor": "cross",
+      "session": 5,
+      "timestamp": "1788220800000006",
+      "event_date": "20260901",
+      "event": "scroll",
+      "url": null,
+      "medium": "Later"
+    },
+    {
+      "visitor": "plain",
+      "session": 6,
+      "timestamp": "1788220800000007",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/plain"
+    },
+    {
+      "visitor": "missing",
+      "session": 7,
+      "timestamp": "1788220800000008",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": null
+    },
+    {
+      "visitor": "invalid",
+      "session": 8,
+      "timestamp": "1788220800000009",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "invalid?utm_source=forged"
+    },
+    {
+      "visitor": "fragment",
+      "session": 9,
+      "timestamp": "1788220800000010",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/fragment#?utm_source=forged&utm_medium=cpc"
+    },
+    {
+      "visitor": "encoded",
+      "session": 10,
+      "timestamp": "1788220800000011",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/encoded?%75tm_source=Case%2BSource&utm_medium=email+push&utm_campaign=A%252BB"
+    },
+    {
+      "visitor": "dupempty",
+      "session": 11,
+      "timestamp": "1788220800000012",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/dupempty?utm_source=&utm_source=later&utm_medium=cpc"
+    },
+    {
+      "visitor": "dupfirst",
+      "session": 12,
+      "timestamp": "1788220800000013",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/dupfirst?utm_source=first&utm_source=second&utm_medium=cpc"
+    },
+    {
+      "visitor": "window",
+      "session": 13,
+      "timestamp": "1788220799999999",
+      "event_date": "20260831",
+      "event": "page_view",
+      "url": "https://example.test/before",
+      "source": "Outside",
+      "medium": "cpc"
+    },
+    {
+      "visitor": "window",
+      "session": 13,
+      "timestamp": "1788220800000014",
+      "event_date": "20260901",
+      "event": "session_start",
+      "url": null,
+      "source": "Observed",
+      "medium": "email"
+    },
+    {
+      "visitor": "window",
+      "session": 13,
+      "timestamp": "1788307200000000",
+      "event_date": "20260902",
+      "event": "purchase",
+      "url": "https://example.test/window?utm_source=Late&utm_medium=email",
+      "transaction": "txn1",
+      "revenue": "5"
+    },
+    {
+      "visitor": "window",
+      "session": 13,
+      "timestamp": "1788307200000001",
+      "event_date": "20260902",
+      "event": "purchase",
+      "url": "https://example.test/window?utm_source=Late&utm_medium=email",
+      "transaction": "txn2",
+      "revenue": "7"
+    },
+    {
+      "visitor": "manual",
+      "session": 14,
+      "timestamp": "1788220800000015",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/manual",
+      "manual_source": "Manual",
+      "manual_medium": "email"
+    },
+    {
+      "visitor": null,
+      "session": 99,
+      "timestamp": "1788220800000016",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/excluded"
+    },
+    {
+      "visitor": "no-session",
+      "session": null,
+      "timestamp": "1788220800000017",
+      "event_date": "20260901",
+      "event": "page_view",
+      "url": "https://example.test/excluded"
+    }
+  ],
+  "expected_sessions": [
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "same.1",
+      "visitor_key": "same",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/key?utm_source=Lead&utm_medium=email",
+      "landing_page_path": "/key",
+      "session_source": "Lead",
+      "session_medium": "email",
+      "engaged": true,
+      "key_events": 1,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "same.2",
+      "visitor_key": "same",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/second",
+      "landing_page_path": "/second",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "tie.3",
+      "visitor_key": "tie",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/a?utm_source=A&utm_medium=cpc",
+      "landing_page_path": "/a",
+      "session_source": "A",
+      "session_medium": "cpc",
+      "engaged": true,
+      "key_events": 0,
+      "events": 2
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "partial.4",
+      "visitor_key": "partial",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/partial?utm_source=URL",
+      "landing_page_path": "/partial",
+      "session_source": "Cross",
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "cross.5",
+      "visitor_key": "cross",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/cross",
+      "landing_page_path": "/cross",
+      "session_source": "First",
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 2
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "plain.6",
+      "visitor_key": "plain",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/plain",
+      "landing_page_path": "/plain",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "missing.7",
+      "visitor_key": "missing",
+      "event_date": "2026-09-01",
+      "landing_page_location": null,
+      "landing_page_path": null,
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "invalid.8",
+      "visitor_key": "invalid",
+      "event_date": "2026-09-01",
+      "landing_page_location": "invalid?utm_source=forged",
+      "landing_page_path": null,
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "fragment.9",
+      "visitor_key": "fragment",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/fragment#?utm_source=forged&utm_medium=cpc",
+      "landing_page_path": "/fragment",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "encoded.10",
+      "visitor_key": "encoded",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/encoded?%75tm_source=Case%2BSource&utm_medium=email+push&utm_campaign=A%252BB",
+      "landing_page_path": "/encoded",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "dupempty.11",
+      "visitor_key": "dupempty",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/dupempty?utm_source=&utm_source=later&utm_medium=cpc",
+      "landing_page_path": "/dupempty",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "dupfirst.12",
+      "visitor_key": "dupfirst",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/dupfirst?utm_source=first&utm_source=second&utm_medium=cpc",
+      "landing_page_path": "/dupfirst",
+      "session_source": null,
+      "session_medium": null,
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "window.13",
+      "visitor_key": "window",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/window?utm_source=Late&utm_medium=email",
+      "landing_page_path": "/window",
+      "session_source": "Observed",
+      "session_medium": "email",
+      "engaged": true,
+      "key_events": 2,
+      "events": 3
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_key": "manual.14",
+      "visitor_key": "manual",
+      "event_date": "2026-09-01",
+      "landing_page_location": "https://example.test/manual",
+      "landing_page_path": "/manual",
+      "session_source": "Manual",
+      "session_medium": "email",
+      "engaged": false,
+      "key_events": 0,
+      "events": 1
+    }
+  ],
+  "expected_landing": [
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": null,
+      "sessions": 2,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/a",
+      "sessions": 1,
+      "engaged_sessions": 1,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/cross",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/dupempty",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/dupfirst",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/encoded",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/fragment",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/key",
+      "sessions": 1,
+      "engaged_sessions": 1,
+      "key_events": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/manual",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/partial",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/plain",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/second",
+      "sessions": 1,
+      "engaged_sessions": 0,
+      "key_events": 0
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "landing_page_path": "/window",
+      "sessions": 1,
+      "engaged_sessions": 1,
+      "key_events": 2
+    }
+  ],
+  "expected_traffic": [
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": null,
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 3
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "invalid",
+      "landing_utm_source": null,
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "missing",
+      "landing_utm_source": null,
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": null,
+      "landing_utm_medium": "cpc",
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": "Case+Source",
+      "landing_utm_medium": "email push",
+      "landing_utm_campaign": "A+B",
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": null,
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": "first",
+      "landing_utm_medium": "cpc",
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "A",
+      "session_last_click_medium": "cpc",
+      "landing_url_status": "valid",
+      "landing_utm_source": "A",
+      "landing_utm_medium": "cpc",
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "Cross",
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": "URL",
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "First",
+      "session_last_click_medium": null,
+      "landing_url_status": "valid",
+      "landing_utm_source": null,
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "Lead",
+      "session_last_click_medium": "email",
+      "landing_url_status": "valid",
+      "landing_utm_source": "Lead",
+      "landing_utm_medium": "email",
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "Manual",
+      "session_last_click_medium": "email",
+      "landing_url_status": "valid",
+      "landing_utm_source": null,
+      "landing_utm_medium": null,
+      "landing_utm_campaign": null,
+      "sessions": 1
+    },
+    {
+      "source_system": "ga4",
+      "source_scope": "PROJECT.analytics_PROPERTY_ID",
+      "session_last_click_source": "Observed",
+      "session_last_click_medium": "email",
+      "landing_url_status": "valid",
+      "landing_utm_source": "Late",
+      "landing_utm_medium": "email",
+      "landing_utm_campaign": null,
+      "sessions": 1
+    }
+  ],
+  "parser_cases": [
+    {
+      "url": null,
+      "expected": {
+        "landing_url_status": "missing",
+        "utm_source": null,
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "   ",
+      "expected": {
+        "landing_url_status": "missing",
+        "utm_source": null,
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "invalid?utm_source=x",
+      "expected": {
+        "landing_url_status": "invalid",
+        "utm_source": null,
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "https://example.test/#?utm_source=x",
+      "expected": {
+        "landing_url_status": "valid",
+        "utm_source": null,
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "//example.test/?%75tm_source=Case%2BSource&utm_medium=email+push&utm_campaign=A%252BB",
+      "expected": {
+        "landing_url_status": "valid",
+        "utm_source": "Case+Source",
+        "utm_medium": "email push",
+        "utm_campaign": "A+B"
+      }
+    },
+    {
+      "url": "https://example.test/?utm_source=&utm_source=later",
+      "expected": {
+        "landing_url_status": "valid",
+        "utm_source": null,
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "https://example.test/?utm_source=first&utm_source=later",
+      "expected": {
+        "landing_url_status": "valid",
+        "utm_source": "first",
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    },
+    {
+      "url": "https://example.test/?utm_source=%ZZ",
+      "expected": {
+        "landing_url_status": "valid",
+        "utm_source": "%ZZ",
+        "utm_medium": null,
+        "utm_campaign": null
+      }
+    }
+  ]
+}

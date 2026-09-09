@@ -1,0 +1,2199 @@
+{
+  "contract_version": "0.1.0",
+  "derivation": "Literal schema names, inventories, matches and counts are independently authored. No native result generates expected findings.",
+  "schemas": {
+    "configuration_input": {
+      "invocation_key": "STRING",
+      "report_scope": "STRING",
+      "report_timezone": "STRING",
+      "report_start": "DATE",
+      "report_end": "DATE",
+      "date_mode": "STRING",
+      "source_evidence_ref": "STRING",
+      "report_evidence_ref": "STRING"
+    },
+    "membership_input": {
+      "invocation_key": "STRING",
+      "source_system": "STRING",
+      "source_scope": "STRING",
+      "table_key": "STRING",
+      "schema_complete": "BOOL",
+      "table_exists": "BOOL"
+    },
+    "column_input": {
+      "invocation_key": "STRING",
+      "source_system": "STRING",
+      "source_scope": "STRING",
+      "table_key": "STRING",
+      "field_path": "STRING",
+      "data_type": "STRING"
+    },
+    "policy_input": {
+      "invocation_key": "STRING",
+      "rule_key": "STRING",
+      "match_kind": "STRING",
+      "pattern": "STRING"
+    }
+  },
+  "cases": [
+    {
+      "id": "schema-baseline",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "schema-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "forbidden-leaf-case",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "Email",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "forbidden-leaf-case",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [
+              {
+                "field_path": "Email",
+                "matched_rule_ids": [
+                  "email_leaf"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "nested-policy",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact",
+            "data_type": "STRUCT<Email STRING, city STRING>"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact.Email",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact.city",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "nested-policy",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "3",
+            "matching_paths": [
+              {
+                "field_path": "contact.Email",
+                "matched_rule_ids": [
+                  "email_leaf"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "3",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "3",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "exact-leaf-boundaries",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "email_hash",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "email_domain",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact.email_address",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "exact-leaf-boundaries",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "3",
+            "matching_paths": [],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "3",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "3",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "regex-path-boundaries",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "CONTACT.Email",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "other.email",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact.email_hash",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "contact_path",
+            "match_kind": "path_regex",
+            "pattern": "^contact\\.email$"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "regex-path-boundaries",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "3",
+            "matching_paths": [
+              {
+                "field_path": "CONTACT.Email",
+                "matched_rule_ids": [
+                  "contact_path"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "3",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "3",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "multiple-rule-evidence",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "contact.email",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          },
+          {
+            "rule_key": "contact_path",
+            "match_kind": "path_regex",
+            "pattern": "^contact\\."
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "multiple-rule-evidence",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [
+              {
+                "field_path": "contact.email",
+                "matched_rule_ids": [
+                  "contact_path",
+                  "email_leaf"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "2",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "partial-safe-unknown",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": false,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "partial-safe-unknown",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "unknown",
+        "reasons": [
+          "schema_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": false,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [],
+            "status": "unknown",
+            "reasons": [
+              "schema_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "partial-forbidden-fails",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": false,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "email",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "partial-forbidden-fails",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name",
+          "schema_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": false,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [
+              {
+                "field_path": "email",
+                "matched_rule_ids": [
+                  "email_leaf"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name",
+              "schema_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "table-absent",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": false
+          }
+        ],
+        "columns": [],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "table-absent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_observed_columns",
+          "table_absent"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": false,
+            "observed_column_count": "0",
+            "matching_paths": [],
+            "status": "unknown",
+            "reasons": [
+              "no_observed_columns",
+              "table_absent"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "0",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "0",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "table-unknown",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": null
+          }
+        ],
+        "columns": [],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "table-unknown",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_observed_columns",
+          "table_existence_unknown"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": null,
+            "observed_column_count": "0",
+            "matching_paths": [],
+            "status": "unknown",
+            "reasons": [
+              "no_observed_columns",
+              "table_existence_unknown"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "0",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "0",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "present-zero-observed-columns",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "present-zero-observed-columns",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_observed_columns"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "0",
+            "matching_paths": [],
+            "status": "unknown",
+            "reasons": [
+              "no_observed_columns"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "0",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "0",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "exact-duplicates-idempotent",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          },
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "exact-duplicates-idempotent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "2",
+          "duplicate_columns_collapsed": "1",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "nonmember-qualified-collision",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "table_key": "safe_table",
+            "field_path": "email",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "nonmember-qualified-collision",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "2",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "1",
+          "policy_rules": "1",
+          "matching_paths": "0"
+        }
+      }
+    },
+    {
+      "id": "exact-pattern-not-regex",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "[",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "literal_meta",
+            "match_kind": "exact_leaf",
+            "pattern": "["
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "exact-pattern-not-regex",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [
+              {
+                "field_path": "[",
+                "matched_rule_ids": [
+                  "literal_meta"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "1",
+          "raw_columns": "1",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "1",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "failure-precedes-missing",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "missing",
+            "schema_complete": true,
+            "table_exists": false
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "bad",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "bad",
+            "field_path": "email",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "no_pii_columns",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "failure-precedes-missing",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "status": "fail",
+        "reasons": [
+          "forbidden_column_name",
+          "no_observed_columns",
+          "table_absent"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-policy"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "bad",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [
+              {
+                "field_path": "email",
+                "matched_rule_ids": [
+                  "email_leaf"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "forbidden_column_name"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "missing",
+            "schema_complete": true,
+            "table_exists": false,
+            "observed_column_count": "0",
+            "matching_paths": [],
+            "status": "unknown",
+            "reasons": [
+              "no_observed_columns",
+              "table_absent"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true,
+            "observed_column_count": "1",
+            "matching_paths": [],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_tables": "3",
+          "raw_columns": "2",
+          "duplicate_columns_collapsed": "0",
+          "selected_columns": "2",
+          "nonmember_columns": "0",
+          "policy_rules": "1",
+          "matching_paths": "1"
+        }
+      }
+    },
+    {
+      "id": "conflicting-column",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "INT64"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "conflicting column metadata"
+    },
+    {
+      "id": "conflicting-inventory",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": false,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "conflicting table inventory"
+    },
+    {
+      "id": "conflicting-rule",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          },
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "phone"
+          }
+        ]
+      },
+      "expectedError": "conflicting schema policy"
+    },
+    {
+      "id": "invalid-regex",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "path_regex",
+            "pattern": "["
+          }
+        ]
+      },
+      "expectedError": "invalid schema policy"
+    },
+    {
+      "id": "missing-policy",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": []
+      },
+      "expectedError": "schema policy is required"
+    },
+    {
+      "id": "missing-inventory",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "table inventory is required"
+    },
+    {
+      "id": "columns-absent-table",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": false
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "columns contradict table inventory"
+    },
+    {
+      "id": "columns-unknown-table",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": null
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "columns contradict table inventory"
+    },
+    {
+      "id": "wrong-empty-column-type",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "invalid input column types",
+      "type_overrides": {
+        "column_input": {
+          "data_type": "INT64"
+        }
+      }
+    },
+    {
+      "id": "invalid-column-key",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "secret\u0001name",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "invalid column metadata"
+    },
+    {
+      "id": "invalid-timezone",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "+01:00",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    },
+    {
+      "id": "null-completeness",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": null,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "exact_leaf",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "invalid table inventory"
+    },
+    {
+      "id": "invalid-match-kind",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-policy"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "schema_complete": true,
+            "table_exists": true
+          }
+        ],
+        "columns": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "safe_table",
+            "field_path": "lead_key",
+            "data_type": "STRING"
+          }
+        ],
+        "policy": [
+          {
+            "rule_key": "email_leaf",
+            "match_kind": "suffix",
+            "pattern": "email"
+          }
+        ]
+      },
+      "expectedError": "invalid schema policy"
+    }
+  ],
+  "integration": {
+    "configuration": {
+      "invocation_key": "synthetic-check",
+      "report_scope": "synthetic-window",
+      "report_timezone": "UTC",
+      "report_start": "2026-01-01",
+      "report_end": "2026-01-01",
+      "date_mode": "cohort",
+      "source_evidence_ref": "synthetic-schema",
+      "report_evidence_ref": "synthetic-policy"
+    },
+    "policy": [
+      {
+        "rule_key": "email_leaf",
+        "match_kind": "exact_leaf",
+        "pattern": "email"
+      }
+    ],
+    "tables": [
+      "clean_table",
+      "empty_table",
+      "missing_table",
+      "nested_table"
+    ],
+    "expectedMembership": [
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "clean_table",
+        "schema_complete": true,
+        "table_exists": true
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "empty_table",
+        "schema_complete": true,
+        "table_exists": true
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "missing_table",
+        "schema_complete": true,
+        "table_exists": false
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "nested_table",
+        "schema_complete": true,
+        "table_exists": true
+      }
+    ],
+    "expectedColumns": [
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "clean_table",
+        "field_path": "lead_key",
+        "data_type": "STRING"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "clean_table",
+        "field_path": "stage_count",
+        "data_type": "INT64"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "empty_table",
+        "field_path": "record_key",
+        "data_type": "STRING"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "nested_table",
+        "field_path": "contact",
+        "data_type": "STRUCT<Email STRING, city STRING>"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "nested_table",
+        "field_path": "contact.Email",
+        "data_type": "STRING"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "nested_table",
+        "field_path": "contact.city",
+        "data_type": "STRING"
+      },
+      {
+        "source_system": "synthetic_crm",
+        "source_scope": "crm-a",
+        "table_key": "nested_table",
+        "field_path": "lead_key",
+        "data_type": "STRING"
+      }
+    ],
+    "expected": {
+      "check_id": "no_pii_columns",
+      "contract_version": "0.1.0",
+      "configuration": {
+        "invocation_key": "actual-schema",
+        "report_scope": "synthetic-window",
+        "report_timezone": "UTC",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-policy"
+      },
+      "status": "fail",
+      "reasons": [
+        "forbidden_column_name",
+        "no_observed_columns",
+        "table_absent"
+      ],
+      "evidence_refs": [
+        "synthetic-schema",
+        "synthetic-policy"
+      ],
+      "details": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "clean_table",
+          "schema_complete": true,
+          "table_exists": true,
+          "observed_column_count": "2",
+          "matching_paths": [],
+          "status": "pass",
+          "reasons": []
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "empty_table",
+          "schema_complete": true,
+          "table_exists": true,
+          "observed_column_count": "1",
+          "matching_paths": [],
+          "status": "pass",
+          "reasons": []
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "missing_table",
+          "schema_complete": true,
+          "table_exists": false,
+          "observed_column_count": "0",
+          "matching_paths": [],
+          "status": "unknown",
+          "reasons": [
+            "no_observed_columns",
+            "table_absent"
+          ]
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "nested_table",
+          "schema_complete": true,
+          "table_exists": true,
+          "observed_column_count": "4",
+          "matching_paths": [
+            {
+              "field_path": "contact.Email",
+              "matched_rule_ids": [
+                "email_leaf"
+              ]
+            }
+          ],
+          "status": "fail",
+          "reasons": [
+            "forbidden_column_name"
+          ]
+        }
+      ],
+      "diagnostics": {
+        "declared_tables": "4",
+        "raw_columns": "7",
+        "duplicate_columns_collapsed": "0",
+        "selected_columns": "7",
+        "nonmember_columns": "0",
+        "policy_rules": "1",
+        "matching_paths": "1"
+      }
+    }
+  }
+}

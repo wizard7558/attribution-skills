@@ -1,55 +1,58 @@
--- Returns: three sanity checks to run before you tell a user a BigQuery
--- number disagrees with the GA4 UI. (1) event row counts per _TABLE_SUFFIX
--- day, to catch a daily table that has not fully landed yet (allow up to
--- 72 hours). (2) the share of events with a NULL user_pseudo_id, which
--- cannot be sessionized or attributed by user. (3) the share of sessions
--- whose events span two different event_date values (midnight crossing).
--- Scan scale: light to moderate. Check 1 is a metadata-adjacent COUNT(*);
--- checks 2 and 3 scan user_pseudo_id and event_params for the window.
+-- Three bounded observation diagnostics; none proves UI parity or export completeness.
+-- No table metadata or consent fields are supplied, so existence/completeness/causes stay unknown.
+-- BEGIN GENERATED PARAMETER HELPERS
+-- Generated consumers copy this GA4-owned authority verbatim.
+-- Pick the first matching record by original offset, even when its selected value is NULL.
+CREATE TEMP FUNCTION param_string(params ANY TYPE, target_key STRING) AS ((
+  SELECT p.value.string_value FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
+));
+CREATE TEMP FUNCTION param_int(params ANY TYPE, target_key STRING) AS ((
+  SELECT p.value.int_value FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
+));
+CREATE TEMP FUNCTION param_number(params ANY TYPE, target_key STRING) AS ((
+  SELECT COALESCE(p.value.float_value, p.value.double_value, CAST(p.value.int_value AS FLOAT64))
+  FROM UNNEST(params) AS p WITH OFFSET AS parameter_offset
+  WHERE p.key = target_key ORDER BY parameter_offset LIMIT 1
+));
+-- END GENERATED PARAMETER HELPERS
 
--- Check 1: daily table completeness / landing lag.
--- Row count by _TABLE_SUFFIX for the window; a day with an unusually low
--- count relative to its neighbors, especially the most recent day, means the
--- daily export has not fully landed yet (allow up to 72 hours).
-SELECT
-  _TABLE_SUFFIX AS table_date,
-  COUNT(*) AS event_rows
-FROM `PROJECT.analytics_PROPERTY_ID.events_*`
-WHERE _TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'
-GROUP BY table_date
-ORDER BY table_date;
-
--- Check 2: share of events with a NULL user_pseudo_id (consent-mode traffic
--- that cannot be sessionized or attributed by user).
-SELECT
-  COUNTIF(user_pseudo_id IS NULL) AS null_user_pseudo_id_events,
-  COUNT(*) AS total_events,
-  ROUND(SAFE_DIVIDE(COUNTIF(user_pseudo_id IS NULL), COUNT(*)) * 100, 2) AS pct_null
+CREATE TEMP TABLE diagnostic_events AS
+SELECT PARSE_DATE('%Y%m%d',_TABLE_SUFFIX) AS table_date,
+  PARSE_DATE('%Y%m%d',event_date) AS event_date, user_pseudo_id,
+  param_int(event_params,'ga_session_id') AS ga_session_id
 FROM `PROJECT.analytics_PROPERTY_ID.events_*`
 WHERE _TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD';
 
--- Check 3: share of sessions whose events span two different event_date
--- values (midnight crossing). Explains session-count drift versus the UI
--- when you sum per-day session tables instead of aggregating across days.
-CREATE TEMP FUNCTION param_int(params ANY TYPE, target_key STRING) AS ((
-  SELECT value.int_value FROM UNNEST(params) WHERE key = target_key LIMIT 1
-));
-WITH keyed AS (
-  SELECT
-    CONCAT(user_pseudo_id, '.', CAST(param_int(event_params, 'ga_session_id') AS STRING)) AS session_key,
-    event_date
-  FROM `PROJECT.analytics_PROPERTY_ID.events_*`
-  WHERE _TABLE_SUFFIX BETWEEN 'YYYYMMDD' AND 'YYYYMMDD'
-    AND user_pseudo_id IS NOT NULL
-    AND param_int(event_params, 'ga_session_id') IS NOT NULL
-),
-spans AS (
-  SELECT session_key, COUNT(DISTINCT event_date) AS n_dates
-  FROM keyed
-  GROUP BY session_key
-)
-SELECT
-  COUNTIF(n_dates > 1) AS sessions_crossing_midnight,
-  COUNT(*) AS total_sessions,
-  ROUND(SAFE_DIVIDE(COUNTIF(n_dates > 1), COUNT(*)) * 100, 2) AS pct_crossing_midnight
-FROM spans;
+CREATE TEMP TABLE observed_spans AS
+SELECT user_pseudo_id, ga_session_id, COUNT(DISTINCT event_date) AS observed_date_count,
+  MIN(event_date) AS first_observed_date, MAX(event_date) AS last_observed_date
+FROM diagnostic_events
+WHERE user_pseudo_id IS NOT NULL AND ga_session_id IS NOT NULL
+GROUP BY user_pseudo_id, ga_session_id;
+
+SELECT TO_JSON_STRING(STRUCT(
+  ARRAY(SELECT AS STRUCT 'ga4' AS source_system, 'PROJECT.analytics_PROPERTY_ID' AS source_scope,
+    date AS table_date, COUNT(e.table_date) AS observed_event_rows,
+    'unknown' AS table_existence, 'unknown' AS export_completeness,
+    'daily_export_rows_in_supplied_window' AS observation_scope,
+    'row_counts_do_not_establish_table_existence_completeness_or_lag' AS limitations
+    FROM UNNEST(GENERATE_DATE_ARRAY(PARSE_DATE('%Y%m%d','YYYYMMDD'),PARSE_DATE('%Y%m%d','YYYYMMDD'))) date
+    LEFT JOIN diagnostic_events e ON e.table_date=date
+    GROUP BY date ORDER BY date) AS daily_observations,
+  (SELECT AS STRUCT 'ga4' AS source_system, 'PROJECT.analytics_PROPERTY_ID' AS source_scope,
+    COUNT(*) AS total_events, COUNTIF(user_pseudo_id IS NULL) AS null_user_pseudo_id_events,
+    COUNTIF(ga_session_id IS NULL) AS missing_session_id_events,
+    ROUND(SAFE_DIVIDE(COUNTIF(user_pseudo_id IS NULL),COUNT(*))*100,2) AS pct_null_user,
+    'unknown' AS missing_identifier_cause,
+    'all_observed_events_in_supplied_window' AS observation_scope,
+    'identifier_absence_does_not_establish_consent_cause' AS limitations
+    FROM diagnostic_events) AS identifier_observation,
+  (SELECT AS STRUCT 'ga4' AS source_system, 'PROJECT.analytics_PROPERTY_ID' AS source_scope,
+    COUNT(*) AS total_sessions, COUNTIF(observed_date_count>1) AS sessions_crossing_midnight,
+    ROUND(SAFE_DIVIDE(COUNTIF(observed_date_count>1),COUNT(*))*100,2) AS pct_crossing_midnight,
+    'qualified_sessions_observed_in_supplied_window' AS observation_scope,
+    'window_censored_date_spans_do_not_establish_lifetime_sessions_or_explain_ui_differences' AS limitations
+    FROM observed_spans) AS session_date_spans
+)) AS result_json;

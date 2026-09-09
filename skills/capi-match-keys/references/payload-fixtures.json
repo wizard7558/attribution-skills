@@ -1,0 +1,4108 @@
+{
+  "version": "0.5.0",
+  "provenance": {
+    "reviewed": "2026-09-08",
+    "method": "Full expected outputs hand-specified from official wire shapes and accepted preparation contract. Hash literals independently derived with Python hashlib over declared canonical synthetic identities and compact JSON business tuple. Timestamp milliseconds independently derived with Python datetime. No payload implementation outputs used.",
+    "sources": [
+      "https://developers.google.com/data-manager/api/reference/rest/v1/events/ingest",
+      "https://developers.google.com/data-manager/api/reference/rest/v1/Destination",
+      "https://developers.google.com/data-manager/api/reference/rest/v1/UserData",
+      "https://developers.google.com/data-manager/api/reference/rest/v1/Consent",
+      "https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/conversions-api-schema?view=li-lms-2026-07"
+    ]
+  },
+  "cases": [
+    {
+      "id": "google-all-signals-routing-consent",
+      "platform": "google",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "google",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "gclid",
+              "value": "gclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            },
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gbraid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "gbraid",
+              "value": "gbraid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            },
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-wbraid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "wbraid",
+              "value": "wbraid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_action_id": "00987654321",
+          "login_account_id": "00012",
+          "linked_account_id": "00034",
+          "event_source": "WEB",
+          "consent": {
+            "ad_user_data": "CONSENT_DENIED",
+            "ad_personalization": "CONSENT_STATUS_UNSPECIFIED"
+          },
+          "validate_only": true
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "gbraid",
+              "value": "gbraid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gbraid"
+            },
+            {
+              "kind": "gclid",
+              "value": "gclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gclid"
+            },
+            {
+              "kind": "wbraid",
+              "value": "wbraid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-wbraid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 3,
+            "unique_count": 3,
+            "duplicate_count": 0,
+            "selected_count": 3,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "google",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "google",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://datamanager.googleapis.com/v1/events:ingest",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "destinations": [
+              {
+                "operatingAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00123456789"
+                },
+                "productDestinationId": "00987654321",
+                "reference": "ad_destination",
+                "loginAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00012"
+                },
+                "linkedAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00034"
+                }
+              }
+            ],
+            "events": [
+              {
+                "destinationReferences": [
+                  "ad_destination"
+                ],
+                "transactionId": "browser+opaque%252F",
+                "eventTimestamp": "2026-09-08T12:34:56.123456789Z",
+                "eventSource": "WEB",
+                "userData": {
+                  "userIdentifiers": [
+                    {
+                      "emailAddress": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e"
+                    },
+                    {
+                      "phoneNumber": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928"
+                    }
+                  ]
+                },
+                "adIdentifiers": {
+                  "gclid": "gclid+Opaque%252F",
+                  "gbraid": "gbraid+Opaque%252F",
+                  "wbraid": "wbraid+Opaque%252F"
+                },
+                "consent": {
+                  "adUserData": "CONSENT_DENIED",
+                  "adPersonalization": "CONSENT_STATUS_UNSPECIFIED"
+                },
+                "conversionValue": 123.45,
+                "currency": "USD"
+              }
+            ],
+            "encoding": "HEX",
+            "validateOnly": true
+          },
+          "request_body": "{\"destinations\":[{\"operatingAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00123456789\"},\"productDestinationId\":\"00987654321\",\"reference\":\"ad_destination\",\"loginAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00012\"},\"linkedAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00034\"}}],\"events\":[{\"destinationReferences\":[\"ad_destination\"],\"transactionId\":\"browser+opaque%252F\",\"eventTimestamp\":\"2026-09-08T12:34:56.123456789Z\",\"eventSource\":\"WEB\",\"userData\":{\"userIdentifiers\":[{\"emailAddress\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\"},{\"phoneNumber\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\"}]},\"adIdentifiers\":{\"gclid\":\"gclid+Opaque%252F\",\"gbraid\":\"gbraid+Opaque%252F\",\"wbraid\":\"wbraid+Opaque%252F\"},\"consent\":{\"adUserData\":\"CONSENT_DENIED\",\"adPersonalization\":\"CONSENT_STATUS_UNSPECIFIED\"},\"conversionValue\":123.45,\"currency\":\"USD\"}],\"encoding\":\"HEX\",\"validateOnly\":true}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "https://www.googleapis.com/auth/datamanager"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "google-click-only-unknown-omitted",
+      "platform": "google",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "google",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "gclid",
+              "value": "gclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "omit_unknown",
+          "conversion_action_id": "00987654321",
+          "login_account_id": null,
+          "linked_account_id": null,
+          "event_source": "WEB",
+          "consent": null,
+          "validate_only": true
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [
+            {
+              "kind": "gclid",
+              "value": "gclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-gclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "google",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "google",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://datamanager.googleapis.com/v1/events:ingest",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "destinations": [
+              {
+                "operatingAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00123456789"
+                },
+                "productDestinationId": "00987654321",
+                "reference": "ad_destination"
+              }
+            ],
+            "events": [
+              {
+                "destinationReferences": [
+                  "ad_destination"
+                ],
+                "transactionId": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+                "eventTimestamp": "2026-09-08T12:34:56.123456789Z",
+                "eventSource": "WEB",
+                "adIdentifiers": {
+                  "gclid": "gclid+Opaque%252F"
+                }
+              }
+            ],
+            "encoding": "HEX",
+            "validateOnly": true
+          },
+          "request_body": "{\"destinations\":[{\"operatingAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00123456789\"},\"productDestinationId\":\"00987654321\",\"reference\":\"ad_destination\"}],\"events\":[{\"destinationReferences\":[\"ad_destination\"],\"transactionId\":\"7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b\",\"eventTimestamp\":\"2026-09-08T12:34:56.123456789Z\",\"eventSource\":\"WEB\",\"adIdentifiers\":{\"gclid\":\"gclid+Opaque%252F\"}}],\"encoding\":\"HEX\",\"validateOnly\":true}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "https://www.googleapis.com/auth/datamanager"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": true,
+          "timestamp_precision_loss": false,
+          "warnings": [
+            "provider_value_defaults_may_apply"
+          ]
+        }
+      }
+    },
+    {
+      "id": "google-email-only-zero",
+      "platform": "google",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": 0,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "google",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_action_id": "00987654321",
+          "login_account_id": null,
+          "linked_account_id": null,
+          "event_source": "WEB",
+          "consent": null,
+          "validate_only": true
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": 0,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "google",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "google",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://datamanager.googleapis.com/v1/events:ingest",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "destinations": [
+              {
+                "operatingAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00123456789"
+                },
+                "productDestinationId": "00987654321",
+                "reference": "ad_destination"
+              }
+            ],
+            "events": [
+              {
+                "destinationReferences": [
+                  "ad_destination"
+                ],
+                "transactionId": "browser+opaque%252F",
+                "eventTimestamp": "2026-09-08T12:34:56.123456789Z",
+                "eventSource": "WEB",
+                "userData": {
+                  "userIdentifiers": [
+                    {
+                      "emailAddress": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e"
+                    }
+                  ]
+                },
+                "conversionValue": 0,
+                "currency": "USD"
+              }
+            ],
+            "encoding": "HEX",
+            "validateOnly": true
+          },
+          "request_body": "{\"destinations\":[{\"operatingAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00123456789\"},\"productDestinationId\":\"00987654321\",\"reference\":\"ad_destination\"}],\"events\":[{\"destinationReferences\":[\"ad_destination\"],\"transactionId\":\"browser+opaque%252F\",\"eventTimestamp\":\"2026-09-08T12:34:56.123456789Z\",\"eventSource\":\"WEB\",\"userData\":{\"userIdentifiers\":[{\"emailAddress\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\"}]},\"conversionValue\":0,\"currency\":\"USD\"}],\"encoding\":\"HEX\",\"validateOnly\":true}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "https://www.googleapis.com/auth/datamanager"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "google-phone-only-negative-zero",
+      "platform": "google",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "-0.00",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "google",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_action_id": "00987654321",
+          "login_account_id": null,
+          "linked_account_id": null,
+          "event_source": "WEB",
+          "consent": null,
+          "validate_only": true
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "-0.00",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "google",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "google",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://datamanager.googleapis.com/v1/events:ingest",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "destinations": [
+              {
+                "operatingAccount": {
+                  "accountType": "GOOGLE_ADS",
+                  "accountId": "00123456789"
+                },
+                "productDestinationId": "00987654321",
+                "reference": "ad_destination"
+              }
+            ],
+            "events": [
+              {
+                "destinationReferences": [
+                  "ad_destination"
+                ],
+                "transactionId": "browser+opaque%252F",
+                "eventTimestamp": "2026-09-08T12:34:56.123456789Z",
+                "eventSource": "WEB",
+                "userData": {
+                  "userIdentifiers": [
+                    {
+                      "phoneNumber": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928"
+                    }
+                  ]
+                },
+                "conversionValue": 0,
+                "currency": "USD"
+              }
+            ],
+            "encoding": "HEX",
+            "validateOnly": true
+          },
+          "request_body": "{\"destinations\":[{\"operatingAccount\":{\"accountType\":\"GOOGLE_ADS\",\"accountId\":\"00123456789\"},\"productDestinationId\":\"00987654321\",\"reference\":\"ad_destination\"}],\"events\":[{\"destinationReferences\":[\"ad_destination\"],\"transactionId\":\"browser+opaque%252F\",\"eventTimestamp\":\"2026-09-08T12:34:56.123456789Z\",\"eventSource\":\"WEB\",\"userData\":{\"userIdentifiers\":[{\"phoneNumber\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\"}]},\"conversionValue\":0,\"currency\":\"USD\"}],\"encoding\":\"HEX\",\"validateOnly\":true}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "https://www.googleapis.com/auth/datamanager"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "google-no-keys-unknown-blocked",
+      "platform": "google",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "google",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_action_id": "00987654321",
+          "login_account_id": null,
+          "linked_account_id": null,
+          "event_source": "WEB",
+          "consent": null,
+          "validate_only": true
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "no_match_keys",
+          "unknown_value"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "google",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "google",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "https://www.googleapis.com/auth/datamanager"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "linkedin-email-click",
+      "platform": "linkedin",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "linkedin",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-li_fat_id",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "li_fat_id",
+              "value": "li_fat_id+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_rule_id": "00987654321",
+          "api_version": "202608"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "li_fat_id",
+              "value": "li_fat_id+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-li_fat_id"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "linkedin",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "linkedin",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/rest/conversionEvents",
+          "headers": {
+            "Content-Type": "application/json",
+            "Linkedin-Version": "202608",
+            "X-Restli-Protocol-Version": "2.0.0"
+          },
+          "body": {
+            "conversion": "urn:lla:llaPartnerConversion:00987654321",
+            "conversionHappenedAt": 1788870896123,
+            "eventId": "browser+opaque%252F",
+            "user": {
+              "userIds": [
+                {
+                  "idType": "SHA256_EMAIL",
+                  "idValue": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                },
+                {
+                  "idType": "LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID",
+                  "idValue": "li_fat_id+Opaque%252F"
+                }
+              ]
+            },
+            "conversionValue": {
+              "currencyCode": "USD",
+              "amount": "123.45"
+            }
+          },
+          "request_body": "{\"conversion\":\"urn:lla:llaPartnerConversion:00987654321\",\"conversionHappenedAt\":1788870896123,\"eventId\":\"browser+opaque%252F\",\"user\":{\"userIds\":[{\"idType\":\"SHA256_EMAIL\",\"idValue\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"},{\"idType\":\"LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID\",\"idValue\":\"li_fat_id+Opaque%252F\"}]},\"conversionValue\":{\"currencyCode\":\"USD\",\"amount\":\"123.45\"}}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "rw_conversions",
+            "r_ads"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "linkedin-email-only-negative-zero",
+      "platform": "linkedin",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "-0.00",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "linkedin",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_rule_id": "00987654321",
+          "api_version": "202608"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "-0.00",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "linkedin",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "linkedin",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/rest/conversionEvents",
+          "headers": {
+            "Content-Type": "application/json",
+            "Linkedin-Version": "202608",
+            "X-Restli-Protocol-Version": "2.0.0"
+          },
+          "body": {
+            "conversion": "urn:lla:llaPartnerConversion:00987654321",
+            "conversionHappenedAt": 1788870896123,
+            "eventId": "browser+opaque%252F",
+            "user": {
+              "userIds": [
+                {
+                  "idType": "SHA256_EMAIL",
+                  "idValue": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                }
+              ]
+            },
+            "conversionValue": {
+              "currencyCode": "USD",
+              "amount": "-0.00"
+            }
+          },
+          "request_body": "{\"conversion\":\"urn:lla:llaPartnerConversion:00987654321\",\"conversionHappenedAt\":1788870896123,\"eventId\":\"browser+opaque%252F\",\"user\":{\"userIds\":[{\"idType\":\"SHA256_EMAIL\",\"idValue\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"}]},\"conversionValue\":{\"currencyCode\":\"USD\",\"amount\":\"-0.00\"}}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "rw_conversions",
+            "r_ads"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "linkedin-click-only-mixed-omitted",
+      "platform": "linkedin",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": null,
+            "value_status": "mixed_currency"
+          },
+          "platform": "linkedin",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-li_fat_id",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "li_fat_id",
+              "value": "li_fat_id+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "omit_unknown",
+          "conversion_rule_id": "00987654321",
+          "api_version": "202608"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": null,
+            "value_status": "mixed_currency"
+          },
+          "selected_clicks": [
+            {
+              "kind": "li_fat_id",
+              "value": "li_fat_id+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-li_fat_id"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "linkedin",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "linkedin",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/rest/conversionEvents",
+          "headers": {
+            "Content-Type": "application/json",
+            "Linkedin-Version": "202608",
+            "X-Restli-Protocol-Version": "2.0.0"
+          },
+          "body": {
+            "conversion": "urn:lla:llaPartnerConversion:00987654321",
+            "conversionHappenedAt": 1788870896123,
+            "eventId": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+            "user": {
+              "userIds": [
+                {
+                  "idType": "LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID",
+                  "idValue": "li_fat_id+Opaque%252F"
+                }
+              ]
+            }
+          },
+          "request_body": "{\"conversion\":\"urn:lla:llaPartnerConversion:00987654321\",\"conversionHappenedAt\":1788870896123,\"eventId\":\"7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b\",\"user\":{\"userIds\":[{\"idType\":\"LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID\",\"idValue\":\"li_fat_id+Opaque%252F\"}]}}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "rw_conversions",
+            "r_ads"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": true,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "provider_value_defaults_may_apply",
+            "timestamp_truncated_to_milliseconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "linkedin-phone-only-blocked",
+      "platform": "linkedin",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "linkedin",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_rule_id": "00987654321",
+          "api_version": "202608"
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "no_match_keys"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "linkedin",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "linkedin",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "rw_conversions",
+            "r_ads"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "linkedin-email-only-zero",
+      "platform": "linkedin",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "linkedin",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "money_policy": "require_known",
+          "conversion_rule_id": "00987654321",
+          "api_version": "202608"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "linkedin",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "linkedin",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "conversion"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/rest/conversionEvents",
+          "headers": {
+            "Content-Type": "application/json",
+            "Linkedin-Version": "202608",
+            "X-Restli-Protocol-Version": "2.0.0"
+          },
+          "body": {
+            "conversion": "urn:lla:llaPartnerConversion:00987654321",
+            "conversionHappenedAt": 1788870896000,
+            "eventId": "browser+opaque%252F",
+            "user": {
+              "userIds": [
+                {
+                  "idType": "SHA256_EMAIL",
+                  "idValue": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                }
+              ]
+            },
+            "conversionValue": {
+              "currencyCode": "USD",
+              "amount": "0"
+            }
+          },
+          "request_body": "{\"conversion\":\"urn:lla:llaPartnerConversion:00987654321\",\"conversionHappenedAt\":1788870896000,\"eventId\":\"browser+opaque%252F\",\"user\":{\"userIds\":[{\"idType\":\"SHA256_EMAIL\",\"idValue\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"}]},\"conversionValue\":{\"currencyCode\":\"USD\",\"amount\":\"0\"}}"
+        },
+        "authorization": {
+          "mechanism": "oauth2_bearer",
+          "header": "Authorization",
+          "scopes": [
+            "rw_conversions",
+            "r_ads"
+          ]
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": false,
+          "warnings": []
+        }
+      }
+    },
+    {
+      "id": "meta-website-all-context",
+      "platform": "meta",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "meta",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "pixel_id": "00987654321",
+          "api_version": "v25.0",
+          "event_name": "Lead",
+          "action_source": "website",
+          "event_source_url": "https://example.test/lead?x=1",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "data_processing": {
+            "options": [
+              "LDU"
+            ],
+            "country": 0,
+            "state": 0
+          },
+          "opt_out": false,
+          "advertiser_tracking_enabled": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "meta",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "meta",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "Lead"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v25.0/00987654321/events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "action_source": "website",
+                "user_data": {
+                  "em": [
+                    "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                  ],
+                  "ph": [
+                    "758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0"
+                  ],
+                  "fbc": "fb.1.1788868800000.fbclid+Opaque%252F",
+                  "client_user_agent": "SyntheticBrowser/1.0"
+                },
+                "event_source_url": "https://example.test/lead?x=1",
+                "custom_data": {
+                  "value": 123.45,
+                  "currency": "USD"
+                },
+                "data_processing_options": [
+                  "LDU"
+                ],
+                "data_processing_options_country": 0,
+                "data_processing_options_state": 0,
+                "opt_out": false,
+                "advertiser_tracking_enabled": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"data\":[{\"event_name\":\"Lead\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"action_source\":\"website\",\"user_data\":{\"em\":[\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"],\"ph\":[\"758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0\"],\"fbc\":\"fb.1.1788868800000.fbclid+Opaque%252F\",\"client_user_agent\":\"SyntheticBrowser/1.0\"},\"event_source_url\":\"https://example.test/lead?x=1\",\"custom_data\":{\"value\":123.45,\"currency\":\"USD\"},\"data_processing_options\":[\"LDU\"],\"data_processing_options_country\":0,\"data_processing_options_state\":0,\"opt_out\":false,\"advertiser_tracking_enabled\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "graph_access_token",
+          "parameter": "access_token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "meta-nonwebsite-known-zero",
+      "platform": "meta",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "meta",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "pixel_id": "00987654321",
+          "api_version": "v25.0",
+          "event_name": "Lead",
+          "action_source": "physical_store",
+          "event_source_url": null,
+          "client_user_agent": null,
+          "test_event_code": null,
+          "data_processing": null,
+          "opt_out": null,
+          "advertiser_tracking_enabled": null,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "meta",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "meta",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "Lead"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v25.0/00987654321/events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "action_source": "physical_store",
+                "user_data": {
+                  "em": [
+                    "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                  ],
+                  "ph": [
+                    "758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0"
+                  ]
+                },
+                "custom_data": {
+                  "value": 0,
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "request_body": "{\"data\":[{\"event_name\":\"Lead\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"action_source\":\"physical_store\",\"user_data\":{\"em\":[\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"],\"ph\":[\"758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0\"]},\"custom_data\":{\"value\":0,\"currency\":\"USD\"}}]}"
+        },
+        "authorization": {
+          "mechanism": "graph_access_token",
+          "parameter": "access_token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "meta-blocked-no-keys-unknown",
+      "platform": "meta",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "meta",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "pixel_id": "00987654321",
+          "api_version": "v25.0",
+          "event_name": "Lead",
+          "action_source": "website",
+          "event_source_url": "https://example.test/lead?x=1",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "data_processing": {
+            "options": [
+              "LDU"
+            ],
+            "country": 0,
+            "state": 0
+          },
+          "opt_out": false,
+          "advertiser_tracking_enabled": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "no_match_keys",
+          "unknown_value"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "meta",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "meta",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "Lead"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "graph_access_token",
+          "parameter": "access_token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "meta-unknown-omitted",
+      "platform": "meta",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "meta",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "pixel_id": "00987654321",
+          "api_version": "v25.0",
+          "event_name": "Lead",
+          "action_source": "website",
+          "event_source_url": "https://example.test/lead?x=1",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "data_processing": {
+            "options": [
+              "LDU"
+            ],
+            "country": 0,
+            "state": 0
+          },
+          "opt_out": false,
+          "advertiser_tracking_enabled": false,
+          "money_policy": "omit_unknown"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [
+            {
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "meta",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "meta",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "Lead"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v25.0/00987654321/events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "action_source": "website",
+                "user_data": {
+                  "em": [
+                    "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                  ],
+                  "ph": [
+                    "758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0"
+                  ],
+                  "fbc": "fb.1.1788868800000.fbclid+Opaque%252F",
+                  "client_user_agent": "SyntheticBrowser/1.0"
+                },
+                "event_source_url": "https://example.test/lead?x=1",
+                "data_processing_options": [
+                  "LDU"
+                ],
+                "data_processing_options_country": 0,
+                "data_processing_options_state": 0,
+                "opt_out": false,
+                "advertiser_tracking_enabled": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"data\":[{\"event_name\":\"Lead\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"action_source\":\"website\",\"user_data\":{\"em\":[\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"],\"ph\":[\"758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0\"],\"fbc\":\"fb.1.1788868800000.fbclid+Opaque%252F\",\"client_user_agent\":\"SyntheticBrowser/1.0\"},\"event_source_url\":\"https://example.test/lead?x=1\",\"data_processing_options\":[\"LDU\"],\"data_processing_options_country\":0,\"data_processing_options_state\":0,\"opt_out\":false,\"advertiser_tracking_enabled\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "graph_access_token",
+          "parameter": "access_token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": true,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "provider_value_defaults_may_apply",
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "meta-pre-epoch-fbc-unrepresentable",
+      "platform": "meta",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "meta",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid",
+              "occurred_at": "1969-12-31T12:00:00Z",
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "00123456789",
+          "pixel_id": "00987654321",
+          "api_version": "v25.0",
+          "event_name": "Lead",
+          "action_source": "website",
+          "event_source_url": "https://example.test/lead?x=1",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "data_processing": {
+            "options": [
+              "LDU"
+            ],
+            "country": 0,
+            "state": 0
+          },
+          "opt_out": false,
+          "advertiser_tracking_enabled": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "fbclid",
+              "value": "fbclid+Opaque%252F",
+              "occurred_at": "1969-12-31T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-fbclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "meta",
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "meta",
+          "account_key": "00123456789",
+          "destination_key": "00987654321",
+          "event_type": "Lead"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v25.0/00987654321/events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": [
+              {
+                "event_name": "Lead",
+                "event_time": -1,
+                "event_id": "browser+opaque%252F",
+                "action_source": "website",
+                "user_data": {
+                  "em": [
+                    "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd"
+                  ],
+                  "ph": [
+                    "758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0"
+                  ],
+                  "client_user_agent": "SyntheticBrowser/1.0"
+                },
+                "event_source_url": "https://example.test/lead?x=1",
+                "custom_data": {
+                  "value": 123.45,
+                  "currency": "USD"
+                },
+                "data_processing_options": [
+                  "LDU"
+                ],
+                "data_processing_options_country": 0,
+                "data_processing_options_state": 0,
+                "opt_out": false,
+                "advertiser_tracking_enabled": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"data\":[{\"event_name\":\"Lead\",\"event_time\":-1,\"event_id\":\"browser+opaque%252F\",\"action_source\":\"website\",\"user_data\":{\"em\":[\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\"],\"ph\":[\"758fbf68945f21c416814c539ab578876c8d98fb69e6da692def92cd52417fe0\"],\"client_user_agent\":\"SyntheticBrowser/1.0\"},\"event_source_url\":\"https://example.test/lead?x=1\",\"custom_data\":{\"value\":123.45,\"currency\":\"USD\"},\"data_processing_options\":[\"LDU\"],\"data_processing_options_country\":0,\"data_processing_options_state\":0,\"opt_out\":false,\"advertiser_tracking_enabled\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "graph_access_token",
+          "parameter": "access_token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds",
+            "fbc_unrepresentable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiktok-custom-all-context",
+      "platform": "tiktok",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "tiktok",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-ttclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "ttclid",
+              "value": "ttclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "PIXEL-Abc123",
+          "event_name": "Custom Signup ✨",
+          "page_url": "https://example.test/signup?ttclid=Unqualified",
+          "page_referrer": "https://example.test/start",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "limited_data_use": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "ttclid",
+              "value": "ttclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-ttclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "tiktok",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "tiktok",
+          "account_key": "account+alpha",
+          "destination_key": "PIXEL-Abc123",
+          "event_type": "Custom Signup ✨"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://business-api.tiktok.com/open_api/v1.3/event/track/",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "event_source": "web",
+            "event_source_id": "PIXEL-Abc123",
+            "data": [
+              {
+                "event": "Custom Signup ✨",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "user": {
+                  "email": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd",
+                  "phone": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                  "ttclid": "ttclid+Opaque%252F",
+                  "user_agent": "SyntheticBrowser/1.0"
+                },
+                "page": {
+                  "url": "https://example.test/signup?ttclid=Unqualified",
+                  "referrer": "https://example.test/start"
+                },
+                "properties": {
+                  "value": 123.45,
+                  "currency": "USD"
+                },
+                "limited_data_use": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"event_source\":\"web\",\"event_source_id\":\"PIXEL-Abc123\",\"data\":[{\"event\":\"Custom Signup ✨\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"user\":{\"email\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\",\"phone\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"ttclid\":\"ttclid+Opaque%252F\",\"user_agent\":\"SyntheticBrowser/1.0\"},\"page\":{\"url\":\"https://example.test/signup?ttclid=Unqualified\",\"referrer\":\"https://example.test/start\"},\"properties\":{\"value\":123.45,\"currency\":\"USD\"},\"limited_data_use\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "access_token",
+          "header": "Access-Token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiktok-known-zero-no-context",
+      "platform": "tiktok",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "tiktok",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "PIXEL-Abc123",
+          "event_name": "Custom Signup ✨",
+          "page_url": null,
+          "page_referrer": null,
+          "client_user_agent": null,
+          "test_event_code": null,
+          "limited_data_use": null,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "tiktok",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "tiktok",
+          "account_key": "account+alpha",
+          "destination_key": "PIXEL-Abc123",
+          "event_type": "Custom Signup ✨"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://business-api.tiktok.com/open_api/v1.3/event/track/",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "event_source": "web",
+            "event_source_id": "PIXEL-Abc123",
+            "data": [
+              {
+                "event": "Custom Signup ✨",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "user": {
+                  "email": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd",
+                  "phone": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928"
+                },
+                "properties": {
+                  "value": 0,
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "request_body": "{\"event_source\":\"web\",\"event_source_id\":\"PIXEL-Abc123\",\"data\":[{\"event\":\"Custom Signup ✨\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"user\":{\"email\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\",\"phone\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\"},\"properties\":{\"value\":0,\"currency\":\"USD\"}}]}"
+        },
+        "authorization": {
+          "mechanism": "access_token",
+          "header": "Access-Token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiktok-blocked-no-keys-unknown",
+      "platform": "tiktok",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "tiktok",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "PIXEL-Abc123",
+          "event_name": "Custom Signup ✨",
+          "page_url": "https://example.test/signup?ttclid=Unqualified",
+          "page_referrer": "https://example.test/start",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "limited_data_use": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "no_match_keys",
+          "unknown_value"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "tiktok",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "tiktok",
+          "account_key": "account+alpha",
+          "destination_key": "PIXEL-Abc123",
+          "event_type": "Custom Signup ✨"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "access_token",
+          "header": "Access-Token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiktok-unknown-omitted",
+      "platform": "tiktok",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "tiktok",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-ttclid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "ttclid",
+              "value": "ttclid+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "PIXEL-Abc123",
+          "event_name": "Custom Signup ✨",
+          "page_url": "https://example.test/signup?ttclid=Unqualified",
+          "page_referrer": "https://example.test/start",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "limited_data_use": false,
+          "money_policy": "omit_unknown"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [
+            {
+              "kind": "ttclid",
+              "value": "ttclid+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-ttclid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "tiktok",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "tiktok",
+          "account_key": "account+alpha",
+          "destination_key": "PIXEL-Abc123",
+          "event_type": "Custom Signup ✨"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://business-api.tiktok.com/open_api/v1.3/event/track/",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "event_source": "web",
+            "event_source_id": "PIXEL-Abc123",
+            "data": [
+              {
+                "event": "Custom Signup ✨",
+                "event_time": 1788870896,
+                "event_id": "browser+opaque%252F",
+                "user": {
+                  "email": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd",
+                  "phone": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                  "ttclid": "ttclid+Opaque%252F",
+                  "user_agent": "SyntheticBrowser/1.0"
+                },
+                "page": {
+                  "url": "https://example.test/signup?ttclid=Unqualified",
+                  "referrer": "https://example.test/start"
+                },
+                "limited_data_use": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"event_source\":\"web\",\"event_source_id\":\"PIXEL-Abc123\",\"data\":[{\"event\":\"Custom Signup ✨\",\"event_time\":1788870896,\"event_id\":\"browser+opaque%252F\",\"user\":{\"email\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\",\"phone\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"ttclid\":\"ttclid+Opaque%252F\",\"user_agent\":\"SyntheticBrowser/1.0\"},\"page\":{\"url\":\"https://example.test/signup?ttclid=Unqualified\",\"referrer\":\"https://example.test/start\"},\"limited_data_use\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "access_token",
+          "header": "Access-Token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": true,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "provider_value_defaults_may_apply",
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tiktok-pre-epoch-fraction",
+      "platform": "tiktok",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "tiktok",
+          "click_observations": [],
+          "policy": {
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "PIXEL-Abc123",
+          "event_name": "Custom Signup ✨",
+          "page_url": "https://example.test/signup?ttclid=Unqualified",
+          "page_referrer": "https://example.test/start",
+          "client_user_agent": "SyntheticBrowser/1.0",
+          "test_event_code": "TEST123",
+          "limited_data_use": false,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "tiktok",
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "tiktok",
+          "account_key": "account+alpha",
+          "destination_key": "PIXEL-Abc123",
+          "event_type": "Custom Signup ✨"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://business-api.tiktok.com/open_api/v1.3/event/track/",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "event_source": "web",
+            "event_source_id": "PIXEL-Abc123",
+            "data": [
+              {
+                "event": "Custom Signup ✨",
+                "event_time": -1,
+                "event_id": "browser+opaque%252F",
+                "user": {
+                  "email": "d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd",
+                  "phone": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                  "user_agent": "SyntheticBrowser/1.0"
+                },
+                "page": {
+                  "url": "https://example.test/signup?ttclid=Unqualified",
+                  "referrer": "https://example.test/start"
+                },
+                "properties": {
+                  "value": 123.45,
+                  "currency": "USD"
+                },
+                "limited_data_use": false
+              }
+            ],
+            "test_event_code": "TEST123"
+          },
+          "request_body": "{\"event_source\":\"web\",\"event_source_id\":\"PIXEL-Abc123\",\"data\":[{\"event\":\"Custom Signup ✨\",\"event_time\":-1,\"event_id\":\"browser+opaque%252F\",\"user\":{\"email\":\"d15efbf82e75e1cfe93b15abc4aa7cca95ce14a27d2fd6b3e81428de42f2e9dd\",\"phone\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"user_agent\":\"SyntheticBrowser/1.0\"},\"page\":{\"url\":\"https://example.test/signup?ttclid=Unqualified\",\"referrer\":\"https://example.test/start\"},\"properties\":{\"value\":123.45,\"currency\":\"USD\"},\"limited_data_use\":false}],\"test_event_code\":\"TEST123\"}"
+        },
+        "authorization": {
+          "mechanism": "access_token",
+          "header": "Access-Token",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_seconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-custom-ldu-qualified-url",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "reddit",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-rdt_cid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "rdt_cid",
+              "value": "rdt+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "CUSTOM",
+          "custom_event_name": "Custom Signup ✨",
+          "action_source": "WEBSITE",
+          "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+          "test_id": "TEST123",
+          "data_processing": {
+            "modes": [
+              "LDU"
+            ],
+            "country": "US",
+            "region": "US-CA"
+          },
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "rdt_cid",
+              "value": "rdt+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-rdt_cid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://ads-api.reddit.com/api/v3/pixels/pixel%2Fa%2Bb%3Fc/conversion_events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": {
+              "events": [
+                {
+                  "event_at": 1788870896123,
+                  "action_source": "WEBSITE",
+                  "type": {
+                    "tracking_type": "CUSTOM",
+                    "custom_event_name": "Custom Signup ✨"
+                  },
+                  "click_id": "rdt+Opaque%252F",
+                  "user": {
+                    "email": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e",
+                    "phone_number": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                    "data_processing_options": {
+                      "modes": [
+                        "LDU"
+                      ],
+                      "country": "US",
+                      "region": "US-CA"
+                    }
+                  },
+                  "metadata": {
+                    "conversion_id": "browser+opaque%252F",
+                    "value": 123.45,
+                    "currency": "USD"
+                  },
+                  "event_source_url": "https://example.test/signup?rdt_cid=Unqualified"
+                }
+              ],
+              "test_id": "TEST123"
+            }
+          },
+          "request_body": "{\"data\":{\"events\":[{\"event_at\":1788870896123,\"action_source\":\"WEBSITE\",\"type\":{\"tracking_type\":\"CUSTOM\",\"custom_event_name\":\"Custom Signup ✨\"},\"click_id\":\"rdt+Opaque%252F\",\"user\":{\"email\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\",\"phone_number\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"data_processing_options\":{\"modes\":[\"LDU\"],\"country\":\"US\",\"region\":\"US-CA\"}},\"metadata\":{\"conversion_id\":\"browser+opaque%252F\",\"value\":123.45,\"currency\":\"USD\"},\"event_source_url\":\"https://example.test/signup?rdt_cid=Unqualified\"}],\"test_id\":\"TEST123\"}}"
+        },
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-standard-click-only-zero",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "reddit",
+          "click_observations": [
+            {
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-rdt_cid",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "kind": "rdt_cid",
+              "value": "rdt+Opaque%252F",
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "scope",
+              "conversion_key": "conversion-1"
+            }
+          ],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "LEAD",
+          "custom_event_name": null,
+          "action_source": "WEBSITE",
+          "event_source_url": null,
+          "test_id": null,
+          "data_processing": null,
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "0",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [
+            {
+              "kind": "rdt_cid",
+              "value": "rdt+Opaque%252F",
+              "occurred_at": "2026-09-08T12:00:00Z",
+              "source_system": "ads",
+              "source_scope": "ads-scope",
+              "click_key": "click-rdt_cid"
+            }
+          ],
+          "click_diagnostics": {
+            "input_count": 1,
+            "unique_count": 1,
+            "duplicate_count": 0,
+            "selected_count": 1,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": false
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"LEAD\",null]"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://ads-api.reddit.com/api/v3/pixels/pixel%2Fa%2Bb%3Fc/conversion_events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": {
+              "events": [
+                {
+                  "event_at": 1788870896123,
+                  "action_source": "WEBSITE",
+                  "type": {
+                    "tracking_type": "LEAD"
+                  },
+                  "click_id": "rdt+Opaque%252F",
+                  "metadata": {
+                    "conversion_id": "browser+opaque%252F",
+                    "value": 0,
+                    "currency": "USD"
+                  }
+                }
+              ]
+            }
+          },
+          "request_body": "{\"data\":{\"events\":[{\"event_at\":1788870896123,\"action_source\":\"WEBSITE\",\"type\":{\"tracking_type\":\"LEAD\"},\"click_id\":\"rdt+Opaque%252F\",\"metadata\":{\"conversion_id\":\"browser+opaque%252F\",\"value\":0,\"currency\":\"USD\"}}]}}"
+        },
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-unknown-omitted-url-fallback-disabled",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "reddit",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "CUSTOM",
+          "custom_event_name": "Custom Signup ✨",
+          "action_source": "WEBSITE",
+          "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+          "test_id": "TEST123",
+          "data_processing": {
+            "modes": [
+              "LDU"
+            ],
+            "country": "US",
+            "region": "US-CA"
+          },
+          "money_policy": "omit_unknown"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://ads-api.reddit.com/api/v3/pixels/pixel%2Fa%2Bb%3Fc/conversion_events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": {
+              "events": [
+                {
+                  "event_at": 1788870896123,
+                  "action_source": "WEBSITE",
+                  "type": {
+                    "tracking_type": "CUSTOM",
+                    "custom_event_name": "Custom Signup ✨"
+                  },
+                  "user": {
+                    "email": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e",
+                    "phone_number": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                    "data_processing_options": {
+                      "modes": [
+                        "LDU"
+                      ],
+                      "country": "US",
+                      "region": "US-CA"
+                    }
+                  },
+                  "metadata": {
+                    "conversion_id": "browser+opaque%252F"
+                  }
+                }
+              ],
+              "test_id": "TEST123"
+            }
+          },
+          "request_body": "{\"data\":{\"events\":[{\"event_at\":1788870896123,\"action_source\":\"WEBSITE\",\"type\":{\"tracking_type\":\"CUSTOM\",\"custom_event_name\":\"Custom Signup ✨\"},\"user\":{\"email\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\",\"phone_number\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"data_processing_options\":{\"modes\":[\"LDU\"],\"country\":\"US\",\"region\":\"US-CA\"}},\"metadata\":{\"conversion_id\":\"browser+opaque%252F\"}}],\"test_id\":\"TEST123\"}}"
+        },
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": true,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "provider_value_defaults_may_apply",
+            "timestamp_truncated_to_milliseconds",
+            "event_source_url_omitted_without_selected_click"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-blocked-no-keys-unknown",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "platform": "reddit",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": null,
+          "phone": null
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "CUSTOM",
+          "custom_event_name": "Custom Signup ✨",
+          "action_source": "WEBSITE",
+          "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+          "test_id": "TEST123",
+          "data_processing": {
+            "modes": [
+              "LDU"
+            ],
+            "country": "US",
+            "region": "US-CA"
+          },
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "no_match_keys",
+          "unknown_value"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-08T12:34:56.123456789Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds",
+            "event_source_url_omitted_without_selected_click"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-pre-epoch-millisecond-floor",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "reddit",
+          "click_observations": [],
+          "policy": {
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "CUSTOM",
+          "custom_event_name": "Custom Signup ✨",
+          "action_source": "WEBSITE",
+          "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+          "test_id": "TEST123",
+          "data_processing": {
+            "modes": [
+              "LDU"
+            ],
+            "country": "US",
+            "region": "US-CA"
+          },
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "1969-12-31T23:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "1969-12-31T23:59:59.999999999Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://ads-api.reddit.com/api/v3/pixels/pixel%2Fa%2Bb%3Fc/conversion_events",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body": {
+            "data": {
+              "events": [
+                {
+                  "event_at": -1,
+                  "action_source": "WEBSITE",
+                  "type": {
+                    "tracking_type": "CUSTOM",
+                    "custom_event_name": "Custom Signup ✨"
+                  },
+                  "user": {
+                    "email": "dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e",
+                    "phone_number": "cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928",
+                    "data_processing_options": {
+                      "modes": [
+                        "LDU"
+                      ],
+                      "country": "US",
+                      "region": "US-CA"
+                    }
+                  },
+                  "metadata": {
+                    "conversion_id": "browser+opaque%252F",
+                    "value": 123.45,
+                    "currency": "USD"
+                  }
+                }
+              ],
+              "test_id": "TEST123"
+            }
+          },
+          "request_body": "{\"data\":{\"events\":[{\"event_at\":-1,\"action_source\":\"WEBSITE\",\"type\":{\"tracking_type\":\"CUSTOM\",\"custom_event_name\":\"Custom Signup ✨\"},\"user\":{\"email\":\"dae9c7c55697ba170d6b494c458649bd469af525520280d0dcfc98d74d13b17e\",\"phone_number\":\"cb6880e416769253645cb9c6b8989154bf66a56a77fc14c81fb1019663cbb928\",\"data_processing_options\":{\"modes\":[\"LDU\"],\"country\":\"US\",\"region\":\"US-CA\"}},\"metadata\":{\"conversion_id\":\"browser+opaque%252F\",\"value\":123.45,\"currency\":\"USD\"}}],\"test_id\":\"TEST123\"}}"
+        },
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds",
+            "event_source_url_omitted_without_selected_click"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reddit-older-than-seven-days",
+      "platform": "reddit",
+      "input": {
+        "preparation_input": {
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-01T12:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "platform": "reddit",
+          "click_observations": [],
+          "policy": {
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          },
+          "browser_event_id": "browser+opaque%252F"
+        },
+        "identity": {
+          "email": " Test.User+tag@gmail.com ",
+          "phone": "+1 (415) 555-2671 ext 9"
+        },
+        "configuration": {
+          "account_id": "account+alpha",
+          "pixel_id": "pixel/a+b?c",
+          "tracking_type": "CUSTOM",
+          "custom_event_name": "Custom Signup ✨",
+          "action_source": "WEBSITE",
+          "event_source_url": "https://example.test/signup?rdt_cid=Unqualified",
+          "test_id": "TEST123",
+          "data_processing": {
+            "modes": [
+              "LDU"
+            ],
+            "country": "US",
+            "region": "US-CA"
+          },
+          "money_policy": "require_known"
+        }
+      },
+      "expected": {
+        "status": "blocked",
+        "reasons": [
+          "provider_event_too_old"
+        ],
+        "preparation": {
+          "status": "ready",
+          "reasons": [],
+          "event_id": "browser+opaque%252F",
+          "business_conversion_id": "7af015a5c42c87622cd4136ba432ca4c81268bbc1c889ade4722558d528e391b",
+          "conversion": {
+            "source_system": "crm",
+            "source_scope": "scope",
+            "conversion_key": "conversion-1",
+            "occurred_at": "2026-09-01T12:59:59.999999999Z",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null,
+            "value": "123.45",
+            "currency": "USD",
+            "value_status": "known"
+          },
+          "selected_clicks": [],
+          "click_diagnostics": {
+            "input_count": 0,
+            "unique_count": 0,
+            "duplicate_count": 0,
+            "selected_count": 0,
+            "excluded_count": 0,
+            "excluded": [],
+            "no_selected_clicks": true
+          },
+          "policy": {
+            "source": "caller_supplied",
+            "platform": "reddit",
+            "as_of": "2026-09-08T13:00:00Z",
+            "max_event_age_days": 100,
+            "click_lookback_days": 1,
+            "click_scope_bindings": [
+              {
+                "conversion_source_system": "crm",
+                "conversion_source_scope": "scope",
+                "click_source_system": "ads",
+                "click_source_scope": "ads-scope"
+              }
+            ]
+          }
+        },
+        "destination": {
+          "platform": "reddit",
+          "account_key": "account+alpha",
+          "destination_key": "pixel/a+b?c",
+          "event_type": "[\"CUSTOM\",\"Custom Signup ✨\"]"
+        },
+        "request": null,
+        "authorization": {
+          "mechanism": "conversion_access_token",
+          "header": "Authorization",
+          "scheme": "Bearer",
+          "scopes": []
+        },
+        "diagnostics": {
+          "money_omitted": false,
+          "timestamp_precision_loss": true,
+          "warnings": [
+            "timestamp_truncated_to_milliseconds",
+            "event_source_url_omitted_without_selected_click"
+          ]
+        }
+      }
+    }
+  ]
+}

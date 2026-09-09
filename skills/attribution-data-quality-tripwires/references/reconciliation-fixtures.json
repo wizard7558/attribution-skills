@@ -1,0 +1,5407 @@
+{
+  "contract_version": "0.1.0",
+  "schemas": {
+    "spend": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "crm_source_system": "STRING",
+        "crm_source_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "stage_key": "STRING",
+        "source_complete": "BOOL",
+        "report_complete": "BOOL",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING",
+        "abs_tolerance": "NUMERIC",
+        "relative_tolerance": "NUMERIC"
+      },
+      "source_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "spend_key": "STRING",
+        "event_date": "DATE",
+        "spend": "NUMERIC",
+        "currency": "STRING",
+        "spend_status": "STRING",
+        "included": "BOOL"
+      },
+      "report_input": {
+        "invocation_key": "STRING",
+        "report_date": "DATE",
+        "stage_key": "STRING",
+        "stage_order": "INT64",
+        "stage_kind": "STRING",
+        "channel": "STRING",
+        "channel_status": "STRING",
+        "network_id": "STRING",
+        "campaign_key": "STRING",
+        "ad_source_system": "STRING",
+        "ad_source_scope": "STRING",
+        "bucket": "STRING",
+        "crm_source_system": "STRING",
+        "crm_source_scope": "STRING",
+        "date_mode": "STRING",
+        "report_timezone": "STRING",
+        "taxonomy_version": "STRING",
+        "spend_fact_count": "INT64",
+        "observed_spend": "NUMERIC",
+        "observed_spend_currency": "STRING",
+        "observed_spend_status": "STRING"
+      },
+      "membership_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING"
+      }
+    },
+    "funnel": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "crm_source_system": "STRING",
+        "crm_source_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "stage_key": "STRING",
+        "source_complete": "BOOL",
+        "report_complete": "BOOL",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING"
+      },
+      "source_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "lead_key": "STRING",
+        "stage_key": "STRING",
+        "report_date": "DATE",
+        "included": "BOOL",
+        "achieved": "BOOL",
+        "is_attribution_primary": "BOOL"
+      },
+      "report_input": {
+        "invocation_key": "STRING",
+        "report_date": "DATE",
+        "stage_key": "STRING",
+        "stage_order": "INT64",
+        "stage_kind": "STRING",
+        "channel": "STRING",
+        "channel_status": "STRING",
+        "network_id": "STRING",
+        "campaign_key": "STRING",
+        "ad_source_system": "STRING",
+        "ad_source_scope": "STRING",
+        "bucket": "STRING",
+        "crm_source_system": "STRING",
+        "crm_source_scope": "STRING",
+        "date_mode": "STRING",
+        "report_timezone": "STRING",
+        "taxonomy_version": "STRING",
+        "lead_count": "INT64",
+        "stage_count_total": "INT64",
+        "stage_count_primary": "INT64",
+        "stage_unknown_count": "INT64"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "spend-baseline",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-baseline",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-baseline",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-drop-spend-only",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-drop-spend-only",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "SpendOnly+Case",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-drop-spend-only",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "currency_fact_count_mismatch",
+          "fact_count_mismatch",
+          "spend_amount_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "0",
+            "fact_count_difference": "-1",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": false,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "0",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "0",
+                "amount_difference": "-20",
+                "allowed_difference": "0",
+                "fact_count_difference": "-1",
+                "status": "fail",
+                "reasons": [
+                  "currency_fact_count_mismatch",
+                  "spend_amount_mismatch"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "currency_fact_count_mismatch",
+              "fact_count_mismatch",
+              "spend_amount_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "A complete report losing a spend-only supplied fact must fail counts and amount; the empty report is not unknown."
+    },
+    {
+      "id": "spend-only-bucket-included",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-only-bucket-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "spend_only",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-only-bucket-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Spend-only is a real report bucket and cannot be excluded by the check."
+    },
+    {
+      "id": "spend-duplicate-grain",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-duplicate-grain",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          },
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-duplicate-grain",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "currency_fact_count_mismatch",
+          "duplicate_report_grain",
+          "fact_count_mismatch",
+          "spend_amount_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "2",
+            "fact_count_difference": "1",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "1",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "40",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "2",
+                "amount_difference": "20",
+                "allowed_difference": "0",
+                "fact_count_difference": "1",
+                "status": "fail",
+                "reasons": [
+                  "currency_fact_count_mismatch",
+                  "spend_amount_mismatch"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "currency_fact_count_mismatch",
+              "duplicate_report_grain",
+              "fact_count_mismatch",
+              "spend_amount_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "2",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "2",
+          "duplicate_report_grains": "1",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-repeated-other-stage-excluded",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-repeated-other-stage-excluded",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          },
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "lead",
+            "stage_order": 10,
+            "stage_kind": "lead",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-repeated-other-stage-excluded",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "2",
+          "report_other_stage_rows": "1",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "The same spend repeated for a second configured stage is excluded before sums."
+    },
+    {
+      "id": "spend-source-incomplete",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-source-incomplete",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": false,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-source-incomplete",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": false,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "0",
+            "report_fact_count": "1",
+            "fact_count_difference": "1",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": false,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "0",
+                "report_known_amount": "20",
+                "source_known_fact_count": "0",
+                "report_known_fact_count": "1",
+                "amount_difference": "20",
+                "allowed_difference": "0",
+                "fact_count_difference": "1",
+                "status": "unknown",
+                "reasons": [
+                  "comparison_unresolved"
+                ]
+              }
+            ],
+            "status": "unknown",
+            "reasons": [
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-report-incomplete",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-report-incomplete",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": false,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-report-incomplete",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": false,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "unknown",
+        "reasons": [
+          "report_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "unknown",
+                "reasons": [
+                  "comparison_unresolved"
+                ]
+              }
+            ],
+            "status": "unknown",
+            "reasons": [
+              "report_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-known-zero",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-known-zero",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "0",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "0",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-known-zero",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "0",
+                "report_known_amount": "0",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-complete-empty",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-complete-empty",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [],
+        "report": [],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-complete-empty",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "0"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-complete-empty",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-complete-empty",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [],
+        "report": [],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-complete-empty",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "0"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-exact-source-repeat",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-exact-source-repeat",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-exact-source-repeat",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "1",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-qualified-membership",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-qualified-membership",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "other-account",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "999",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-qualified-membership",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "1",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Same bare native key outside explicitly declared membership is diagnosed, never globally joined."
+    },
+    {
+      "id": "spend-decimal-sum",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-decimal-sum",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "0.1",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Second",
+            "event_date": "2026-01-02",
+            "spend": "0.2",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 2,
+            "observed_spend": "0.3",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-decimal-sum",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "2",
+            "report_fact_count": "2",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "0.3",
+                "report_known_amount": "0.3",
+                "source_known_fact_count": "2",
+                "report_known_fact_count": "2",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Native NUMERIC0.1+0.2 becomes exact BIGNUMERIC0.3."
+    },
+    {
+      "id": "spend-currency-separation",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-currency-separation",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Euro",
+            "event_date": "2026-01-02",
+            "spend": "7",
+            "currency": "EUR",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          },
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "EuroCampaign",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "7",
+            "observed_spend_currency": "EUR",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-currency-separation",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "2",
+            "report_fact_count": "2",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "EUR",
+                "source_known_amount": "7",
+                "report_known_amount": "7",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              },
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "2",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "2",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-mixed-report-unknown",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-mixed-report-unknown",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Euro",
+            "event_date": "2026-01-02",
+            "spend": "7",
+            "currency": "EUR",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 2,
+            "observed_spend": null,
+            "observed_spend_currency": null,
+            "observed_spend_status": "mixed_currency"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-mixed-report-unknown",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "unknown",
+        "reasons": [
+          "unknown_money"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "2",
+            "report_fact_count": "2",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "2",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "EUR",
+                "source_known_amount": "7",
+                "report_known_amount": "0",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "0",
+                "amount_difference": "-7",
+                "allowed_difference": "0",
+                "fact_count_difference": "-1",
+                "status": "unknown",
+                "reasons": [
+                  "comparison_unresolved"
+                ]
+              },
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "0",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "0",
+                "amount_difference": "-20",
+                "allowed_difference": "0",
+                "fact_count_difference": "-1",
+                "status": "unknown",
+                "reasons": [
+                  "comparison_unresolved"
+                ]
+              }
+            ],
+            "status": "unknown",
+            "reasons": [
+              "unknown_money"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-unknown-count-mismatch-still-fails",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-unknown-count-mismatch-still-fails",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": null,
+            "currency": null,
+            "spend_status": "unknown",
+            "included": true
+          }
+        ],
+        "report": [],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-unknown-count-mismatch-still-fails",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "fact_count_mismatch",
+          "unknown_money"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "0",
+            "fact_count_difference": "-1",
+            "source_unknown_fact_count": "1",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": false,
+            "currency_comparisons": [],
+            "status": "fail",
+            "reasons": [
+              "fact_count_mismatch",
+              "unknown_money"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-absolute-boundary",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-absolute-boundary",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0.5",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20.5",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-absolute-boundary",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0.5",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20.5",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0.5",
+                "allowed_difference": "0.5",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Difference equal to the declared tolerance passes; no hidden thresholds."
+    },
+    {
+      "id": "spend-relative-boundary",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-relative-boundary",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0.1"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "22",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-relative-boundary",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0.1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "22",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "2",
+                "allowed_difference": "2",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Difference equal to the declared tolerance passes; no hidden thresholds."
+    },
+    {
+      "id": "spend-over-tolerance",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-over-tolerance",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0.5",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20.500000001",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-over-tolerance",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0.5",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "spend_amount_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20.500000001",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0.500000001",
+                "allowed_difference": "0.5",
+                "fact_count_difference": "0",
+                "status": "fail",
+                "reasons": [
+                  "spend_amount_mismatch"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "spend_amount_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "spend-zero-fact-unknown-ignored",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "spend-zero-fact-unknown-ignored",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          },
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "bucket": "unattributed",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 0,
+            "observed_spend": null,
+            "observed_spend_currency": null,
+            "observed_spend_status": "unknown"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "spend-zero-fact-unknown-ignored",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "1",
+            "report_fact_count": "1",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "20",
+                "report_known_amount": "20",
+                "source_known_fact_count": "1",
+                "report_known_fact_count": "1",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "2",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "2",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-drop-unattributed",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-drop-unattributed",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-drop-unattributed",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "fail",
+        "reasons": [
+          "count_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": false,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "count_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Dropping an achieved lead from a reconciliation bucket changes all-lead and primary counts."
+    },
+    {
+      "id": "funnel-unattributed-included",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-unattributed-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "bucket": "unattributed",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-unattributed-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-drop-ambiguous",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-drop-ambiguous",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-drop-ambiguous",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "fail",
+        "reasons": [
+          "count_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": false,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "count_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Dropping an achieved lead from a reconciliation bucket changes all-lead and primary counts."
+    },
+    {
+      "id": "funnel-ambiguous-included",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-ambiguous-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "bucket": "ambiguous",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-ambiguous-included",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-unknown-nonprimary-undated",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-unknown-nonprimary-undated",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": null,
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": false
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Unknown",
+            "stage_key": "won",
+            "report_date": null,
+            "included": true,
+            "achieved": null,
+            "is_attribution_primary": false
+          }
+        ],
+        "report": [
+          {
+            "report_date": null,
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 2,
+            "stage_count_total": 1,
+            "stage_count_primary": 0,
+            "stage_unknown_count": 1
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-unknown-nonprimary-undated",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": null,
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "2",
+                "report_count": "2",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Undated achieved nonprimary and unknown achievement remain separate count semantics; no stage ordering inference."
+    },
+    {
+      "id": "funnel-incomplete-report",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-incomplete-report",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": false,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-incomplete-report",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": false,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "unknown",
+        "reasons": [
+          "report_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": false,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "0",
+                "difference": "-1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "unknown"
+              }
+            ],
+            "status": "unknown",
+            "reasons": [
+              "report_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "0",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "0",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-duplicate-even-partial",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-duplicate-even-partial",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": false,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          },
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-duplicate-even-partial",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": false,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "fail",
+        "reasons": [
+          "duplicate_report_grain",
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "1",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "2",
+                "difference": "1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "2",
+                "difference": "1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "2",
+                "difference": "1",
+                "status": "unknown"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "unknown"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "duplicate_report_grain",
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "2",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "2",
+          "duplicate_report_grains": "1",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-qualified-outscope",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-qualified-outscope",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "other-crm",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-qualified-outscope",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "1",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-source-exact-duplicate",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-source-exact-duplicate",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-source-exact-duplicate",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "1",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "funnel-outside-range",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "funnel-outside-range",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Outside",
+            "stage_key": "won",
+            "report_date": "2025-12-31",
+            "included": false,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "funnel-outside-range",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "1",
+                "report_count": "1",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "1",
+          "report_raw_rows": "1",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "1",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "derivation": "Independent literal expected totals."
+    },
+    {
+      "id": "bad-report-metadata",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-report-metadata",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "CET",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "invalid report metadata",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-member-inclusion",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-member-inclusion",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": false
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "invalid source inclusion",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-source-money",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-source-money",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": null,
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "invalid monetary contract",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-spend-membership",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-spend-membership",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "spend membership is required",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "conflicting-spend-key",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "conflicting-spend-key",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          },
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "21",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "conflicting qualified source record",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-tolerance",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-tolerance",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "1.01"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "spend_key": "Spend+A",
+            "event_date": "2026-01-02",
+            "spend": "20",
+            "currency": "USD",
+            "spend_status": "known",
+            "included": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "invalid spend tolerance",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-timezone",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-timezone",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "Not/AZone",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "invalid invocation configuration",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-primary-flag",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-primary-flag",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": null
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "invalid qualified source record",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "conflicting-lead-stage",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "conflicting-lead-stage",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": false,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "conflicting qualified source record",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-negative-count",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-negative-count",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": -1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "invalid report counts",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "bad-control-identity",
+      "check": "funnel",
+      "input": {
+        "configuration": {
+          "invocation_key": "bad-control-identity",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "lead_key": "bad\u0000key",
+            "stage_key": "won",
+            "report_date": "2026-01-02",
+            "included": true,
+            "achieved": true,
+            "is_attribution_primary": true
+          }
+        ],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "lead_count": 1,
+            "stage_count_total": 1,
+            "stage_count_primary": 1,
+            "stage_unknown_count": 0
+          }
+        ],
+        "membership": []
+      },
+      "expectedError": "invalid qualified source record",
+      "derivation": "Actual native structural assertion must fail with a data-free message."
+    },
+    {
+      "id": "wrong-empty-money-type",
+      "check": "spend",
+      "input": {
+        "configuration": {
+          "invocation_key": "wrong-empty-money-type",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "source": [],
+        "report": [
+          {
+            "report_date": "2026-01-02",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "channel": "Paid Search",
+            "channel_status": "classified",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "bucket": "matched",
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "date_mode": "cohort",
+            "report_timezone": "UTC",
+            "taxonomy_version": "0.1.0",
+            "spend_fact_count": 1,
+            "observed_spend": "20",
+            "observed_spend_currency": "USD",
+            "observed_spend_status": "known"
+          }
+        ],
+        "membership": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a"
+          }
+        ]
+      },
+      "expectedError": "invalid input column types",
+      "derivation": "Actual native structural assertion must fail with a data-free message.",
+      "type_overrides": {
+        "source_input": {
+          "spend": "FLOAT64"
+        }
+      }
+    }
+  ],
+  "integration": {
+    "spend": {
+      "expected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-cost-spend",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "3",
+            "report_fact_count": "3",
+            "fact_count_difference": "0",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "41",
+                "report_known_amount": "41",
+                "source_known_fact_count": "3",
+                "report_known_fact_count": "3",
+                "amount_difference": "0",
+                "allowed_difference": "0",
+                "fact_count_difference": "0",
+                "status": "pass",
+                "reasons": []
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "3",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "3",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "6",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "6",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "corruptedExpected": {
+        "check_id": "spend_conservation",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-cost-spend-corrupted",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "currency_fact_count_mismatch",
+          "fact_count_mismatch",
+          "spend_amount_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_fact_count": "3",
+            "report_fact_count": "1",
+            "fact_count_difference": "-2",
+            "source_unknown_fact_count": "0",
+            "report_unknown_fact_count": "0",
+            "duplicate_grain_count": "0",
+            "source_present": true,
+            "report_present": true,
+            "currency_comparisons": [
+              {
+                "currency": "USD",
+                "source_known_amount": "41",
+                "report_known_amount": "20",
+                "source_known_fact_count": "3",
+                "report_known_fact_count": "1",
+                "amount_difference": "-21",
+                "allowed_difference": "0",
+                "fact_count_difference": "-2",
+                "status": "fail",
+                "reasons": [
+                  "currency_fact_count_mismatch",
+                  "spend_amount_mismatch"
+                ]
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "currency_fact_count_mismatch",
+              "fact_count_mismatch",
+              "spend_amount_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "3",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "3",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "4",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "4",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      }
+    },
+    "funnel": {
+      "expected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-cost-funnel",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "4",
+                "report_count": "4",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "4",
+                "report_count": "4",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "4",
+                "report_count": "4",
+                "difference": "0",
+                "status": "pass"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "4",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "4",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "6",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "6",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      },
+      "corruptedExpected": {
+        "check_id": "funnel_additivity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-cost-funnel-corrupted",
+          "report_scope": "synthetic-window",
+          "crm_source_system": "synthetic_crm",
+          "crm_source_scope": "crm-a",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-31",
+          "date_mode": "cohort",
+          "stage_key": "won",
+          "source_complete": true,
+          "report_complete": true,
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report"
+        },
+        "status": "fail",
+        "reasons": [
+          "count_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "report_date": "2026-01-02",
+            "source_present": true,
+            "report_present": true,
+            "duplicate_grain_count": "0",
+            "metrics": [
+              {
+                "metric": "lead_count",
+                "source_count": "4",
+                "report_count": "3",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_total",
+                "source_count": "4",
+                "report_count": "3",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_count_primary",
+                "source_count": "4",
+                "report_count": "3",
+                "difference": "-1",
+                "status": "fail"
+              },
+              {
+                "metric": "stage_unknown_count",
+                "source_count": "0",
+                "report_count": "0",
+                "difference": "0",
+                "status": "pass"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "count_mismatch"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "4",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "4",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "report_raw_rows": "5",
+          "report_other_stage_rows": "0",
+          "report_selected_rows": "5",
+          "duplicate_report_grains": "0",
+          "compared_dates": "1"
+        }
+      }
+    }
+  }
+}

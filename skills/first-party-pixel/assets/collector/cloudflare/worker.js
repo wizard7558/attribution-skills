@@ -9,14 +9,10 @@
 //
 // Uses `pg` against env.HYPERDRIVE.connectionString, same driver as the
 // node/ and vercel/ adapters, since Hyperdrive proxies the TCP connection
-// and Workers' `pg` support covers this path. If TCP sockets are
-// unavailable in a given Workers environment, swap in the Neon serverless
-// (HTTP-based) driver instead:
-//
-//   import { neon } from "@neondatabase/serverless";
-//   const sql = neon(env.DATABASE_URL);
-//   const db = { query: (text, params) => sql.query(text, params) };
+// and Workers' pg support covers this path. Keep an interactive transaction-
+// capable connection; a stateless HTTP query driver cannot replace it.
 import pg from "pg";
+import { createPgDatabase } from "../transaction-db.mjs";
 import { handleCollect } from "../core.js";
 
 function clientIp(request) {
@@ -61,7 +57,7 @@ export default {
     }
 
     const pool = new pg.Pool({ connectionString: env.HYPERDRIVE.connectionString });
-    const db = { query: (text, params) => pool.query(text, params) };
+    const db = createPgDatabase(pool);
 
     const ctx = {
       ip: clientIp(request),

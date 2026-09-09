@@ -1,0 +1,1077 @@
+{
+  "version": 1,
+  "window": {
+    "start": "20260901",
+    "end": "20260903"
+  },
+  "events": [
+    {
+      "user": "u",
+      "event_date": "20260901",
+      "timestamp": "1788220800000001",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 1,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 99,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/forged",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "session_engaged",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "session_engaged",
+          "value": {
+            "string_value": "1",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 20000,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "u",
+      "event_date": "20260901",
+      "timestamp": "1788220800000002",
+      "event_name": "purchase",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 1,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": 0,
+      "transaction": "order",
+      "revenue": 0
+    },
+    {
+      "user": "u",
+      "event_date": "20260901",
+      "timestamp": "1788220800000002",
+      "event_name": "purchase",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 1,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": 0,
+      "transaction": "order",
+      "revenue": 0
+    },
+    {
+      "user": "u",
+      "event_date": "20260903",
+      "timestamp": "1788393600000000",
+      "event_name": "scroll",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 1,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "u",
+      "event_date": "20260901",
+      "timestamp": "1788220800000003",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 2,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/two",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/later",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "session_engaged",
+          "value": {
+            "string_value": "0",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "session_engaged",
+          "value": {
+            "string_value": "1",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 7,
+            "float_value": 2.5,
+            "double_value": 5
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "v",
+      "event_date": "20260901",
+      "timestamp": "1788220800000004",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 3,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/null-session",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": "100",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 100,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": null,
+      "event_date": "20260901",
+      "timestamp": "1788220800000005",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 4,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/anonymous",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 8,
+            "float_value": null,
+            "double_value": 3.5
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "w",
+      "event_date": "20260903",
+      "timestamp": "1788393600000001",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 5,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/int",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 9,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "x",
+      "event_date": "20260903",
+      "timestamp": "1788393600000001",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 6,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/missing",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "u",
+      "event_date": "20260901",
+      "timestamp": "1788220800000006",
+      "event_name": "generate_lead",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 2,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "u",
+      "event_date": "20260903",
+      "timestamp": "1788393600000002",
+      "event_name": "sign_up",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 2,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": -5,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "v",
+      "event_date": "20260901",
+      "timestamp": "1788220800000007",
+      "event_name": "purchase",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 3,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/null-session",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": "100",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "engagement_time_msec",
+          "value": {
+            "string_value": null,
+            "int_value": 100,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": 10,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": null,
+      "event_date": "20260901",
+      "timestamp": "1788220800000008",
+      "event_name": "purchase",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 7,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": null,
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": 7,
+      "transaction": null,
+      "revenue": null
+    },
+    {
+      "user": "u",
+      "event_date": "20260831",
+      "timestamp": "1788220799999999",
+      "event_name": "page_view",
+      "event_params": [
+        {
+          "key": "ga_session_id",
+          "value": {
+            "string_value": null,
+            "int_value": 1,
+            "float_value": null,
+            "double_value": null
+          }
+        },
+        {
+          "key": "page_location",
+          "value": {
+            "string_value": "https://example.test/outside",
+            "int_value": null,
+            "float_value": null,
+            "double_value": null
+          }
+        }
+      ],
+      "event_value_in_usd": null,
+      "transaction": null,
+      "revenue": null
+    }
+  ],
+  "expected": {
+    "params": {
+      "inline_rows": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 1,
+          "page_location": null,
+          "ga_session_id_duplicate_count": 1,
+          "page_location_duplicate_count": 1
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000003,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 2,
+          "page_location": "https://example.test/two",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 1
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000004,
+          "event_name": "page_view",
+          "user_pseudo_id": "v",
+          "ga_session_id": null,
+          "page_location": "https://example.test/null-session",
+          "ga_session_id_duplicate_count": 1,
+          "page_location_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000005,
+          "event_name": "page_view",
+          "user_pseudo_id": null,
+          "ga_session_id": 4,
+          "page_location": "https://example.test/anonymous",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-03",
+          "event_timestamp": 1788393600000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "w",
+          "ga_session_id": 5,
+          "page_location": "https://example.test/int",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-03",
+          "event_timestamp": 1788393600000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "x",
+          "ga_session_id": 6,
+          "page_location": "https://example.test/missing",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0
+        }
+      ],
+      "helper_rows": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 1,
+          "page_location": null,
+          "ga_session_id_duplicate_count": 1,
+          "page_location_duplicate_count": 1,
+          "session_engaged": null,
+          "engagement_time_msec": null,
+          "session_engaged_duplicate_count": 1,
+          "engagement_time_msec_duplicate_count": 1
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000003,
+          "event_name": "page_view",
+          "user_pseudo_id": "u",
+          "ga_session_id": 2,
+          "page_location": "https://example.test/two",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 1,
+          "session_engaged": "0",
+          "engagement_time_msec": 2.5,
+          "session_engaged_duplicate_count": 1,
+          "engagement_time_msec_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000004,
+          "event_name": "page_view",
+          "user_pseudo_id": "v",
+          "ga_session_id": null,
+          "page_location": "https://example.test/null-session",
+          "ga_session_id_duplicate_count": 1,
+          "page_location_duplicate_count": 0,
+          "session_engaged": null,
+          "engagement_time_msec": null,
+          "session_engaged_duplicate_count": 0,
+          "engagement_time_msec_duplicate_count": 1
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-01",
+          "event_timestamp": 1788220800000005,
+          "event_name": "page_view",
+          "user_pseudo_id": null,
+          "ga_session_id": 4,
+          "page_location": "https://example.test/anonymous",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0,
+          "session_engaged": null,
+          "engagement_time_msec": 3.5,
+          "session_engaged_duplicate_count": 0,
+          "engagement_time_msec_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-03",
+          "event_timestamp": 1788393600000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "w",
+          "ga_session_id": 5,
+          "page_location": "https://example.test/int",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0,
+          "session_engaged": null,
+          "engagement_time_msec": 9,
+          "session_engaged_duplicate_count": 0,
+          "engagement_time_msec_duplicate_count": 0
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "event_date": "2026-09-03",
+          "event_timestamp": 1788393600000001,
+          "event_name": "page_view",
+          "user_pseudo_id": "x",
+          "ga_session_id": 6,
+          "page_location": "https://example.test/missing",
+          "ga_session_id_duplicate_count": 0,
+          "page_location_duplicate_count": 0,
+          "session_engaged": null,
+          "engagement_time_msec": null,
+          "session_engaged_duplicate_count": 0,
+          "engagement_time_msec_duplicate_count": 0
+        }
+      ]
+    },
+    "key_events": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": 1,
+        "event_date": "2026-09-01",
+        "event_name": "purchase",
+        "event_timestamp": 1788220800000002,
+        "event_ts": "2026-09-01 00:00:00",
+        "event_value_in_usd": 0,
+        "session_key": "u.1"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": 1,
+        "event_date": "2026-09-01",
+        "event_name": "purchase",
+        "event_timestamp": 1788220800000002,
+        "event_ts": "2026-09-01 00:00:00",
+        "event_value_in_usd": 0,
+        "session_key": "u.1"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": 2,
+        "event_date": "2026-09-01",
+        "event_name": "generate_lead",
+        "event_timestamp": 1788220800000006,
+        "event_ts": "2026-09-01 00:00:00",
+        "event_value_in_usd": null,
+        "session_key": "u.2"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "user_pseudo_id": "u",
+        "ga_session_id": 2,
+        "event_date": "2026-09-03",
+        "event_name": "sign_up",
+        "event_timestamp": 1788393600000002,
+        "event_ts": "2026-09-03 00:00:00",
+        "event_value_in_usd": -5,
+        "session_key": "u.2"
+      }
+    ],
+    "ui_reconciliation": {
+      "daily_observations": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-01",
+          "observed_event_rows": 9,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-02",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-03",
+          "observed_event_rows": 4,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        }
+      ],
+      "identifier_observation": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_events": 13,
+        "null_user_pseudo_id_events": 2,
+        "missing_session_id_events": 2,
+        "pct_null_user": 15.38,
+        "missing_identifier_cause": "unknown",
+        "observation_scope": "all_observed_events_in_supplied_window",
+        "limitations": "identifier_absence_does_not_establish_consent_cause"
+      },
+      "session_date_spans": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_sessions": 4,
+        "sessions_crossing_midnight": 2,
+        "pct_crossing_midnight": 50,
+        "observation_scope": "qualified_sessions_observed_in_supplied_window",
+        "limitations": "window_censored_date_spans_do_not_establish_lifetime_sessions_or_explain_ui_differences"
+      }
+    },
+    "empty_ui_reconciliation": {
+      "daily_observations": [
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-01",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-02",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        },
+        {
+          "source_system": "ga4",
+          "source_scope": "PROJECT.analytics_PROPERTY_ID",
+          "table_date": "2026-09-03",
+          "observed_event_rows": 0,
+          "table_existence": "unknown",
+          "export_completeness": "unknown",
+          "observation_scope": "daily_export_rows_in_supplied_window",
+          "limitations": "row_counts_do_not_establish_table_existence_completeness_or_lag"
+        }
+      ],
+      "identifier_observation": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_events": 0,
+        "null_user_pseudo_id_events": 0,
+        "missing_session_id_events": 0,
+        "pct_null_user": null,
+        "missing_identifier_cause": "unknown",
+        "observation_scope": "all_observed_events_in_supplied_window",
+        "limitations": "identifier_absence_does_not_establish_consent_cause"
+      },
+      "session_date_spans": {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "total_sessions": 0,
+        "sessions_crossing_midnight": 0,
+        "pct_crossing_midnight": null,
+        "observation_scope": "qualified_sessions_observed_in_supplied_window",
+        "limitations": "window_censored_date_spans_do_not_establish_lifetime_sessions_or_explain_ui_differences"
+      }
+    },
+    "sessions": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_key": "u.1",
+        "event_date": "2026-09-01",
+        "landing_page_location": null,
+        "events": 4,
+        "engaged": true,
+        "key_events": 2,
+        "engagement_time_sec": 0
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_key": "u.2",
+        "event_date": "2026-09-01",
+        "landing_page_location": "https://example.test/two",
+        "events": 3,
+        "engaged": true,
+        "key_events": 2,
+        "engagement_time_sec": 0.007
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_key": "w.5",
+        "event_date": "2026-09-03",
+        "landing_page_location": "https://example.test/int",
+        "events": 1,
+        "engaged": false,
+        "key_events": 0,
+        "engagement_time_sec": 0.009
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_key": "x.6",
+        "event_date": "2026-09-03",
+        "landing_page_location": "https://example.test/missing",
+        "events": 1,
+        "engaged": false,
+        "key_events": 0,
+        "engagement_time_sec": 0
+      }
+    ],
+    "channel_daily": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "event_date": "2026-09-01",
+        "channel": "Direct",
+        "taxonomy_version": "0.1.0",
+        "attribution_basis": "session_last_click",
+        "reporting_timezone": null,
+        "date_basis": "GA4 property event_date; first observed event in scan window",
+        "native_channel_groups": [],
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "new_users": 0,
+        "key_events": 2,
+        "purchase_events_without_transaction_id": 0,
+        "purchases": 0,
+        "purchase_revenue_usd": 0,
+        "revenue_status": "no_purchases",
+        "currency": "USD"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "event_date": "2026-09-01",
+        "channel": "Other",
+        "taxonomy_version": "0.1.0",
+        "attribution_basis": "session_last_click",
+        "reporting_timezone": null,
+        "date_basis": "GA4 property event_date; first observed event in scan window",
+        "native_channel_groups": [],
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "new_users": 0,
+        "key_events": 2,
+        "purchase_events_without_transaction_id": 0,
+        "purchases": 1,
+        "purchase_revenue_usd": 0,
+        "revenue_status": "complete",
+        "currency": "USD"
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "event_date": "2026-09-03",
+        "channel": "Direct",
+        "taxonomy_version": "0.1.0",
+        "attribution_basis": "session_last_click",
+        "reporting_timezone": null,
+        "date_basis": "GA4 property event_date; first observed event in scan window",
+        "native_channel_groups": [],
+        "sessions": 2,
+        "engaged_sessions": 0,
+        "new_users": 0,
+        "key_events": 0,
+        "purchase_events_without_transaction_id": 0,
+        "purchases": 0,
+        "purchase_revenue_usd": 0,
+        "revenue_status": "no_purchases",
+        "currency": "USD"
+      }
+    ],
+    "landing_pages": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "landing_page_path": null,
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "key_events": 2
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "landing_page_path": "/int",
+        "sessions": 1,
+        "engaged_sessions": 0,
+        "key_events": 0
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "landing_page_path": "/missing",
+        "sessions": 1,
+        "engaged_sessions": 0,
+        "key_events": 0
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "landing_page_path": "/two",
+        "sessions": 1,
+        "engaged_sessions": 1,
+        "key_events": 2
+      }
+    ],
+    "traffic_source_compare": [
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_last_click_source": null,
+        "session_last_click_medium": null,
+        "landing_url_status": "valid",
+        "landing_utm_source": null,
+        "landing_utm_medium": null,
+        "landing_utm_campaign": null,
+        "sessions": 3
+      },
+      {
+        "source_system": "ga4",
+        "source_scope": "PROJECT.analytics_PROPERTY_ID",
+        "session_last_click_source": null,
+        "session_last_click_medium": null,
+        "landing_url_status": "missing",
+        "landing_utm_source": null,
+        "landing_utm_medium": null,
+        "landing_utm_campaign": null,
+        "sessions": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,4752 @@
+{
+  "contract_version": "0.1.0",
+  "hash_derivation": "Python hashlib SHA-256 of synthetic canonical person.a@example.test, person.b@example.test, +14155551001; expected selections specified independently without calling projection or identity engines.",
+  "cases": [
+    {
+      "name": "unique_match",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cross_device_same_contact",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t2",
+            "visitor_key": "v2",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "observation_key": "o2",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v2\",\"o2\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "observation_key": "o2",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "touch_key": "t2",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v2\",\"o2\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t2",
+            "visitor_key": "v2",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "shared_device_a_b",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o2",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c2",
+            "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o2\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c2"
+              },
+              "evidence": {
+                "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o2",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "ambiguous",
+              "reason": "shared_device",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o2\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [
+              {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "visitor_key": "v1",
+                "contacts": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_key": "c1"
+                  },
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "site",
+                    "contact_key": "c2"
+                  }
+                ]
+              }
+            ],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "ambiguous",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c2",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "email_phone_candidate_ambiguity",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c2",
+            "email_hash": null,
+            "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+            "email_hash_format": null,
+            "phone_hash_format": "canonical_sha256_v1",
+            "email_hash_status": "missing",
+            "phone_hash_status": "attested",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "ambiguous",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c2"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c2",
+            "email_hash_status": "missing",
+            "phone_hash_status": "attested"
+          }
+        ]
+      }
+    },
+    {
+      "name": "legacy_and_per_kind_attestation",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": null,
+            "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "legacy",
+            "email_hash": null,
+            "phone_hash": null,
+            "email_hash_format": null,
+            "phone_hash_format": null,
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing",
+            "capture_status": "no_attested_identity",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "partial",
+            "email_hash": null,
+            "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700",
+            "email_hash_format": null,
+            "phone_hash_format": "canonical_sha256_v1",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "attested",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "partial"
+              },
+              "evidence": {
+                "email_hash": null,
+                "phone_hash": "932cf7d5e0f518999447d4cae69de7f30b052120a3d278fb2a0489179a0ff700"
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "partial"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "partial"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "partial"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "legacy",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "partial",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "attested"
+          }
+        ]
+      }
+    },
+    {
+      "name": "no_valid_identity",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": null,
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "no_valid_identity"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "reason": "no_valid_identity"
+          }
+        ],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing_binding",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unauthorized_source_binding",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "other_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unauthorized_scope_binding",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "other_site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "external_crm_only_binding",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "crm",
+              "contact_source_scope": "crm-account"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ],
+        "external_contacts": [
+          {
+            "source_system": "crm",
+            "source_scope": "crm-account",
+            "contact_key": "crm-c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": null
+          }
+        ],
+        "external_contact_evidence_ref": "crm-snapshot-fixture-1"
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": "crm-snapshot-fixture-1",
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "crm",
+                "source_scope": "crm-account",
+                "contact_key": "crm-c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-account",
+                  "contact_key": "crm-c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-account",
+                  "contact_key": "crm-c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "crm",
+            "subject_source_scope": "crm-account",
+            "subject_key": "crm-c1"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "crm",
+            "source_scope": "crm-account",
+            "contact_key": "crm-c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "both_catalogs_ambiguous",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "crm",
+              "contact_source_scope": "crm-account"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ],
+        "external_contacts": [
+          {
+            "source_system": "crm",
+            "source_scope": "crm-account",
+            "contact_key": "crm-c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": null
+          }
+        ],
+        "external_contact_evidence_ref": "crm-snapshot-fixture-1"
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": "crm-snapshot-fixture-1",
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "ambiguous",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-account",
+                  "contact_key": "crm-c1"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "crm",
+            "source_scope": "crm-account",
+            "contact_key": "crm-c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "native_contact_is_never_subject",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": "c1",
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": "c1",
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "future_one_nanosecond",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T01:00:00.000000000Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "future",
+            "visitor_key": "v2",
+            "occurred_at": "2026-01-01T01:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "future-o",
+            "occurred_at": "2026-01-01T01:00:00.000000001Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T01:00:00.000000000Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 1,
+              "touches": 1
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T01:00:00.000000000Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "touch_key": "future",
+            "reason": "future_after_as_of"
+          }
+        ],
+        "excluded_observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "future-o",
+            "reason": "future_after_as_of"
+          }
+        ],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "inclusive_lookback_one_ns_outside",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "exact",
+            "visitor_key": "v1",
+            "occurred_at": "2025-12-31T00:20:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "outside",
+            "visitor_key": "v2",
+            "occurred_at": "2025-12-31T00:20:00.000000000Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00.000000001Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "observation_key": "o2",
+            "occurred_at": "2026-01-01T00:20:00.000000001Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v2\",\"o2\"]",
+              "occurred_at": "2026-01-01T00:20:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "observation_key": "o2",
+              "occurred_at": "2026-01-01T00:20:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "exact",
+              "occurred_at": "2025-12-31T00:20:00.000000001Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "touch_key": "outside",
+              "occurred_at": "2025-12-31T00:20:00.000000000Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "exact",
+            "visitor_key": "v1",
+            "occurred_at": "2025-12-31T00:20:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "outside",
+            "visitor_key": "v2",
+            "occurred_at": "2025-12-31T00:20:00.000000000Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "dedupe_nanosecond_exact_direct_idempotent",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "first",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "below",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:30:00.000000000Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "exact",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:30:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "direct",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:40:00Z",
+            "channel": "Direct",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "first",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "exact",
+              "occurred_at": "2026-01-01T00:30:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "first",
+              "occurred_at": "2026-01-01T00:00:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "exact",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:30:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "first",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "below",
+            "reason": "consecutive_duplicate_within_30_minutes"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "direct",
+            "reason": "direct_first_touch_only"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "first",
+            "reason": "duplicate_idempotent"
+          }
+        ],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "first_direct_preserved",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Direct",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Direct",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "source_rejections_no_temporal_judgment",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "legacy",
+            "visitor_key": "v1",
+            "occurred_at": "unjudged-calendar-text",
+            "channel": "Paid Search",
+            "taxonomy_version": null,
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "legacy_requires_reclassification"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "unsupported",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "9.9.9",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "unsupported_taxonomy_version"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "bad",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Unclassified Native",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "invalid_canonical_channel"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "unjudged-calendar-text",
+            "source_event_type": "identify",
+            "email_hash": null,
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "no_valid_identity"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [],
+        "suppressed_touches": [],
+        "excluded_touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "bad",
+            "reason": "invalid_canonical_channel"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "legacy",
+            "reason": "legacy_requires_reclassification"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "unsupported",
+            "reason": "unsupported_taxonomy_version"
+          }
+        ],
+        "excluded_observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "reason": "no_valid_identity"
+          }
+        ],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "identical_qualified_duplicates",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          }
+        ],
+        "suppressed_touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "touch_key": "t1",
+            "reason": "duplicate_idempotent"
+          }
+        ],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown_legacy_never_matches",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": null,
+            "phone_hash": null,
+            "email_hash_format": null,
+            "phone_hash_format": null,
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing",
+            "capture_status": "no_attested_identity",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty_explicit_snapshot",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [],
+        "observations": [],
+        "contacts": []
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [],
+          "touch_links": [],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": []
+      }
+    },
+    {
+      "name": "same_touch_key_different_visitors",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v2",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v2",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v2",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "same_bare_keys_different_scopes",
+      "input": {
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "config": {
+          "invocation_key": "invocation-fixture-1",
+          "as_of": "2026-01-01T01:00:00Z",
+          "lookback_days": 1,
+          "identity_scope_bindings": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "site"
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "other-site",
+              "contact_source_system": "first_party_pixel",
+              "contact_source_scope": "other-site"
+            }
+          ],
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0"
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "other-site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible"
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "other-site",
+            "visitor_key": "v1",
+            "observation_key": "o1",
+            "occurred_at": "2026-01-01T00:20:00Z",
+            "source_event_type": "identify",
+            "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+            "phone_hash": null,
+            "identity_input_format": "canonical_sha256_v1",
+            "identity_normalization_version": "0.1.0",
+            "capture_status": "eligible"
+          }
+        ],
+        "contacts": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "other-site",
+            "contact_key": "c1",
+            "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+            "phone_hash": null,
+            "email_hash_format": "canonical_sha256_v1",
+            "phone_hash_format": null,
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing",
+            "capture_status": "eligible",
+            "native_created_at": "2000-01-01T00:00:00.000000Z"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "invocation-fixture-1",
+        "snapshot_evidence_ref": "snapshot-fixture-1",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"other-site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "other-site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "other-site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "site",
+                "contact_key": "c1"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "other-site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "other-site",
+                  "contact_key": "c1"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "observation_key": "o1",
+              "occurred_at": "2026-01-01T00:20:00Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "other-site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "other-site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"other-site\",\"v1\",\"o1\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "site",
+              "visitor_key": "v1",
+              "touch_key": "t1",
+              "occurred_at": "2026-01-01T00:00:00Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "site",
+                  "contact_key": "c1"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"site\",\"v1\",\"o1\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-01-01T01:00:00Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "other-site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "other-site",
+            "subject_key": "c1"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "touch_key": "t1",
+            "visitor_key": "v1",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": "Campaign+Raw",
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Click%2B+Raw",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "invocation-fixture-1",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "site",
+            "subject_key": "c1"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "other-site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "site",
+            "contact_key": "c1",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -62,11 +62,19 @@ CREATE TABLE IF NOT EXISTS pixel.events (
   url           text,
   referrer      text,
   properties    jsonb NOT NULL DEFAULT '{}'::jsonb,
+  -- Sanitized raw tracking evidence. NULL distinguishes pre-upgrade records.
+  utm           jsonb,
+  click_ids     jsonb,
   ip            inet,
   occurred_at   timestamptz NOT NULL,
   received_at   timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (id, occurred_at)
 ) PARTITION BY RANGE (occurred_at);
+
+-- Add nullable source evidence without inventing values for historical events.
+ALTER TABLE pixel.events ADD COLUMN IF NOT EXISTS utm jsonb;
+ALTER TABLE pixel.events ADD COLUMN IF NOT EXISTS click_ids jsonb;
+ALTER TABLE pixel.events ADD COLUMN IF NOT EXISTS occurred_at_iso text;
 
 CREATE INDEX IF NOT EXISTS idx_pixel_events_site_occurred ON pixel.events (site_key, occurred_at DESC);
 CREATE INDEX IF NOT EXISTS idx_pixel_events_visitor_occurred ON pixel.events (visitor_id, occurred_at);
@@ -122,8 +130,10 @@ $$;
 -- contacts: known (identified) people, keyed by hashed email/phone
 -- ===========================================================================
 -- Canonicalization happens before hashing, in the collector: email is
--- trimmed + lowercased; phone is reduced to E.164 digits with a leading '+'
--- when the source value carried one. email_hash/phone_hash are sha256 hex of
+-- validated, trimmed and lowercased; phone requires an explicit international
+-- '+', removes supported formatting/extensions, and validates 8-15 digits.
+-- The shared portable normalization authority never guesses a country code.
+-- Invalid values produce no new identity hash. email_hash/phone_hash are sha256 hex of
 -- those canonical strings. A contact can be created from either identifier
 -- alone; the unique constraints on hash columns allow NULL (a contact
 -- created from phone only has a NULL email_hash, and vice versa).
@@ -139,10 +149,28 @@ CREATE TABLE IF NOT EXISTS pixel.contacts (
   CONSTRAINT uq_pixel_contacts_site_phone UNIQUE (site_key, phone_hash)
 );
 
+-- Nullable per-kind provenance: historical hashes remain explicitly unverified.
+ALTER TABLE pixel.contacts ADD COLUMN IF NOT EXISTS email_hash_format text;
+ALTER TABLE pixel.contacts ADD COLUMN IF NOT EXISTS phone_hash_format text;
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conrelid='pixel.contacts'::regclass AND conname='pixel_contacts_email_hash_format') THEN
+    ALTER TABLE pixel.contacts ADD CONSTRAINT pixel_contacts_email_hash_format CHECK (
+      email_hash_format IS NULL OR (email_hash_format='canonical_sha256_v1' AND email_hash IS NOT NULL AND length(email_hash)=64 AND email_hash ~ '^[0-9a-f]{64}$')
+    );
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conrelid='pixel.contacts'::regclass AND conname='pixel_contacts_phone_hash_format') THEN
+    ALTER TABLE pixel.contacts ADD CONSTRAINT pixel_contacts_phone_hash_format CHECK (
+      phone_hash_format IS NULL OR (phone_hash_format='canonical_sha256_v1' AND phone_hash IS NOT NULL AND length(phone_hash)=64 AND phone_hash ~ '^[0-9a-f]{64}$')
+    );
+  END IF;
+END;
+$$;
+
 -- ===========================================================================
 -- identity_links: bipartite, additive visitor <-> contact graph
 -- ===========================================================================
--- Rows are never deleted. A visitor can resolve to more than one contact
+-- Rows are additive during ingestion; retention can cascade. A visitor can resolve to more than one contact
 -- (shared devices, re-identification with a different email) and a contact
 -- can be reached from more than one visitor (multiple devices); merging is
 -- always additive, never destructive.
@@ -157,8 +185,38 @@ CREATE TABLE IF NOT EXISTS pixel.identity_links (
 
 CREATE INDEX IF NOT EXISTS idx_pixel_identity_links_contact ON pixel.identity_links (contact_id);
 
+-- Immutable source observations; never infer historical event time from links.
+-- event_id is the application's real event UUID; events itself is partitioned.
+CREATE TABLE IF NOT EXISTS pixel.identity_observations (
+  event_id uuid PRIMARY KEY,
+  site_key text NOT NULL REFERENCES pixel.sites(site_key) ON DELETE CASCADE,
+  visitor_id uuid NOT NULL REFERENCES pixel.visitors(id) ON DELETE CASCADE,
+  source_event_type text NOT NULL CHECK (source_event_type IN ('identify','form_submit')),
+  occurred_at timestamptz NOT NULL,
+  occurred_at_iso text NOT NULL,
+  email_hash text CHECK (email_hash IS NULL OR (length(email_hash) = 64 AND email_hash ~ '^[0-9a-f]{64}$')),
+  phone_hash text CHECK (phone_hash IS NULL OR (length(phone_hash) = 64 AND phone_hash ~ '^[0-9a-f]{64}$')),
+  identity_input_format text NOT NULL CHECK (identity_input_format = 'canonical_sha256_v1'),
+  identity_normalization_version text NOT NULL CHECK (identity_normalization_version = '0.1.0'),
+  capture_status text NOT NULL CHECK (capture_status IN ('eligible','no_valid_identity')),
+  recorded_at timestamptz NOT NULL DEFAULT now(),
+  CHECK ((capture_status = 'eligible') = (email_hash IS NOT NULL OR phone_hash IS NOT NULL))
+);
+CREATE INDEX IF NOT EXISTS idx_pixel_identity_observations_visitor_occurred
+  ON pixel.identity_observations(visitor_id, occurred_at);
+CREATE OR REPLACE FUNCTION pixel.reject_identity_observation_update()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  RAISE EXCEPTION 'identity observations are immutable' USING ERRCODE = '55000';
+END;
+$$;
+DROP TRIGGER IF EXISTS identity_observations_immutable ON pixel.identity_observations;
+CREATE TRIGGER identity_observations_immutable BEFORE UPDATE ON pixel.identity_observations
+  FOR EACH ROW EXECUTE FUNCTION pixel.reject_identity_observation_update();
+-- Deletion through site/visitor retention cascades remains intentionally allowed.
+
 -- ===========================================================================
--- touchpoints: channel-derived marketing touches
+-- touchpoints: one channel-derived native observation per accepted pageview
 -- ===========================================================================
 CREATE TABLE IF NOT EXISTS pixel.touchpoints (
   id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -199,6 +257,7 @@ CREATE TABLE IF NOT EXISTS pixel.touchpoints (
 ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS srsltid text;
 ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS native_channel text;
 ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS taxonomy_version text;
+ALTER TABLE pixel.touchpoints ADD COLUMN IF NOT EXISTS occurred_at_iso text;
 
 CREATE INDEX IF NOT EXISTS idx_pixel_touchpoints_visitor_occurred ON pixel.touchpoints (visitor_id, occurred_at);
 CREATE INDEX IF NOT EXISTS idx_pixel_touchpoints_contact ON pixel.touchpoints (contact_id) WHERE contact_id IS NOT NULL;
@@ -218,6 +277,8 @@ CREATE TABLE IF NOT EXISTS pixel.conversion_events (
   currency    text,
   page_url    text
 );
+
+ALTER TABLE pixel.conversion_events ADD COLUMN IF NOT EXISTS occurred_at_iso text;
 
 CREATE INDEX IF NOT EXISTS idx_pixel_conversion_events_visitor ON pixel.conversion_events (visitor_id, occurred_at);
 CREATE INDEX IF NOT EXISTS idx_pixel_conversion_events_site_occurred ON pixel.conversion_events (site_key, occurred_at);

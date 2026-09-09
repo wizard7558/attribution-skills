@@ -1,0 +1,3649 @@
+{
+  "schemas": {
+    "configuration_input": {
+      "invocation_key": "STRING",
+      "report_scope": "STRING",
+      "report_timezone": "STRING",
+      "report_start": "DATE",
+      "report_end": "DATE",
+      "date_mode": "STRING",
+      "source_evidence_ref": "STRING",
+      "report_evidence_ref": "STRING",
+      "population_mode": "STRING"
+    },
+    "membership_input": {
+      "invocation_key": "STRING",
+      "source_system": "STRING",
+      "source_scope": "STRING",
+      "table_key": "STRING",
+      "column_key": "STRING",
+      "schema_complete": "BOOL",
+      "table_exists": "BOOL",
+      "column_exists": "BOOL",
+      "scan_complete": "BOOL"
+    },
+    "observation_input": {
+      "invocation_key": "STRING",
+      "source_system": "STRING",
+      "source_scope": "STRING",
+      "table_key": "STRING",
+      "column_key": "STRING",
+      "row_count": "INT64",
+      "non_null_count": "INT64",
+      "population_mode": "STRING",
+      "observed_start": "DATE",
+      "observed_end": "DATE"
+    }
+  },
+  "cases": [
+    {
+      "id": "empty-baseline",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "all-null",
+      "input": {
+        "configuration": {
+          "invocation_key": "all-null",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "all-null",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_all_null"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "1",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "empty-table",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 0,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "empty-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_observed_rows"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "0",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "no_observed_rows"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "partial-positive",
+      "input": {
+        "configuration": {
+          "invocation_key": "partial-positive",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "partial-positive",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "pass",
+        "reasons": [
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": [
+              "scan_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "partial-zero",
+      "input": {
+        "configuration": {
+          "invocation_key": "partial-zero",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "partial-zero",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "scan_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "incomplete-schema-positive",
+      "input": {
+        "configuration": {
+          "invocation_key": "incomplete-schema-positive",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "incomplete-schema-positive",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "pass",
+        "reasons": [
+          "schema_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": [
+              "schema_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "incomplete-schema-all-null",
+      "input": {
+        "configuration": {
+          "invocation_key": "incomplete-schema-all-null",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "incomplete-schema-all-null",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_all_null",
+          "schema_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null",
+              "schema_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "1",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "column-absent",
+      "input": {
+        "configuration": {
+          "invocation_key": "column-absent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": null,
+            "non_null_count": null,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "column-absent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "column_absent",
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "table-absent",
+      "input": {
+        "configuration": {
+          "invocation_key": "table-absent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": false,
+            "column_exists": false,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": null,
+            "non_null_count": null,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "table-absent",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "column_absent",
+          "no_population_observation",
+          "scan_incomplete",
+          "table_absent"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": false,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete",
+              "table_absent"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "existence-unknown",
+      "input": {
+        "configuration": {
+          "invocation_key": "existence-unknown",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": null,
+            "column_exists": null,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": null,
+            "non_null_count": null,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "existence-unknown",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "column_existence_unknown",
+          "no_population_observation",
+          "scan_incomplete",
+          "schema_incomplete",
+          "table_existence_unknown"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": false,
+            "table_exists": null,
+            "column_exists": null,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_existence_unknown",
+              "no_population_observation",
+              "scan_incomplete",
+              "schema_incomplete",
+              "table_existence_unknown"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "missing-observation",
+      "input": {
+        "configuration": {
+          "invocation_key": "missing-observation",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false
+          }
+        ],
+        "observations": []
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "missing-observation",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": null,
+            "observed_end": null,
+            "status": "unknown",
+            "reasons": [
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "0",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "exact-duplicates",
+      "input": {
+        "configuration": {
+          "invocation_key": "exact-duplicates",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "exact-duplicates",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "2",
+          "duplicate_observations_collapsed": "1",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "whole-table",
+      "input": {
+        "configuration": {
+          "invocation_key": "whole-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "full_table_snapshot"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "full_table_snapshot",
+            "observed_start": null,
+            "observed_end": null
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "whole-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "full_table_snapshot"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "qualified-collision",
+      "input": {
+        "configuration": {
+          "invocation_key": "qualified-collision",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "qualified-collision",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_all_null"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "2",
+          "populated_columns": "1",
+          "all_null_columns": "1",
+          "unknown_columns": "0",
+          "raw_observations": "2",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "nonmember",
+      "input": {
+        "configuration": {
+          "invocation_key": "nonmember",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "other",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "nonmember",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "1",
+          "all_null_columns": "0",
+          "unknown_columns": "0",
+          "raw_observations": "2",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "1"
+        }
+      }
+    },
+    {
+      "id": "bad-count",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 3,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid population observation"
+    },
+    {
+      "id": "negative-count",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": -1,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid population observation"
+    },
+    {
+      "id": "half-null",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": null,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid population observation"
+    },
+    {
+      "id": "wrong-window",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-02"
+          }
+        ]
+      },
+      "expectedError": "invalid population observation"
+    },
+    {
+      "id": "conflicting-observation",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 0,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "conflicting population observation"
+    },
+    {
+      "id": "conflicting-inventory",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "conflicting column inventory"
+    },
+    {
+      "id": "absent-with-count",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "population contradicts inventory"
+    },
+    {
+      "id": "complete-no-observation",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": []
+      },
+      "expectedError": "population contradicts inventory"
+    },
+    {
+      "id": "no-members",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "column inventory is required"
+    },
+    {
+      "id": "wrong-empty-type",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": []
+      },
+      "expectedError": "invalid input column types",
+      "type_overrides": {
+        "observation_input": {
+          "row_count": "FLOAT64"
+        }
+      }
+    },
+    {
+      "id": "bad-timezone",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "+01:00",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    },
+    {
+      "id": "bad-mode",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "implicit"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    },
+    {
+      "id": "bad-key",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": " bad",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    },
+    {
+      "id": "reverse-window",
+      "input": {
+        "configuration": {
+          "invocation_key": "empty-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-02",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true
+          }
+        ],
+        "observations": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "sample_table",
+            "column_key": "amount",
+            "row_count": 2,
+            "non_null_count": 1,
+            "population_mode": "report_window",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01"
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    }
+  ],
+  "integration": [
+    {
+      "id": "actual-timestamp",
+      "table": "population",
+      "columns": [
+        "all_null",
+        "amount",
+        "complex",
+        "flag",
+        "json_cell",
+        "missing",
+        "text"
+      ],
+      "mode": "report_window",
+      "date_column": "event_ts",
+      "configuration": {
+        "invocation_key": "actual-timestamp",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "report_window"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": false,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "row_count": "1",
+          "non_null_count": "0",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "row_count": "1",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "row_count": "1",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "row_count": "1",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "row_count": "1",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        }
+      ],
+      "expectedDiagnostics": [
+        {
+          "column_key": "complex",
+          "reason": "unsupported_type",
+          "data_type": "STRUCT<nested INT64>"
+        }
+      ],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-timestamp",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_absent",
+          "column_all_null",
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "all_null",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "1",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "1",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "complex",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "flag",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "1",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "json_cell",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "1",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "missing",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "text",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "1",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "7",
+          "populated_columns": "4",
+          "all_null_columns": "1",
+          "unknown_columns": "2",
+          "raw_observations": "7",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "actual-date",
+      "table": "population",
+      "columns": [
+        "all_null",
+        "amount",
+        "complex",
+        "flag",
+        "json_cell",
+        "missing",
+        "text"
+      ],
+      "mode": "report_window",
+      "date_column": "event_date",
+      "configuration": {
+        "invocation_key": "actual-date",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "report_window"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": false,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "row_count": "2",
+          "non_null_count": "0",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        }
+      ],
+      "expectedDiagnostics": [
+        {
+          "column_key": "complex",
+          "reason": "unsupported_type",
+          "data_type": "STRUCT<nested INT64>"
+        }
+      ],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-date",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_absent",
+          "column_all_null",
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "all_null",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "complex",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "flag",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "json_cell",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "missing",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "text",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "7",
+          "populated_columns": "4",
+          "all_null_columns": "1",
+          "unknown_columns": "2",
+          "raw_observations": "7",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "actual-datetime",
+      "table": "population",
+      "columns": [
+        "all_null",
+        "amount",
+        "complex",
+        "flag",
+        "json_cell",
+        "missing",
+        "text"
+      ],
+      "mode": "report_window",
+      "date_column": "local_dt",
+      "configuration": {
+        "invocation_key": "actual-datetime",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "report_window"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": false,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "row_count": "2",
+          "non_null_count": "0",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "row_count": "2",
+          "non_null_count": "1",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        }
+      ],
+      "expectedDiagnostics": [
+        {
+          "column_key": "complex",
+          "reason": "unsupported_type",
+          "data_type": "STRUCT<nested INT64>"
+        }
+      ],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-datetime",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_absent",
+          "column_all_null",
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "all_null",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "complex",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "flag",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "json_cell",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "missing",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "text",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "2",
+            "non_null_count": "1",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "7",
+          "populated_columns": "4",
+          "all_null_columns": "1",
+          "unknown_columns": "2",
+          "raw_observations": "7",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "actual-whole-table",
+      "table": "population",
+      "columns": [
+        "all_null",
+        "amount",
+        "complex",
+        "flag",
+        "json_cell",
+        "missing",
+        "text"
+      ],
+      "mode": "full_table_snapshot",
+      "date_column": null,
+      "configuration": {
+        "invocation_key": "actual-whole-table",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "full_table_snapshot"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": false,
+          "scan_complete": false
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "all_null",
+          "row_count": "3",
+          "non_null_count": "0",
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "amount",
+          "row_count": "3",
+          "non_null_count": "2",
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "complex",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "flag",
+          "row_count": "3",
+          "non_null_count": "2",
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "json_cell",
+          "row_count": "3",
+          "non_null_count": "2",
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "missing",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "population",
+          "column_key": "text",
+          "row_count": "3",
+          "non_null_count": "2",
+          "population_mode": "full_table_snapshot",
+          "observed_start": null,
+          "observed_end": null
+        }
+      ],
+      "expectedDiagnostics": [
+        {
+          "column_key": "complex",
+          "reason": "unsupported_type",
+          "data_type": "STRUCT<nested INT64>"
+        }
+      ],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-whole-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "full_table_snapshot"
+        },
+        "status": "fail",
+        "reasons": [
+          "column_absent",
+          "column_all_null",
+          "no_population_observation",
+          "scan_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "all_null",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "3",
+            "non_null_count": "0",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "fail",
+            "reasons": [
+              "column_all_null"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "3",
+            "non_null_count": "2",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "complex",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": null,
+            "observed_end": null,
+            "status": "unknown",
+            "reasons": [
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "flag",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "3",
+            "non_null_count": "2",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "json_cell",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "3",
+            "non_null_count": "2",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "missing",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": null,
+            "observed_end": null,
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "population",
+            "column_key": "text",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "3",
+            "non_null_count": "2",
+            "observed_start": null,
+            "observed_end": null,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "7",
+          "populated_columns": "4",
+          "all_null_columns": "1",
+          "unknown_columns": "2",
+          "raw_observations": "7",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "actual-empty-table",
+      "table": "empty_table",
+      "columns": [
+        "amount"
+      ],
+      "mode": "report_window",
+      "date_column": "event_date",
+      "configuration": {
+        "invocation_key": "actual-empty-table",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "report_window"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "empty_table",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": true,
+          "column_exists": true,
+          "scan_complete": true
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "empty_table",
+          "column_key": "amount",
+          "row_count": "0",
+          "non_null_count": "0",
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        }
+      ],
+      "expectedDiagnostics": [],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-empty-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_observed_rows"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "empty_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": true,
+            "column_exists": true,
+            "scan_complete": true,
+            "row_count": "0",
+            "non_null_count": "0",
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "no_observed_rows"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    },
+    {
+      "id": "actual-missing-table",
+      "table": "missing_table",
+      "columns": [
+        "amount"
+      ],
+      "mode": "report_window",
+      "date_column": "event_date",
+      "configuration": {
+        "invocation_key": "actual-missing-table",
+        "report_scope": "synthetic-window",
+        "report_timezone": "America/Los_Angeles",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-schema",
+        "report_evidence_ref": "synthetic-population",
+        "population_mode": "report_window"
+      },
+      "expectedMembership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "missing_table",
+          "column_key": "amount",
+          "schema_complete": true,
+          "table_exists": false,
+          "column_exists": false,
+          "scan_complete": false
+        }
+      ],
+      "expectedObservations": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "table_key": "missing_table",
+          "column_key": "amount",
+          "row_count": null,
+          "non_null_count": null,
+          "population_mode": "report_window",
+          "observed_start": "2026-01-01",
+          "observed_end": "2026-01-01"
+        }
+      ],
+      "expectedDiagnostics": [],
+      "expected": {
+        "check_id": "empty_column_probe",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-missing-table",
+          "report_scope": "synthetic-window",
+          "report_timezone": "America/Los_Angeles",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-schema",
+          "report_evidence_ref": "synthetic-population",
+          "population_mode": "report_window"
+        },
+        "status": "unknown",
+        "reasons": [
+          "column_absent",
+          "no_population_observation",
+          "scan_incomplete",
+          "table_absent"
+        ],
+        "evidence_refs": [
+          "synthetic-schema",
+          "synthetic-population"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "table_key": "missing_table",
+            "column_key": "amount",
+            "schema_complete": true,
+            "table_exists": false,
+            "column_exists": false,
+            "scan_complete": false,
+            "row_count": null,
+            "non_null_count": null,
+            "observed_start": "2026-01-01",
+            "observed_end": "2026-01-01",
+            "status": "unknown",
+            "reasons": [
+              "column_absent",
+              "no_population_observation",
+              "scan_incomplete",
+              "table_absent"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "declared_columns": "1",
+          "populated_columns": "0",
+          "all_null_columns": "0",
+          "unknown_columns": "1",
+          "raw_observations": "1",
+          "duplicate_observations_collapsed": "0",
+          "nonmember_observations": "0"
+        }
+      }
+    }
+  ]
+}

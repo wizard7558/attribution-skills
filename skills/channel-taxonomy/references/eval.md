@@ -1,58 +1,59 @@
-# Evaluation prompts
+# Channel taxonomy evaluation
 
-These prompts are for an independent evaluator. They specify expected behavior without
-fabricating model results; run them against the skill and record observed answers separately.
+The shared-harness manifest retains three fixed groups with eight neutral scenarios each:
 
-## 1. Conflicting acquisition evidence
+1. `conflicting-acquisition-evidence`: classify conflicting click, medium, network, native,
+   referrer, and Direct evidence, retaining the distinction between a label and proof of spend.
+2. `native-shopify-network-normalization`: classify native projections, explicit networks,
+   Shopify types, unknown evidence, and AI referrals without losing raw provenance.
+3. `cross-source-interoperability`: review scoped identity, overlap, source attribution,
+   daily grain, required metrics, absent/unknown money, and incompatible currencies.
 
-You receive `{utm_source: "google", utm_medium: "email", click_ids: {fbclid: "abc"},
-native_channel: "Direct"}`. Classify it, explain the precedence, and list the raw evidence
-that must remain in the output.
+The first 16 expected channel/version projections are checked against the actual current
+`classify` API. Boolean provenance decisions and the eight interoperability answers are
+case-specific readings of [channel-contract.md](channel-contract.md), not native join results.
+The old combined monetary status rubric was corrected to the existing contract's `unknown`
+and `mixed_currency` statuses. No monetary records means an empty observation list and a null
+total; a declaration of currencies or available metrics is not an observed amount. Historical
+manifest/results and the former skill-local harness are preserved in a private review archive.
+Historical [results](eval-results.md) describe the former manifest and are not scores for this one.
 
-Expected outcome: Paid Social via the social click-ID rule; mention that the label is a routing
-convention rather than proof of spend; retain all raw fields and taxonomy version.
+[eval-cases.json](eval-cases.json) uses the shared harness's exact format. The public
+[evaluation-output-contract.md](evaluation-output-contract.md) defines projections, vocabulary,
+and every scored array order and is included in each condition's user prompt. The with-skill
+context contains exactly `SKILL.md`, `references/channel-contract.md`, and
+`references/source-mappings.md`. Baseline receives the same raw inputs, output schema, and
+user prompt with no skill context. Expected checks remain outside both model requests.
 
-## 2. Native and Shopify evidence
-
-Classify `{native_channel: "Cross-network", shopify_source_type: "ad",
-shopify_source: "unknown"}` and then `{shopify_source_type: "ad", shopify_source: "google"}`.
-
-Expected outcome: the first is Paid Other and the second is Paid Search due to platform evidence.
-Explain that native Cross-network is a custom projection and preserve provenance.
-
-## 3. Measurement contract
-
-Design a daily output joining GA4 sessions with first-party pixel touchpoints. State the identity
-keys, attribution basis, daily grain, required metrics, and monetary-field handling.
-
-Expected outcome: source-scoped identity (`source_system`, `source_scope`, `session_key`,
-`visitor_key`); GA4 session last-click and pixel first-touch explicitly labeled; grain
-`source_system/source_scope/event_date/channel`; required sessions, engaged_sessions, new_users,
-key_events; source-native monetary fields with declared currency, NULL/status for unknown or
-mixed currency, explicit FX before monetary joins, and no overlap summation or fabricated
-purchase equivalence.
-
-## Reproducible model harness
-
-The machine-readable cases and hidden rubric are in [eval-cases.json](eval-cases.json). The
-harness generates exactly three prompts from those cases, each with eight independent synthetic
-inputs, and runs the same prompts in `without-skill` and `with-skill` conditions against Claude
-Fable 5.1, Claude Sonnet 5, and the isolated Ollama `qwen3:4b` endpoint. Expected answers are
-never included in a prompt. The with-skill system context contains only `SKILL.md`,
-`channel-contract.md`, and `source-mappings.md`.
-
-Run local parser/scorer checks with:
+From the repository root, run the offline verification:
 
 ```sh
-python3 scripts/run-model-evals.py --self-test
+node skills/channel-taxonomy/scripts/test-eval-manifest.mjs
+python3 scripts/run-skill-evals.py --skill skills/channel-taxonomy
 ```
 
-After the reviewed core skill and references are ready, run the live evaluation with:
+The Node test runs the real classifier and frozen shared parser/scorer, checks all 24 literal
+projections, meaningful semantic and schema mutations, request separation, vocabulary, source
+pins, and a copied standalone skill with an explicitly supplied shared scorer. It reports
+`NO SQL EXECUTED`; no model or network calls occur. Deterministically regenerate the manifest
+from its reviewed literal definitions with the same Node command plus `--write`.
+Node 18+ and Python 3.10+ are required. `tiktoken` is optional for a cl100k estimate; the test
+otherwise labels its conservative bytes/3 estimate. Neither is a claim about Qwen tokenization.
+
+All 18 cells for this revised manifest are **pending**: Fable 5.1, Sonnet 5, and Qwen3:4b,
+three groups, with and without skill context. No taxonomy inference has been run in this step.
+After separate launch review, the stock shared command is:
 
 ```sh
-python3 scripts/run-model-evals.py --run
+python3 scripts/run-skill-evals.py --skill skills/channel-taxonomy --run \
+  --models claude-fable-5-1 claude-sonnet-5 qwen3:4b --condition both \
+  --groups conflicting-acquisition-evidence native-shopify-network-normalization cross-source-interoperability \
+  --output "$HOME/Downloads/channel-taxonomy-shared-evaluation-raw.json"
 ```
 
-This writes [eval-results.json](eval-results.json), including prompt snapshots, timestamps,
-model response metadata, raw responses, parsed JSON, item-level scores, and deltas, plus the
-user-facing report at `~/Downloads/channel-taxonomy-evaluation-report.md`.
+A live launch must use the intended authenticated Claude CLI and an explicitly owned Ollama
+endpoint via `OLLAMA_HOST`, with exact model identities recorded. The frozen harness uses
+32768 Qwen context, 8192 output, temperature 0, and thinking disabled. Transport or schema
+failures are unavailable results, not zero knowledge scores. Any timeout override requires
+separate review and explicit provenance. Results describe these 24 synthetic scenarios only;
+they do not establish a general model ranking, source parity, paid spend, or causal validity.

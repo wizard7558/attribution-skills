@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "token": "+ads@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "...@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "a+bad@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/key-contract.md",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "a.b+tag@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/clickstream-identity-stitching/scripts/test-identity-artifacts.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "a.lice+ads@googlemail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "a@.example.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "a@example..com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "alice.smith+ads@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json",
+        "skills/capi-match-keys/references/key-fixtures.json",
+        "skills/capi-match-keys/scripts/test-match-keys.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "alice.smith@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "alice@googlemail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/key-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "alicesmith+ads@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "alicesmith@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json",
+        "skills/capi-match-keys/references/key-fixtures.json",
+        "skills/capi-match-keys/scripts/test-match-keys.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "first.last+offer@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/first-party-pixel/scripts/identity-parity.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "first.last+tag@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/clickstream-identity-stitching/references/primitive-fixtures.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "test.user+tag@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/attribution-audit/references/execution-fixtures.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json",
+        "skills/capi-match-keys/references/payload-fixtures.json",
+        "skills/capi-match-keys/scripts/test-provider-payloads.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "test.user@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "testuser+tag@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    },
+    {
+      "token": "testuser@gmail.com",
+      "paths": [
+        "scripts/confidential-email-allowlist.json",
+        "skills/capi-match-keys/references/eval-cases.json",
+        "skills/capi-match-keys/references/eval-results.json",
+        "skills/capi-match-keys/references/eval-supplemental-sonnet-baseline.json",
+        "skills/capi-match-keys/scripts/test-provider-payloads.mjs"
+      ],
+      "provenance": "Literal synthetic identity normalization fixture or its reviewed test, enum, contract, and historical model evidence copies; exact token only."
+    }
+  ],
+  "public_text_exceptions": [
+    {
+      "token": "Bellaso",
+      "paths": [
+        "README.md",
+        "scripts/confidential-email-allowlist.json"
+      ],
+      "provenance": "Public author product branding verified in wizard7558/attribution-skills README, public blob a9f342e1b5534ffc6955f3c9cbaa45c3eb5a018a: https://api.github.com/repos/wizard7558/attribution-skills/git/blobs/a9f342e1b5534ffc6955f3c9cbaa45c3eb5a018a . Exact whole-word denylist term only; not other private terms."
+    }
+  ]
+}

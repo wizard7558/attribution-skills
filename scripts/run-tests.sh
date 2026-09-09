@@ -12,6 +12,7 @@ fi
 for suite in "$@"; do
   case "$suite" in
     --offline)
+      python3 scripts/test-confidential.py
       node skills/channel-taxonomy/scripts/build-artifacts.mjs --repository --check
       node skills/channel-taxonomy/scripts/run-checks.mjs
       node skills/ga4-bigquery-export/scripts/test-integration.mjs

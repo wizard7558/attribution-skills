@@ -1,0 +1,2548 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/contract.md",
+    "scripts/attribute-leads.mjs",
+    "scripts/channel-taxonomy.mjs"
+  ],
+  "groups": [
+    {
+      "id": "precedence-and-normalization",
+      "prompt": "Resolve each supplied CRM attribution input independently. Return one case object for every input, in input order, with its projected lead results in input order. Preserve false and null exactly; do not execute code or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A",
+                  "click_ids": {
+                    "dclid": "D",
+                    "gclid": "G",
+                    "fbclid": "F"
+                  }
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "google",
+                  "utm_medium": "organic",
+                  "first_touch": {
+                    "click_ids": {
+                      "gclid": "First"
+                    }
+                  }
+                }
+              ],
+              "options": {}
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "%252525252567%25252525256F%25252525256F%252525252567%25252525256C%252525252565",
+                  "utm_medium": "cpc"
+                }
+              ],
+              "options": {}
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "leads"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "leads": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "channel",
+                      "quality_status",
+                      "ad_match_status",
+                      "ad_confidence",
+                      "ad_key",
+                      "campaign_key",
+                      "ad_source_system",
+                      "ad_source_scope",
+                      "is_attribution_primary",
+                      "confidence",
+                      "match_key"
+                    ],
+                    "properties": {
+                      "channel": {
+                        "type": "string"
+                      },
+                      "quality_status": {
+                        "type": "string"
+                      },
+                      "ad_match_status": {
+                        "type": "string"
+                      },
+                      "ad_confidence": {
+                        "type": "string"
+                      },
+                      "ad_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "campaign_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_system": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_scope": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "is_attribution_primary": {
+                        "type": "boolean"
+                      },
+                      "confidence": {
+                        "type": "string"
+                      },
+                      "match_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "equals",
+          "expected": [
+            {
+              "case_id": "A",
+              "leads": [
+                {
+                  "channel": "Paid Other",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "HIGH",
+                  "match_key": "dclid"
+                }
+              ]
+            },
+            {
+              "case_id": "B",
+              "leads": [
+                {
+                  "channel": "Organic Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            },
+            {
+              "case_id": "C",
+              "leads": [
+                {
+                  "channel": "Paid Other",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Other",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "HIGH",
+              "match_key": "dclid"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Other",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/match_key",
+          "op": "equals",
+          "expected": "dclid",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Organic Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/channel",
+          "op": "equals",
+          "expected": "Organic Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Other",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Other",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        }
+      ]
+    },
+    {
+      "id": "scoped-ad-matching",
+      "prompt": "Resolve each supplied CRM attribution input independently. Return one case object for every input, in input order, with its projected lead results in input order. Preserve false and null exactly; do not execute code or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A"
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  },
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-b",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "OtherCampaign",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A"
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  },
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-b",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "OtherCampaign",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  },
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-b",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A"
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "other",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case_id": "D",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad A"
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "leads"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "leads": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "channel",
+                      "quality_status",
+                      "ad_match_status",
+                      "ad_confidence",
+                      "ad_key",
+                      "campaign_key",
+                      "ad_source_system",
+                      "ad_source_scope",
+                      "is_attribution_primary",
+                      "confidence",
+                      "match_key"
+                    ],
+                    "properties": {
+                      "channel": {
+                        "type": "string"
+                      },
+                      "quality_status": {
+                        "type": "string"
+                      },
+                      "ad_match_status": {
+                        "type": "string"
+                      },
+                      "ad_confidence": {
+                        "type": "string"
+                      },
+                      "ad_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "campaign_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_system": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_scope": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "is_attribution_primary": {
+                        "type": "boolean"
+                      },
+                      "confidence": {
+                        "type": "string"
+                      },
+                      "match_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "equals",
+          "expected": [
+            {
+              "case_id": "A",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "matched",
+                  "ad_confidence": "HIGH",
+                  "ad_key": "Ad+A",
+                  "campaign_key": "CatalogCampaign+Case",
+                  "ad_source_system": "ads_system",
+                  "ad_source_scope": "ads-a",
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            },
+            {
+              "case_id": "B",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "ambiguous",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": "MapCampaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            },
+            {
+              "case_id": "C",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": "MapCampaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            },
+            {
+              "case_id": "D",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": "MapCampaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "matched",
+              "ad_confidence": "HIGH",
+              "ad_key": "Ad+A",
+              "campaign_key": "CatalogCampaign+Case",
+              "ad_source_system": "ads_system",
+              "ad_source_scope": "ads-a",
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_key",
+          "op": "equals",
+          "expected": "Ad+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/campaign_key",
+          "op": "equals",
+          "expected": "CatalogCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": "ads_system",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": "ads-a",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "ambiguous",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": "MapCampaign+Case",
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "ambiguous",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/campaign_key",
+          "op": "equals",
+          "expected": "MapCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": "MapCampaign+Case",
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/campaign_key",
+          "op": "equals",
+          "expected": "MapCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "D",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": "MapCampaign+Case",
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/campaign_key",
+          "op": "equals",
+          "expected": "MapCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/3/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        }
+      ]
+    },
+    {
+      "id": "primary-selection",
+      "prompt": "Resolve each supplied CRM attribution input independently. Return one case object for every input, in input order, with its projected lead results in input order. Preserve false and null exactly; do not execute code or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "late",
+                  "created_at": "2026-01-04T00:00:00Z",
+                  "first_touch": {
+                    "click_ids": {
+                      "gclid": "Shared+ID"
+                    }
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "early",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "first_touch": {},
+                  "click_ids": {
+                    "gclid": "Shared+ID"
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "null",
+                  "created_at": null,
+                  "first_touch": {
+                    "click_ids": {
+                      "gclid": "Shared+ID"
+                    }
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-b",
+                  "lead_key": "other-scope",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "first_touch": {
+                    "click_ids": {
+                      "gclid": "Shared+ID"
+                    }
+                  }
+                }
+              ],
+              "options": {}
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "late",
+                  "created_at": null,
+                  "click_ids": {
+                    "gclid": "Shared+ID"
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "early",
+                  "created_at": null,
+                  "click_ids": {
+                    "gclid": "Shared+ID"
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "null",
+                  "created_at": null,
+                  "click_ids": {
+                    "gclid": "Shared+ID"
+                  }
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-b",
+                  "lead_key": "other-scope",
+                  "created_at": null,
+                  "click_ids": {
+                    "gclid": "Shared+ID"
+                  }
+                }
+              ],
+              "options": {}
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "leads": [
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-a",
+                  "created_at": "2026-01-02T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A"
+                },
+                {
+                  "source_system": "crm_system",
+                  "source_scope": "crm-a",
+                  "lead_key": "lead-b",
+                  "created_at": "2026-01-03T00:00:00Z",
+                  "utm_source": "search.example",
+                  "utm_medium": "cpc",
+                  "utm_content": "Ad+A"
+                }
+              ],
+              "options": {
+                "source_map": [
+                  {
+                    "source": "search.example",
+                    "medium": "cpc",
+                    "channel": "Paid Search",
+                    "network_id": "google_ads",
+                    "campaign_key": "MapCampaign+Case"
+                  }
+                ],
+                "source_patterns": [],
+                "ad_catalog": [
+                  {
+                    "source_system": "ads_system",
+                    "source_scope": "ads-a",
+                    "network_id": "google_ads",
+                    "ad_key": "Ad+A",
+                    "campaign_key": "CatalogCampaign+Case",
+                    "ad_name": "Summer Sale"
+                  }
+                ],
+                "ad_scope_bindings": [
+                  {
+                    "crm_source_system": "crm_system",
+                    "crm_source_scope": "crm-a",
+                    "ad_source_system": "ads_system",
+                    "ad_source_scope": "ads-a",
+                    "platform": "google_ads",
+                    "entity_type": "ad"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "leads"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "leads": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "channel",
+                      "quality_status",
+                      "ad_match_status",
+                      "ad_confidence",
+                      "ad_key",
+                      "campaign_key",
+                      "ad_source_system",
+                      "ad_source_scope",
+                      "is_attribution_primary",
+                      "confidence",
+                      "match_key"
+                    ],
+                    "properties": {
+                      "channel": {
+                        "type": "string"
+                      },
+                      "quality_status": {
+                        "type": "string"
+                      },
+                      "ad_match_status": {
+                        "type": "string"
+                      },
+                      "ad_confidence": {
+                        "type": "string"
+                      },
+                      "ad_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "campaign_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_system": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ad_source_scope": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "is_attribution_primary": {
+                        "type": "boolean"
+                      },
+                      "confidence": {
+                        "type": "string"
+                      },
+                      "match_key": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "equals",
+          "expected": [
+            {
+              "case_id": "A",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": false,
+                  "confidence": "LOW",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "HIGH",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": false,
+                  "confidence": "LOW",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "LOW",
+                  "match_key": "gclid"
+                }
+              ]
+            },
+            {
+              "case_id": "B",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": false,
+                  "confidence": "HIGH",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "HIGH",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": false,
+                  "confidence": "HIGH",
+                  "match_key": "gclid"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "unmatched",
+                  "ad_confidence": "UNMATCHED",
+                  "ad_key": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "is_attribution_primary": true,
+                  "confidence": "HIGH",
+                  "match_key": "gclid"
+                }
+              ]
+            },
+            {
+              "case_id": "C",
+              "leads": [
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "matched",
+                  "ad_confidence": "HIGH",
+                  "ad_key": "Ad+A",
+                  "campaign_key": "CatalogCampaign+Case",
+                  "ad_source_system": "ads_system",
+                  "ad_source_scope": "ads-a",
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                },
+                {
+                  "channel": "Paid Search",
+                  "quality_status": "matched",
+                  "ad_match_status": "matched",
+                  "ad_confidence": "HIGH",
+                  "ad_key": "Ad+A",
+                  "campaign_key": "CatalogCampaign+Case",
+                  "ad_source_system": "ads_system",
+                  "ad_source_scope": "ads-a",
+                  "is_attribution_primary": true,
+                  "confidence": "MEDIUM",
+                  "match_key": "utm_source"
+                }
+              ]
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": false,
+              "confidence": "LOW",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "HIGH",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": false,
+              "confidence": "LOW",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "LOW",
+              "match_key": "gclid"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/confidence",
+          "op": "equals",
+          "expected": "LOW",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/0/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/1/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/is_attribution_primary",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/confidence",
+          "op": "equals",
+          "expected": "LOW",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/2/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/confidence",
+          "op": "equals",
+          "expected": "LOW",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/0/leads/3/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": false,
+              "confidence": "HIGH",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "HIGH",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": false,
+              "confidence": "HIGH",
+              "match_key": "gclid"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "unmatched",
+              "ad_confidence": "UNMATCHED",
+              "ad_key": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "is_attribution_primary": true,
+              "confidence": "HIGH",
+              "match_key": "gclid"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/0/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/1/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/is_attribution_primary",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/2/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/ad_match_status",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/ad_confidence",
+          "op": "equals",
+          "expected": "UNMATCHED",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/ad_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/ad_source_system",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/ad_source_scope",
+          "op": "equals",
+          "expected": null,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/1/leads/3/match_key",
+          "op": "equals",
+          "expected": "gclid",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/leads",
+          "op": "equals",
+          "expected": [
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "matched",
+              "ad_confidence": "HIGH",
+              "ad_key": "Ad+A",
+              "campaign_key": "CatalogCampaign+Case",
+              "ad_source_system": "ads_system",
+              "ad_source_scope": "ads-a",
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            },
+            {
+              "channel": "Paid Search",
+              "quality_status": "matched",
+              "ad_match_status": "matched",
+              "ad_confidence": "HIGH",
+              "ad_key": "Ad+A",
+              "campaign_key": "CatalogCampaign+Case",
+              "ad_source_system": "ads_system",
+              "ad_source_scope": "ads-a",
+              "is_attribution_primary": true,
+              "confidence": "MEDIUM",
+              "match_key": "utm_source"
+            }
+          ],
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_match_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_key",
+          "op": "equals",
+          "expected": "Ad+A",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/campaign_key",
+          "op": "equals",
+          "expected": "CatalogCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_system",
+          "op": "equals",
+          "expected": "ads_system",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/ad_source_scope",
+          "op": "equals",
+          "expected": "ads-a",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/0/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/quality_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/ad_match_status",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/ad_confidence",
+          "op": "equals",
+          "expected": "HIGH",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/ad_key",
+          "op": "equals",
+          "expected": "Ad+A",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/campaign_key",
+          "op": "equals",
+          "expected": "CatalogCampaign+Case",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/ad_source_system",
+          "op": "equals",
+          "expected": "ads_system",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/ad_source_scope",
+          "op": "equals",
+          "expected": "ads-a",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/confidence",
+          "op": "equals",
+          "expected": "MEDIUM",
+          "provenance": "pinned-projection-literal"
+        },
+        {
+          "path": "/cases/2/leads/1/match_key",
+          "op": "equals",
+          "expected": "utm_source",
+          "provenance": "pinned-projection-literal"
+        }
+      ]
+    }
+  ]
+}

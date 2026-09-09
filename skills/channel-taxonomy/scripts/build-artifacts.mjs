@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { TAXONOMY_VERSION } from './channel-taxonomy.mjs';
@@ -33,18 +33,39 @@ ${JSON.stringify(ids)}.forEach((id) => { result[id] = params[id] === undefined ?
 return result;
 ''';`;
 const udf = sqlFor(implementation).split('\n\nWITH synthetic AS (')[0] + '\n\n' + clickParser;
+// UTM decoding uses the same private canonical helpers as click parsing.
+const utmParser = `CREATE TEMP FUNCTION extract_landing_utm_evidence(landing_url STRING)
+RETURNS STRUCT<landing_url_status STRING, utm_source STRING, utm_medium STRING, utm_campaign STRING>
+LANGUAGE js
+AS r'''
+${implementation}
+const result = {landing_url_status: 'missing', utm_source: null, utm_medium: null, utm_campaign: null};
+if (!text(landing_url)) return result;
+if (!hostOf(landing_url)) { result.landing_url_status = 'invalid'; return result; }
+result.landing_url_status = 'valid';
+const params = queryParams(landing_url);
+['utm_source', 'utm_medium', 'utm_campaign'].forEach((key) => {
+  if (params[key] !== undefined) { const value = decode(params[key]); result[key] = value === '' ? null : value; }
+});
+return result;
+''';`;
 const artifacts = new Map([[outputPath, sqlFor(implementation)]]);
 // A standalone install only regenerates its own reference UDF.
 if (process.argv.includes('--repository')) {
   const skillsRoot = path.resolve(here, '../..');
-  for (const skill of ['ga4-bigquery-export', 'first-party-pixel']) {
-    await readFile(path.join(skillsRoot, skill, 'SKILL.md'), 'utf8');
-  }
   const contract = await readFile(path.join(here, '../references/channel-contract.md'), 'utf8');
+  const parameterHelpers = await readFile(path.join(skillsRoot, 'ga4-bigquery-export/scripts/parameter-helpers.sql'), 'utf8');
   const sessionCtes = await readFile(path.join(skillsRoot, 'ga4-bigquery-export/scripts/session-ctes.sql'), 'utf8');
   artifacts.set(path.join(skillsRoot, 'first-party-pixel/assets/collector/channel-taxonomy.mjs'), source);
-  for (const skill of ['ga4-bigquery-export', 'first-party-pixel']) {
-    artifacts.set(path.join(skillsRoot, skill, 'references/channel-contract.md'), contract);
+  const entries = await readdir(skillsRoot, { withFileTypes: true });
+  for (const entry of entries.filter((item) => item.isDirectory()).sort((left, right) => left.name.localeCompare(right.name))) {
+    const skill = entry.name;
+    const skillPath = path.join(skillsRoot, skill);
+    try { await readFile(path.join(skillPath, 'SKILL.md'), 'utf8'); } catch { continue; }
+    artifacts.set(path.join(skillPath, 'references/channel-contract.md'), contract);
+    if (skill === 'crm-paid-attribution') {
+      artifacts.set(path.join(skillPath, 'scripts/channel-taxonomy.mjs'), source);
+    }
   }
   function replaceBlock(sql, name, body) {
     const begin = `-- BEGIN GENERATED ${name}`;
@@ -52,11 +73,15 @@ if (process.argv.includes('--repository')) {
     if (!sql.includes(begin) || !sql.includes(end)) throw new Error(`Missing ${name} markers`);
     return sql.slice(0, sql.indexOf(begin)) + begin + '\n' + body.trimEnd() + '\n' + sql.slice(sql.indexOf(end));
   }
-  for (const name of ['sessions.sql', 'channel_daily.sql']) {
+  for (const name of ['sessions.sql', 'channel_daily.sql', 'landing_pages.sql', 'traffic_source_compare.sql', 'params.sql', 'key_events.sql', 'ui_reconciliation.sql']) {
     const target = path.join(skillsRoot, 'ga4-bigquery-export/references/sql', name);
     let sql = await readFile(target, 'utf8');
+    if (['sessions.sql', 'channel_daily.sql', 'landing_pages.sql', 'traffic_source_compare.sql'].includes(name)) {
     sql = replaceBlock(sql, 'CHANNEL TAXONOMY', udf.replace('-- Run this file as a standalone BigQuery script; it reads no customer tables.\n', ''));
     sql = replaceBlock(sql, 'SESSION CTES', sessionCtes.replaceAll('{{TAXONOMY_VERSION}}', TAXONOMY_VERSION));
+    }
+    sql = replaceBlock(sql, 'PARAMETER HELPERS', parameterHelpers);
+    if (name === 'traffic_source_compare.sql') sql = replaceBlock(sql, 'LANDING UTM EVIDENCE', utmParser);
     artifacts.set(target, sql);
   }
 }

@@ -3,8 +3,8 @@
 // handleCollect(payload, ctx, db) implements the entire /collect endpoint
 // contract; every adapter in ../node, ../vercel, ../supabase, ../cloudflare
 // is a thin shim that extracts (payload, ctx) from its runtime's request
-// object and calls this function against a `db.query(text, params) =>
-// Promise<{ rows }>` wrapper.
+// object and calls this function against a database with query(text, params)
+// and transaction(async tx => result). All request queries use tx.query.
 //
 //   ctx = {
 //     ip: string | null,          // caller's IP, as seen by the adapter
@@ -19,7 +19,9 @@
 // module runs unmodified on Node 20+, Deno, Cloudflare Workers, and in a
 // browser, no runtime-specific crypto import.
 
-import { classify, classifyChannel, TAXONOMY_VERSION } from "./channel-taxonomy.mjs";
+import { classify, classifyChannel, extractRawTrackingEvidence, TAXONOMY_VERSION } from "./channel-taxonomy.mjs";
+import { parseCollectorTimestamp } from "./timestamp.mjs";
+import { canonicalizeEmail, canonicalizePhone } from "./identity-normalization.mjs";
 
 const CLICK_ID_PARAMS = [
   "gclid",
@@ -37,6 +39,13 @@ const CLICK_ID_PARAMS = [
   "srsltid",
 ];
 
+const UTM_PARAMS = ["source", "medium", "campaign", "content", "term"];
+
+// Preserve only recognized raw string evidence; decoding belongs to the classifier.
+function rawTracking(source, names) {
+  return Object.fromEntries(names.map((name) => [name, typeof source?.[name] === "string" ? source[name] : null]));
+}
+
 const PLATFORM_COOKIE_KEYS = ["_fbp", "_fbc", "_rdt_uuid", "_ttp"];
 
 const EVENT_TYPES = ["pageview", "track", "identify", "form_submit", "consent"];
@@ -44,8 +53,6 @@ const EVENT_TYPES = ["pageview", "track", "identify", "form_submit", "consent"];
 const CONVERSION_EVENT_NAMES = ["purchase", "generate_lead", "sign_up", "form_submit"];
 
 const BOT_UA_RE = /bot|crawl|spider|slurp|headless|phantomjs|lighthouse|pingdom|monitor/i;
-
-const TOUCHPOINT_DEDUPE_WINDOW_MINUTES = 30;
 
 const MAX_STRING_LEN = 2048;
 const MAX_PROPERTIES_JSON_LEN = 20000;
@@ -82,25 +89,6 @@ async function sha256Hex(text) {
     .join("");
 }
 
-function canonicalizeEmail(email) {
-  if (typeof email !== "string") return null;
-  const trimmed = email.trim().toLowerCase();
-  return trimmed || null;
-}
-
-// Best-effort E.164 canonicalization: keep a leading '+' if the source value
-// had one, strip everything but digits. This is not full phone-number
-// validation (no country-code inference for numbers without a '+'); it is
-// enough to make the same phone typed two different ways hash identically.
-function canonicalizePhone(phone) {
-  if (typeof phone !== "string") return null;
-  const trimmed = phone.trim();
-  const hasPlus = trimmed.charAt(0) === "+";
-  const digits = trimmed.replace(/\D/g, "");
-  if (!digits) return null;
-  return (hasPlus ? "+" : "") + digits;
-}
-
 function normalizeCurrency(currency) {
   if (typeof currency !== "string") return null;
   const normalized = currency.trim().toUpperCase();
@@ -135,9 +123,6 @@ function validPayload(payload) {
   if (payload.referrer != null && (typeof payload.referrer !== "string" || payload.referrer.length > MAX_STRING_LEN)) {
     return "referrer is too long";
   }
-  if (typeof payload.occurred_at !== "string" || Number.isNaN(Date.parse(payload.occurred_at))) {
-    return "occurred_at must be a parseable timestamp";
-  }
   if (payload.properties != null) {
     if (!isPlainObject(payload.properties)) return "properties must be an object";
     if (JSON.stringify(payload.properties).length > MAX_PROPERTIES_JSON_LEN) return "properties is too large";
@@ -165,276 +150,250 @@ export async function handleCollect(payload, ctx, db) {
     return { status: 400, body: { error: validationError } };
   }
 
-  const siteRows = (await db.query("SELECT allowed_origins FROM pixel.sites WHERE site_key = $1", [payload.site_key])).rows;
-  if (!siteRows.length) {
-    return { status: 403, body: { error: "unknown site_key" } };
+  let timestamp;
+  try { timestamp = parseCollectorTimestamp(payload.occurred_at); }
+  catch (error) { return { status: 400, body: { error: error.message } }; }
+
+  if (!db || typeof db.transaction !== "function") {
+    throw new TypeError("collector database must support interactive transactions");
   }
-  const allowedOrigins = siteRows[0].allowed_origins || [];
-  const origin = ctx && ctx.origin;
-  if (allowedOrigins.length > 0 && (!origin || allowedOrigins.indexOf(origin) === -1)) {
-    return { status: 403, body: { error: "origin not allowed" } };
-  }
+  return db.transaction(async (tx) => {
+    const siteRows = (await tx.query("SELECT allowed_origins FROM pixel.sites WHERE site_key = $1", [payload.site_key])).rows;
+    if (!siteRows.length) {
+      return { status: 403, body: { error: "unknown site_key" } };
+    }
+    const allowedOrigins = siteRows[0].allowed_origins || [];
+    const origin = ctx && ctx.origin;
+    if (allowedOrigins.length > 0 && (!origin || allowedOrigins.indexOf(origin) === -1)) {
+      return { status: 403, body: { error: "origin not allowed" } };
+    }
 
-  const userAgent = (ctx && ctx.userAgent) || "";
-  if (BOT_UA_RE.test(userAgent)) {
-    return { status: 204, body: null };
-  }
+    const userAgent = (ctx && ctx.userAgent) || "";
+    if (BOT_UA_RE.test(userAgent)) {
+      return { status: 204, body: null };
+    }
 
-  const occurredAt = new Date(payload.occurred_at);
-  const ip = (ctx && ctx.ip) || null;
-  const ipHash = ip ? await sha256Hex(salt + ip) : null;
+    const utm = rawTracking(payload.utm, UTM_PARAMS);
+    const clickIds = rawTracking(payload.click_ids, CLICK_ID_PARAMS);
+    const ip = (ctx && ctx.ip) || null;
+    const ipHash = ip ? await sha256Hex(salt + ip) : null;
 
-  const visitorRow = (
-    await db.query(
-      `INSERT INTO pixel.visitors (site_key, visitor_uid, first_seen_at, last_seen_at, user_agent, ip_hash, last_ip)
-       VALUES ($1, $2, $3, $3, $4, $5, $6)
-       ON CONFLICT (site_key, visitor_uid) DO UPDATE SET
-         last_seen_at = EXCLUDED.last_seen_at,
-         user_agent = COALESCE(EXCLUDED.user_agent, pixel.visitors.user_agent),
-         ip_hash = COALESCE(EXCLUDED.ip_hash, pixel.visitors.ip_hash),
-         last_ip = COALESCE(EXCLUDED.last_ip, pixel.visitors.last_ip)
-       RETURNING id`,
-      [payload.site_key, payload.visitor_uid, now.toISOString(), userAgent || null, ipHash, ip]
-    )
-  ).rows[0];
-  const visitorId = visitorRow.id;
+    const visitorRow = (
+      await tx.query(
+        `INSERT INTO pixel.visitors (site_key, visitor_uid, first_seen_at, last_seen_at, user_agent, ip_hash, last_ip)
+         VALUES ($1, $2, $3, $3, $4, $5, $6)
+         ON CONFLICT (site_key, visitor_uid) DO UPDATE SET
+           last_seen_at = EXCLUDED.last_seen_at,
+           user_agent = COALESCE(EXCLUDED.user_agent, pixel.visitors.user_agent),
+           ip_hash = COALESCE(EXCLUDED.ip_hash, pixel.visitors.ip_hash),
+           last_ip = COALESCE(EXCLUDED.last_ip, pixel.visitors.last_ip)
+         RETURNING id`,
+        [payload.site_key, payload.visitor_uid, now.toISOString(), userAgent || null, ipHash, ip]
+      )
+    ).rows[0];
+    const visitorId = visitorRow.id;
 
-  const eventRow = (
-    await db.query(
-      `INSERT INTO pixel.events (site_key, visitor_id, event_type, event_name, url, referrer, properties, ip, occurred_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-       RETURNING id`,
-      [
-        payload.site_key,
-        visitorId,
-        payload.event_type,
-        payload.event_name || null,
-        payload.url || null,
-        payload.referrer || null,
-        JSON.stringify(payload.properties || {}),
-        ip,
-        occurredAt.toISOString(),
-      ]
-    )
-  ).rows[0];
-  const eventId = eventRow.id;
+    const eventRow = (
+      await tx.query(
+        `INSERT INTO pixel.events (site_key, visitor_id, event_type, event_name, url, referrer, properties, ip, occurred_at, utm, click_ids, occurred_at_iso)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+         RETURNING id`,
+        [
+          payload.site_key,
+          visitorId,
+          payload.event_type,
+          payload.event_name || null,
+          payload.url || null,
+          payload.referrer || null,
+          JSON.stringify(payload.properties || {}),
+          ip,
+          timestamp.postgres,
+          JSON.stringify(utm),
+          JSON.stringify(clickIds),
+          timestamp.original,
+        ]
+      )
+    ).rows[0];
+    const eventId = eventRow.id;
 
-  // Known-contact lookup: a visitor already resolved by an earlier event
-  // (this is a fresh invocation per request, so nothing carries forward in
-  // memory) gets every subsequent touchpoint/conversion on this visitor
-  // stamped with that contact_id immediately, not just retroactively via the
-  // back-fill UPDATE below. The identity block further down overrides this
-  // when the current event itself resolves (or re-resolves) identity.
-  let contactId = null;
-  {
-    const existingLink = (
-      await db.query(`SELECT contact_id FROM pixel.identity_links WHERE visitor_id = $1 ORDER BY created_at DESC LIMIT 1`, [
-        visitorId,
-      ])
-    ).rows;
-    if (existingLink.length) contactId = existingLink[0].contact_id;
-  }
+    // Native ownership is current-event evidence only. Prior visitor links are
+    // neither a person-selection rule nor authority to rewrite earlier touches.
+    let contactId = null;
 
-  // ---- identity resolution (identify / form_submit) ------------------------
-  if ((payload.event_type === "identify" || payload.event_type === "form_submit") && payload.identity) {
-    const emailCanonical = canonicalizeEmail(payload.identity.email);
-    const phoneE164 = canonicalizePhone(payload.identity.phone);
-    if (emailCanonical || phoneE164) {
+    // ---- identity resolution (identify / form_submit) ------------------------
+    if (payload.event_type === "identify" || payload.event_type === "form_submit") {
+      const emailCanonical = canonicalizeEmail(payload.identity?.email);
+      const phoneE164 = canonicalizePhone(payload.identity?.phone);
       const emailHash = emailCanonical ? await sha256Hex(emailCanonical) : null;
       const phoneHash = phoneE164 ? await sha256Hex(phoneE164) : null;
-
-      let contactRow;
-      if (emailHash) {
-        contactRow = (
-          await db.query(
-            `INSERT INTO pixel.contacts (site_key, email_canonical, email_hash, phone_e164, phone_hash)
-             VALUES ($1, $2, $3, $4, $5)
-             ON CONFLICT (site_key, email_hash) DO UPDATE SET
-               phone_e164 = COALESCE(pixel.contacts.phone_e164, EXCLUDED.phone_e164),
-               phone_hash = COALESCE(pixel.contacts.phone_hash, EXCLUDED.phone_hash)
-             RETURNING id`,
-            [payload.site_key, emailCanonical, emailHash, phoneE164, phoneHash]
-          )
-        ).rows[0];
-      } else {
-        contactRow = (
-          await db.query(
-            `INSERT INTO pixel.contacts (site_key, email_canonical, email_hash, phone_e164, phone_hash)
-             VALUES ($1, NULL, NULL, $2, $3)
-             ON CONFLICT (site_key, phone_hash) DO UPDATE SET
-               phone_e164 = EXCLUDED.phone_e164
-             RETURNING id`,
-            [payload.site_key, phoneE164, phoneHash]
-          )
-        ).rows[0];
-      }
-      contactId = contactRow.id;
-
-      await db.query(
-        `INSERT INTO pixel.identity_links (visitor_id, contact_id, confidence, source)
-         VALUES ($1, $2, 1.0, $3)
-         ON CONFLICT (visitor_id, contact_id) DO NOTHING`,
-        [visitorId, contactId, payload.event_type]
+      await tx.query(
+        `INSERT INTO pixel.identity_observations
+         (event_id, site_key, visitor_id, source_event_type, occurred_at, occurred_at_iso,
+          email_hash, phone_hash, identity_input_format, identity_normalization_version, capture_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'canonical_sha256_v1', '0.1.0', $9)`,
+        [eventId, payload.site_key, visitorId, payload.event_type, timestamp.postgres, timestamp.original,
+          emailHash, phoneHash, emailHash || phoneHash ? 'eligible' : 'no_valid_identity']
       );
-
-      // Additive back-fill: any touchpoint already recorded for this visitor
-      // that hasn't been linked to a contact yet gets this one.
-      await db.query(`UPDATE pixel.touchpoints SET contact_id = $1 WHERE visitor_id = $2 AND contact_id IS NULL`, [
-        contactId,
-        visitorId,
-      ]);
-    }
-  }
-
-  // ---- consent -----------------------------------------------------------
-  if (payload.event_type === "consent" && payload.consent) {
-    await db.query(
-      `INSERT INTO pixel.consent_state (visitor_id, analytics, ads, updated_at)
-       VALUES ($1, $2, $3, $4)
-       ON CONFLICT (visitor_id) DO UPDATE SET
-         analytics = EXCLUDED.analytics,
-         ads = EXCLUDED.ads,
-         updated_at = EXCLUDED.updated_at`,
-      [visitorId, !!payload.consent.analytics, !!payload.consent.ads, now.toISOString()]
-    );
-  }
-
-  // ---- touchpoint derivation (pageview only) ------------------------------
-  if (payload.event_type === "pageview") {
-    const utm = payload.utm || {};
-    const clickIds = payload.click_ids || {};
-    const hasUtm = !!(utm.source || utm.medium || utm.campaign || utm.content || utm.term);
-    const hasClickId = CLICK_ID_PARAMS.some((name) => clickIds[name]);
-    const referrerHost = hostOf(payload.referrer);
-    const pageHost = hostOf(payload.url);
-    const hasExternalReferrer = !!referrerHost && referrerHost !== pageHost;
-    const carriesSourceSignal = hasUtm || hasClickId || hasExternalReferrer;
-
-    // "The visitor's first event ever" is the degenerate case of a broader
-    // rule: every session's landing pageview gets a touchpoint, signal or
-    // not, so pixel.sessions always has a real channel to join against
-    // instead of falling back to its own no-touchpoint Direct/Unassigned
-    // guess. A session starts when there is no prior pageview/track/
-    // form_submit event for this visitor in the preceding 30 minutes - the
-    // same inactivity window pixel.sessions itself sessionizes on.
-    const priorEventInWindow = (
-      await db.query(
-        `SELECT 1 FROM pixel.events
-         WHERE visitor_id = $1
-           AND event_type IN ('pageview', 'track', 'form_submit')
-           AND occurred_at < $2::timestamptz
-           AND occurred_at >= $2::timestamptz - interval '30 minutes'
-         LIMIT 1`,
-        [visitorId, occurredAt.toISOString()]
-      )
-    ).rows;
-    const startsNewSession = priorEventInWindow.length === 0;
-
-    if (carriesSourceSignal || startsNewSession) {
-      const classification = classify({
-        utm_source: utm.source,
-        utm_medium: utm.medium,
-        utm_campaign: utm.campaign,
-        click_ids: clickIds,
-        referrer: payload.referrer,
-        landing_url: payload.url,
-      });
-      const channel = classification.channel;
-
-      const existing = (
-        await db.query(
-          `SELECT id FROM pixel.touchpoints
-           WHERE visitor_id = $1 AND channel = $2
-             AND occurred_at >= $3::timestamptz - make_interval(mins => $4)
-             AND occurred_at <= $3::timestamptz
-           ORDER BY occurred_at DESC
-           LIMIT 1`,
-          [visitorId, channel, occurredAt.toISOString(), TOUCHPOINT_DEDUPE_WINDOW_MINUTES]
-        )
-      ).rows;
-
-      if (!existing.length) {
-        await db.query(
-          `INSERT INTO pixel.touchpoints (
-             site_key, visitor_id, contact_id, event_id, channel,
-             utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-             gclid, gbraid, wbraid, dclid, fbclid, ttclid, rdt_cid, li_fat_id, msclkid, twclid, epik, sccid, srsltid,
-             referrer, landing_url, occurred_at, taxonomy_version
-           )
-           VALUES (
-             $1, $2, $3, $4, $5,
-             $6, $7, $8, $9, $10,
-             $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22,
-             $23, $24, $25, $26, $27
-           )`,
-          [
-            payload.site_key,
-            visitorId,
-            contactId,
-            eventId,
-            channel,
-            utm.source || null,
-            utm.medium || null,
-            utm.campaign || null,
-            utm.content || null,
-            utm.term || null,
-            clickIds.gclid || null,
-            clickIds.gbraid || null,
-            clickIds.wbraid || null,
-            clickIds.dclid || null,
-            clickIds.fbclid || null,
-            clickIds.ttclid || null,
-            clickIds.rdt_cid || null,
-            clickIds.li_fat_id || null,
-            clickIds.msclkid || null,
-            clickIds.twclid || null,
-            clickIds.epik || null,
-            clickIds.sccid || null,
-            clickIds.srsltid || null,
-            payload.referrer || null,
-            payload.url || null,
-            occurredAt.toISOString(),
-            classification.taxonomy_version || TAXONOMY_VERSION,
-          ]
+      if (emailHash || phoneHash) {
+        await tx.query("SELECT pg_advisory_xact_lock(hashtextextended('pixel.identity:' || $1, 0))", [payload.site_key]);
+        const rows = (await tx.query(
+          `SELECT id, email_canonical, email_hash, phone_e164, phone_hash, email_hash_format, phone_hash_format
+           FROM pixel.contacts WHERE site_key = $1 AND (email_hash = $2 OR phone_hash = $3)
+           ORDER BY id FOR UPDATE`,
+          [payload.site_key, emailHash, phoneHash]
+        )).rows;
+        const candidates = [...new Map(rows.map((row) => [row.id, row])).values()];
+        if (candidates.length === 0) {
+          contactId = (await tx.query(
+            `INSERT INTO pixel.contacts (site_key, email_canonical, email_hash, phone_e164, phone_hash, email_hash_format, phone_hash_format)
+             VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
+            [payload.site_key, emailCanonical, emailHash, phoneE164, phoneHash,
+              emailHash ? 'canonical_sha256_v1' : null, phoneHash ? 'canonical_sha256_v1' : null]
+          )).rows[0].id;
+        } else {
+          const unique = candidates.length === 1;
+          for (const candidate of candidates) {
+            const patch = {};
+            for (const [rawKey, hashKey, formatKey, raw, hash] of [
+              ['email_canonical', 'email_hash', 'email_hash_format', emailCanonical, emailHash],
+              ['phone_e164', 'phone_hash', 'phone_hash_format', phoneE164, phoneHash]
+            ]) {
+              if (!hash) continue;
+              const matches = candidate[hashKey] === hash;
+              const fillHash = unique && candidate[hashKey] === null && (candidate[rawKey] === null || candidate[rawKey] === raw);
+              if (!matches && !fillHash) continue;
+              if (fillHash) patch[hashKey] = hash;
+              if (unique && candidate[rawKey] === null) patch[rawKey] = raw;
+              if (candidate[formatKey] !== 'canonical_sha256_v1') patch[formatKey] = 'canonical_sha256_v1';
+            }
+            const keys = Object.keys(patch);
+            if (keys.length) await tx.query(
+              `UPDATE pixel.contacts SET ${keys.map((key, index) => `${key} = $${index + 3}`).join(', ')} WHERE site_key = $1 AND id = $2`,
+              [payload.site_key, candidate.id, ...keys.map((key) => patch[key])]
+            );
+          }
+          if (unique) contactId = candidates[0].id;
+        }
+        if (contactId !== null) await tx.query(
+          `INSERT INTO pixel.identity_links (visitor_id, contact_id, confidence, source)
+           VALUES ($1, $2, 1.0, $3)
+           ON CONFLICT (visitor_id, contact_id) DO NOTHING`,
+          [visitorId, contactId, payload.event_type]
         );
       }
     }
-  }
 
-  // ---- conversion detection (form_submit / track) -------------------------
-  // Every form_submit is a conversion by definition (the whitelisted event
-  // name "form_submit" below documents that rather than gating on it, an
-  // event_type check is used instead so callers don't have to also set
-  // event_name to get the credit). A track event only counts when the
-  // caller flagged it explicitly (properties.is_conversion) or its name is
-  // on the fixed conversion-name list.
-  const properties = payload.properties || {};
-  const isConversion =
-    payload.event_type === "form_submit" ||
-    (payload.event_type === "track" &&
-      (properties.is_conversion === true || CONVERSION_EVENT_NAMES.indexOf(payload.event_name) !== -1));
+    // ---- consent -----------------------------------------------------------
+    if (payload.event_type === "consent" && payload.consent) {
+      await tx.query(
+        `INSERT INTO pixel.consent_state (visitor_id, analytics, ads, updated_at)
+         VALUES ($1, $2, $3, $4)
+         ON CONFLICT (visitor_id) DO UPDATE SET
+           analytics = EXCLUDED.analytics,
+           ads = EXCLUDED.ads,
+           updated_at = EXCLUDED.updated_at`,
+        [visitorId, !!payload.consent.analytics, !!payload.consent.ads, now.toISOString()]
+      );
+    }
 
-  if (isConversion) {
-    const value = typeof properties.value === "number" ? properties.value : null;
-    const currency = normalizeCurrency(properties.currency);
-    await db.query(
-      `INSERT INTO pixel.conversion_events (site_key, visitor_id, contact_id, event_id, event_name, occurred_at, value, currency, page_url)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-      [
-        payload.site_key,
-        visitorId,
-        contactId,
-        eventId,
-        payload.event_name || payload.event_type,
-        occurredAt.toISOString(),
-        value,
-        currency,
-        payload.url || null,
-      ]
-    );
-  }
+    // Every accepted pageview is one native observation. Session first-touch
+    // reporting uses these rows; canonical attribution dedupe runs on full exports.
+    if (payload.event_type === "pageview") {
+      const classificationInput = {
+        utm_source: utm.source,
+        utm_medium: utm.medium,
+        utm_campaign: utm.campaign,
+        utm_content: utm.content,
+        utm_term: utm.term,
+        click_ids: clickIds,
+        referrer: payload.referrer,
+        landing_url: payload.url,
+      };
+      const classification = classify(classificationInput);
+      const evidence = extractRawTrackingEvidence(classificationInput);
+      const channel = classification.channel;
+      await tx.query(
+        `INSERT INTO pixel.touchpoints (
+           site_key, visitor_id, contact_id, event_id, channel,
+           utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+           gclid, gbraid, wbraid, dclid, fbclid, ttclid, rdt_cid, li_fat_id, msclkid, twclid, epik, sccid, srsltid,
+           referrer, landing_url, occurred_at, taxonomy_version, occurred_at_iso
+         )
+         VALUES (
+           $1, $2, $3, $4, $5,
+           $6, $7, $8, $9, $10,
+           $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22,
+           $23, $24, $25, $26, $27, $28
+         )`,
+        [
+          payload.site_key,
+          visitorId,
+          contactId,
+          eventId,
+          channel,
+          evidence.utm_source,
+          evidence.utm_medium,
+          evidence.utm_campaign,
+          evidence.utm_content,
+          evidence.utm_term,
+          evidence.click_ids.gclid,
+          evidence.click_ids.gbraid,
+          evidence.click_ids.wbraid,
+          evidence.click_ids.dclid,
+          evidence.click_ids.fbclid,
+          evidence.click_ids.ttclid,
+          evidence.click_ids.rdt_cid,
+          evidence.click_ids.li_fat_id,
+          evidence.click_ids.msclkid,
+          evidence.click_ids.twclid,
+          evidence.click_ids.epik,
+          evidence.click_ids.sccid,
+          evidence.click_ids.srsltid,
+          payload.referrer || null,
+          payload.url || null,
+          timestamp.postgres,
+          classification.taxonomy_version || TAXONOMY_VERSION,
+          timestamp.original,
+        ]
+      );
+    }
 
-  return { status: 204, body: null };
+    // ---- conversion detection (form_submit / track) -------------------------
+    // Every form_submit is a conversion by definition (the whitelisted event
+    // name "form_submit" below documents that rather than gating on it, an
+    // event_type check is used instead so callers don't have to also set
+    // event_name to get the credit). A track event only counts when the
+    // caller flagged it explicitly (properties.is_conversion) or its name is
+    // on the fixed conversion-name list.
+    const properties = payload.properties || {};
+    const isConversion =
+      payload.event_type === "form_submit" ||
+      (payload.event_type === "track" &&
+        (properties.is_conversion === true || CONVERSION_EVENT_NAMES.indexOf(payload.event_name) !== -1));
+
+    if (isConversion) {
+      const value = typeof properties.value === "number" ? properties.value : null;
+      const currency = normalizeCurrency(properties.currency);
+      await tx.query(
+        `INSERT INTO pixel.conversion_events (site_key, visitor_id, contact_id, event_id, event_name, occurred_at, value, currency, page_url, occurred_at_iso)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        [
+          payload.site_key,
+          visitorId,
+          contactId,
+          eventId,
+          payload.event_name || payload.event_type,
+          timestamp.postgres,
+          value,
+          currency,
+          payload.url || null,
+          timestamp.original,
+        ]
+      );
+    }
+
+    return { status: 204, body: null };
+  });
 }
 
 export const __internal = {
