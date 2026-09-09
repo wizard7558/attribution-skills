@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Smoke: copy the full skills/ tree, then skills-ref validate each skill in that
+# isolated checkout. Sibling-aware artifact checks run against the copied tree.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
@@ -13,6 +15,8 @@ skills_ref() {
 tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/attribution-skills-standalone.XXXXXX")"
 cleanup() { rm -rf "$tmpdir"; }
 trap cleanup EXIT
+
+cp -R skills "$tmpdir/skills"
 
 skills=(
   channel-taxonomy
@@ -29,24 +33,22 @@ skills=(
   attribution-audit
 )
 
+(
+  cd "$tmpdir/skills/channel-taxonomy"
+  node scripts/build-artifacts.mjs --check
+)
+(
+  cd "$tmpdir/skills/ga4-bigquery-export"
+  # test-artifacts expects skills/ siblings two levels up from scripts/
+  node scripts/test-artifacts.mjs
+)
+(
+  cd "$tmpdir/skills/first-party-pixel"
+  node scripts/taxonomy-parity.mjs
+)
+
 for skill in "${skills[@]}"; do
-  target="$tmpdir/$skill"
-  mkdir -p "$target"
-  cp -R "skills/$skill/." "$target/"
-  case "$skill" in
-    channel-taxonomy)
-      node "$target/scripts/build-artifacts.mjs" --check
-      ;;
-    ga4-bigquery-export)
-      node "$target/scripts/test-artifacts.mjs"
-      ;;
-    first-party-pixel)
-      node "$target/scripts/taxonomy-parity.mjs"
-      ;;
-    attribution-audit)
-      ;;
-  esac
-  skills_ref validate "$target"
+  skills_ref validate "$tmpdir/skills/$skill"
 done
 
 echo "PASS standalone install smoke for ${#skills[@]} skills"
