@@ -79,13 +79,30 @@ def scan_forbidden_bytes(payload: bytes, label: str) -> None:
             raise ValueError(f"{label} contains forbidden publication pattern: {pattern.pattern.decode()}")
 
 
-def verify_frozen(source: dict[str, Any], context_hashes: dict[str, str], harness: Any, manifest_sha256: str) -> None:
+def verify_frozen(
+    source: dict[str, Any],
+    context_hashes: dict[str, str],
+    harness: Any,
+    manifest_sha256: str,
+    *,
+    allow_manifest_mismatch: bool = False,
+) -> dict[str, Any] | None:
+    manifest_mismatch: dict[str, Any] | None = None
     if source.get("cases_sha256") != manifest_sha256:
-        raise ValueError("source cases_sha256 does not match current eval-cases.json bytes")
-    if source.get("context_hashes") != context_hashes:
+        if not allow_manifest_mismatch:
+            raise ValueError("source cases_sha256 does not match current eval-cases.json bytes")
+        manifest_mismatch = {
+            "source_cases_sha256": source.get("cases_sha256"),
+            "current_manifest_sha256": manifest_sha256,
+            "context_hashes_match_current": source.get("context_hashes") == context_hashes,
+            "rescore_skipped": True,
+            "reason": "Historical evidence archived under a prior eval-cases.json manifest; scores are preserved from the original execution without recomputation against the revised manifest.",
+        }
+    elif source.get("context_hashes") != context_hashes:
         raise ValueError("source context_hashes mismatch against current skill context files")
     if source.get("harness_hash") != harness.harness_hash():
         raise ValueError("source harness_hash mismatch against frozen harness")
+    return manifest_mismatch
 
 
 def group_by_id(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -276,13 +293,20 @@ def publish(
     revision: str | None = None,
     historical_artifacts_sha256: dict[str, str] | None = None,
     extra_provenance: dict[str, Any] | None = None,
+    allow_manifest_mismatch: bool = False,
 ) -> dict[str, str]:
     harness = load_harness(repo_root)
     source_bytes = source_path.read_bytes()
     source_sha256 = digest_bytes(source_bytes)
     source = json.loads(source_bytes)
     manifest, context_hashes, manifest_sha256 = harness.validate_manifest(skill)
-    verify_frozen(source, context_hashes, harness, manifest_sha256)
+    manifest_mismatch = verify_frozen(
+        source,
+        context_hashes,
+        harness,
+        manifest_sha256,
+        allow_manifest_mismatch=allow_manifest_mismatch,
+    )
     groups = group_by_id(manifest)
     redactions: list[dict[str, Any]] = []
     redacted = copy.deepcopy(source)
@@ -296,10 +320,11 @@ def publish(
             }
         )
         set_pointer(redacted, pointer, REDACTION)
-    for model, conditions in source.get("models", {}).items():
-        for condition, group_cells in conditions.items():
-            for group_id, cell in group_cells.items():
-                rescore_cell(cell, groups[group_id], model, harness)
+    if manifest_mismatch is None:
+        for model, conditions in source.get("models", {}).items():
+            for condition, group_cells in conditions.items():
+                for group_id, cell in group_cells.items():
+                    rescore_cell(cell, groups[group_id], model, harness)
     refs = skill / "references"
     json_path = refs / f"{output_stem}.json"
     md_path = refs / f"{output_stem}.md"
@@ -319,19 +344,26 @@ def publish(
     md_text = results_markdown(redacted, title=title, narrative=narrative)
     scan_forbidden_bytes(md_text.encode(), md_path.name)
     md_path.write_text(md_text)
+    provenance_extra = dict(extra_provenance or {})
+    if manifest_mismatch:
+        provenance_extra["manifest_mismatch"] = manifest_mismatch
+        provenance_extra["rescore"] = (
+            "Skipped: source cases_sha256 does not match current eval-cases.json. "
+            "Recorded scores and check statuses are preserved from the original execution."
+        )
     provenance = build_provenance(
         source_sha256=source_sha256,
         public_sha256=public_sha256,
         redactions=redactions,
-        manifest_sha256=manifest_sha256,
-        context_hashes=context_hashes,
+        manifest_sha256=manifest_sha256 if manifest_mismatch is None else source.get("cases_sha256", manifest_sha256),
+        context_hashes=source.get("context_hashes", context_hashes),
         source=source,
         summaries=summaries,
         verified_cells=verified_cells,
         private_archive_basename=private_archive_basename,
         revision=revision,
         historical_artifacts_sha256=historical_artifacts_sha256,
-        extra=extra_provenance,
+        extra=provenance_extra or None,
     )
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"
     scan_forbidden_bytes(provenance_text.encode(), provenance_path.name)
@@ -359,6 +391,11 @@ def main() -> int:
     parser.add_argument("--narrative", required=True)
     parser.add_argument("--provenance-stem")
     parser.add_argument("--revision")
+    parser.add_argument(
+        "--allow-manifest-mismatch",
+        action="store_true",
+        help="Publish historical evidence when source cases_sha256 differs from current eval-cases.json; skips rescore.",
+    )
     args = parser.parse_args()
     repo = args.repo.resolve()
     skill = (repo / args.skill if not args.skill.is_absolute() else args.skill).resolve()
@@ -375,6 +412,7 @@ def main() -> int:
         narrative=args.narrative,
         provenance_stem=args.provenance_stem,
         revision=args.revision,
+        allow_manifest_mismatch=args.allow_manifest_mismatch,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

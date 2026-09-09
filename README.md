@@ -64,8 +64,8 @@ Deterministic test results and model behavior evaluations are separate evidence.
 
 | Blocker | Skill | Owner action |
 | --- | --- | --- |
-| GA4 transport supplements (4 cells) | `ga4-bigquery-export` | Rerun failed cells with reviewed Sonnet 600s wrapper; never resume whole artifact under changed manifest |
-| Identity corrected graph (Fable ×2, Qwen without-skill never run; Qwen with-skill truncated) | `clickstream-identity-stitching` | Decide truncation policy; rerun only never-run or failed cells on manifest `71a0c119` |
+| GA4 transport supplements (4 cells; Fable `transactions-and-execution` without-skill re-attempted 2026-09-09T20:06Z still `TimeoutExpired` at 300s — published n/a in [transport supplement](skills/ga4-bigquery-export/references/eval-results-transport-supplement-fable-transactions-without.md); private evidence under `Downloads/completion-live-supplements-20260909T1300Z/`; Sonnet 600s supplements still in flight) | `ga4-bigquery-export` | Rerun remaining failed cells with reviewed Sonnet 600s wrapper; never resume whole artifact under changed manifest |
+| Identity corrected graph (Fable ×2, Qwen without-skill never run; Qwen with-skill truncated) | `clickstream-identity-stitching` | Decide truncation policy; rerun only never-run or failed cells on manifest `71a0c119`; original matrix published on prior manifest `9e2b5e6e` |
 | Pixel live matrix (18 cells) | `first-party-pixel` | Launch review then `python3 scripts/run-skill-evals.py --skill skills/first-party-pixel --run ...` |
 | Audit live matrix (18 cells) | `attribution-audit` | Launch review after offline manifest review |
 | Hosted pixel adapter smoke | `first-party-pixel` | Disposable Vercel/Supabase/Neon/Cloudflare proof with teardown |
