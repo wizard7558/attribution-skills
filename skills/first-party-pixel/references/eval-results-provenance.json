@@ -1,0 +1,478 @@
+{
+  "attempts": 18,
+  "context_hashes": {
+    "SKILL.md": "a525b6344813b9130690f1d06d521ac18c01c8a86acbbf92af5998af87c0e048",
+    "references/evaluation-quick-reference.md": "2cf8276e781eb5ea1f961a3f130dbd209a58ad046ec8b6cdc64780e4e121cfd9"
+  },
+  "finished_at": "2026-09-09T22:07:40.418408+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "8b954f62f590c483e41b7c9ddafaf41c10d4499da90308624b12373000a9034f",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "pixel-full-raw.json",
+  "public_results_sha256": "ae41d7e04bb47e119299ed8ef0d812c8b2a3dc9e197a7f38a6b8a9495cf50f44",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/identity-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "a680d7c66215c0695a6d7d9d259bb3114979b45f49b40e50c142dab529886e16"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/identity-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "65d105a7d285e3ea1c9d6eab92de074a7f30778680fd636d6cf3fa56f7ed5091"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/identity-snapshot-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b7c3d6d72c9edb41ce00de4d2eab34b2d9fc18d3b4ccd81744ea61dd97ab88c1"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/identity-snapshot-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "747128f2ed9a476c9f2520f40e936484eaeabbb794c99116bae1d220be7bb94a"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/touchpoint-channel-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "4d3f780e02b278a1e21365c1aed9016cd89afe62156fc30e26cb83c8c43d04f5"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/touchpoint-channel-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "2c2bbeef988e4488f54b46b98711fe158d6b413ad6b77c269e3b733469e3b869"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/identity-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "24fb85b8bccd5b1f80cb05d2abc196067f9b372b10f31570e52f028de26e884f"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/identity-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0c3feb16ddde7abe6018e9132c0092865a6a840b05ba53d6067187ce79887b3e"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/identity-snapshot-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "9c4d08f113e4e3ff746a2ac5285bf80db3cb98a141a2bf407cda3e10d6fa11ac"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/identity-snapshot-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "294265d3bc374f80ff59873e114c960570359fd6710217da93c3066f95ca6724"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/touchpoint-channel-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c6c299e22a3c7304f33a12c2463f554ba3f303d6223d674978f045b0789fd418"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/touchpoint-channel-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "e7d3065aa6538fd7c83244cf8d76d7852e29b0883b27bd444707b6bf501e12ed"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/identity-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "a614a1a9eb3ae2bf55202d3c1bbbe29e984d9b315c995e2ee150bc1d7be7a05b"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/identity-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "d46b540cf35e6bec9cc1337a8c2b3b7c4dbd77ebc172b4fe6038c135f80249de"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/identity-snapshot-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "6ba29d21fbc3e035b170e1d03f9285198bef903338c23e720ea95dd0acefe21f"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/identity-snapshot-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "6ced8bf84aed010f3e444d4214883bd1d578a12f38060ad1d20ebd33c83d08a9"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/touchpoint-channel-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "ff8669eea46830a9607ca6883c60e2266cc91d9561ea587a4116aa02b6c72720"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/touchpoint-channel-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b1522620fcb605600c29ccb4303d29f324dc2cc8b72906dbe863322c987b39cf"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/identity-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "fa8bbda80c03061ff0976986671f785d106f45d0ca6a236384a9ccce30faeee3"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/identity-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "af6b3329ca259670f93288489ab78ee87c724d9d94f5271b8a46f48f894536f5"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/identity-snapshot-projection/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "63806a61d5ef4e64d18c8e4d518950add1910f21b3151eff97f057825e8e8259"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/identity-snapshot-projection/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "73eb9b483dc4cbbd8330e1aaf357876d4f74b66fc9144cc1da643db8be5df2f3"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/touchpoint-channel-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c85a88cf385e4fe8d2576060a744c1d870545b80c783eaeb8f879621dc66903c"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/touchpoint-channel-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "3c757f1ed02046e89d7e38e64abb507c29a668baf9ac2786e338ab77af5bd468"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "c6ed05f92ffc250f8f6b5f695b3eeb461809525ffc0849a241ed6a3f8ff5356e",
+  "started_at": "2026-09-09T21:54:31.250972+00:00",
+  "summaries": [
+    {
+      "checks": 58,
+      "condition": "with-skill",
+      "model": "claude-fable-5-1",
+      "passed": 35,
+      "usable_calls": 3
+    },
+    {
+      "checks": 58,
+      "condition": "without-skill",
+      "model": "claude-fable-5-1",
+      "passed": 31,
+      "usable_calls": 3
+    },
+    {
+      "checks": 58,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 41,
+      "usable_calls": 3
+    },
+    {
+      "checks": 58,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 43,
+      "usable_calls": 3
+    },
+    {
+      "checks": 58,
+      "condition": "with-skill",
+      "model": "qwen3:4b",
+      "passed": 42,
+      "usable_calls": 3
+    },
+    {
+      "checks": 58,
+      "condition": "without-skill",
+      "model": "qwen3:4b",
+      "passed": 39,
+      "usable_calls": 3
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 18,
+  "verified_cells": [
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "claude-fable-5-1",
+      "passed": 17,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "dbc263be9d8992459fc091e418a5e45a2c6c8c2a4d829ddc8b5022e1bd508e5a",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "claude-fable-5-1",
+      "passed": 7,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "9d7a9c6b4c1263c08e6e229d4056b5cb9f304365ec4f4c3076896658f9b0d546",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "claude-fable-5-1",
+      "passed": 11,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "fa62e382f7b4dbbc1e6c63d1cf40a3b929d5eec9bf8ff97f62b977fc84e91ca9",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "claude-fable-5-1",
+      "passed": 16,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "b1fda9ea9d5cb9142c70043943c9ab2ef73ad99898912f11edeb93b3ecd970a1",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "claude-fable-5-1",
+      "passed": 7,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "467463effd80f91d48d979462bca06afa5dc3a61a7ed8e0d2bc7740a9f71750b",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "claude-fable-5-1",
+      "passed": 8,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "efe5fa8b53eb236180a6f10fa0a2219a12a3089477f7cdc9d169a285cd7366d3",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "claude-sonnet-5",
+      "passed": 23,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "e209c96c5400f7e5cc1a8e20a0d47ee3e1aa69008e937a0aef708f9a1842a641",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "claude-sonnet-5",
+      "passed": 7,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "950be7893a45d991a8c99287611d91af8bbc6ec99bd9b9fe9f97e999ad637083",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "claude-sonnet-5",
+      "passed": 11,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "fc9591b93f16c52a3b42fdc60aec6df4b793e6ca38f58275ac56e2b688aedce8",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "claude-sonnet-5",
+      "passed": 23,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "1973ea09a7482727f466aef081633e92b51286d24c79893900d4dc2167039101",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "claude-sonnet-5",
+      "passed": 8,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "e43106fcf4c5c3eef0b9bb60c74793a27c2ef1830ac9a4d61a267aff0939ba03",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "claude-sonnet-5",
+      "passed": 12,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "78492f71360ca660073ba8a277a696d235ddfeef38fc5a50e862580e4d1538a6",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "qwen3:4b",
+      "passed": 21,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "1ebc026bc546ae1b4ca026bf19606466ee9ad51c3ecc8d1e6f140ba0a6e54244",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "qwen3:4b",
+      "passed": 10,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "cee3bb08bae092c4a7d6a4f0285d8bc13f16beba32a4d5a077dca6f894d0e19f",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "qwen3:4b",
+      "passed": 11,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "7a9273fccb23f66f7a90a448942082575aeeacc4e362ad7faa6cc4c55f9342f9",
+      "schema_passed": true,
+      "system_prompt_sha256": "5bf4f72e948e2cd29f813935ffdfb5ccb8168a54e893e9f79bc6f3cc4803298c",
+      "usable": true
+    },
+    {
+      "checks": 24,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-projection",
+      "model": "qwen3:4b",
+      "passed": 21,
+      "prompt_sha256": "985b799ce003880dd4515a324768e4e47cea7865af205e73c4a549b8b8c97552",
+      "raw_model_content_sha256": "85a62c446db6529c8d7b3b15bcee3d4129a9989e4649d1b3f9445b8dd3f520be",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 18,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "identity-snapshot-projection",
+      "model": "qwen3:4b",
+      "passed": 10,
+      "prompt_sha256": "f6899a3eb85617d94eecc50d1db125279e19403b128b3c652b17451f02df61c8",
+      "raw_model_content_sha256": "3f41f2002cbd58d583f84e4947770268ec613a0e1cc412720926b13c4d5b0403",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 16,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "touchpoint-channel-normalization",
+      "model": "qwen3:4b",
+      "passed": 8,
+      "prompt_sha256": "4bf81cc5dffa399965efefabb4953a651234c42882beab03a586e585db0b3939",
+      "raw_model_content_sha256": "2b0968aebb6cae3a32e8555321917e012b378978a6af0619bbdbbefb86467570",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
