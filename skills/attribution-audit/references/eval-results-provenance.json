@@ -1,0 +1,479 @@
+{
+  "attempts": 18,
+  "context_hashes": {
+    "SKILL.md": "8254785bdca9a3e28ed35a487638ba96c354f0b990b2b1fa6c62af5065edb94f",
+    "references/audit-contract.md": "0123219240e4a2211732b1ac528a230d64f22095a55d7d426b1709778d7a813b",
+    "references/entrypoints.json": "f23c7720439878213d010598f8729307f7e667af1391e104d2dcf28b94cfa673"
+  },
+  "finished_at": "2026-09-09T22:24:23.917915+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "c9c86357f06410d119760b09f9c62e215478bd4d159218447c4a874777225edd",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "audit-full-raw.json",
+  "public_results_sha256": "b7699938d1b8c2580e5d5f258994a2376b7f76b6e4378772bd52c098095738ca",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/evidence-preservation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0e5fa22cdf9bb3eb80a2f163e13eacaf1861b46b18da8c830fec92e508c37e3c"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/evidence-preservation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "cd2caa6c488b6e184e9e745eea1f13203a98a493c3d7f592bbfe7600eab40f32"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/fresh-invocation-gating/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "94169d47481505d815a97c69238a0f6207b6d0475859573c423092a5258b2c03"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/fresh-invocation-gating/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0a0930d8ce3e587576fbe058aa4ddbf23f8a0b6bfbc2aa501568ab96999a3ba7"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/partial-inventory-routing/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b64581f989c345e3203c6cdb39afada9e439516ca803dc94bf54a17079755207"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/partial-inventory-routing/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "dbce281965bfc50b22f0379407634ea5537ab21f15b7a57e49fd5684b7f9bfa1"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/evidence-preservation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "df4ac2f31ee6746e5a15c08df01766d98f59fc5f128d26e08ca532c2358162a0"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/evidence-preservation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "3eb3f6498299d57ca4b94e095dd02e5935b4d0752cc9034025abf9cfde1d86d2"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/fresh-invocation-gating/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "24f05866cdb2ae5463c499c91fe072628dc5b896307ad5c3965efe0f5e9783fb"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/fresh-invocation-gating/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "44ed4f4dcf43620d5109feb7516a54152e7e04b9f0b77d4e481f45e52fa0a0dc"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/partial-inventory-routing/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0fc4b6146209f7858abf943515f800eacbccbb567fbbeb5a3ae5b95464e2ad41"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/partial-inventory-routing/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "2d186caf25241dfa85dbd9ed60dddfefa07870deba8359d9a102e0f10dcb74c0"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/evidence-preservation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "fa929c41ac4e85e9f2c492a70a415e3a533a542dc5e6269c1583824a7759c15a"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/evidence-preservation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "4cde9c56a056bca1607dd969786a36e9e14ba8169162122a3eae30f49c76cdd4"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/fresh-invocation-gating/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c0d747ff4d4694867c715e6bf3806d7fbfc67872774dc88dde0411ff667aac38"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/fresh-invocation-gating/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "43d7814bd320171e7b4c096403108a0d16608cd673e688209331d25d9e4c4fca"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/partial-inventory-routing/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "04782ee8daa0349c0c856c485b8c38e1652ed9a9d3ad76f79cbb8506e9743e72"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/partial-inventory-routing/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "e7d1e718a7da99f4431f042da35f32424070f7c79ae6999c9148f78a57bfe882"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/evidence-preservation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "f8c0672da67e0e77489b6ed3bc639031e9a16bae2bfa5f89f2da52b5bad19f8e"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/evidence-preservation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "aeea1f0aeea564b918cbabb8fa62fdb0daf816ad36c2c7c448c01deaa5573dda"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/fresh-invocation-gating/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "a5e65906df7e1e3dfbe35502b5731e6447e6f72a43c27212873520def07f7bd8"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/fresh-invocation-gating/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b0189c8350b3a43e5b55aa97bd73d94e4eb83600a2057b7cff6b710b05002dde"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/partial-inventory-routing/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "ddd1cbbff5c0a2760ed541728d56bf368e9f39d49a1ff3e8eea34e770158e8cc"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/partial-inventory-routing/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c49dd31b0889fc8e14084929700f37a397699e7bdd8a50de35e364093a6130db"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "fda7bfcf8b7f3e75edcb313fd07c568e30e6fa6c7fdebc379a03028ea6acc942",
+  "started_at": "2026-09-09T22:07:40.607605+00:00",
+  "summaries": [
+    {
+      "checks": 63,
+      "condition": "with-skill",
+      "model": "claude-fable-5-1",
+      "passed": 63,
+      "usable_calls": 3
+    },
+    {
+      "checks": 63,
+      "condition": "without-skill",
+      "model": "claude-fable-5-1",
+      "passed": 45,
+      "usable_calls": 3
+    },
+    {
+      "checks": 63,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 62,
+      "usable_calls": 3
+    },
+    {
+      "checks": 63,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 42,
+      "usable_calls": 3
+    },
+    {
+      "checks": 63,
+      "condition": "with-skill",
+      "model": "qwen3:4b",
+      "passed": 36,
+      "usable_calls": 3
+    },
+    {
+      "checks": 63,
+      "condition": "without-skill",
+      "model": "qwen3:4b",
+      "passed": 37,
+      "usable_calls": 3
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 18,
+  "verified_cells": [
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "claude-fable-5-1",
+      "passed": 21,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "95659453256d9b2ef676aa4827f59535e46141190db91a64316d3452612efc32",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "claude-fable-5-1",
+      "passed": 21,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "d517e2fdfa2633ae7cadb74e0040e0e18755daa86000a7bb62f2864cd39782d3",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "claude-fable-5-1",
+      "passed": 21,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "c14cb85cddec2be95b6898c6d858fcbd577933c567f7cddc03fb6b397abdafbb",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "claude-fable-5-1",
+      "passed": 18,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "0bcbbb7b3add3b985104a00d970a2d06b6e80aed21df657ff1bd96eb617376fa",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "claude-fable-5-1",
+      "passed": 13,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "1905f2cbf368621408947ad3e100880121f1a67bd9a92336afdd7da4842e3eae",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "claude-fable-5-1",
+      "passed": 14,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "b17cb752b16515d84c34a11b779467b6d957e8e3f117b1018d71e23e5c0eca98",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "claude-sonnet-5",
+      "passed": 21,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "c9144ed9bd76c085afa26a54268402ffc4c003dbab2f2a1905235025ae827f1b",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "claude-sonnet-5",
+      "passed": 20,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "1b87bbb6513a63aedb287d9f2e0dcd44f0db58f3056aed910d18d2c96e4bde98",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "claude-sonnet-5",
+      "passed": 21,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "024a06753117683d149f01c264ce23c253ca7bcda483c090c37cc50dc364fa72",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "claude-sonnet-5",
+      "passed": 15,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "9a68a7d724effc4f77bf0a71db69b6f39625ad24891fb603477da9401e98446b",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "claude-sonnet-5",
+      "passed": 13,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "837529779286afbcd806204bace8d1603f44275ff2194f103cbe9581d2399e33",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "claude-sonnet-5",
+      "passed": 14,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "55ebe5955ba474c47be0040d304377678ef03c0436be2e62e239bb157faaabfd",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "qwen3:4b",
+      "passed": 13,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "8a56f20a43385e4df4d4667470afd0f6f69d7623e5d9795658a69c8af31bb291",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "qwen3:4b",
+      "passed": 11,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "f5e974e6d2ba6bb2ef766387b2cc33b43cb13e1035304413817b672b88614e12",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "qwen3:4b",
+      "passed": 12,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "82095328032a09092fc320e37bd6dd0dd4196192ae1b4aed471c38e928705108",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cdc14cc5c3010907ab785b03742f5786f03be2995c39309bbc46fbda8dbef2f",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "evidence-preservation",
+      "model": "qwen3:4b",
+      "passed": 14,
+      "prompt_sha256": "55a28418f70f55a9980cda20ff00b759c9c516ef1610ed557d40dea4e8455aa5",
+      "raw_model_content_sha256": "b5619cb86fe8d17a0df20f8439e1096e4c8b51d88ef2243c33f0894417bb6c35",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "fresh-invocation-gating",
+      "model": "qwen3:4b",
+      "passed": 11,
+      "prompt_sha256": "ff1c73ad867a0b29805cc9ae927109f3099e1b3a31cca9f41825fec0946c6a60",
+      "raw_model_content_sha256": "a1472b7a9c5fbc8b6440fc85b98a0b237ff6b1ad09dd3b50868f971b6b63c8c3",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 21,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "partial-inventory-routing",
+      "model": "qwen3:4b",
+      "passed": 12,
+      "prompt_sha256": "02b087d72e50dbf457e0a897bc8c8a9172b905e80391ddde6bf2857b73639fb8",
+      "raw_model_content_sha256": "50d19a1eb500571ac9eae418ecedfdc89ced73fb9d3aa981e34f637a1801ae95",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
