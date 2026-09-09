@@ -1,0 +1,55 @@
+{
+  "publication_kind": "hosted_adapter_smoke_summary",
+  "finished_at": "2026-09-09T23:06:47.624937+00:00",
+  "runtime": "vercel",
+  "database_provider": "neon",
+  "result": "pass",
+  "neon": {
+    "project_id": "ancient-hill-30300306",
+    "project_name": "attribution-pixel-smoke-20260909",
+    "org_id": "org-empty-credit-28346059",
+    "region": "aws-us-east-1",
+    "database": "neondb",
+    "role": "neondb_owner",
+    "host_basename": "ep-twilight-king-aufp12xf",
+    "pooler_basename": "ep-twilight-king-aufp12xf-pooler"
+  },
+  "vercel": {
+    "project": "attribution-pixel-smoke-20260909",
+    "production_alias": "https://attribution-pixel-smoke-20260909.vercel.app",
+    "collector_path": "/api/collect"
+  },
+  "schema_apply": "pass",
+  "http_smoke": [
+    {
+      "event_type": "pageview",
+      "status": 204,
+      "body": ""
+    },
+    {
+      "event_type": "identify",
+      "status": 204,
+      "body": ""
+    }
+  ],
+  "db_verify": {
+    "events": 2,
+    "visitors": 1,
+    "raw": "events \n--------\n      2\n(1 row)\n\n visitors \n----------\n        1\n(1 row)"
+  },
+  "teardown": {
+    "neon_deleted": true,
+    "vercel_removed": true,
+    "notes": "Vercel project removed via CLI; Neon project absent from org list after teardown attempts"
+  },
+  "private_evidence": {
+    "journal_basename": "pixel-hosted-smoke-20260909T2302Z",
+    "neon_create_sha256": "b998eae6d9abc7b6dc72fef8491b9b117af14487ec90cf3985090e06f9a3147f",
+    "smoke_http_sha256": "c9489f36766e6fb7c1595be58f6c5a8fcdb78bd2083cbf3c0bfcb0664a7baf28"
+  },
+  "boundaries": [
+    "Disposable Neon project + disposable Vercel project only",
+    "No customer databases reused",
+    "Connection secrets retained only in private Downloads journal, not in repo"
+  ]
+}
