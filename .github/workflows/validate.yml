@@ -58,7 +58,7 @@ jobs:
 
       - name: Verify standalone collector and repository migration against PostgreSQL
         # initdb runs as the regular runner user. Each roundtrip creates and removes its own cluster.
-        run: env -u DATABASE_URL PGPORT_TEST=55439 COLLECTOR_PORT=8799 bash scripts/run-tests.sh --postgres
+        run: env -u DATABASE_URL PGPORT_TEST=55439 COLLECTOR_PORT=8799 PYTHON_EXECUTABLE=$(which python3) bash scripts/run-tests.sh --postgres
 
   confidentiality:
     runs-on: ubuntu-latest
