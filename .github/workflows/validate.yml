@@ -48,7 +48,7 @@ jobs:
           PY
 
       - name: Check generated artifacts, classifiers, GA4 fixtures, and shared harness
-        run: bash scripts/run-tests.sh --offline
+        run: PYTHON_EXECUTABLE=$(which python3) bash scripts/run-tests.sh --offline
 
       - name: Install PostgreSQL for the disposable runtime test
         run: |

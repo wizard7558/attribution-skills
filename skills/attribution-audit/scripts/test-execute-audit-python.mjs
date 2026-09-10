@@ -9,7 +9,7 @@ import {executeAudit,AuditPreflightError} from './execute-audit.mjs';
 import {canonicalHash} from './compose-audit.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),repo=resolve(root,'../..'),sha=x=>createHash('sha256').update(x).digest('hex');
 const arg=k=>{const i=process.argv.indexOf(k);return i<0?null:process.argv[i+1];};
-const python=arg('--python')??'/opt/homebrew/opt/python@3.14/bin/python3.14';
+const python=arg('--python')??(process.env.PYTHON_EXECUTABLE || '/opt/homebrew/opt/python@3.14/bin/python3.14');
 const fixturePath=join(root,'references/python-execution-fixtures.json'),fixtures=JSON.parse(await readFile(fixturePath)),registry=JSON.parse(await readFile(join(root,'references/entrypoints.json')));
 const work=await mkdtemp(join(tmpdir(),'audit-python-tests-')),skill='mmm-and-incrementality-framing',roots={[skill]:join(work,'independently-installed-mmm')};
 const report={mode:'actual_python_cli_and_composition',node_version:process.version,python_executable:python,started_at:new Date().toISOString(),source_hashes:{},fixture_sha256:sha(await readFile(fixturePath)),derivation:fixtures.derivation,actual_runs:[],rejected_requests:[],goldens:[],checks:[],mutations:[],sql_calls:0,postgres_calls:0,provider_requests:0,model_calls:0};
