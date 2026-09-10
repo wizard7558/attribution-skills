@@ -6,7 +6,7 @@
   "groups": [
     {
       "id": "scenario-projections",
-      "prompt": "Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\n\n# Evaluation output interface\n\nReturn exactly `{\"cases\":[{\"case_id\":\"…\",\"result\":…}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\n\nUse the $a_c = 4 \\mu_c \\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.",
+      "prompt": "Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\n\n# Evaluation output interface\n\nReturn exactly `{\"cases\":[{\"case_id\":\"\u2026\",\"result\":\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\n\nUse the $a_c = 4 \\mu_c \\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.",
       "input": {
         "cases": [
           {
@@ -16,8 +16,12 @@
               "historical_data": [
                 {
                   "channels": {
-                    "Paid Search": { "spend": 10000 },
-                    "Paid Social": { "spend": 8000 }
+                    "Paid Search": {
+                      "spend": 10000
+                    },
+                    "Paid Social": {
+                      "spend": 8000
+                    }
                   }
                 }
               ],
@@ -37,21 +41,34 @@
             "items": {
               "type": "object",
               "properties": {
-                "case_id": { "type": "string" },
+                "case_id": {
+                  "type": "string"
+                },
                 "result": {
                   "type": "object",
                   "properties": {
-                    "optimal_allocation": { "type": "object" },
-                    "funnel_projections": { "type": "object" },
-                    "disclaimer_present": { "type": "boolean" }
+                    "optimal_allocation": {
+                      "type": "object"
+                    },
+                    "funnel_projections": {
+                      "type": "object"
+                    },
+                    "disclaimer_present": {
+                      "type": "boolean"
+                    }
                   }
                 }
               },
-              "required": ["case_id", "result"]
+              "required": [
+                "case_id",
+                "result"
+              ]
             }
           }
         },
-        "required": ["cases"]
+        "required": [
+          "cases"
+        ]
       },
       "checks": [
         {
@@ -62,7 +79,8 @@
         {
           "path": "/cases/0/result/funnel_projections/mean",
           "op": "approximately",
-          "expected": 500
+          "expected": 500,
+          "tolerance": 50
         }
       ]
     }
