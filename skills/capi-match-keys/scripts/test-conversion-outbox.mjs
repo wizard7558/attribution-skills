@@ -291,7 +291,7 @@ try {
   console.log(`PASS ${evidence.groups.length} native PostgreSQL groups, ${assertions} assertions; separate-connection races, real locks, rollback, retries, lease fencing and prepared-event integration.`);
 } catch (error) {
   evidence.status = 'failed'; evidence.failure = { group: currentGroup, code: error.code ?? 'ASSERTION', label: error.code ? 'database operation failed; raw database detail omitted' : error.message };
-  console.error(`FAIL ${currentGroup} (${error.code ?? 'ASSERTION'}); raw database input omitted.`);
+  console.error(`FAIL ${currentGroup} (${error.code ?? 'ASSERTION'}); raw database input omitted.`); console.error(error.stack);
   process.exitCode = 1;
 } finally {
   await Promise.allSettled(clients.map((client) => client.end()));
