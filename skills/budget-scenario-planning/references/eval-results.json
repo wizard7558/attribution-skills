@@ -1,0 +1,1117 @@
+{
+  "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+  "claude_help": {
+    "exit_code": 0,
+    "json_schema": true
+  },
+  "cli_version": "2.1.267 (Claude Code)",
+  "completed_groups": [
+    "scenario-projections"
+  ],
+  "conditions": [
+    "with-skill",
+    "without-skill"
+  ],
+  "context_hashes": {
+    "SKILL.md": "888f5cad23065dbe78ec6edb9a32546a91d4ef648579973da1dd9d75c4cd272d",
+    "references/planning-math.md": "22dc79ba614b86fe67328780063a05c075aabe50b17ab7163b9fe0050622e61f"
+  },
+  "finished_at": "2026-09-10T04:43:08.397526+00:00",
+  "groups": [
+    "scenario-projections"
+  ],
+  "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "models": {
+    "claude-fable-5-1": {
+      "with-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": true,
+              "expected": true,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": true
+            },
+            {
+              "actual": 724.3,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": true
+            }
+          ],
+          "completion_status": "complete",
+          "context_sha256": "d6ae4dd81bcf4ec5797b57f1b699a8be3e023ea471ee57b0bc65824886dfa0f4",
+          "elapsed_seconds": 16.093581,
+          "errors": [],
+          "finished_at": "2026-09-10T04:41:02.158837+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "json_schema": true,
+            "max_budget_usd": 2,
+            "safe_mode": true,
+            "tools": false
+          },
+          "parsed": {
+            "cases": [
+              {
+                "case_id": "A",
+                "result": {
+                  "disclaimer_present": true,
+                  "funnel_projections": {
+                    "mean": 724.3,
+                    "p10": 706.2,
+                    "p90": 742.4
+                  },
+                  "optimal_allocation": {
+                    "Paid Search": 29638,
+                    "Paid Social": 20362
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": {
+            "api_error_status": null,
+            "duration_api_ms": 16399,
+            "duration_ms": 15140,
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "fast_mode_state": "off",
+            "first_content_frame_ms": 1988,
+            "is_error": false,
+            "modelUsage": {
+              "claude-fable-5-1": {
+                "cacheCreationInputTokens": 4431,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-fable-5-1",
+                "contextWindow": 1000000,
+                "costBasis": "list",
+                "costUSD": 0.15349000000000002,
+                "inputTokens": 2,
+                "maxOutputTokens": 64000,
+                "outputTokens": 1297,
+                "provider": "firstParty",
+                "thinkingTokens": 1156,
+                "webSearchRequests": 0
+              },
+              "claude-haiku-4-5-20251001": {
+                "cacheCreationInputTokens": 0,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "contextWindow": 200000,
+                "costBasis": "list",
+                "costUSD": 0.00154,
+                "inputTokens": 1450,
+                "maxOutputTokens": 32000,
+                "outputTokens": 18,
+                "provider": "firstParty",
+                "thinkingTokens": 0,
+                "webSearchRequests": 0
+              }
+            },
+            "num_turns": 2,
+            "permission_denials": [],
+            "queued_turn_count": 0,
+            "result": "{\"cases\":[{\"case_id\":\"A\",\"result\":{\"optimal_allocation\":{\"Paid Search\":29638,\"Paid Social\":20362},\"funnel_projections\":{\"p10\":706.2,\"mean\":724.3,\"p90\":742.4},\"disclaimer_present\":true}}]}",
+            "session_id": "d2338460-7140-4fa3-aea3-181aadf1f94f",
+            "stop_reason": "tool_use",
+            "structured_output": {
+              "cases": [
+                {
+                  "case_id": "A",
+                  "result": {
+                    "disclaimer_present": true,
+                    "funnel_projections": {
+                      "mean": 724.3,
+                      "p10": 706.2,
+                      "p90": 742.4
+                    },
+                    "optimal_allocation": {
+                      "Paid Search": 29638,
+                      "Paid Social": 20362
+                    }
+                  }
+                }
+              ]
+            },
+            "subagent_stats": {
+              "by_type": {},
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "system": 0,
+                "user": 0
+              },
+              "max_depth": 0,
+              "refused": {
+                "budget": 0,
+                "concurrency_limit": 0,
+                "depth_limit": 0
+              },
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "spawned": 0,
+              "spawned_by_subagents": 0,
+              "started_in_background": 0
+            },
+            "subtype": "success",
+            "terminal_reason": "completed",
+            "time_to_request_ms": 14,
+            "total_cost_usd": 0.15503000000000003,
+            "ttft_ms": 14142,
+            "ttft_stream_ms": 1417,
+            "type": "result",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 4431,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 4431,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "not_available",
+              "input_tokens": 2,
+              "iterations": [
+                {
+                  "cache_creation": {
+                    "ephemeral_1h_input_tokens": 4431,
+                    "ephemeral_5m_input_tokens": 0
+                  },
+                  "cache_creation_input_tokens": 4431,
+                  "cache_read_input_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 1297,
+                  "type": "message"
+                }
+              ],
+              "output_tokens": 1297,
+              "output_tokens_details": {
+                "thinking_tokens": 1156
+              },
+              "server_tool_use": {
+                "web_fetch_requests": 0,
+                "web_search_requests": 0
+              },
+              "service_tier": "standard",
+              "speed": "standard"
+            },
+            "uuid": "3c1b30df-0ed2-48f9-b3e1-6f5698147231"
+          },
+          "requested_model": "claude-fable-5-1",
+          "resolved_model": "claude-fable-5-1",
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": true
+          },
+          "started_at": "2026-09-10T04:40:46.064557+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+          "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+          "transport": {
+            "command": [
+              "claude",
+              "--safe-mode",
+              "--no-session-persistence",
+              "--disable-slash-commands",
+              "--tools",
+              "",
+              "--strict-mcp-config",
+              "--mcp-config",
+              "{\"mcpServers\":{}}",
+              "--model",
+              "claude-fable-5-1",
+              "--output-format",
+              "json",
+              "--max-budget-usd",
+              "2",
+              "--json-schema"
+            ],
+            "elapsed_seconds": 16.093581,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "json_schema": true,
+              "max_budget_usd": 2,
+              "safe_mode": true,
+              "tools": false
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "claude-fable-5-1",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+            "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+            "transport_exit_code": 0
+          }
+        }
+      },
+      "without-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": true,
+              "expected": true,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": true
+            },
+            {
+              "actual": null,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": false
+            }
+          ],
+          "completion_status": "complete",
+          "context_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "elapsed_seconds": 18.766399,
+          "errors": [],
+          "finished_at": "2026-09-10T04:41:20.926645+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "json_schema": true,
+            "max_budget_usd": 2,
+            "safe_mode": true,
+            "tools": false
+          },
+          "parsed": {
+            "cases": [
+              {
+                "case_id": "A",
+                "result": {
+                  "disclaimer_present": true,
+                  "funnel_projections": {
+                    "Leads": {
+                      "mean": 495.6,
+                      "p10": 477.5,
+                      "p90": 513.7
+                    }
+                  },
+                  "optimal_allocation": {
+                    "Paid Search": 31745,
+                    "Paid Social": 18255
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": {
+            "api_error_status": null,
+            "duration_api_ms": 18649,
+            "duration_ms": 17716,
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "fast_mode_state": "off",
+            "first_content_frame_ms": 1832,
+            "is_error": false,
+            "modelUsage": {
+              "claude-fable-5-1": {
+                "cacheCreationInputTokens": 1670,
+                "cacheReadInputTokens": 568,
+                "canonicalModel": "claude-fable-5-1",
+                "contextWindow": 1000000,
+                "costBasis": "list",
+                "costUSD": 0.11136200000000002,
+                "inputTokens": 2,
+                "maxOutputTokens": 64000,
+                "outputTokens": 1556,
+                "provider": "firstParty",
+                "thinkingTokens": 1408,
+                "webSearchRequests": 0
+              },
+              "claude-haiku-4-5-20251001": {
+                "cacheCreationInputTokens": 0,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "contextWindow": 200000,
+                "costBasis": "list",
+                "costUSD": 0.001535,
+                "inputTokens": 1450,
+                "maxOutputTokens": 32000,
+                "outputTokens": 17,
+                "provider": "firstParty",
+                "thinkingTokens": 0,
+                "webSearchRequests": 0
+              }
+            },
+            "num_turns": 2,
+            "permission_denials": [],
+            "queued_turn_count": 0,
+            "result": "{\"cases\":[{\"case_id\":\"A\",\"result\":{\"optimal_allocation\":{\"Paid Search\":31745,\"Paid Social\":18255},\"funnel_projections\":{\"Leads\":{\"p10\":477.5,\"mean\":495.6,\"p90\":513.7}},\"disclaimer_present\":true}}]}",
+            "session_id": "45560786-baf9-4c69-89fe-3964a6db83f8",
+            "stop_reason": "tool_use",
+            "structured_output": {
+              "cases": [
+                {
+                  "case_id": "A",
+                  "result": {
+                    "disclaimer_present": true,
+                    "funnel_projections": {
+                      "Leads": {
+                        "mean": 495.6,
+                        "p10": 477.5,
+                        "p90": 513.7
+                      }
+                    },
+                    "optimal_allocation": {
+                      "Paid Search": 31745,
+                      "Paid Social": 18255
+                    }
+                  }
+                }
+              ]
+            },
+            "subagent_stats": {
+              "by_type": {},
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "system": 0,
+                "user": 0
+              },
+              "max_depth": 0,
+              "refused": {
+                "budget": 0,
+                "concurrency_limit": 0,
+                "depth_limit": 0
+              },
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "spawned": 0,
+              "spawned_by_subagents": 0,
+              "started_in_background": 0
+            },
+            "subtype": "success",
+            "terminal_reason": "completed",
+            "time_to_request_ms": 13,
+            "total_cost_usd": 0.11289700000000001,
+            "ttft_ms": 16625,
+            "ttft_stream_ms": 1276,
+            "type": "result",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 1670,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 1670,
+              "cache_read_input_tokens": 568,
+              "inference_geo": "not_available",
+              "input_tokens": 2,
+              "iterations": [
+                {
+                  "cache_creation": {
+                    "ephemeral_1h_input_tokens": 1670,
+                    "ephemeral_5m_input_tokens": 0
+                  },
+                  "cache_creation_input_tokens": 1670,
+                  "cache_read_input_tokens": 568,
+                  "input_tokens": 2,
+                  "output_tokens": 1556,
+                  "type": "message"
+                }
+              ],
+              "output_tokens": 1556,
+              "output_tokens_details": {
+                "thinking_tokens": 1408
+              },
+              "server_tool_use": {
+                "web_fetch_requests": 0,
+                "web_search_requests": 0
+              },
+              "service_tier": "standard",
+              "speed": "standard"
+            },
+            "uuid": "38d6c247-3c1a-4295-b90f-3306477a5982"
+          },
+          "requested_model": "claude-fable-5-1",
+          "resolved_model": "claude-fable-5-1",
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": true
+          },
+          "started_at": "2026-09-10T04:41:02.159519+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+          "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+          "transport": {
+            "command": [
+              "claude",
+              "--safe-mode",
+              "--no-session-persistence",
+              "--disable-slash-commands",
+              "--tools",
+              "",
+              "--strict-mcp-config",
+              "--mcp-config",
+              "{\"mcpServers\":{}}",
+              "--model",
+              "claude-fable-5-1",
+              "--output-format",
+              "json",
+              "--max-budget-usd",
+              "2",
+              "--json-schema"
+            ],
+            "elapsed_seconds": 18.766399,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "json_schema": true,
+              "max_budget_usd": 2,
+              "safe_mode": true,
+              "tools": false
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "claude-fable-5-1",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+            "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+            "transport_exit_code": 0
+          }
+        }
+      }
+    },
+    "claude-sonnet-5": {
+      "with-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": true,
+              "expected": true,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": true
+            },
+            {
+              "actual": 724.32,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": true
+            }
+          ],
+          "completion_status": "complete",
+          "context_sha256": "d6ae4dd81bcf4ec5797b57f1b699a8be3e023ea471ee57b0bc65824886dfa0f4",
+          "elapsed_seconds": 61.916395,
+          "errors": [],
+          "finished_at": "2026-09-10T04:42:22.845195+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "json_schema": true,
+            "max_budget_usd": 2,
+            "safe_mode": true,
+            "tools": false
+          },
+          "parsed": {
+            "cases": [
+              {
+                "case_id": "A",
+                "result": {
+                  "disclaimer_present": true,
+                  "funnel_projections": {
+                    "mean": 724.32,
+                    "p10": 706.19,
+                    "p90": 742.44
+                  },
+                  "optimal_allocation": {
+                    "Paid Search": 29638,
+                    "Paid Social": 20362
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": {
+            "api_error_status": null,
+            "duration_api_ms": 62049,
+            "duration_ms": 61160,
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "fast_mode_state": "off",
+            "first_content_frame_ms": 1008,
+            "is_error": false,
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "cacheCreationInputTokens": 0,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "contextWindow": 200000,
+                "costBasis": "list",
+                "costUSD": 0.001535,
+                "inputTokens": 1450,
+                "maxOutputTokens": 32000,
+                "outputTokens": 17,
+                "provider": "firstParty",
+                "thinkingTokens": 0,
+                "webSearchRequests": 0
+              },
+              "claude-sonnet-5": {
+                "cacheCreationInputTokens": 11615,
+                "cacheReadInputTokens": 4517,
+                "canonicalModel": "claude-sonnet-5",
+                "contextWindow": 1000000,
+                "costBasis": "list",
+                "costUSD": 0.1181014,
+                "inputTokens": 4,
+                "maxOutputTokens": 64000,
+                "outputTokens": 7073,
+                "provider": "firstParty",
+                "thinkingTokens": 6778,
+                "webSearchRequests": 0
+              }
+            },
+            "num_turns": 3,
+            "permission_denials": [],
+            "queued_turn_count": 0,
+            "result": "{\"cases\":[{\"case_id\":\"A\",\"result\":{\"optimal_allocation\":{\"Paid Search\":29638,\"Paid Social\":20362},\"funnel_projections\":{\"p10\":706.19,\"mean\":724.32,\"p90\":742.44},\"disclaimer_present\":true}}]}",
+            "session_id": "9214c321-9375-4852-b1e9-3ff382e1e6cc",
+            "stop_reason": "tool_use",
+            "structured_output": {
+              "cases": [
+                {
+                  "case_id": "A",
+                  "result": {
+                    "disclaimer_present": true,
+                    "funnel_projections": {
+                      "mean": 724.32,
+                      "p10": 706.19,
+                      "p90": 742.44
+                    },
+                    "optimal_allocation": {
+                      "Paid Search": 29638,
+                      "Paid Social": 20362
+                    }
+                  }
+                }
+              ]
+            },
+            "subagent_stats": {
+              "by_type": {},
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "system": 0,
+                "user": 0
+              },
+              "max_depth": 0,
+              "refused": {
+                "budget": 0,
+                "concurrency_limit": 0,
+                "depth_limit": 0
+              },
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "spawned": 0,
+              "spawned_by_subagents": 0,
+              "started_in_background": 0
+            },
+            "subtype": "success",
+            "terminal_reason": "completed",
+            "time_to_request_ms": 21,
+            "total_cost_usd": 0.11963639999999999,
+            "ttft_ms": 58595,
+            "ttft_stream_ms": 665,
+            "type": "result",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 11615,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 11615,
+              "cache_read_input_tokens": 4517,
+              "inference_geo": "not_available",
+              "input_tokens": 4,
+              "iterations": [
+                {
+                  "cache_creation": {
+                    "ephemeral_1h_input_tokens": 7098,
+                    "ephemeral_5m_input_tokens": 0
+                  },
+                  "cache_creation_input_tokens": 7098,
+                  "cache_read_input_tokens": 4517,
+                  "input_tokens": 2,
+                  "output_tokens": 148,
+                  "type": "message"
+                }
+              ],
+              "output_tokens": 7073,
+              "output_tokens_details": {
+                "thinking_tokens": 6778
+              },
+              "server_tool_use": {
+                "web_fetch_requests": 0,
+                "web_search_requests": 0
+              },
+              "service_tier": "standard",
+              "speed": "standard"
+            },
+            "uuid": "320a3199-d26a-40d2-b445-112923c7bf15"
+          },
+          "requested_model": "claude-sonnet-5",
+          "resolved_model": "claude-sonnet-5",
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": true
+          },
+          "started_at": "2026-09-10T04:41:20.927905+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+          "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+          "transport": {
+            "command": [
+              "claude",
+              "--safe-mode",
+              "--no-session-persistence",
+              "--disable-slash-commands",
+              "--tools",
+              "",
+              "--strict-mcp-config",
+              "--mcp-config",
+              "{\"mcpServers\":{}}",
+              "--model",
+              "claude-sonnet-5",
+              "--output-format",
+              "json",
+              "--max-budget-usd",
+              "2",
+              "--json-schema"
+            ],
+            "elapsed_seconds": 61.916395,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "json_schema": true,
+              "max_budget_usd": 2,
+              "safe_mode": true,
+              "tools": false
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "claude-sonnet-5",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+            "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+            "transport_exit_code": 0
+          }
+        }
+      },
+      "without-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": true,
+              "expected": true,
+              "op": "equals",
+              "passed": true,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": true
+            },
+            {
+              "actual": 691,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": true
+            }
+          ],
+          "completion_status": "complete",
+          "context_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "elapsed_seconds": 45.548504,
+          "errors": [],
+          "finished_at": "2026-09-10T04:43:08.395373+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "json_schema": true,
+            "max_budget_usd": 2,
+            "safe_mode": true,
+            "tools": false
+          },
+          "parsed": {
+            "cases": [
+              {
+                "case_id": "A",
+                "result": {
+                  "disclaimer_present": true,
+                  "funnel_projections": {
+                    "mean": 691,
+                    "p10": 673,
+                    "p90": 710
+                  },
+                  "optimal_allocation": {
+                    "Paid Search": 30488,
+                    "Paid Social": 19512
+                  }
+                }
+              }
+            ]
+          },
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": {
+            "api_error_status": null,
+            "duration_api_ms": 45788,
+            "duration_ms": 44727,
+            "fast_mode_disabled_reason": "sdk_opt_in_required",
+            "fast_mode_state": "off",
+            "first_content_frame_ms": 1780,
+            "is_error": false,
+            "modelUsage": {
+              "claude-haiku-4-5-20251001": {
+                "cacheCreationInputTokens": 0,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-haiku-4-5",
+                "contextWindow": 200000,
+                "costBasis": "list",
+                "costUSD": 0.00153,
+                "inputTokens": 1450,
+                "maxOutputTokens": 32000,
+                "outputTokens": 16,
+                "provider": "firstParty",
+                "thinkingTokens": 0,
+                "webSearchRequests": 0
+              },
+              "claude-sonnet-5": {
+                "cacheCreationInputTokens": 2324,
+                "cacheReadInputTokens": 0,
+                "canonicalModel": "claude-sonnet-5",
+                "contextWindow": 1000000,
+                "costBasis": "list",
+                "costUSD": 0.05305,
+                "inputTokens": 2,
+                "maxOutputTokens": 64000,
+                "outputTokens": 4375,
+                "provider": "firstParty",
+                "thinkingTokens": 4237,
+                "webSearchRequests": 0
+              }
+            },
+            "num_turns": 2,
+            "permission_denials": [],
+            "queued_turn_count": 0,
+            "result": "{\"cases\":[{\"case_id\":\"A\",\"result\":{\"optimal_allocation\":{\"Paid Search\":30488,\"Paid Social\":19512},\"funnel_projections\":{\"p10\":673,\"mean\":691,\"p90\":710},\"disclaimer_present\":true}}]}",
+            "session_id": "8bb3a363-c5e0-4222-9e59-377164e5a633",
+            "stop_reason": "tool_use",
+            "structured_output": {
+              "cases": [
+                {
+                  "case_id": "A",
+                  "result": {
+                    "disclaimer_present": true,
+                    "funnel_projections": {
+                      "mean": 691,
+                      "p10": 673,
+                      "p90": 710
+                    },
+                    "optimal_allocation": {
+                      "Paid Search": 30488,
+                      "Paid Social": 19512
+                    }
+                  }
+                }
+              ]
+            },
+            "subagent_stats": {
+              "by_type": {},
+              "completed": 0,
+              "failed": 0,
+              "killed": {
+                "parent": 0,
+                "system": 0,
+                "user": 0
+              },
+              "max_depth": 0,
+              "refused": {
+                "budget": 0,
+                "concurrency_limit": 0,
+                "depth_limit": 0
+              },
+              "requested": {
+                "background": 0,
+                "foreground": 0,
+                "unset": 0
+              },
+              "spawned": 0,
+              "spawned_by_subagents": 0,
+              "started_in_background": 0
+            },
+            "subtype": "success",
+            "terminal_reason": "completed",
+            "time_to_request_ms": 12,
+            "total_cost_usd": 0.05458,
+            "ttft_ms": 44048,
+            "ttft_stream_ms": 1254,
+            "type": "result",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 2324,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 2324,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "not_available",
+              "input_tokens": 2,
+              "iterations": [
+                {
+                  "cache_creation": {
+                    "ephemeral_1h_input_tokens": 2324,
+                    "ephemeral_5m_input_tokens": 0
+                  },
+                  "cache_creation_input_tokens": 2324,
+                  "cache_read_input_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 4375,
+                  "type": "message"
+                }
+              ],
+              "output_tokens": 4375,
+              "output_tokens_details": {
+                "thinking_tokens": 4237
+              },
+              "server_tool_use": {
+                "web_fetch_requests": 0,
+                "web_search_requests": 0
+              },
+              "service_tier": "standard",
+              "speed": "standard"
+            },
+            "uuid": "c3f4d707-f769-45c9-a1e3-c2f264af28a6"
+          },
+          "requested_model": "claude-sonnet-5",
+          "resolved_model": "claude-sonnet-5",
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": true
+          },
+          "started_at": "2026-09-10T04:42:22.846116+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+          "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+          "transport": {
+            "command": [
+              "claude",
+              "--safe-mode",
+              "--no-session-persistence",
+              "--disable-slash-commands",
+              "--tools",
+              "",
+              "--strict-mcp-config",
+              "--mcp-config",
+              "{\"mcpServers\":{}}",
+              "--model",
+              "claude-sonnet-5",
+              "--output-format",
+              "json",
+              "--max-budget-usd",
+              "2",
+              "--json-schema"
+            ],
+            "elapsed_seconds": 45.548504,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "json_schema": true,
+              "max_budget_usd": 2,
+              "safe_mode": true,
+              "tools": false
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "claude-sonnet-5",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+            "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+            "transport_exit_code": 0
+          }
+        }
+      }
+    },
+    "qwen3:4b": {
+      "with-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": null,
+              "expected": true,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": false
+            }
+          ],
+          "completion_status": "transport_failure",
+          "context_sha256": "d6ae4dd81bcf4ec5797b57f1b699a8be3e023ea471ee57b0bc65824886dfa0f4",
+          "elapsed_seconds": 1.9e-05,
+          "errors": [
+            "transport_failure",
+            "model_identity_missing",
+            "invalid_structure"
+          ],
+          "finished_at": "2026-09-10T04:43:08.396259+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "num_ctx": 32768,
+            "num_predict": 8192,
+            "temperature": 0
+          },
+          "parsed": null,
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": null,
+          "requested_model": "qwen3:4b",
+          "resolved_model": null,
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": false
+          },
+          "started_at": "2026-09-10T04:43:08.396151+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+          "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+          "transport": {
+            "elapsed_seconds": 1.9e-05,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "num_ctx": 32768,
+              "num_predict": 8192,
+              "temperature": 0
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "qwen3:4b",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "RuntimeError: requested Ollama model unavailable or digest missing: qwen3:4b",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.\n\nSkill context files:\n--- SKILL.md ---\n---\nname: budget-scenario-planning\ndescription: Project marketing budget across a conversion funnel using Monte Carlo sampling, calibrate Hill-saturation curves from historical spend, and compare/backtest scenarios without claiming causal lift.\nlicense: MIT\nmetadata:\n  author: Riley Sorenson\n  version: \"0.1.0\"\n---\n\n# Budget Scenario Planning\n\nUse this skill when analyzing marketing budgets, forecasting outcomes, fitting Hill-saturation curves, projecting funnel performance using Monte Carlo sampling, or backtesting models against historical scenarios. \n\nThis skill provides a mathematically rigorous approach to marketing budget allocation, replacing flat multiplier forecasting with methods that account for diminishing returns and variance.\n\n## Core concepts & workflow\n\n1. **Calibrate**: Ingest historical weekly/monthly spend by channel alongside funnel outcomes.\n2. **Curve-fit**: Fit a Hill-saturation curve `f_c(x) = a_c * x / (b_c + x)` for each channel using the `a_c = 4 * \u03bc_c * \u03b2_c` heuristic to cap the upside of low-spend, high-return channels.\n3. **Project**: Given a total budget and timeframe, project the expected outcome across funnel stages.\n4. **Sample**: Run Monte Carlo simulations to generate p10 (conservative) and p90 (optimistic) bands.\n5. **Backtest**: Compare projected scenarios against historical hold-out periods to measure model error (e.g., RMSE, MAPE).\n\n## Mandatory constraints (Contract Boundaries)\n\n- **Unknown \u2260 Zero**: If historical spend data is missing for a period, treat it as a missing data point (gap), not as $0 spend.\n- **No allocator hallucination**: When asked to \"optimize\" or \"allocate\" a budget, you MUST use the Karush-Kuhn-Tucker (KKT) conditions on the Hill curves. DO NOT use a naive linear programming solver that dumps 100% of the budget into the single highest ROI channel. \n- **Strict framing**: Projections are observational estimates based on historical correlation. Explicitly communicate to the user that these are forecasts, NOT causal incrementality guarantees.\n- **Date alignment**: Funnel projection periods must cleanly map to the historical fit window.\n\n## Using the included artifacts\n\n- Consult `references/planning-math.md` for exact formulas (Hill calibration, KKT allocation, Monte Carlo sampling).\n- Use `scripts/run-budget-scenario.py` to project budgets deterministically.\n- Use `references/scenario-fixtures.json` to mock inputs or test the script.\n- Check `references/eval.md` and `references/eval-cases.json` for validation criteria and evaluation prompts.\n\n\n--- references/planning-math.md ---\n# Planning Math\n\nThis document defines the exact mathematical formulations used in the budget scenario planning skill.\n\n## 1. Hill-Saturation Curve\n\nFor any channel \\( c \\), the response curve relating spend \\( x \\) to conversions/outcomes \\( f_c(x) \\) is modeled using a Hill function:\n\n\\[ f_c(x) = \\frac{a_c \\cdot x}{b_c + x} \\]\n\nWhere:\n- \\( a_c \\) is the **asymptote** (the theoretical maximum return of the channel).\n- \\( b_c \\) is the **half-saturation point** (the spend level where the channel reaches \\( a_c / 2 \\)).\n\n### Calibration Heuristic\n\nGiven historical mean spend \\( \\mu_c \\) and historical marginal ROI \\( \\beta_c \\) (derived from observational regressions), we constrain the asymptote using the local calibration method:\n\n\\[ a_c = 4 \\cdot \\mu_c \\cdot \\beta_c \\]\n\nBy forcing \\( a_c = 4 \\mu_c \\beta_c \\), we ensure that low-spend channels with artificially high ROI cannot scale to infinity when the budget optimizer is run.\n\n## 2. KKT Allocation\n\nTo find the optimal budget distribution \\( x_1, x_2, \\dots, x_n \\) across \\( n \\) channels given a total budget \\( B \\), we maximize the total response:\n\n\\[ \\max \\sum_{c=1}^n \\frac{a_c \\cdot x_c}{b_c + x_c} \\]\n\nSubject to:\n\\[ \\sum_{c=1}^n x_c \\leq B \\]\n\\[ x_c \\geq 0 \\quad \\forall c \\]\n\nBy applying the Karush-Kuhn-Tucker (KKT) conditions, the optimal allocation occurs when the marginal return across all funded channels is equal to some constant \\( \\lambda \\):\n\n\\[ \\frac{\\partial f_c(x_c)}{\\partial x_c} = \\frac{a_c \\cdot b_c}{(b_c + x_c)^2} = \\lambda \\quad \\text{for } x_c > 0 \\]\n\nAnd for unfunded channels (\\( x_c = 0 \\)), their maximum marginal return is less than \\( \\lambda \\). An iterative numerical solver or gradient descent can determine \\( \\lambda \\) and the specific \\( x_c \\) values that exactly exhaust \\( B \\).\n\n## 3. Monte Carlo Sampling\n\nPoint estimates convey false precision. To communicate variance, we generate a funnel projection via Monte Carlo simulation with \\( N \\) draws.\n\nFor a specific spend scenario, let the expected outcome for a channel be \\( \\hat{y}_c = f_c(x_c) \\). \nAssume the historical error for the channel follows a normal distribution with standard deviation \\( \\sigma_c \\).\n\nFor each draw \\( i \\in \\{1, 2, \\dots, N\\} \\):\n1. Sample \\( \\epsilon_{c, i} \\sim \\mathcal{N}(0, \\sigma_c^2) \\).\n2. Calculate the simulated outcome: \\( y_{c, i} = \\max(0, \\hat{y}_c + \\epsilon_{c, i}) \\).\n\nAcross all channels, the total simulated outcome is:\n\\[ Y_i = \\sum_{c=1}^n y_{c, i} \\]\n\nThe resulting distribution of \\( Y_1, \\dots, Y_N \\) provides the confidence bands:\n- **p10**: The 10th percentile of \\( Y \\) (conservative band).\n- **mean**: The average of \\( Y \\).\n- **p90**: The 90th percentile of \\( Y \\) (optimistic band).\n",
+            "system_prompt_sha256": "31d623f77fe72c99ec9325c46de719389eed0cb7486d35d169757fbd6c4976db",
+            "transport_exit_code": 1
+          }
+        }
+      },
+      "without-skill": {
+        "scenario-projections": {
+          "cases_sha256": "751e7c90c7f05bb375c647099c1e1f5ceaaf5d9369a97713fb29fd8b5bd6e341",
+          "check_status": [
+            {
+              "actual": null,
+              "expected": true,
+              "op": "equals",
+              "passed": false,
+              "path": "/cases/0/result/disclaimer_present",
+              "present": false
+            },
+            {
+              "actual": null,
+              "expected": 500,
+              "op": "approximately",
+              "passed": false,
+              "path": "/cases/0/result/funnel_projections/mean",
+              "present": false
+            }
+          ],
+          "completion_status": "transport_failure",
+          "context_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "elapsed_seconds": 5e-06,
+          "errors": [
+            "transport_failure",
+            "model_identity_missing",
+            "invalid_structure"
+          ],
+          "finished_at": "2026-09-10T04:43:08.396877+00:00",
+          "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+          "model_digest": null,
+          "model_options": {
+            "num_ctx": 32768,
+            "num_predict": 8192,
+            "temperature": 0
+          },
+          "parsed": null,
+          "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+          "prompt_sha256": "f652a0de1e037db4348b4674355f65b897d485056e59be2a708a7e5c0e73cbf5",
+          "raw_envelope": null,
+          "requested_model": "qwen3:4b",
+          "resolved_model": null,
+          "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+          "schema_status": {
+            "errors": [],
+            "passed": false
+          },
+          "started_at": "2026-09-10T04:43:08.396815+00:00",
+          "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+          "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+          "transport": {
+            "elapsed_seconds": 5e-06,
+            "harness_hash": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+            "model_digest": null,
+            "model_options": {
+              "num_ctx": 32768,
+              "num_predict": 8192,
+              "temperature": 0
+            },
+            "prompt": "{\n  \"input\": {\n    \"cases\": [\n      {\n        \"case_id\": \"A\",\n        \"input\": {\n          \"historical_betas\": {\n            \"Paid Search\": 0.015,\n            \"Paid Social\": 0.012\n          },\n          \"historical_data\": [\n            {\n              \"channels\": {\n                \"Paid Search\": {\n                  \"spend\": 10000\n                },\n                \"Paid Social\": {\n                  \"spend\": 8000\n                }\n              }\n            }\n          ],\n          \"total_budget\": 50000\n        }\n      }\n    ]\n  },\n  \"output_schema\": {\n    \"properties\": {\n      \"cases\": {\n        \"items\": {\n          \"properties\": {\n            \"case_id\": {\n              \"type\": \"string\"\n            },\n            \"result\": {\n              \"properties\": {\n                \"disclaimer_present\": {\n                  \"type\": \"boolean\"\n                },\n                \"funnel_projections\": {\n                  \"type\": \"object\"\n                },\n                \"optimal_allocation\": {\n                  \"type\": \"object\"\n                }\n              },\n              \"type\": \"object\"\n            }\n          },\n          \"required\": [\n            \"case_id\",\n            \"result\"\n          ],\n          \"type\": \"object\"\n        },\n        \"type\": \"array\"\n      }\n    },\n    \"required\": [\n      \"cases\"\n    ],\n    \"type\": \"object\"\n  },\n  \"prompt\": \"Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\\n\\n# Evaluation output interface\\n\\nReturn exactly `{\\\"cases\\\":[{\\\"case_id\\\":\\\"\\u2026\\\",\\\"result\\\":\\u2026}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\\n\\nUse the $a_c = 4 \\\\mu_c \\\\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.\"\n}",
+            "requested_model": "qwen3:4b",
+            "schema_sha256": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2",
+            "stderr": "RuntimeError: requested Ollama model unavailable or digest missing: qwen3:4b",
+            "system_prompt": "Return exactly one JSON value conforming to the output schema. Use only the supplied input and instructions. Do not add markdown or explanations.",
+            "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+            "transport_exit_code": 1
+          }
+        }
+      }
+    }
+  },
+  "ollama_models": {
+    "qwen3:4b": {
+      "available_models": [],
+      "digest": null,
+      "name": null
+    }
+  },
+  "schema_hashes": {
+    "scenario-projections": "c84a4346059356a8acd16d2d6037fbeed4dc6457f32d55ba92d0133a5558b0c2"
+  },
+  "schema_version": 1,
+  "skill": "budget-scenario-planning",
+  "started_at": "2026-09-10T04:40:46.051331+00:00"
+}
