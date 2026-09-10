@@ -112,3 +112,4 @@ Every producer and consumer follows these norms:
 ## Definition of done
 
 The catalog is complete only when all twelve rows above have their required files, semantic tests, documentation, three-prompt evaluation matrices, and validation evidence; all shared artifacts agree; standalone installs work; public confidentiality checks pass; and the public repository is published with MIT licensing. No live result, model score, or runtime claim is recorded without evidence.
+| `budget-scenario-planning` | `skills/budget-scenario-planning/` | Completed | Project marketing budget using Monte Carlo sampling, calibrate Hill-saturation curves, and optimize using KKT allocation without claiming causal lift |
