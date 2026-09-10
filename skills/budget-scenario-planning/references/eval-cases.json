@@ -1,14 +1,70 @@
-[
-  {
-    "id": "eval-1-basic-projection",
-    "prompt": "Using the scenario fixtures, run the budget scenario script to project outcomes if we spend $50,000 next month split equally across Paid Search and Paid Social. Report the p10, mean, and p90 funnel projections."
-  },
-  {
-    "id": "eval-2-optimization",
-    "prompt": "We have $100,000 to spend next quarter. Determine the optimal allocation between our historical channels using the KKT allocator. Explain how the diminishing returns logic prevented the budget from going entirely to the channel with the highest initial ROI."
-  },
-  {
-    "id": "eval-3-missing-data-causality",
-    "prompt": "Our historical data for Q3 is missing spend details for Organic Social. How does the model handle this? Also, if we increase our total budget by 20% according to the model's projection, can we guarantee that revenue will increase by the projected amount? Frame the answer according to the skill's boundaries."
-  }
-]
+{
+  "context_files": [
+    "SKILL.md",
+    "references/planning-math.md"
+  ],
+  "groups": [
+    {
+      "id": "scenario-projections",
+      "prompt": "Apply the supplied historical evidence and budget to calculate the projected KKT allocations and funnel outcomes.\n\n# Evaluation output interface\n\nReturn exactly `{\"cases\":[{\"case_id\":\"…\",\"result\":…}]}` in input case order. For each case, return `optimal_allocation` (a key-value mapping of channel name to integer spend), `funnel_projections` (an object with keys 'p10', 'mean', and 'p90' for the 'Leads' stage only), and a `disclaimer_present` boolean.\n\nUse the $a_c = 4 \\mu_c \\beta_c$ heuristic and assume a standard deviation of 10 for all channels if not provided.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "total_budget": 50000,
+              "historical_data": [
+                {
+                  "channels": {
+                    "Paid Search": { "spend": 10000 },
+                    "Paid Social": { "spend": 8000 }
+                  }
+                }
+              ],
+              "historical_betas": {
+                "Paid Search": 0.015,
+                "Paid Social": 0.012
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "case_id": { "type": "string" },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "optimal_allocation": { "type": "object" },
+                    "funnel_projections": { "type": "object" },
+                    "disclaimer_present": { "type": "boolean" }
+                  }
+                }
+              },
+              "required": ["case_id", "result"]
+            }
+          }
+        },
+        "required": ["cases"]
+      },
+      "checks": [
+        {
+          "path": "/cases/0/result/disclaimer_present",
+          "op": "equals",
+          "expected": true
+        },
+        {
+          "path": "/cases/0/result/funnel_projections/mean",
+          "op": "approximately",
+          "expected": 500
+        }
+      ]
+    }
+  ]
+}
