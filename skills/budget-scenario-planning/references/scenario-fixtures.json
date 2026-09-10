@@ -1,0 +1,46 @@
+{
+  "historical_data": [
+    {
+      "period": "2026-01",
+      "channels": {
+        "Paid Search": { "spend": 10000, "conversions": 200 },
+        "Paid Social": { "spend": 8000, "conversions": 120 },
+        "Email": { "spend": 1000, "conversions": 50 }
+      },
+      "funnel": { "Leads": 370, "MQLs": 150, "Opportunities": 30, "Closed Won": 5 }
+    },
+    {
+      "period": "2026-02",
+      "channels": {
+        "Paid Search": { "spend": 12000, "conversions": 230 },
+        "Paid Social": { "spend": 9000, "conversions": 130 },
+        "Email": { "spend": null, "conversions": 40 }
+      },
+      "funnel": { "Leads": 400, "MQLs": 160, "Opportunities": 35, "Closed Won": 6 }
+    },
+    {
+      "period": "2026-03",
+      "channels": {
+        "Paid Search": { "spend": 15000, "conversions": 270 },
+        "Paid Social": { "spend": 11000, "conversions": 150 },
+        "Email": { "spend": 1200, "conversions": 55 }
+      },
+      "funnel": { "Leads": 475, "MQLs": 190, "Opportunities": 42, "Closed Won": 8 }
+    }
+  ],
+  "historical_betas": {
+    "Paid Search": 0.015,
+    "Paid Social": 0.012,
+    "Email": 0.040
+  },
+  "historical_sigmas": {
+    "Paid Search": 15,
+    "Paid Social": 10,
+    "Email": 5
+  },
+  "funnel_conversion_rates": {
+    "Leads_to_MQLs": 0.40,
+    "MQLs_to_Opps": 0.22,
+    "Opps_to_Won": 0.18
+  }
+}

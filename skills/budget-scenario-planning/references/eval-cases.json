@@ -1,0 +1,14 @@
+[
+  {
+    "id": "eval-1-basic-projection",
+    "prompt": "Using the scenario fixtures, run the budget scenario script to project outcomes if we spend $50,000 next month split equally across Paid Search and Paid Social. Report the p10, mean, and p90 funnel projections."
+  },
+  {
+    "id": "eval-2-optimization",
+    "prompt": "We have $100,000 to spend next quarter. Determine the optimal allocation between our historical channels using the KKT allocator. Explain how the diminishing returns logic prevented the budget from going entirely to the channel with the highest initial ROI."
+  },
+  {
+    "id": "eval-3-missing-data-causality",
+    "prompt": "Our historical data for Q3 is missing spend details for Organic Social. How does the model handle this? Also, if we increase our total budget by 20% according to the model's projection, can we guarantee that revenue will increase by the projected amount? Frame the answer according to the skill's boundaries."
+  }
+]
