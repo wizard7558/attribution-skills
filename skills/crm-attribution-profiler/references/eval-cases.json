@@ -1,0 +1,1987 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/api.md",
+    "scripts/profile.mjs"
+  ],
+  "groups": [
+    {
+      "id": "scoped-normalization",
+      "prompt": "Profile each supplied input independently using its policy. Return a snake_case result for every input keyed by its case_id, mapping candidate 0 to the candidate fields and root rowCounts.validInWindow and archetype to the corresponding output fields. Use null for undefined values. Do not execute code, use tools, infer missing fields, or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "Summer%252BSale"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "Summer%252BSale"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "other",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "AbC+123"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "id",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "id",
+                  "value": "AbC 123",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "D",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "Summer%252BSale"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "results"
+        ],
+        "properties": {
+          "results": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "properties": {
+              "A": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "B": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "C": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "D": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/results/A/verdict",
+          "op": "equals",
+          "expected": "propose"
+        },
+        {
+          "path": "/results/A/weighted_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/distinct_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/A/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/A/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/B/verdict",
+          "op": "equals",
+          "expected": "reject"
+        },
+        {
+          "path": "/results/B/weighted_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/distinct_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/C/verdict",
+          "op": "equals",
+          "expected": "reject"
+        },
+        {
+          "path": "/results/C/weighted_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/distinct_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/C/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/C/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/D/verdict",
+          "op": "equals",
+          "expected": "propose"
+        },
+        {
+          "path": "/results/D/weighted_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/D/distinct_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/D/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/D/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/D/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/D/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/D/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/D/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        }
+      ]
+    },
+    {
+      "id": "population-exclusions",
+      "prompt": "Profile each supplied input independently using its policy. Return a snake_case result for every input keyed by its case_id, mapping candidate 0 to the candidate fields and root rowCounts.validInWindow and archetype to the corresponding output fields. Use null for undefined values. Do not execute code, use tools, infer missing fields, or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "Apollo"
+                  },
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "valid"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "Apollo",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                },
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "valid",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "Summer%252BSale"
+                  },
+                  {
+                    "at": "2026-01-15T12:00:00",
+                    "property_utm_content": "bad"
+                  },
+                  {
+                    "at": "2026-02-30T00:00:00Z",
+                    "property_utm_content": "bad"
+                  },
+                  {
+                    "at": "2026-02-01T00:00:00Z"
+                  },
+                  {
+                    "at": "2025-12-31T23:59:59Z"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": []
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "results"
+        ],
+        "properties": {
+          "results": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "A",
+              "B",
+              "C"
+            ],
+            "properties": {
+              "A": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "B": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "C": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/results/A/verdict",
+          "op": "equals",
+          "expected": "propose"
+        },
+        {
+          "path": "/results/A/weighted_rate",
+          "op": "approximately",
+          "expected": 0.5,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/distinct_rate",
+          "op": "approximately",
+          "expected": 0.5,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/A/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/A/valid_in_window",
+          "op": "approximately",
+          "expected": 2,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/excluded_count",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/B/verdict",
+          "op": "equals",
+          "expected": "propose"
+        },
+        {
+          "path": "/results/B/weighted_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/distinct_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/C/verdict",
+          "op": "equals",
+          "expected": "capture_missing"
+        },
+        {
+          "path": "/results/C/weighted_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/distinct_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/populated_pct",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/C/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/C/valid_in_window",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        }
+      ]
+    },
+    {
+      "id": "temporal-archetypes",
+      "prompt": "Profile each supplied input independently using its policy. Return a snake_case result for every input keyed by its case_id, mapping candidate 0 to the candidate fields and root rowCounts.validInWindow and archetype to the corresponding output fields. Use null for undefined values. Do not execute code, use tools, infer missing fields, or include explanations.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-02T00:00:00Z",
+                    "property_utm_content": "0"
+                  },
+                  {
+                    "at": "2026-01-02T00:00:00Z",
+                    "property_utm_content": "1"
+                  },
+                  {
+                    "at": "2026-01-02T00:00:00Z",
+                    "property_utm_content": "2"
+                  },
+                  {
+                    "at": "2026-01-02T00:00:00Z",
+                    "property_utm_content": "3"
+                  },
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "property_utm_content": "summer sale"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "property_utm_content",
+                  "kind": "name",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              },
+              "recentWindow": {
+                "startInclusive": "2026-01-15T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              }
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "lead_source": "Apollo",
+                    "ip_address": "192.0.2.1",
+                    "property_gclid": "OpaquePaidSignal"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "lead_source",
+                  "kind": "enum",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "source": {
+                "source_system": "crm-system",
+                "source_scope": "crm-scope",
+                "timestampField": "at",
+                "rows": [
+                  {
+                    "at": "2026-01-15T12:00:00Z",
+                    "lead_source": "Apollo",
+                    "ip_address": "192.0.2.1"
+                  }
+                ]
+              },
+              "candidates": [
+                {
+                  "rawField": "lead_source",
+                  "kind": "enum",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "adHistory": [
+                {
+                  "source_system": "ad-system",
+                  "source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign",
+                  "key_kind": "name",
+                  "value": "summer sale",
+                  "observed_at": "2026-01-15T00:00:00Z"
+                }
+              ],
+              "ad_scope_bindings": [
+                {
+                  "crm_source_system": "crm-system",
+                  "crm_source_scope": "crm-scope",
+                  "ad_source_system": "ad-system",
+                  "ad_source_scope": "ad-scope",
+                  "platform": "meta",
+                  "entity_type": "campaign"
+                }
+              ],
+              "window": {
+                "startInclusive": "2026-01-01T00:00:00Z",
+                "endExclusive": "2026-02-01T00:00:00Z",
+                "timezone": "UTC"
+              },
+              "config": {
+                "thresholds": {
+                  "populationPctFloor": 1,
+                  "populationRowFloor": 20,
+                  "proposeWeighted": 0.5,
+                  "proposeDistinct": 0.7,
+                  "rejectExactFloor": 0.25,
+                  "preWindowDistinct": 0.7,
+                  "highWeighted": 0.75,
+                  "highDistinct": 0.9,
+                  "outboundDominanceFloor": 0.6
+                }
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "results"
+        ],
+        "properties": {
+          "results": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "A",
+              "B",
+              "C"
+            ],
+            "properties": {
+              "A": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "B": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "C": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "verdict",
+                  "weighted_rate",
+                  "distinct_rate",
+                  "populated_pct",
+                  "recent_distinct_rate",
+                  "archetype",
+                  "valid_in_window",
+                  "excluded_count",
+                  "logical_field"
+                ],
+                "properties": {
+                  "verdict": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weighted_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "populated_pct": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "recent_distinct_rate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "archetype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "valid_in_window": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "excluded_count": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "logical_field": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/results/A/verdict",
+          "op": "equals",
+          "expected": "pre_window"
+        },
+        {
+          "path": "/results/A/weighted_rate",
+          "op": "approximately",
+          "expected": 0.2,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/distinct_rate",
+          "op": "approximately",
+          "expected": 0.2,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/recent_distinct_rate",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/A/valid_in_window",
+          "op": "approximately",
+          "expected": 5,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/excluded_count",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/A/logical_field",
+          "op": "equals",
+          "expected": "utm_content"
+        },
+        {
+          "path": "/results/B/verdict",
+          "op": "equals",
+          "expected": "corroborate"
+        },
+        {
+          "path": "/results/B/weighted_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/distinct_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/archetype",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/B/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/excluded_count",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/B/logical_field",
+          "op": "equals",
+          "expected": "lead_source"
+        },
+        {
+          "path": "/results/C/verdict",
+          "op": "equals",
+          "expected": "corroborate"
+        },
+        {
+          "path": "/results/C/weighted_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/distinct_rate",
+          "op": "approximately",
+          "expected": 0,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/populated_pct",
+          "op": "approximately",
+          "expected": 100,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/recent_distinct_rate",
+          "op": "equals",
+          "expected": null
+        },
+        {
+          "path": "/results/C/archetype",
+          "op": "equals",
+          "expected": "outbound_bd"
+        },
+        {
+          "path": "/results/C/valid_in_window",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/excluded_count",
+          "op": "approximately",
+          "expected": 1,
+          "tolerance": 1e-9
+        },
+        {
+          "path": "/results/C/logical_field",
+          "op": "equals",
+          "expected": "lead_source"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Channel taxonomy model evaluation
 
+Superseded for manifest `1be1b437` by [eval-results-v2.md](eval-results-v2.md). This page retains the historical v1 matrix on manifest `5ef36ee675677b9f546a2cbc732fa82fc9e8b8b0c8e44aa9ad8d45608a2a9d27` unchanged.
+
 Run window: 2026-09-08T21:10:46.397458+00:00 to 2026-09-08T21:23:41.334991+00:00
 Current cases SHA-256: `5ef36ee675677b9f546a2cbc732fa82fc9e8b8b0c8e44aa9ad8d45608a2a9d27`
 Initial-format raw checkpoint: `eval-results-initial-format.json` (initial cases SHA-256 `4ee042c6e3bc28e825aabf6593d163a91b29443889973affd0995521dc770004`).

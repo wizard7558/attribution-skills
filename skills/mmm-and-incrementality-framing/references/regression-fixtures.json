@@ -1,0 +1,5964 @@
+{
+  "contract_version": "0.1.0",
+  "numeric_tolerance": {
+    "relative": 1e-09,
+    "absolute": 1e-10
+  },
+  "cases": [
+    {
+      "id": "exact-line-original-units",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "y=2+3x for x=0,1,2,3. Centered x is orthogonal to intercept; both standardized columns have norm2; rank2, df2, r2=1."
+    },
+    {
+      "id": "orthogonal-noise-known-fit",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 3,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 7,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 12,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 3,
+            "predicted": 2,
+            "residual": 1
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 4,
+            "predicted": 5,
+            "residual": -1
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 7,
+            "predicted": 8,
+            "residual": -1
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 12,
+            "predicted": 11,
+            "residual": 1
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 0.9183673469387755,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Residual [1,-1,-1,1] is orthogonal to both 1 and x. SSE4,TSS49; OLS remains intercept2,slope3,R2=45/49."
+    },
+    {
+      "id": "orthogonal-spend-and-control",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [
+            "Control+Case"
+          ],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 8
+            },
+            "controls": {
+              "Control+Case": -1
+            },
+            "outcome": 25,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 8
+            },
+            "controls": {
+              "Control+Case": 1
+            },
+            "outcome": 33,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 12
+            },
+            "controls": {
+              "Control+Case": -1
+            },
+            "outcome": 37,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 12
+            },
+            "controls": {
+              "Control+Case": 1
+            },
+            "outcome": 45,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [
+            "Control+Case"
+          ],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 5,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 10
+          }
+        ],
+        "control_coefficients": [
+          {
+            "key": "Control+Case",
+            "coefficient": 4
+          }
+        ],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 25,
+            "predicted": 25,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 33,
+            "predicted": 33,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 37,
+            "predicted": 37,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 45,
+            "predicted": 45,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 2,
+          "residual_df": 1,
+          "rank": 3,
+          "singular_values": [
+            2,
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "x=10+2a; control=b; a=(-1,-1,1,1), b=(-1,1,-1,1). Three mutually orthogonal standardized columns norm2. y=5+3x+4b."
+    },
+    {
+      "id": "negative-coefficient-not-clipped",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 10,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 6,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 10,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": -2,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 10,
+            "predicted": 10,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 6,
+            "predicted": 6,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 4,
+            "predicted": 4,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [
+            {
+              "kind": "channel",
+              "key": "Ads+Case"
+            }
+          ],
+          "flags": [
+            "negative_coefficients"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Exact line y=10-2x. Negative association must remain -2; clipping would change predictions and residuals."
+    },
+    {
+      "id": "spend-unit-rescaling",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 100
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 200
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 300
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 0.03,
+            "mean_spend": 150
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Multiplying x by100 divides its original-unit coefficient by100, leaving intercept2 and all predicted outcomes unchanged."
+    },
+    {
+      "id": "constant-outcome-analytic-fullrank",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 7,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 7,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 7,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 7,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 7,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 0,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 7,
+            "predicted": 7,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 7,
+            "predicted": 7,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 7,
+            "predicted": 7,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 7,
+            "predicted": 7,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "constant_outcome"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Exactly equal outcomes; full-rank intercept design has unique analytic intercept7, slope0, residual0. R2 undefined, not1."
+    },
+    {
+      "id": "intercept-only-baseline",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {},
+            "controls": {},
+            "outcome": 1,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {},
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {},
+            "controls": {},
+            "outcome": 3,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {},
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2.5,
+        "channel_coefficients": [],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 1,
+            "predicted": 2.5,
+            "residual": -1.5
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 2,
+            "predicted": 2.5,
+            "residual": -0.5
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 3,
+            "predicted": 2.5,
+            "residual": 0.5
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 4,
+            "predicted": 2.5,
+            "residual": 1.5
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 0,
+          "residual_df": 3,
+          "rank": 1,
+          "singular_values": [
+            2
+          ],
+          "condition_number": 1,
+          "r2": 0,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "intercept_only"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Empty predictor vectors are an intercept-only baseline: mean2.5, residualdf3, SSE=TSS, R2=0. No channel-effect estimates."
+    },
+    {
+      "id": "constant-intercept-only",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {},
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {},
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {},
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {},
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 5,
+        "channel_coefficients": [],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 0,
+          "residual_df": 3,
+          "rank": 1,
+          "singular_values": [
+            2
+          ],
+          "condition_number": 1,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "intercept_only",
+            "constant_outcome"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Intercept-only and exactly constant: intercept5, rank1, residualdf3, no coefficients, R2 null."
+    },
+    {
+      "id": "zero-variance-predictor",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 5
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 5
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 5
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 5
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "rank_deficient",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": 5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 1,
+          "singular_values": [
+            2,
+            0
+          ],
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [
+            {
+              "kind": "channel",
+              "key": "Ads+Case"
+            }
+          ],
+          "negative_coefficients": [],
+          "flags": [
+            "zero_variance_predictors",
+            "rank_deficient"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Standardized constant predictor is the zero column. Design singular values2,0 and rank1; no pseudoinverse coefficient claims."
+    },
+    {
+      "id": "perfect-collinearity",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "A",
+            "B"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "A": 0,
+              "B": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "A": 0,
+              "B": 0
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "A": 2,
+              "B": 4
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "A": 2,
+              "B": 4
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "A",
+            "B"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "rank_deficient",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "A",
+            "coefficient": null,
+            "mean_spend": 1
+          },
+          {
+            "key": "B",
+            "coefficient": null,
+            "mean_spend": 2
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 2,
+          "residual_df": 1,
+          "rank": 2,
+          "singular_values": [
+            2.8284271247461903,
+            2,
+            0
+          ],
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "rank_deficient"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "After standardization both predictor columns equal a=(-1,-1,1,1). Eigenvalues of XTX are8,4,0; rank2<3."
+    },
+    {
+      "id": "fullrank-condition-threshold",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "A",
+            "B"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 10
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "A": 0,
+              "B": 0.9
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "A": 0,
+              "B": 1.1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "A": 2,
+              "B": 2.9
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "A": 2,
+              "B": 3.1
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "A",
+            "B"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 10
+        },
+        "status": "ill_conditioned",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "A",
+            "coefficient": null,
+            "mean_spend": 1
+          },
+          {
+            "key": "B",
+            "coefficient": null,
+            "mean_spend": 2
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 2,
+          "residual_df": 1,
+          "rank": 3,
+          "singular_values": [
+            2.82491570862565,
+            2,
+            0.14089442558186233
+          ],
+          "condition_number": 20.04987562112115,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "ill_conditioned"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Standardized predictor correlation rho=1/sqrt(1.01). Singular values sqrt(4(1+rho)),2,sqrt(4(1-rho)); condition about20.05 exceeds declared10 despite full rank."
+    },
+    {
+      "id": "minimum-weeks",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 5,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 5,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "min_weeks_not_met"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Four complete weeks fall below declared minimum5; no fitting or means are computed."
+    },
+    {
+      "id": "minimum-residual-degrees",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 3,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 3,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "min_residual_df_not_met"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "n4 minus intercept+one predictor2 leaves df2, below declared3."
+    },
+    {
+      "id": "missing-week-never-dropped",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": null,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [
+            "2026-01-12"
+          ],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "missing_weeks"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Configured completed grid still has4 weeks. Missing week2 prevents a fit; its actual/predicted/residual fields remain null."
+    },
+    {
+      "id": "unknown-spend-never-zero-filled",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": null
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [
+            {
+              "week": "2026-01-12",
+              "fields": [
+                "spend:Ads+Case"
+              ]
+            }
+          ],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "unknown_required_values"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Explicit null spend is unknown; no zero fill and no dropping that week."
+    },
+    {
+      "id": "unknown-outcome-never-dropped",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": null,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": null,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [
+            {
+              "week": "2026-01-19",
+              "fields": [
+                "outcome"
+              ]
+            }
+          ],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "unknown_required_values"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Unknown selected outcome keeps all4 grid weeks visible and blocks OLS."
+    },
+    {
+      "id": "unknown-control-never-imputed",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [
+            "Control+Case"
+          ],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 8
+            },
+            "controls": {
+              "Control+Case": null
+            },
+            "outcome": 25,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 8
+            },
+            "controls": {
+              "Control+Case": 1
+            },
+            "outcome": 33,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 12
+            },
+            "controls": {
+              "Control+Case": -1
+            },
+            "outcome": 37,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 12
+            },
+            "controls": {
+              "Control+Case": 1
+            },
+            "outcome": 45,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [
+            "Control+Case"
+          ],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [
+          {
+            "key": "Control+Case",
+            "coefficient": null
+          }
+        ],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 25,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 33,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 37,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 45,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 2,
+          "residual_df": 1,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [
+            {
+              "week": "2026-01-05",
+              "fields": [
+                "controls:Control+Case"
+              ]
+            }
+          ],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "unknown_required_values"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "A null explicitly declared control blocks fitting, just like a missing outcome or spend."
+    },
+    {
+      "id": "identical-week-duplicate-collapses",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 1,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Identical raw weekly payload is idempotent; only4 observations are used."
+    },
+    {
+      "id": "row-permutation-deterministic",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Reversed raw order produces the same sorted weekly output and OLS design."
+    },
+    {
+      "id": "outside-window-unknown-row-excluded",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2025-12-29",
+            "spend": {
+              "Ads+Case": null
+            },
+            "controls": {},
+            "outcome": null,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [
+            "2025-12-29"
+          ],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "All raw fields are structurally validated; null outside-window values are excluded rather than included or zero filled."
+    },
+    {
+      "id": "completed-week-exact-dst-boundary",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T07:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-02-23",
+            "spend": {},
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-02",
+            "spend": {},
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-09",
+            "spend": {},
+            "controls": {},
+            "outcome": 1000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-16",
+            "spend": {},
+            "controls": {},
+            "outcome": 2000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T07:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 3,
+        "channel_coefficients": [],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-02-23",
+            "actual": 2,
+            "predicted": 3,
+            "residual": -1
+          },
+          {
+            "week": "2026-03-02",
+            "actual": 4,
+            "predicted": 3,
+            "residual": 1
+          }
+        ],
+        "diagnostics": {
+          "n": 2,
+          "p": 0,
+          "residual_df": 1,
+          "rank": 1,
+          "singular_values": [
+            1.4142135623730951
+          ],
+          "condition_number": 1,
+          "r2": 0,
+          "rcond": 4.440892098500626e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [
+            "2026-03-09",
+            "2026-03-16"
+          ],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "intercept_only"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Next Monday local midnight is07:00Z after the DST change. Exactly at that instant the second week is complete. Future provided values1000/2000 remain excluded."
+    },
+    {
+      "id": "incomplete-week-before-dst-boundary",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T06:59:59Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-02-23",
+            "spend": {},
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-02",
+            "spend": {},
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-09",
+            "spend": {},
+            "controls": {},
+            "outcome": 1000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-16",
+            "spend": {},
+            "controls": {},
+            "outcome": 2000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T06:59:59Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-02-23",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 1,
+          "p": 0,
+          "residual_df": 0,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 2.220446049250313e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [
+            "2026-03-02",
+            "2026-03-09",
+            "2026-03-16"
+          ],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "intercept_only",
+            "min_residual_df_not_met"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "One second before completion only the first week is complete; df0 cannot fit an intercept-only baseline with minimumdf1."
+    },
+    {
+      "id": "no-completed-weeks",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-01-05T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-01-05T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "insufficient_input",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [],
+        "diagnostics": {
+          "n": 0,
+          "p": 1,
+          "residual_df": -2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 4.440892098500626e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [
+            "2026-01-05",
+            "2026-01-12",
+            "2026-01-19",
+            "2026-01-26"
+          ],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "no_completed_weeks",
+            "min_weeks_not_met",
+            "min_residual_df_not_met"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "At the first week start, no configured week is complete; provided future outcomes cannot enter the model."
+    },
+    {
+      "id": "explicit-distinct-currency-units",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "revenue",
+          "spend_currency": "USD",
+          "outcome_currency": "EUR",
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": "EUR"
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": "EUR"
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": "EUR"
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": "EUR"
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "revenue",
+          "spend_currency": "USD",
+          "outcome_currency": "EUR",
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 2,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 3,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 8,
+            "predicted": 8,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 11,
+            "predicted": 11,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Declared outcome EUR and spend USD remain distinct units; coefficient3 is EUR per USD association, not a currency conversion or causal ROI."
+    },
+    {
+      "id": "declared-fractional-count-measure",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 0.5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 3.5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 0.5,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": 1.5,
+            "mean_spend": 1.5
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 0.5,
+            "predicted": 0.5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 2,
+            "predicted": 2,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 3.5,
+            "predicted": 3.5,
+            "residual": 0
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 5,
+            "predicted": 5,
+            "residual": 0
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": 1,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": []
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "A declared weighted count measure can be fractional: exact line0.5+1.5x with nonnegative outcomes."
+    },
+    {
+      "id": "original-unit-coefficient-overflow",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 0,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 5e-324
+            },
+            "controls": {},
+            "outcome": 1,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 1e-323
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 1.5e-323
+            },
+            "controls": {},
+            "outcome": 3,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "numerical_failure",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": 1e-323
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 0,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 1,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 2,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 3,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": 2,
+          "singular_values": [
+            2,
+            2
+          ],
+          "condition_number": 1,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "nonfinite_or_unstable_computation"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Finite subnormal spend values and unit-scale outcome require an unrepresentable original-unit slope. Standardized design is full rank, but no usable coefficients may escape."
+    },
+    {
+      "id": "float64-integer-precision-loss",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 100000000000000000001,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 100000000000000000002,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 100000000000000000003,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 100000000000000000004,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "numerical_failure",
+        "intercept": null,
+        "channel_coefficients": [
+          {
+            "key": "Ads+Case",
+            "coefficient": null,
+            "mean_spend": null
+          }
+        ],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-01-05",
+            "actual": 100000000000000000001,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-12",
+            "actual": 100000000000000000002,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-19",
+            "actual": 100000000000000000003,
+            "predicted": null,
+            "residual": null
+          },
+          {
+            "week": "2026-01-26",
+            "actual": 100000000000000000004,
+            "predicted": null,
+            "residual": null
+          }
+        ],
+        "diagnostics": {
+          "n": 4,
+          "p": 1,
+          "residual_df": 2,
+          "rank": null,
+          "singular_values": null,
+          "condition_number": null,
+          "r2": null,
+          "rcond": 8.881784197001252e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "float64_precision_loss"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "These distinct finite integers cannot be represented exactly in float64. They must not become an artificial constant outcome or misleading fit."
+    },
+    {
+      "id": "conflicting-week-duplicate",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 99,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Duplicate calendar identity with a conflicting declared payload must fail."
+    },
+    {
+      "id": "missing-vector-key",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {},
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Missing vector keys are structural errors; null must be explicit."
+    },
+    {
+      "id": "extra-vector-key",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0,
+              "Undeclared": 1
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Extra predictors cannot silently change the model."
+    },
+    {
+      "id": "bool-is-not-spend",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": true
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Boolean is not a numeric spend value."
+    },
+    {
+      "id": "negative-spend",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": -1
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Negative spend is invalid."
+    },
+    {
+      "id": "negative-outcome",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": -1,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Negative outcome is invalid."
+    },
+    {
+      "id": "wrong-spend-currency",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "EUR",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Every raw row must match the declared currency pair."
+    },
+    {
+      "id": "count-currency-not-null",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": "USD"
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Count outcomes have no monetary currency."
+    },
+    {
+      "id": "outside-row-still-validated",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2025-12-29",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "EUR",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Being outside the range cannot bypass raw-row structural validation."
+    },
+    {
+      "id": "non-monday-week",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-06",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Weekly identity is a Monday date."
+    },
+    {
+      "id": "invalid-calendar-date",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-02-30",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Invalid dates cannot normalize silently."
+    },
+    {
+      "id": "naive-asof",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "as_of must contain an explicit UTC offset or Z."
+    },
+    {
+      "id": "invalid-timezone",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "Mars/Base",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "ZoneInfo must resolve the explicitly named zone."
+    },
+    {
+      "id": "disjoint-predictor-keys",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [
+            "Ads+Case"
+          ],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Channel and control identities cannot overlap."
+    },
+    {
+      "id": "duplicate-channel-keys",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case",
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Declared predictor keys are unique."
+    },
+    {
+      "id": "invalid-min-weeks-bool",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": true,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Boolean cannot be an integer sample threshold."
+    },
+    {
+      "id": "invalid-condition-threshold",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Condition threshold must be finite and greater than1."
+    },
+    {
+      "id": "blank-scope",
+      "input": {
+        "config": {
+          "report_scope": " ",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Explicit scope identity is exact nonblank."
+    },
+    {
+      "id": "nan-outcome",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "NaN is structurally invalid, not an unknown null.",
+      "inject_nonfinite": {
+        "path": [
+          "rows",
+          0,
+          "outcome"
+        ],
+        "value": "nan"
+      }
+    },
+    {
+      "id": "infinite-outside-spend",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2025-12-29",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Infinity remains invalid even outside the selected range.",
+      "inject_nonfinite": {
+        "path": [
+          "rows",
+          0,
+          "spend",
+          "Ads+Case"
+        ],
+        "value": "inf"
+      }
+    },
+    {
+      "id": "invalid-offset-+0199",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00+01:99",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Offset hours/minutes require explicit validation before datetime parsing."
+    },
+    {
+      "id": "invalid-offset-+1401",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00+14:01",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Offset hours/minutes require explicit validation before datetime parsing."
+    },
+    {
+      "id": "invalid-offset-+2400",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00+24:00",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Offset hours/minutes require explicit validation before datetime parsing."
+    },
+    {
+      "id": "interior-control-report_scope",
+      "input": {
+        "config": {
+          "report_scope": "a\u0085b",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Even unused labels reject interior C0/C1 control characters."
+    },
+    {
+      "id": "interior-control-outcome_name",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "a\u0085b",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "Ads+Case"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Even unused labels reject interior C0/C1 control characters."
+    },
+    {
+      "id": "interior-control-predictor",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "UTC",
+          "start_week": "2026-01-05",
+          "end_week": "2026-01-26",
+          "as_of": "2026-02-02T00:00:00Z",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [
+            "A\u0000B"
+          ],
+          "control_keys": [],
+          "min_weeks": 4,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-01-05",
+            "spend": {
+              "Ads+Case": 0
+            },
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-12",
+            "spend": {
+              "Ads+Case": 1
+            },
+            "controls": {},
+            "outcome": 5,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-19",
+            "spend": {
+              "Ads+Case": 2
+            },
+            "controls": {},
+            "outcome": 8,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-01-26",
+            "spend": {
+              "Ads+Case": 3
+            },
+            "controls": {},
+            "outcome": 11,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected_error": "invalid weekly regression input",
+      "derivation": "Predictor identities reject interior C0 characters before vector use."
+    },
+    {
+      "id": "equivalent-offset-completion-boundary",
+      "input": {
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T00:00:00-07:00",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "rows": [
+          {
+            "week": "2026-02-23",
+            "spend": {},
+            "controls": {},
+            "outcome": 2,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-02",
+            "spend": {},
+            "controls": {},
+            "outcome": 4,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-09",
+            "spend": {},
+            "controls": {},
+            "outcome": 1000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          },
+          {
+            "week": "2026-03-16",
+            "spend": {},
+            "controls": {},
+            "outcome": 2000,
+            "spend_currency": "USD",
+            "outcome_currency": null
+          }
+        ]
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "config": {
+          "report_scope": "synthetic-weekly-population",
+          "timezone": "America/Los_Angeles",
+          "start_week": "2026-02-23",
+          "end_week": "2026-03-16",
+          "as_of": "2026-03-09T00:00:00-07:00",
+          "outcome_name": "declared_outcome",
+          "outcome_kind": "count",
+          "spend_currency": "USD",
+          "outcome_currency": null,
+          "channel_keys": [],
+          "control_keys": [],
+          "min_weeks": 1,
+          "min_residual_df": 1,
+          "max_condition_number": 1000000
+        },
+        "status": "fitted",
+        "intercept": 3,
+        "channel_coefficients": [],
+        "control_coefficients": [],
+        "weeks": [
+          {
+            "week": "2026-02-23",
+            "actual": 2,
+            "predicted": 3,
+            "residual": -1
+          },
+          {
+            "week": "2026-03-02",
+            "actual": 4,
+            "predicted": 3,
+            "residual": 1
+          }
+        ],
+        "diagnostics": {
+          "n": 2,
+          "p": 0,
+          "residual_df": 1,
+          "rank": 1,
+          "singular_values": [
+            1.4142135623730951
+          ],
+          "condition_number": 1,
+          "r2": 0,
+          "rcond": 4.440892098500626e-16,
+          "missing_weeks": [],
+          "missing_fields": [],
+          "excluded_outside_window": [],
+          "excluded_incomplete": [
+            "2026-03-09",
+            "2026-03-16"
+          ],
+          "duplicate_weeks_collapsed": 0,
+          "zero_variance_predictors": [],
+          "negative_coefficients": [],
+          "flags": [
+            "intercept_only"
+          ]
+        },
+        "limits": [
+          "observational_association",
+          "not_causal_lift",
+          "no_p_values_or_confidence_intervals",
+          "in_sample_fit_only"
+        ]
+      },
+      "derivation": "Explicit -07:00 equals07:00Z and includes exactly the same completed DST-boundary weeks."
+    }
+  ]
+}

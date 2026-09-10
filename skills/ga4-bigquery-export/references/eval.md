@@ -1,68 +1,45 @@
-# Evaluation prompts
+# Planned model evaluation
 
-Three prompts a reviewer can run against an agent with and without this skill loaded, each
-with a checklist of expected behaviors. Score each behavior pass/fail; the skill is working
-if the with-skill run passes every item and the without-skill run misses at least one.
+Measured model status: **14/18 usable**; four transport-failure cells remain outstanding supplements. Published results: [eval-results.json](eval-results.json), [eval-results.md](eval-results.md), and [eval-results-provenance.json](eval-results-provenance.json). The Fable `transactions-and-execution` without-skill cell was re-attempted 2026-09-09T20:06Z and still failed with `TimeoutExpired` at 300s; that n/a evidence is published separately in [eval-results-transport-supplement-fable-transactions-without.json](eval-results-transport-supplement-fable-transactions-without.json) (private evidence under `Downloads/completion-live-supplements-20260909T1300Z/`). Native SQL verification is recorded separately in [verification status](verification-status.md); it is not evidence of model performance.
 
-## Eval 1: "Give me sessions by channel for the last 7 days for property PROJECT.analytics_PROPERTY_ID."
+Exactly three groups are planned. Their identities and objectives are:
 
-Expected behavior:
-- [ ] Prunes the wildcard with `_TABLE_SUFFIX BETWEEN '<7-days-ago>' AND '<yesterday>'` (or
-      equivalent explicit date bounds) - never an unbounded `events_*` scan.
-- [ ] Builds the session key from both `user_pseudo_id` and `ga_session_id`
-      (`CONCAT(user_pseudo_id, '.', CAST(ga_session_id AS STRING))`), not `ga_session_id`
-      alone.
-- [ ] Uses `session_traffic_source_last_click` (or explicitly derives its own channel and
-      states why) rather than `traffic_source` for channel/session attribution.
-- [ ] Reads session source/medium from `cross_channel_campaign` (or uses
-      `default_channel_group`), not `manual_campaign`, so Direct sessions are not reported as
-      Unassigned.
-- [ ] Classifies medium `paid-social` as Paid Social, not Organic Social.
-- [ ] Does not select all raw columns from `events_*`; projection from reduced session CTEs is acceptable.
-- [ ] Caveats that the most recent 1-3 days may be incomplete because daily tables can land
-      up to 72 hours late, before presenting numbers for those days as final.
-- [ ] Sets or recommends a bytes cap (`--maximum_bytes_billed` / `maximumBytesBilled`) before
-      running, or dry-runs first.
+| Group identity | Objective |
+| --- | --- |
+| `sessions-and-source-evidence` | Apply the property-scoped local session key, scan-window limitations, deterministic whole-record native attribution and landing selection, canonical click/channel rules, observed engagement proxy and companion grouping/sample boundaries. |
+| `parameters-and-observation-boundaries` | Apply first-offset typed extraction including NULL and duplicates; distinguish raw page views/key-event occurrences, excluded identifiers, daily date-spine observations and bounded session spans without inferring consent, table existence or completeness. |
+| `transactions-and-execution` | Keep session/transaction channel revenue separate from qualified cross-date ecommerce payload deduplication, conflicts, unkeyed-window uncertainty and item offsets; apply exact rendering, daily pruning, byte caps, full pagination and same-handle resume. |
 
-## Eval 2: "Why doesn't my BigQuery purchase revenue match what the GA4 UI shows for last month?"
+The matrix is three groups × with-skill/without-skill × Fable 5.1, Sonnet 5 and Qwen3:4b = **18 cells; 14 complete, 4 transport failures (n/a)**. Outstanding cells: `claude-fable-5-1/without-skill/transactions-and-execution` (re-attempted 2026-09-09T20:06Z; still transport_failure n/a), `claude-sonnet-5/with-skill/transactions-and-execution`, `claude-sonnet-5/without-skill/sessions-and-source-evidence`, `claude-sonnet-5/without-skill/transactions-and-execution`. Sonnet 600s supplements remain in flight. The [manifest](eval-cases.json) has eight neutral A–H cases per group.
 
-Expected behavior:
-- [ ] Checks (or instructs the user to check) `ecommerce.purchase_revenue` vs.
-      `purchase_revenue_in_usd` and asks/states which currency the UI number is in, rather
-      than assuming a mismatch is a bug.
-- [ ] Dedupes purchases on `ecommerce.transaction_id` before summing revenue - flags
-      `COUNT(*)`/`SUM()` without a transaction_id dedupe as a likely cause if the raw query
-      didn't do this.
-- [ ] Runs (or recommends) the daily-table-completeness check
-      (`references/sql/ui_reconciliation.sql` check 1) for the queried window before
-      concluding there's a real discrepancy.
-- [ ] Mentions at least one of: HLL-based UI approximation, thresholding, modeled data, or
-      `(not set)` handling as a plausible source of small differences, without treating every
-      GA4 UI vs. BigQuery gap as an anomaly to be forced into exact agreement.
-- [ ] Does not silently assume the two numbers should match exactly.
+The context files are exactly [SKILL.md](../SKILL.md) and the [compact operational reference](evaluation-quick-reference.md). Each fixed prompt includes the shared and relevant group sections of the [output contract](evaluation-output-contract.md), identically in both conditions. The baseline receives the same prompt, raw pools, selectors and types-only schema, with no skill context. Expected values appear only in manifest checks and private test evidence. Fixture IDs, original native envelopes, identity-label mappings and source hashes remain outside model context. Visitor/order labels use a documented bijection that preserves NULL/blank keys and surrounding whitespace; URL, parameter, campaign and array evidence is unchanged. No unaided cryptographic or large numerical calculation is requested.
 
-## Eval 3: "Tag which sessions came from Google Ads using click IDs, for the current quarter."
+The compact projections cover all objectives above. Ecommerce omits repeated native bookkeeping and payload JSON from model answers while the full original reports remain in private derivation proof. Every array has a cardinality check; ordering is stated in terms of visible projection fields or explicit selector order. Native equal-timestamp session evidence field order is supplied explicitly. Monetary FLOAT64 scalars use absolute tolerance 1e-9; integer counts, strings, NULL and Boolean values are strict. The frozen shared scorer is version `2026-09-08.3`.
 
-Expected behavior:
-- [ ] Uses `collected_traffic_source.gclid` as the primary signal, not
-      `session_traffic_source_last_click` alone. Does not use `.dclid` for this - `dclid` is a
-      Campaign Manager 360 / Display & Video 360 click id (canonical Paid Other; native Display), not Google Ads
-      search, and should not be tagged as Google Ads search traffic.
-- [ ] Does not assume `gbraid`/`wbraid` exist as columns on `collected_traffic_source` -
-      either states they are not present as dedicated fields, or falls back to
-      `REGEXP_EXTRACT` on `page_location` for them.
-- [ ] Notes that `collected_traffic_source` is populated on the events that carried the
-      click ID, not backfilled across the whole session - so a plain per-event filter for
-      `gclid IS NOT NULL` needs to be selected at the first landing event and rolled up to the session key; later click IDs must not silently change session attribution.
-- [ ] For a "current quarter" window (likely >1 week), dry-runs the query or explicitly
-      warns about scan size before running, per the cost/safety checklist.
-- [ ] Filters `_TABLE_SUFFIX` to the quarter's date range, not an open-ended wildcard.
+From the repository root:
 
-## Integration regressions
+```bash
+# Deterministic freshness, actual frozen scorer, wrapper mocks and standalone proof.
+node skills/ga4-bigquery-export/scripts/test-eval-manifest.mjs
+# NO SQL EXECUTED; no model calls.
 
-Run `bash scripts/run_checks.sh --synthetic` to execute both actual query templates against
-synthetic nested GA4 events. Assertions cover all canonical classifier fixtures, conflicting
-paid IDs and email, all 13 retained click-ID fields, direct versus unknown, first-landing
-selection versus later clicks, coherent campaign fields, cross-midnight sessions, canonical
-native-label aggregation, multiple purchases/key events, transaction duplicates, partial
-unknown revenue, unkeyed purchase visibility, URL fragments, and encoded query keys. This is deterministic integration validation, not a new model evaluation.
+# Rebuild only the manifest after an authorized definition change, then check it.
+node skills/ga4-bigquery-export/scripts/test-eval-manifest.mjs --write
+```
+
+Optional `--native-index PATH` audits existing private native reports from disk, including their exact query/source/fixture/runner hashes, raw envelopes and complete retained outputs. It makes no API or BigQuery calls. `--evidence NEW_PATH` writes an exclusive private review report. A copied skill can set `GA4_EVAL_HARNESS` to the frozen shared harness; Python 3 with optional `tiktoken` and Node.js 20+ are needed. Without tiktoken, token estimates use a disclosed conservative byte heuristic and the same size guards.
+
+The accepted native sources underpin 43 retained synthetic jobs in the offline audit; this is reinspection, not 43 new queries. Actual production wrapper validation, nested decoding, pagination and same-handle resume are exercised with clearly labeled offline transport mocks. No second JavaScript session or ecommerce engine generates expected answers.
+
+The three groups have 341, 252 and 451 checks (1,044 total). Expected output estimates are 3,380, 2,892 and 4,425 tokens using cl100k as an estimate, not the actual model tokenizer. The runner enforces estimated request+context+8,192 ≤28,000 and expected output ≤5,000, leaving formatting margin within the 32,768 context/8,192 output configuration. Exact current estimates and all hashes are retained in the private review report.
+
+After explicit review and authorization, the live command is:
+
+```bash
+python3 scripts/run-skill-evals.py --run --skill skills/ga4-bigquery-export \
+  --models claude-fable-5-1 claude-sonnet-5 qwen3:4b --condition both \
+  --groups sessions-and-source-evidence parameters-and-observation-boundaries transactions-and-execution \
+  --output "$HOME/Downloads/ga4-model-evaluation.json"
+```
+
+This command has **not** been run. Resolve the actual CLI/model identities and owned local model server settings before calls. Report raw scores and completion/errors for both conditions; transport timeouts are unresolved attempts, not zero-knowledge answers. Do not require a baseline failure or infer general model ranking, UI parity or customer completeness from these synthetic cases.

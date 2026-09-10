@@ -1,0 +1,5370 @@
+{
+  "contract_version": "0.1.0",
+  "derivation": "Literal numerators, bounds, group members and parity differences were authored independently. Helpers serialize fixed expectations; no SQL result or independent check engine generates expected outcomes.",
+  "schemas": {
+    "unmapped": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING",
+        "source_complete": "BOOL",
+        "threshold": "NUMERIC",
+        "min_eligible_count": "INT64"
+      },
+      "membership_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING"
+      },
+      "source_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "record_key": "STRING",
+        "included": "BOOL",
+        "eligible": "BOOL",
+        "meets_condition": "BOOL"
+      }
+    },
+    "match": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING",
+        "source_complete": "BOOL",
+        "threshold": "NUMERIC",
+        "min_eligible_count": "INT64"
+      },
+      "membership_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING"
+      },
+      "source_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "record_key": "STRING",
+        "included": "BOOL",
+        "eligible": "BOOL",
+        "meets_condition": "BOOL"
+      }
+    },
+    "primary": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING",
+        "source_complete": "BOOL"
+      },
+      "membership_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING"
+      },
+      "source_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "record_key": "STRING",
+        "included": "BOOL",
+        "group_key": "STRING",
+        "is_attribution_primary": "BOOL"
+      }
+    },
+    "parity": {
+      "configuration_input": {
+        "invocation_key": "STRING",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "report_start": "DATE",
+        "report_end": "DATE",
+        "date_mode": "STRING",
+        "source_evidence_ref": "STRING",
+        "report_evidence_ref": "STRING",
+        "metric_name": "STRING",
+        "unit": "STRING",
+        "abs_tolerance": "NUMERIC",
+        "relative_tolerance": "NUMERIC"
+      },
+      "membership_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "reference_complete": "BOOL",
+        "observed_complete": "BOOL",
+        "reference_evidence_ref": "STRING",
+        "observed_evidence_ref": "STRING"
+      },
+      "reference_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "event_date": "DATE",
+        "count": "INT64",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "date_mode": "STRING",
+        "metric_name": "STRING"
+      },
+      "observed_input": {
+        "invocation_key": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "event_date": "DATE",
+        "count": "INT64",
+        "report_scope": "STRING",
+        "report_timezone": "STRING",
+        "date_mode": "STRING",
+        "metric_name": "STRING"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "unmapped-baseline",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "0",
+            "false_count": "1",
+            "unknown_count": "0",
+            "point_rate": "0",
+            "lower_rate": "0",
+            "upper_rate": "0",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-baseline",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": "1",
+            "lower_rate": "1",
+            "upper_rate": "1",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "unmapped-equal-threshold",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-equal-threshold",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "1",
+            "false_count": "1",
+            "unknown_count": "0",
+            "point_rate": "0.5",
+            "lower_rate": "0.5",
+            "upper_rate": "0.5",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "unmapped-outside-threshold",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.999999999",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-outside-threshold",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.999999999",
+          "min_eligible_count": "1"
+        },
+        "status": "fail",
+        "reasons": [
+          "rate_above_maximum"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": "1",
+            "lower_rate": "1",
+            "upper_rate": "1",
+            "unknown_conditions_present": false,
+            "status": "fail",
+            "reasons": [
+              "rate_above_maximum"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "unmapped-unknown-proves-pass",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-unknown-proves-pass",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "0",
+            "false_count": "1",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0",
+            "upper_rate": "0.5",
+            "unknown_conditions_present": true,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "unmapped-unknown-proves-fail",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.25",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-unknown-proves-fail",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.25",
+          "min_eligible_count": "1"
+        },
+        "status": "fail",
+        "reasons": [
+          "rate_above_maximum"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0.5",
+            "upper_rate": "1",
+            "unknown_conditions_present": true,
+            "status": "fail",
+            "reasons": [
+              "rate_above_maximum"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "unmapped-uncertain-interval",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "unmapped-uncertain-interval",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "unknown",
+        "reasons": [
+          "condition_uncertainty"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "0",
+            "false_count": "0",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0",
+            "upper_rate": "1",
+            "unknown_conditions_present": true,
+            "status": "unknown",
+            "reasons": [
+              "condition_uncertainty"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-equal-threshold",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-equal-threshold",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "1",
+            "false_count": "1",
+            "unknown_count": "0",
+            "point_rate": "0.5",
+            "lower_rate": "0.5",
+            "upper_rate": "0.5",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-outside-threshold",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.000000001",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-outside-threshold",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.000000001",
+          "min_eligible_count": "1"
+        },
+        "status": "fail",
+        "reasons": [
+          "rate_below_minimum"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "0",
+            "false_count": "1",
+            "unknown_count": "0",
+            "point_rate": "0",
+            "lower_rate": "0",
+            "upper_rate": "0",
+            "unknown_conditions_present": false,
+            "status": "fail",
+            "reasons": [
+              "rate_below_minimum"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-unknown-proves-pass",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-unknown-proves-pass",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0.5",
+            "upper_rate": "1",
+            "unknown_conditions_present": true,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-unknown-proves-fail",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.75",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-unknown-proves-fail",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.75",
+          "min_eligible_count": "1"
+        },
+        "status": "fail",
+        "reasons": [
+          "rate_below_minimum"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "2",
+            "true_count": "0",
+            "false_count": "1",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0",
+            "upper_rate": "0.5",
+            "unknown_conditions_present": true,
+            "status": "fail",
+            "reasons": [
+              "rate_below_minimum"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "match-uncertain-interval",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": null
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "match-uncertain-interval",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "unknown",
+        "reasons": [
+          "condition_uncertainty"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "0",
+            "false_count": "0",
+            "unknown_count": "1",
+            "point_rate": null,
+            "lower_rate": "0",
+            "upper_rate": "1",
+            "unknown_conditions_present": true,
+            "status": "unknown",
+            "reasons": [
+              "condition_uncertainty"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "rate-empty",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": []
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "rate-empty",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "unknown",
+        "reasons": [
+          "no_eligible_records"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "0",
+            "true_count": "0",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": null,
+            "lower_rate": null,
+            "upper_rate": null,
+            "unknown_conditions_present": false,
+            "status": "unknown",
+            "reasons": [
+              "no_eligible_records"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "rate-below-minimum",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 2
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "rate-below-minimum",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "2"
+        },
+        "status": "unknown",
+        "reasons": [
+          "below_minimum_eligible_count"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": "1",
+            "lower_rate": "1",
+            "upper_rate": "1",
+            "unknown_conditions_present": false,
+            "status": "unknown",
+            "reasons": [
+              "below_minimum_eligible_count"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "rate-incomplete-cannot-prove-fail",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "rate-incomplete-cannot-prove-fail",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": "1",
+            "lower_rate": "1",
+            "upper_rate": "1",
+            "unknown_conditions_present": false,
+            "status": "unknown",
+            "reasons": [
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    {
+      "id": "rate-qualified-selection-dedup",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": false,
+            "eligible": true,
+            "meets_condition": false
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "C",
+            "included": true,
+            "eligible": false,
+            "meets_condition": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "record_key": "A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "rate-qualified-selection-dedup",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "1",
+            "true_count": "1",
+            "false_count": "0",
+            "unknown_count": "0",
+            "point_rate": "1",
+            "lower_rate": "1",
+            "upper_rate": "1",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "5",
+          "source_duplicate_rows_collapsed": "1",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "1",
+          "source_excluded_rows": "1",
+          "ineligible_rows": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-baseline",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "Click+Case",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "Record+A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "Record+A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-one-per-group",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-one-per-group",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "G",
+            "singleton_record_key": null,
+            "member_count": "2",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-multiple-partial",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-multiple-partial",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "fail",
+        "reasons": [
+          "multiple_primary",
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "G",
+            "singleton_record_key": null,
+            "member_count": "2",
+            "primary_count": "2",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "multiple_primary",
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "2",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "2",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-zero-true",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-zero-true",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "fail",
+        "reasons": [
+          "missing_primary"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "G",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "0",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [],
+            "status": "fail",
+            "reasons": [
+              "missing_primary"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-zero-false",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": "G",
+            "is_attribution_primary": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-zero-false",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "G",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "0",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [],
+            "status": "unknown",
+            "reasons": [
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-one-group-partial",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-one-group-partial",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "Click+Case",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "Record+A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "Record+A"
+              }
+            ],
+            "status": "unknown",
+            "reasons": [
+              "source_incomplete"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-singleton-partial-true",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": null,
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-singleton-partial-true",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "A",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-singleton-partial-false",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": null,
+            "is_attribution_primary": false
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-singleton-partial-false",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "fail",
+        "reasons": [
+          "singleton_not_primary",
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "A",
+            "member_count": "1",
+            "primary_count": "0",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [],
+            "status": "fail",
+            "reasons": [
+              "singleton_not_primary"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "1",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "1",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "primary-empty-true",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": []
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-empty-true",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "primary-empty-false",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": []
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-empty-false",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": false
+        },
+        "status": "unknown",
+        "reasons": [
+          "source_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [],
+        "diagnostics": {
+          "source_raw_rows": "0",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "0",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "primary-tagged-opaque-qualified",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": null,
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "B",
+            "included": true,
+            "group_key": "A",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "record_key": "A",
+            "included": true,
+            "group_key": "A",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "C",
+            "included": true,
+            "group_key": "a",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "D",
+            "included": true,
+            "group_key": "A+",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A",
+            "included": true,
+            "group_key": null,
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "primary-tagged-opaque-qualified",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "A",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "A+",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "a",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "A",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "group_type": "declared",
+            "group_key": "A",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "6",
+          "source_duplicate_rows_collapsed": "1",
+          "source_selected_rows": "5",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "5"
+        }
+      }
+    },
+    {
+      "id": "parity-baseline",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-baseline",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "2",
+            "observed_count": "2",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-full-empty-grid",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-02",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [],
+        "observed": []
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-full-empty-grid",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-02",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": false,
+            "observed_present": false,
+            "reference_count": "0",
+            "observed_count": "0",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-02",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": false,
+            "observed_present": false,
+            "reference_count": "0",
+            "observed_count": "0",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "0",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "0",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "0",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "0",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "2",
+          "missing_reference_groups": "2",
+          "missing_observed_groups": "2"
+        }
+      }
+    },
+    {
+      "id": "parity-complete-missing-fails",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": []
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-complete-missing-fails",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "count_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": false,
+            "reference_count": "2",
+            "observed_count": "0",
+            "difference": "-2",
+            "allowed_difference": "0",
+            "status": "fail",
+            "reasons": [
+              "count_mismatch"
+            ],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "0",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "0",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "1"
+        }
+      }
+    },
+    {
+      "id": "parity-incomplete-missing-unknown",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": false,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-incomplete-missing-unknown",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "unknown",
+        "reasons": [
+          "reference_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": false,
+            "observed_complete": true,
+            "reference_present": false,
+            "observed_present": true,
+            "reference_count": null,
+            "observed_count": "2",
+            "difference": null,
+            "allowed_difference": null,
+            "status": "unknown",
+            "reasons": [
+              "reference_incomplete"
+            ],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "0",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "0",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "1",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-absolute-boundary",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "1",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 10,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 11,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-absolute-boundary",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "1",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "10",
+            "observed_count": "11",
+            "difference": "1",
+            "allowed_difference": "1",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-relative-boundary",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0.1"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 10,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 11,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-relative-boundary",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0.1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "10",
+            "observed_count": "11",
+            "difference": "1",
+            "allowed_difference": "1",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-outside-boundary",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0.999999999",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-outside-boundary",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0.999999999",
+          "relative_tolerance": "0"
+        },
+        "status": "fail",
+        "reasons": [
+          "count_mismatch"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "2",
+            "observed_count": "3",
+            "difference": "1",
+            "allowed_difference": "0.999999999",
+            "status": "fail",
+            "reasons": [
+              "count_mismatch"
+            ],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-observed-partial-visible",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": false,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 8,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-observed-partial-visible",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "unknown",
+        "reasons": [
+          "observed_incomplete"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": false,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "2",
+            "observed_count": "8",
+            "difference": "6",
+            "allowed_difference": "0",
+            "status": "unknown",
+            "reasons": [
+              "observed_incomplete"
+            ],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "1",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "1",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "1",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "1",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "1",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "parity-qualified-and-raw-dedup",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-b",
+            "observed_evidence_ref": "observed-b"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-c",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2025-12-31",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "parity-qualified-and-raw-dedup",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "2",
+            "observed_count": "2",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "3",
+            "observed_count": "3",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-b",
+              "observed-b"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "3",
+          "reference_duplicate_rows_collapsed": "1",
+          "reference_selected_rows": "2",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "4",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "2",
+          "observed_nonmember_rows": "1",
+          "observed_excluded_rows": "1",
+          "compared_groups": "2",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    },
+    {
+      "id": "bad-rate-threshold",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "1.1",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expectedError": "invalid rate configuration"
+    },
+    {
+      "id": "bad-rate-minimum",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 0
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expectedError": "invalid rate configuration"
+    },
+    {
+      "id": "bad-eligibility",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": null,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expectedError": "invalid eligibility evidence"
+    },
+    {
+      "id": "bad-rate-conflict",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expectedError": "conflicting qualified source record"
+    },
+    {
+      "id": "bad-empty-rate-type",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": []
+      },
+      "expectedError": "invalid input column types",
+      "type_overrides": {
+        "source_input": {
+          "meets_condition": "INT64"
+        }
+      }
+    },
+    {
+      "id": "bad-primary-null",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": null
+          }
+        ]
+      },
+      "expectedError": "invalid primary evidence"
+    },
+    {
+      "id": "bad-group-identity",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": " G ",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expectedError": "invalid primary evidence"
+    },
+    {
+      "id": "bad-primary-conflict",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "group_key": "different",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expectedError": "conflicting qualified source record"
+    },
+    {
+      "id": "bad-parity-metadata",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "other",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expectedError": "invalid parity evidence"
+    },
+    {
+      "id": "bad-negative-count",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": -1,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expectedError": "invalid parity evidence"
+    },
+    {
+      "id": "bad-count-conflict",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 3,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expectedError": "conflicting qualified count record"
+    },
+    {
+      "id": "bad-empty-count-type",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": []
+      },
+      "expectedError": "invalid input column types",
+      "type_overrides": {
+        "observed_input": {
+          "count": "NUMERIC"
+        }
+      }
+    },
+    {
+      "id": "bad-membership-conflict",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": false,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expectedError": "conflicting source membership"
+    },
+    {
+      "id": "bad-empty-membership",
+      "check": "match",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": true
+          }
+        ]
+      },
+      "expectedError": "source membership is required"
+    },
+    {
+      "id": "bad-timezone",
+      "check": "unmapped",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "+01:00",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": 1
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "Record+A",
+            "included": true,
+            "eligible": true,
+            "meets_condition": false
+          }
+        ]
+      },
+      "expectedError": "invalid invocation configuration"
+    },
+    {
+      "id": "bad-calendar-date",
+      "check": "parity",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-02-30",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_evidence_ref": "reference-a",
+            "observed_evidence_ref": "observed-a"
+          }
+        ],
+        "reference": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ],
+        "observed": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "count": 2,
+            "report_scope": "synthetic-window",
+            "report_timezone": "UTC",
+            "date_mode": "cohort",
+            "metric_name": "leads"
+          }
+        ]
+      },
+      "expectedError": "Invalid date:"
+    },
+    {
+      "id": "bad-control-key",
+      "check": "primary",
+      "input": {
+        "configuration": {
+          "invocation_key": "synthetic-check",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "membership": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a"
+          }
+        ],
+        "source": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "record_key": "A\u0001B",
+            "included": true,
+            "group_key": "Click+Case",
+            "is_attribution_primary": true
+          }
+        ]
+      },
+      "expectedError": "invalid qualified source record"
+    }
+  ],
+  "integration": {
+    "input": {
+      "leads": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "A",
+          "created_at": "2026-01-01T00:00:00Z",
+          "click_ids": {
+            "gclid": "Shared+Case"
+          },
+          "utm_content": "Ad+A"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "B",
+          "created_at": "2026-01-01T00:00:00Z",
+          "first_touch": {
+            "click_ids": {
+              "gclid": "Shared%2BCase"
+            }
+          }
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b",
+          "lead_key": "A",
+          "created_at": "2026-01-01T00:00:00Z",
+          "click_ids": {
+            "gclid": "Shared+Case"
+          }
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "C",
+          "created_at": "2026-01-01T00:00:00Z",
+          "utm_source": "mystery"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "D",
+          "created_at": "2026-01-01T00:00:00Z"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "E",
+          "created_at": "2026-01-01T00:00:00Z",
+          "utm_source": "google",
+          "utm_medium": "cpc",
+          "utm_content": "Ad+A"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "F",
+          "created_at": "2026-01-01T00:00:00Z",
+          "utm_source": "newsletter",
+          "utm_medium": "email"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "lead_key": "G",
+          "created_at": "2026-01-01T00:00:00Z",
+          "utm_source": "google",
+          "utm_medium": "organic"
+        }
+      ],
+      "options": {
+        "source_map": [
+          {
+            "utm_source": "google",
+            "utm_medium": "cpc",
+            "channel": "Paid Search",
+            "network_id": "google_ads"
+          }
+        ],
+        "ad_catalog": [
+          {
+            "source_system": "synthetic_ads",
+            "source_scope": "ads-a",
+            "network_id": "google_ads",
+            "ad_key": "Ad+A",
+            "campaign_key": "Campaign+Case",
+            "ad_name": "Creative"
+          }
+        ],
+        "ad_scope_bindings": [
+          {
+            "crm_source_system": "synthetic_crm",
+            "crm_source_scope": "crm-a",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "ads-a",
+            "platform": "google_ads",
+            "entity_type": "ad"
+          }
+        ]
+      }
+    },
+    "expectedProjection": [
+      {
+        "lead_key": "A",
+        "source_scope": "crm-a",
+        "channel": "Paid Search",
+        "quality_status": "matched",
+        "ad_match_status": "matched",
+        "confidence": "HIGH",
+        "match_key": "gclid",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "B",
+        "source_scope": "crm-a",
+        "channel": "Paid Search",
+        "quality_status": "matched",
+        "ad_match_status": "unmatched",
+        "confidence": "LOW",
+        "match_key": "gclid",
+        "is_attribution_primary": false
+      },
+      {
+        "lead_key": "A",
+        "source_scope": "crm-b",
+        "channel": "Paid Search",
+        "quality_status": "matched",
+        "ad_match_status": "unmatched",
+        "confidence": "HIGH",
+        "match_key": "gclid",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "C",
+        "source_scope": "crm-a",
+        "channel": "Other",
+        "quality_status": "unmapped",
+        "ad_match_status": "unmatched",
+        "confidence": "UNMATCHED",
+        "match_key": "utm_source",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "D",
+        "source_scope": "crm-a",
+        "channel": "Other",
+        "quality_status": "unattributed",
+        "ad_match_status": "unmatched",
+        "confidence": "UNMATCHED",
+        "match_key": "none",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "E",
+        "source_scope": "crm-a",
+        "channel": "Paid Search",
+        "quality_status": "matched",
+        "ad_match_status": "matched",
+        "confidence": "MEDIUM",
+        "match_key": "utm_source",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "F",
+        "source_scope": "crm-a",
+        "channel": "Email",
+        "quality_status": "matched",
+        "ad_match_status": "unmatched",
+        "confidence": "MEDIUM",
+        "match_key": "utm_source",
+        "is_attribution_primary": true
+      },
+      {
+        "lead_key": "G",
+        "source_scope": "crm-a",
+        "channel": "Organic Search",
+        "quality_status": "matched",
+        "ad_match_status": "unmatched",
+        "confidence": "MEDIUM",
+        "match_key": "utm_source",
+        "is_attribution_primary": true
+      }
+    ],
+    "unmapped": {
+      "configuration": {
+        "invocation_key": "synthetic-check",
+        "report_scope": "synthetic-window",
+        "report_timezone": "UTC",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-source",
+        "report_evidence_ref": "synthetic-report",
+        "source_complete": true,
+        "threshold": "0.5",
+        "min_eligible_count": 1
+      },
+      "membership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b"
+        }
+      ],
+      "expected": {
+        "check_id": "unmapped_share",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-crm-unmapped",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "8",
+            "true_count": "2",
+            "false_count": "6",
+            "unknown_count": "0",
+            "point_rate": "0.25",
+            "lower_rate": "0.25",
+            "upper_rate": "0.25",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "8",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "8",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "0"
+        }
+      }
+    },
+    "match": {
+      "configuration": {
+        "invocation_key": "synthetic-check",
+        "report_scope": "synthetic-window",
+        "report_timezone": "UTC",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-source",
+        "report_evidence_ref": "synthetic-report",
+        "source_complete": true,
+        "threshold": "0.5",
+        "min_eligible_count": 1
+      },
+      "membership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b"
+        }
+      ],
+      "expected": {
+        "check_id": "match_rate",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-crm-match",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true,
+          "threshold": "0.5",
+          "min_eligible_count": "1"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "eligible_count": "4",
+            "true_count": "2",
+            "false_count": "2",
+            "unknown_count": "0",
+            "point_rate": "0.5",
+            "lower_rate": "0.5",
+            "upper_rate": "0.5",
+            "unknown_conditions_present": false,
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "8",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "8",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "ineligible_rows": "4"
+        }
+      }
+    },
+    "primary": {
+      "configuration": {
+        "invocation_key": "synthetic-check",
+        "report_scope": "synthetic-window",
+        "report_timezone": "UTC",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-source",
+        "report_evidence_ref": "synthetic-report",
+        "source_complete": true
+      },
+      "membership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b"
+        }
+      ],
+      "expected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-crm-primary",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "[\"gclid\",\"Shared+Case\"]",
+            "singleton_record_key": null,
+            "member_count": "2",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "C",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "D",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "E",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "E"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "E"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "F",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "F"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "F"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "G",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "G"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "G"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "group_type": "declared",
+            "group_key": "[\"gclid\",\"Shared+Case\"]",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "8",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "8",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "7"
+        }
+      },
+      "corruptedExpected": {
+        "check_id": "primary_uniqueness",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-crm-primary-corrupted",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "source_complete": true
+        },
+        "status": "fail",
+        "reasons": [
+          "multiple_primary"
+        ],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "declared",
+            "group_key": "[\"gclid\",\"Shared+Case\"]",
+            "singleton_record_key": null,
+            "member_count": "2",
+            "primary_count": "2",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "B"
+              }
+            ],
+            "status": "fail",
+            "reasons": [
+              "multiple_primary"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "C",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "C"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "D",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "D"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "E",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "E"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "E"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "F",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "F"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "F"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "group_type": "singleton",
+            "group_key": null,
+            "singleton_record_key": "G",
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "G"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "record_key": "G"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "group_type": "declared",
+            "group_key": "[\"gclid\",\"Shared+Case\"]",
+            "singleton_record_key": null,
+            "member_count": "1",
+            "primary_count": "1",
+            "member_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "primary_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-b",
+                "record_key": "A"
+              }
+            ],
+            "status": "pass",
+            "reasons": []
+          }
+        ],
+        "diagnostics": {
+          "source_raw_rows": "8",
+          "source_duplicate_rows_collapsed": "0",
+          "source_selected_rows": "8",
+          "source_nonmember_rows": "0",
+          "source_excluded_rows": "0",
+          "selected_groups": "7"
+        }
+      }
+    },
+    "parity": {
+      "configuration": {
+        "invocation_key": "synthetic-check",
+        "report_scope": "synthetic-window",
+        "report_timezone": "UTC",
+        "report_start": "2026-01-01",
+        "report_end": "2026-01-01",
+        "date_mode": "cohort",
+        "source_evidence_ref": "synthetic-source",
+        "report_evidence_ref": "synthetic-report",
+        "metric_name": "leads",
+        "unit": "count",
+        "abs_tolerance": "0",
+        "relative_tolerance": "0"
+      },
+      "membership": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "reference_complete": true,
+          "observed_complete": true,
+          "reference_evidence_ref": "reference-a",
+          "observed_evidence_ref": "observed-a"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b",
+          "reference_complete": true,
+          "observed_complete": true,
+          "reference_evidence_ref": "reference-b",
+          "observed_evidence_ref": "observed-b"
+        }
+      ],
+      "reference": [
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-a",
+          "event_date": "2026-01-01",
+          "count": 7,
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "date_mode": "cohort",
+          "metric_name": "leads"
+        },
+        {
+          "source_system": "synthetic_crm",
+          "source_scope": "crm-b",
+          "event_date": "2026-01-01",
+          "count": 1,
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "date_mode": "cohort",
+          "metric_name": "leads"
+        }
+      ],
+      "expected": {
+        "check_id": "source_parity",
+        "contract_version": "0.1.0",
+        "configuration": {
+          "invocation_key": "actual-crm-parity",
+          "report_scope": "synthetic-window",
+          "report_timezone": "UTC",
+          "report_start": "2026-01-01",
+          "report_end": "2026-01-01",
+          "date_mode": "cohort",
+          "source_evidence_ref": "synthetic-source",
+          "report_evidence_ref": "synthetic-report",
+          "metric_name": "leads",
+          "unit": "count",
+          "abs_tolerance": "0",
+          "relative_tolerance": "0"
+        },
+        "status": "pass",
+        "reasons": [],
+        "evidence_refs": [
+          "synthetic-source",
+          "synthetic-report"
+        ],
+        "details": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-a",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "7",
+            "observed_count": "7",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-a",
+              "observed-a"
+            ]
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "crm-b",
+            "event_date": "2026-01-01",
+            "reference_complete": true,
+            "observed_complete": true,
+            "reference_present": true,
+            "observed_present": true,
+            "reference_count": "1",
+            "observed_count": "1",
+            "difference": "0",
+            "allowed_difference": "0",
+            "status": "pass",
+            "reasons": [],
+            "evidence_refs": [
+              "reference-b",
+              "observed-b"
+            ]
+          }
+        ],
+        "diagnostics": {
+          "reference_raw_rows": "2",
+          "reference_duplicate_rows_collapsed": "0",
+          "reference_selected_rows": "2",
+          "reference_nonmember_rows": "0",
+          "reference_excluded_rows": "0",
+          "observed_raw_rows": "2",
+          "observed_duplicate_rows_collapsed": "0",
+          "observed_selected_rows": "2",
+          "observed_nonmember_rows": "0",
+          "observed_excluded_rows": "0",
+          "compared_groups": "2",
+          "missing_reference_groups": "0",
+          "missing_observed_groups": "0"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,489 @@
+{
+  "publication_kind": "metadata_redacted_derivative",
+  "source_archive_sha256": "9299dee1e4dffc258b55259155cbf77bc9187dfe99a851a9146815c04504b36f",
+  "public_results_sha256": "a7e3cef8deb88e2bcbe9b47cb797d94f2e14686d7b1c7216106e5100855f0313",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/population/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "9135c2a44592f3d184d65a926d92ef55dcb7840b798df37a868492fffa59811d",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/population/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "a19cd0a38188cc267dae04d3798927d565b628bca307fe5c8f56a8975a706c18",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/reconciliation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "7da5386929c8070f9559aafa97b22799aaa66d253fdf082229a25ca62f9ad9f8",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/reconciliation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "1bb16443800dd9df00a5786a9700e81624c6a67f9aed4ebd5cbcbc3a3a22535c",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/schema_history/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "9d76eabed6ba061133b6521dd04a9d3d63226213584f75223e7a3077bdd9f325",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/schema_history/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "5b1e6f4a9e6ca31880be68adc042930ee021655d196a189d8613b58d0fb91844",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/population/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "7eb9bbb7928da274271cd81f2007667023e2bc6a71d2b8e086e7c380265af139",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/population/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "fabd5d939f9b7f5983ccca484e766caa4306c6caa622df6040c79a792d137ba8",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/reconciliation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "c72428f22e67d380595926d6f48403851e8ecd2591314240a843c41b2688e03b",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/reconciliation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "045652252709035875124b87d73df9127ebed0e28588613b25e1bcbaa6a92a1a",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/schema_history/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "3d1b770da23530f49b6e5703078a305164b7af6defb2e25feea805c4edde4c37",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/schema_history/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "6eb89e3fd52036cfb9c9b204302720d5d287aee8bda8133e45dee3e4572951ed",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/population/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "b20212b445106ff1a05de6d4bd3ba3aa617eb3e6cee8cdf850ea294d6aec5106",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/population/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "5259ecb8f91164c3f94cfadcac788858b1fbffa6ec0d0c03f489aebc3b9ecf7a",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/reconciliation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "2809b1985d14cfd7a082c3b6abcc8360625c64c652e7d50f55f6b2789f290638",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/reconciliation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "6e89888b9077b5cf8a11d765c6caabcd26c98dab36b5a77621fa3294ed8dec4b",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/schema_history/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "8f43dd13679a458362ec61f67e0e06d3792111c4bf2af2c69bfb31e016089e1d",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/schema_history/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "9a76eb37d4e527ad14c8202e81e582df75125f851b2813b2c1b707ab6f77ab5a",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/population/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "137ec60d6d6c4c6ee75f2a8ac449c046c33852e0ad64cea51372db1767b01d5c",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/population/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "b2455b2f614bdb92c6979a49e6f2a672dab539581e05021cda6423168772e6a7",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/reconciliation/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "792d6603a3b6e430a4817fb3b55fccb7570e962a5cecf3ac8ad1e7953d16788b",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/reconciliation/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "1d4d700c10538f2976b88df95c11c32f2d1cf5ed5411d46a57095ed8565600c1",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/schema_history/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "6d2b77a36432233da0b990440a89fa401708a55be77967192d4ec0944ab8e894",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/schema_history/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "source_value_sha256": "79ba4dadf95c495c8e35f31fae302bd063ed79b88c3c66a3812218cd59139b70",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]"
+    }
+  ],
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "manifest_sha256": "2c17a5e81be6a162c99fc95338ad6a67b0f6381f3c826f571ca2b1dff23f3076",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "context_hashes": {
+    "SKILL.md": "7b60bee9a9e92a588b2b9af89485314030c2a0b97627605b8e9e63d003cc5ad0",
+    "references/quality-quick-reference.md": "ba8533982d1895aa4705caa30eaff1d83eb4ce4316df7cffa47cf0807f06e727",
+    "references/evaluation-output-contract.md": "d238973e2a768efbe5c48d2521617d33c681fa5bd8762e69836b4971dcccedcd",
+    "references/channel-contract.md": "c0ec46a712e49ca4fc4428367ee8a04458874de218396a0eb8e0b753f98cd13b"
+  },
+  "accepted_native_source_hashes": {
+    "references/deleted-ad-coverage-contract.md": "4308afc384b9065735abfcfdd02e0206cefab8725f450a2b3de32688f80ddc43",
+    "references/deleted-ad-coverage-fixtures.json": "932e4dadbc9d6570b3e6bd5405fce22c4ac2d8727674b0358f9fa901308d267e",
+    "references/empty-column-contract.md": "4d95753833d2e13b28885d1e35ed42243a60e6c164fec0aade91c9a90e370453",
+    "references/empty-column-fixtures.json": "4adcc5533be8a71fa6d352d4ead1e3f8b784ab25a5a5b42828a4da460e2886a8",
+    "references/population-contract.md": "f5771e2d6b2bcb7d96dd27ab1fbc5ed0b127e78283c59521049cb28ad2c6cf13",
+    "references/population-fixtures.json": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da",
+    "references/reconciliation-contract.md": "6e6667fba99d54759ed4f0d62ae5ab8a979cd3cad7861aba136341af9ee27c87",
+    "references/reconciliation-fixtures.json": "b6705f4bbd56012a8e0c0bf14c5bdfe99315b2006f888eabd311d457a5cc82e9",
+    "references/schema-contract.md": "e6d5e8193047a9aa34b9339dae6ce62a231e2a6a105f02da25829c88e3326dbe",
+    "references/schema-fixtures.json": "5b5cbe7c67bc3e1769c3c847ac6e5e0f59489de87ff27d32cf47e518a4daabf1",
+    "scripts/deleted-ad-coverage.sql": "abed98f034ce895284a8e5b1039d7f681a1697ed06d15d12c541f77b60349256",
+    "scripts/empty-column-probe.sql": "92b23fb4cb3e5cd735e002b884f37c86bae34fbb3ef155aa96fa9a8fddca89a1",
+    "scripts/funnel-additivity.sql": "330f372ca987210cdc1599eae2c117499798d961cacc84f689bb861dd9a89ed4",
+    "scripts/inspect-column-population.sql": "2e4d22e033b77edd4d2cbac802b9178f49df8a63a5d36b14782033ea02828fd6",
+    "scripts/inspect-schema.sql": "c5c71c5265c34c93240ebd5383e6c543e96cac1db6f881ed818fa6b7ad5f24a7",
+    "scripts/match-rate.sql": "9c574a429119029c74abbd32abf57133424233efe019db37572b3d96577d4e07",
+    "scripts/no-pii-columns.sql": "2c3fed3dfa233f4b11f531f6f26258cb08765a5780422dfab47c27b51b90340b",
+    "scripts/primary-uniqueness.sql": "fa1821d6528b15009122fefc0ba60a99f907de73774e8ce5781ec8f81e0bf940",
+    "scripts/source-parity.sql": "b4483f986cde5d7d16916e886ba9d4855600f7c3d5f5ea1c02e6053a0371e861",
+    "scripts/spend-conservation.sql": "1243c093c40f857678df9b73071a268a0bce2591e1729d636503944bbffb2a24",
+    "scripts/test-deleted-ad-coverage.mjs": "f1781126ceb7d8bff6c845f4fdd59321c5a79ec85abbd6585e675302144c97f6",
+    "scripts/test-empty-columns.mjs": "f242953f86b51be25340a87f7f83b893d555801b25f58ff0a2dbb120d9cd6ecf",
+    "scripts/test-population-checks.mjs": "40233c7c9caf539d8e75b5f327ecb6ef65946e36b48941fd1e709527554c104e",
+    "scripts/test-reconciliation.mjs": "9a0663bbd2eb261728d36bd1f7868b43ee86aedc4deba5c3eeb21292667f739a",
+    "scripts/test-schema-checks.mjs": "7de3a365856c4f5c74acb7f207571d9294ca080f9baf1e4ffc69e4ebe6013678",
+    "scripts/unmapped-share.sql": "220b4a8d9d6b88f6c7237971d7093ccec4d7c30ecaf4a00ec1d3e2fef1f30a26"
+  },
+  "started_at": "2026-09-09T04:39:32.885521+00:00",
+  "finished_at": "2026-09-09T04:55:48.044934+00:00",
+  "versions": {
+    "claude_code": "2.1.263 (Claude Code)",
+    "ollama": "0.33.2",
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    },
+    "per_call_timeout_seconds": 300
+  },
+  "attempts": 18,
+  "usable_calls": 18,
+  "transport_failures": 0,
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "summaries": [
+    {
+      "model": "claude-fable-5-1",
+      "condition": "with-skill",
+      "passed": 304,
+      "checks": 304,
+      "usable_calls": 3
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "without-skill",
+      "passed": 269,
+      "checks": 304,
+      "usable_calls": 3
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "with-skill",
+      "passed": 304,
+      "checks": 304,
+      "usable_calls": 3
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "without-skill",
+      "passed": 272,
+      "checks": 304,
+      "usable_calls": 3
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "with-skill",
+      "passed": 235,
+      "checks": 304,
+      "usable_calls": 3
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "without-skill",
+      "passed": 156,
+      "checks": 304,
+      "usable_calls": 3
+    }
+  ],
+  "verified_cells": [
+    {
+      "model": "claude-fable-5-1",
+      "condition": "with-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 83,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "e8e074a70bca9e6d815c65432d40b833acd9f710700c87e11cae35fc0ceb27e1"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "with-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 114,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "2bb64727466b780dbf9e4f79a2c52a73fb31553be584e07ce5502784e12469b3"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "with-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 107,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "3cda96831044d79bb3d9b7804a6a44c75319563c781e81b6cf7203201e940ca9"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "without-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 76,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "8bbdd908417d208132000de552a17b184aed603c30a7cdeb98b77c4681068afd"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "without-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 98,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "3a86eded2be91f9de8a0d0cb6388d1be0c5251481ea885c273199e158de76f85"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "condition": "without-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 95,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "33e0533ad3948d4d82c14c25a4659425fdebcc34ea00932912bed6cbea25d4d9"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "with-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 83,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "e8e074a70bca9e6d815c65432d40b833acd9f710700c87e11cae35fc0ceb27e1"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "with-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 114,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "2bb64727466b780dbf9e4f79a2c52a73fb31553be584e07ce5502784e12469b3"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "with-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 107,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "3cda96831044d79bb3d9b7804a6a44c75319563c781e81b6cf7203201e940ca9"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "without-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 75,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "70d49ff5e168550d7c42a4b6419ffbd3540a4b855ade3c50cc2a14004d0343a5"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "without-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 106,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "7d8f47a5454e7e14950253444ac117d820ecc986446cc5dff6bb709d559fe3e5"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "condition": "without-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 91,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "b9952b7f71a413a9fc55b6f02a8649c15d7565ceeb3f3c7ca82714cadef2efd7"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "with-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 65,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "0e04a9f11108277652060ce8683e2413f84624e5379b26b2589a3e2e3526182e"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "with-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 91,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "9065272440abb93be2c0f8cc9886b670188ef66249fd36563fc4e436b7efc345"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "with-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 79,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "38e47ad665a864d284bff54587ec24a24ce7bcbc745d666aef296cca05153c8f",
+      "raw_model_content_sha256": "4e6279e1ac1a00bf678e79192aae12a848d24149b7ea9f6efa4e024ceb6bfa20"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "without-skill",
+      "group": "population",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 83,
+      "passed": 56,
+      "prompt_sha256": "27332f1e0eb2a01f2a3a06c34fa13df3a8481df26cb57c2d24fe03d61e2c06fc",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "f47fbb0c2a1c4fd30ccf3896e44f20946a370b1db63217f04f4b1583aa6f365d"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "without-skill",
+      "group": "reconciliation",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 114,
+      "passed": 81,
+      "prompt_sha256": "c4b3a075e62e2358b00402990791ddd34d0b00e253a43b88e0a241fd77f2d430",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "96917f44dd930821fb0959364bb3b722540629b50f6a7c736a7f32d8db8f6514"
+    },
+    {
+      "model": "qwen3:4b",
+      "condition": "without-skill",
+      "group": "schema_history",
+      "completion_status": "complete",
+      "schema_passed": true,
+      "usable": true,
+      "checks": 107,
+      "passed": 19,
+      "prompt_sha256": "e0f62d4c63a5a2b3feba0f0597775d5490e0777fcaacfa116d6594415b5046f5",
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "raw_model_content_sha256": "c680a71638cbae7d869880609912633b4ac2d93cd4ecba73ae4a202c5fbf71cf"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors."
+}

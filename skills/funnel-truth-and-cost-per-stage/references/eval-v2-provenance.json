@@ -1,0 +1,275 @@
+{
+  "started_at": "2026-09-09T02:14:25.695867+00:00",
+  "revision": "v2",
+  "manifest_sha256": "35b20930e1901ac330c7dbdd964842def2ef4b3bd1b2df54d47016dc7d4e41a5",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "context_hashes": {
+    "SKILL.md": "421d4f894f90020f3651ff78ee73b5ed3b260dad207faafc35cb8a23d983ef64",
+    "references/stage-contract.md": "e498dbfba65bdd5ac564703325b46d52f7b7d11a0dffbf4def905a15f059960d",
+    "references/cost-contract.md": "e809a95af709e173683d6817b49ea0f9bd2b83845cf8ad12eff492ff63c92d5e",
+    "references/refresh-contract.md": "468965f6cfb583f30a0a42f1c76d8c941ebe12bde41bedf8507d1ac88144a6ab"
+  },
+  "historical_artifacts_sha256": {
+    "eval-cases-v1.json": "291dbf45c132f150b4be686b2319a3078b9ecd4981e212e25a1a6c1810c8f21d",
+    "eval-results.json": "0dba20d2ce3359d8da6a2e07e8fe13c04bd2bf00c6f738a1441a8e2517a159b1",
+    "eval-results.md": "667484c4cc9f4dbe18015a9aefccac5000b2f6de247eef26adfb5e5bd1e1d4f1",
+    "eval-results-pre-recovery-20260909T0142Z.json": "6221fc28e07a5abe47dab877c21720ed09932de90a85769bde468fc30d5e98f4",
+    "eval-recovery-20260909.json": "95661726f77e3b4325c83f48a8a769cb8cc8d89f19ef0303accfcde79b50024f"
+  },
+  "command": "OLLAMA_BASE_URL=http://127.0.0.1:11435 python3 scripts/run-skill-evals.py --skill skills/funnel-truth-and-cost-per-stage --run --models claude-fable-5-1 claude-sonnet-5 qwen3:4b --condition both --output skills/funnel-truth-and-cost-per-stage/references/eval-results-v2.json",
+  "expected_cells": 18,
+  "harness_pid": 29783,
+  "owned_server_pid": 29778,
+  "shell_pid": 29777,
+  "tool_session": 81483,
+  "user_server_pid_untouched": 3157,
+  "model_cache": "/tmp/ollama-eval-live.ZdKoNj/models",
+  "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "cli_version": "2.1.263 (Claude Code)",
+  "matrix_log": "/tmp/funnel-v2-matrix-20260909.log",
+  "server_log": "/tmp/funnel-v2-ollama-20260909.log",
+  "cleanup_verified": true,
+  "status": "complete_with_separate_transport_recovery",
+  "old_downloads_report_preserved": "~/Downloads/funnel-truth-and-cost-per-stage-evaluation-report-v1.md",
+  "completed_at": "2026-09-09T02:42:10.942001+00:00",
+  "original_matrix_started_at": "2026-09-09T02:13:33.140463+00:00",
+  "original_matrix_finished_at": "2026-09-09T02:34:47.629487+00:00",
+  "owned_pids_absent": [
+    29778,
+    29783
+  ],
+  "owned_port_no_listener": 11435,
+  "user_server_pid_alive": 3157,
+  "usable_cell_count": 18,
+  "original_usable_cell_count": 17,
+  "preserved_original_failures": [
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "without-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "elapsed_seconds": 300.009541
+    }
+  ],
+  "usable_cells": [
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "with-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 146,
+      "checks": 146
+    },
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "with-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 105,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "with-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 189,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "without-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 80,
+      "checks": 146
+    },
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "without-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 103,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "claude-fable-5-1",
+        "without-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 133,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "with-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 144,
+      "checks": 146
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "with-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 105,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "with-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 188,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "without-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 82,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "without-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 159,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "with-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 70,
+      "checks": 146
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "with-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 60,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "with-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 57,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "without-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 69,
+      "checks": 146
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "without-skill",
+        "refresh-partitions"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 28,
+      "checks": 105
+    },
+    {
+      "selection": [
+        "qwen3:4b",
+        "without-skill",
+        "stage-truth"
+      ],
+      "source": "eval-results-v2.json",
+      "passed": 31,
+      "checks": 189
+    },
+    {
+      "selection": [
+        "claude-sonnet-5",
+        "without-skill",
+        "cost-reconciliation"
+      ],
+      "source": "eval-results-v2-transport-supplement.json",
+      "passed": 82,
+      "checks": 146
+    }
+  ],
+  "raw_reparse_schema_identity_prompt_system_context_manifest_harness_score_audit": "passed",
+  "v1_artifacts_preserved": true,
+  "artifacts_sha256": {
+    "eval-results-v2.json": "b99ce425f5d7cf74bf43ac1e47002e22ec78c761a94c464465739b18ebc79083",
+    "eval-results-v2-report.md": "734c3142cdb2232513ae10c924b526e5ff844a4df7ee0204d00d149f36b0b3e0",
+    "eval-results-v2-transport-supplement.json": "150b4a111670d842529843d1f250a8f69c49296e2e986313f62a429d161d3ebc",
+    "eval-results-v2-transport-supplement.md": "cc6a5dfcd37b134767a76d31f48ced89f5ad7777f8fa54b4863c83b9b6bb49dc",
+    "eval-v2-recover-transport.py": "0ee80e73f9fea3561026eff7129e615425869e7c9eb0b30744868dd50b27b26b"
+  },
+  "audit_script_private_copy": "funnel-truth-and-cost-per-stage-v2-audit.py",
+  "audit_script_sha256": "9ac112f81ba0b1164b7adf06bb33bcdba4d5896b6bb503441c2d31781326eef6",
+  "operational_logs": {
+    "funnel-v2-matrix-20260909.log": "completed model=claude-fable-5-1 condition=with-skill group=stage-truth status=complete\ncompleted model=claude-fable-5-1 condition=with-skill group=cost-reconciliation status=complete\ncompleted model=claude-fable-5-1 condition=with-skill group=refresh-partitions status=complete\ncompleted model=claude-fable-5-1 condition=without-skill group=stage-truth status=complete\ncompleted model=claude-fable-5-1 condition=without-skill group=cost-reconciliation status=complete\ncompleted model=claude-fable-5-1 condition=without-skill group=refresh-partitions status=complete\ncompleted model=claude-sonnet-5 condition=with-skill group=stage-truth status=complete\ncompleted model=claude-sonnet-5 condition=with-skill group=cost-reconciliation status=complete\ncompleted model=claude-sonnet-5 condition=with-skill group=refresh-partitions status=complete\ncompleted model=claude-sonnet-5 condition=without-skill group=stage-truth status=complete\ncompleted model=claude-sonnet-5 condition=without-skill group=cost-reconciliation status=transport_failure\ncompleted model=claude-sonnet-5 condition=without-skill group=refresh-partitions status=complete\ncompleted model=qwen3:4b condition=with-skill group=stage-truth status=complete\ncompleted model=qwen3:4b condition=with-skill group=cost-reconciliation status=complete\ncompleted model=qwen3:4b condition=with-skill group=refresh-partitions status=complete\ncompleted model=qwen3:4b condition=without-skill group=stage-truth status=complete\ncompleted model=qwen3:4b condition=without-skill group=cost-reconciliation status=complete\ncompleted model=qwen3:4b condition=without-skill group=refresh-partitions status=complete\nWrote [repository]/skills/funnel-truth-and-cost-per-stage/references/eval-results-v2.json\nWrote [repository]/skills/funnel-truth-and-cost-per-stage/references/eval-results-v2-report.md\nWrote [private-evidence]/funnel-truth-and-cost-per-stage-evaluation-report.md\n",
+    "funnel-v2-supplement.log": "Completed supplemental cell: complete; errors=[]\n"
+  },
+  "supplemental_wrapper_pid": 44568,
+  "supplemental_wrapper_finished": true,
+  "public_redaction": {
+    "original_provenance_sha256": "bdc123a0c893f9050ac81a2d9466062ec390eb33cec967e0ef937747bc70deda",
+    "private_archive_basename": "funnel-v2-provenance-original-private-20260909T052516988677Z.json",
+    "changes": [
+      {
+        "pointer": "/audit_script_private_copy",
+        "kind": "absolute_private_script_path_to_basename"
+      },
+      {
+        "pointer": "/operational_logs/funnel-v2-matrix-20260909.log",
+        "kind": "concrete_repository_and_downloads_prefixes_to_named_labels"
+      }
+    ],
+    "boundary": "Public path-redacted derivative only. Original operational provenance remains in the byte-exact private archive. No evaluated context, model response, request/result hash, score, or model run was changed or rerun."
+  }
+}

@@ -1,0 +1,2904 @@
+{
+  "version": "0.1.0",
+  "golden_provenance": "Full expected selections/statuses and fields specified independently of the implementation. SHA-256 IDs computed only with Python hashlib over literal JSON identity tuples, ensure_ascii=False and compact separators.",
+  "cases": [
+    {
+      "id": "id-base",
+      "operation": "makeConversionId",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "conversion_key": "order-7"
+      },
+      "expected": "6089dd90f4aa871da012035890097611a67eb7dcbf23986cb0f91f13a2750a9c"
+    },
+    {
+      "id": "id-scope",
+      "operation": "makeConversionId",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-b",
+        "conversion_key": "order-7"
+      },
+      "expected": "99e5f38209bb3935cce56831e542f3bbe3477824d6ac78be3ae39f78ef18ea66"
+    },
+    {
+      "id": "id-delimiter-left",
+      "operation": "makeConversionId",
+      "input": {
+        "source_system": "crm|a",
+        "source_scope": "b",
+        "conversion_key": "c"
+      },
+      "expected": "60663204b6159d20352c141912b45a74dd738ca91e5d4a1615d50c5b551031dd"
+    },
+    {
+      "id": "id-delimiter-right",
+      "operation": "makeConversionId",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "a|b",
+        "conversion_key": "c"
+      },
+      "expected": "3ab2bf68a302ab2a9c40f1e8915aebd8fb2a9ba36d7674b6dac7713baa3ba583"
+    },
+    {
+      "id": "id-unicode",
+      "operation": "makeConversionId",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "tenant-雪",
+        "conversion_key": "Order+\"7\\end"
+      },
+      "expected": "1357ba5d0ca1df91ed60c98571a48e18ef6d1460039cbef74656060d9530c644"
+    },
+    {
+      "id": "stage-native-ledger",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "synthetic_crm",
+        "source_scope": "scope-a",
+        "lead_key": "Lead+A",
+        "stage_key": "lead",
+        "stage_order": 0,
+        "stage_kind": "lead",
+        "achieved": true,
+        "cohort_at": "2026-01-01T00:00:00Z",
+        "stage_entered_at": "2026-01-01T00:00:00Z",
+        "cohort_date": "2026-01-01",
+        "activity_date": "2026-01-01",
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": null,
+        "value_status": "unknown",
+        "evidence_keys": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "record_kind": "lead",
+            "record_key": "Lead+A"
+          }
+        ],
+        "stage_truth_status": "achieved",
+        "attribution": {
+          "channel": null,
+          "taxonomy_version": null,
+          "network_id": null,
+          "campaign_key": null,
+          "ad_source_system": null,
+          "ad_source_scope": null,
+          "ad_key": null
+        }
+      },
+      "expected": {
+        "status": "eligible",
+        "conversion": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "conversion_key": "[\"Lead+A\",\"lead\"]",
+          "occurred_at": "2026-01-01T00:00:00Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "business_conversion_id": "5bf4dd24cbc675edb241d82f93d0a5f9ef1d75c46af8fc3183aad56d6b6cc76e"
+      },
+      "provenance": "Copied literal expected ledger row 0 from stage-fixtures.json case complete-snapshot-stage-gaps; this suite performs no SQL run and needs no sibling fixture at runtime."
+    },
+    {
+      "id": "stage-false",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": false,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": null,
+        "value_status": "unknown"
+      },
+      "expected": {
+        "status": "not_achieved",
+        "conversion": null,
+        "business_conversion_id": null
+      }
+    },
+    {
+      "id": "stage-unknown",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": null,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": null,
+        "value_status": "unknown"
+      },
+      "expected": {
+        "status": "stage_unknown",
+        "conversion": null,
+        "business_conversion_id": null
+      }
+    },
+    {
+      "id": "stage-undated",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": true,
+        "stage_entered_at": null,
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": null,
+        "value_status": "unknown",
+        "cohort_at": "2026-01-01T00:00:00Z"
+      },
+      "expected": {
+        "status": "undated",
+        "conversion": null,
+        "business_conversion_id": null
+      }
+    },
+    {
+      "id": "stage-nonprimary-zero",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": true,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": false,
+        "value": 0,
+        "currency": "USD",
+        "value_status": "known",
+        "email": "synthetic@example.invalid",
+        "ip": "192.0.2.1"
+      },
+      "expected": {
+        "status": "eligible",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "[\"Lead+7\",\"won\"]",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": 0,
+          "currency": "USD",
+          "value_status": "known"
+        },
+        "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+      }
+    },
+    {
+      "id": "stage-unknown-currency",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": true,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": "USD",
+        "value_status": "unknown"
+      },
+      "expected": {
+        "status": "eligible",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "[\"Lead+7\",\"won\"]",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": "USD",
+          "value_status": "unknown"
+        },
+        "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+      }
+    },
+    {
+      "id": "stage-mixed",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": true,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": true,
+        "value": null,
+        "currency": null,
+        "value_status": "mixed_currency"
+      },
+      "expected": {
+        "status": "eligible",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "[\"Lead+7\",\"won\"]",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "mixed_currency"
+        },
+        "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+      }
+    },
+    {
+      "id": "stage-exact-negative-decimal",
+      "operation": "conversionFromStage",
+      "input": {
+        "source_system": "crm",
+        "source_scope": "org-a",
+        "lead_key": "Lead+7",
+        "stage_key": "won",
+        "achieved": true,
+        "stage_entered_at": "2026-01-02T00:00:00.123456789Z",
+        "is_attribution_primary": true,
+        "value": "-12345678901234567890123456789.123456789",
+        "currency": "EUR",
+        "value_status": "known"
+      },
+      "expected": {
+        "status": "eligible",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "[\"Lead+7\",\"won\"]",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": "-12345678901234567890123456789.123456789",
+          "currency": "EUR",
+          "value_status": "known"
+        },
+        "business_conversion_id": "40f7a61630f20c39f52bf308cfa2134f198aaf00d31c9f0780cb082500725aef"
+      }
+    },
+    {
+      "id": "prepare-allowlist-meta",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-dclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "dclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-msclkid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "msclkid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-twclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "twclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-epik",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "epik",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-sccid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "sccid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-srsltid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "srsltid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 13,
+          "unique_count": 13,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 12,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-dclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-epik",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gbraid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-li_fat_id",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-msclkid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-rdt_cid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-sccid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-srsltid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-ttclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-twclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-wbraid",
+              "reason": "unsupported_platform_kind"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-allowlist-google",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "google",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-dclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "dclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-msclkid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "msclkid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-twclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "twclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-epik",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "epik",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-sccid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "sccid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-srsltid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "srsltid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid"
+          },
+          {
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid"
+          },
+          {
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 13,
+          "unique_count": 13,
+          "duplicate_count": 0,
+          "selected_count": 3,
+          "excluded_count": 10,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-dclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-epik",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-fbclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-li_fat_id",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-msclkid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-rdt_cid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-sccid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-srsltid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-ttclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-twclid",
+              "reason": "unsupported_platform_kind"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "google",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-allowlist-tiktok",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "tiktok",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-dclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "dclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-msclkid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "msclkid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-twclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "twclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-epik",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "epik",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-sccid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "sccid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-srsltid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "srsltid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 13,
+          "unique_count": 13,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 12,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-dclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-epik",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-fbclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gbraid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-li_fat_id",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-msclkid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-rdt_cid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-sccid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-srsltid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-twclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-wbraid",
+              "reason": "unsupported_platform_kind"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "tiktok",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-allowlist-linkedin",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "linkedin",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-dclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "dclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-msclkid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "msclkid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-twclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "twclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-epik",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "epik",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-sccid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "sccid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-srsltid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "srsltid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 13,
+          "unique_count": 13,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 12,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-dclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-epik",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-fbclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gbraid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-msclkid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-rdt_cid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-sccid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-srsltid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-ttclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-twclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-wbraid",
+              "reason": "unsupported_platform_kind"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "linkedin",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-allowlist-reddit",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "reddit",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-dclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "dclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-gbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-wbraid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-msclkid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "msclkid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-fbclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-ttclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "ttclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-li_fat_id",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "li_fat_id",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-twclid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "twclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-epik",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "epik",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-sccid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "sccid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-srsltid",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "srsltid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "rdt_cid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "click-rdt_cid"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 13,
+          "unique_count": 13,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 12,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-dclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-epik",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-fbclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gbraid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-gclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-li_fat_id",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-msclkid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-sccid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-srsltid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-ttclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-twclid",
+              "reason": "unsupported_platform_kind"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "click-wbraid",
+              "reason": "unsupported_platform_kind"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "reddit",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-event-age-boundary",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [],
+        "policy": {
+          "as_of": "2026-01-09T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 0,
+          "unique_count": 0,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-09T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-event-age-plus-microsecond",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [],
+        "policy": {
+          "as_of": "2026-01-09T00:00:00.123457789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ineligible",
+        "reasons": [
+          "event_too_old"
+        ],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 0,
+          "unique_count": 0,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-09T00:00:00.123457789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-future-plus-microsecond",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [],
+        "policy": {
+          "as_of": "2026-01-02T00:00:00.123455789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ineligible",
+        "reasons": [
+          "future_event"
+        ],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 0,
+          "unique_count": 0,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-02T00:00:00.123455789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-click-inclusive-microseconds",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "google",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "lower-bound",
+            "occurred_at": "2025-12-26T00:00:00.123456789Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "too-old",
+            "occurred_at": "2025-12-26T00:00:00.123455789Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "upper-bound",
+            "occurred_at": "2026-01-02T00:00:00.123456789Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "too-future",
+            "occurred_at": "2026-01-02T00:00:00.123457789Z",
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "gbraid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-02T00:00:00.123456789Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "upper-bound"
+          },
+          {
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2025-12-26T00:00:00.123456789Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "lower-bound"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 4,
+          "unique_count": 4,
+          "duplicate_count": 0,
+          "selected_count": 2,
+          "excluded_count": 2,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "too-future",
+              "reason": "future_click"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "too-old",
+              "reason": "click_too_old"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "google",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-latest-qualified-tie-dedup",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "google",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-b",
+            "click_key": "a",
+            "occurred_at": "2026-01-01T00:00:00.000000002Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "older",
+            "occurred_at": "2026-01-01T00:00:00.000000001Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "second-kind",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "z",
+            "occurred_at": "2026-01-01T00:00:00.000000002Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "z",
+            "occurred_at": "2026-01-01T00:00:00.000000002Z",
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-b"
+            },
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            },
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "gclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00.000000002Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "z"
+          },
+          {
+            "kind": "wbraid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "second-kind"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 5,
+          "unique_count": 4,
+          "duplicate_count": 1,
+          "selected_count": 2,
+          "excluded_count": 2,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "older",
+              "reason": "superseded"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-b",
+              "click_key": "a",
+              "reason": "superseded"
+            }
+          ],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "google",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            },
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-qualified-exclusions",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "ref-system",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "other-crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "ref-scope",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-b",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "ref-key",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+8"
+          },
+          {
+            "source_system": "web",
+            "source_scope": "site-b",
+            "click_key": "scope-miss",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          },
+          {
+            "source_system": "other-web",
+            "source_scope": "site-a",
+            "click_key": "source-miss",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 5,
+          "unique_count": 5,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 5,
+          "excluded": [
+            {
+              "source_system": "other-web",
+              "source_scope": "site-a",
+              "click_key": "source-miss",
+              "reason": "unbound_click_scope"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "ref-key",
+              "reason": "unrelated_conversion"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "ref-scope",
+              "reason": "unrelated_conversion"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "ref-system",
+              "reason": "unrelated_conversion"
+            },
+            {
+              "source_system": "web",
+              "source_scope": "site-b",
+              "click_key": "scope-miss",
+              "reason": "unbound_click_scope"
+            }
+          ],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-no-implicit-binding",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "unbound",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": []
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 1,
+          "unique_count": 1,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 1,
+          "excluded": [
+            {
+              "source_system": "web",
+              "source_scope": "site-a",
+              "click_key": "unbound",
+              "reason": "unbound_click_scope"
+            }
+          ],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": []
+        }
+      }
+    },
+    {
+      "id": "prepare-browser-override-zero-projection",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": 0,
+          "currency": "USD",
+          "value_status": "known",
+          "email": "synthetic@example.invalid",
+          "phone": "+15554441234",
+          "ip": "192.0.2.1"
+        },
+        "platform": "meta",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "capture",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7",
+            "email": "excluded@example.invalid"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        },
+        "browser_event_id": "Browser+Event%2FCase",
+        "destination": "destination-account",
+        "ip": "192.0.2.2"
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "Browser+Event%2FCase",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": 0,
+          "currency": "USD",
+          "value_status": "known"
+        },
+        "selected_clicks": [
+          {
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T00:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "capture"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 1,
+          "unique_count": 1,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-explicit-subject-decimal",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": "crm",
+          "subject_source_scope": "org-a",
+          "subject_key": "Contact+9",
+          "value": "12345678901234567890123456789.123456789",
+          "currency": "USD",
+          "value_status": "known"
+        },
+        "platform": "meta",
+        "click_observations": [],
+        "policy": {
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00.123456789Z",
+          "subject_source_system": "crm",
+          "subject_source_scope": "org-a",
+          "subject_key": "Contact+9",
+          "value": "12345678901234567890123456789.123456789",
+          "currency": "USD",
+          "value_status": "known"
+        },
+        "selected_clicks": [],
+        "click_diagnostics": {
+          "input_count": 0,
+          "unique_count": 0,
+          "duplicate_count": 0,
+          "selected_count": 0,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": true
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-03T00:00:00.123456789Z",
+          "max_event_age_days": 7,
+          "click_lookback_days": 7,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-fractional-policy-boundary",
+      "operation": "prepareConversion",
+      "input": {
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "platform": "meta",
+        "click_observations": [
+          {
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "half-day",
+            "occurred_at": "2026-01-01T12:00:00Z",
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "conversion_source_system": "crm",
+            "conversion_source_scope": "org-a",
+            "conversion_key": "Order+7"
+          }
+        ],
+        "policy": {
+          "as_of": "2026-01-02T12:00:00Z",
+          "max_event_age_days": 0.5,
+          "click_lookback_days": 0.5,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": "ready",
+        "reasons": [],
+        "event_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "business_conversion_id": "ae4e4e305c2386ce76b7428a963f3efdf84d4b1d896f357c4bc97159cf0f85f6",
+        "conversion": {
+          "source_system": "crm",
+          "source_scope": "org-a",
+          "conversion_key": "Order+7",
+          "occurred_at": "2026-01-02T00:00:00Z",
+          "subject_source_system": null,
+          "subject_source_scope": null,
+          "subject_key": null,
+          "value": null,
+          "currency": null,
+          "value_status": "unknown"
+        },
+        "selected_clicks": [
+          {
+            "kind": "fbclid",
+            "value": "Ab+C%252B",
+            "occurred_at": "2026-01-01T12:00:00Z",
+            "source_system": "web",
+            "source_scope": "site-a",
+            "click_key": "half-day"
+          }
+        ],
+        "click_diagnostics": {
+          "input_count": 1,
+          "unique_count": 1,
+          "duplicate_count": 0,
+          "selected_count": 1,
+          "excluded_count": 0,
+          "excluded": [],
+          "no_selected_clicks": false
+        },
+        "policy": {
+          "source": "caller_supplied",
+          "platform": "meta",
+          "as_of": "2026-01-02T12:00:00Z",
+          "max_event_age_days": 0.5,
+          "click_lookback_days": 0.5,
+          "click_scope_bindings": [
+            {
+              "conversion_source_system": "crm",
+              "conversion_source_scope": "org-a",
+              "click_source_system": "web",
+              "click_source_scope": "site-a"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

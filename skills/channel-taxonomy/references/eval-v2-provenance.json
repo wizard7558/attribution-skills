@@ -1,0 +1,492 @@
+{
+  "attempts": 18,
+  "context_hashes": {
+    "SKILL.md": "2c075029304a26e572a1e0f98624ee812c2588d191eb4cfd44331848acd03f7c",
+    "references/channel-contract.md": "c0ec46a712e49ca4fc4428367ee8a04458874de218396a0eb8e0b753f98cd13b",
+    "references/source-mappings.md": "a40a6162f9b0d8eac5cdb7d9f80098d74005910953f9c15673c42ffb2a4058c6"
+  },
+  "finished_at": "2026-09-09T16:56:50.534034+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "historical_artifacts_sha256": {
+    "eval-results-initial-format.json": "9b0fdc1f96dfe19d067e8f2141ae408f07a9e0244856c42f81b0bbd5e878309f",
+    "eval-results.json": "35e71bb2c6114221f84baa2741dac0a2ddfdf8f98bbf1e25c0dc4c09d28d992a",
+    "eval-results.md": "3d90893566e43607c0d8a9a999e024fe2ecb02a1f06f1068f8c8de6803baabb6"
+  },
+  "manifest_sha256": "1be1b4378c57f307ce4682704b1e450c5ea27a2de1c606f313a4e7711a31e479",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "final-raw.json",
+  "public_results_sha256": "b9abfc1dd6407d33572c389d2bee7cd0507325f7760f294281adb546302d22f2",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/conflicting-acquisition-evidence/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "9ab96c8f482e7e9f9d4628ff84b5797dc9004b581c5eaf61ffe6ee4132357203"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/conflicting-acquisition-evidence/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "3eb41ec90f7bfbf9aad9dd58159f8b6d09e97c35978fe58ae904e441f08ec42e"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/cross-source-interoperability/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "189111b7f6ef8093bda6a0701c147840c0a249e1ccc90fed6b141f9921963b4d"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/cross-source-interoperability/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "49b373341bdeaf7f5f48db483cfe3dbd1d4cbe7b32903b7dd708ec486f470605"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/native-shopify-network-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "277179667c762ba8c4a6f6163324f01df77cb9783719bce235e2d3c53e23fd86"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/native-shopify-network-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "77626592280804ad151745a4aecad25969f75a9a07b0788798eecdfc62767827"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/conflicting-acquisition-evidence/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c19c53c4ce63dfdb4011cd520e86475fad57efe3590d9f6bd03c1204de8fafc9"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/conflicting-acquisition-evidence/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "81e59abe9e15ade0be645ed864f220369460a430e6c15eff2ad266cf63ea5f34"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/cross-source-interoperability/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "4658ff3404c2cd5dd70ce8132e7a87357d007c4181507326d2887cc0da843e0f"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/cross-source-interoperability/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "bfdb86df858950830aff5d1bdaf4942e3832e1eace9d9f1282d8a5169b92caf1"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/native-shopify-network-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "f875e0a1afcaa67d7fd58322cfe6e0461fc208d167bac04ba6fd7b474d321ffe"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/native-shopify-network-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "8ce7e1a7b6d9ead0876c97b2d4392bb78d908bc62b233d58e3f4f25a2a96976f"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/conflicting-acquisition-evidence/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "e17647580abb52327d19c527ebf1d7370766edda9a1fb0aeb8e29d3aae0d8c15"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/conflicting-acquisition-evidence/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "97f03d46a42b3084835027fafa767821ad9400ab439fbbfa97a9807480c4e9f3"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/cross-source-interoperability/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "de75446096ba962da64e6221ddbc171c3e813e048d01e05cf59fcd0909e1d9ea"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/cross-source-interoperability/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "1ffa39bd437f359f6b3da46685884c338460337afde8993966f61e07903a9350"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/native-shopify-network-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "cbe87ce7c60300e6708c88405dbf5279c5eeb29f3f5b5fbbb079fd1ca0fad999"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/native-shopify-network-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "91b5cbcd5b61177fff018020bf0879a619cd9733920b2ebf8cca880585a7a063"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/conflicting-acquisition-evidence/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "7669c3eac790b8aee845a313ec1b5d960be2b7d60eecbb8edf153b3f8f769e67"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/conflicting-acquisition-evidence/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "4d432cfe05fe3e79df1b0609c2279b8a5853327877d409eb026dddd22a36ec13"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/cross-source-interoperability/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "4a69e3bb65698f9bd2b6bb9c5dd5ef7e4ae02ef2775775afe059bbae30e854ec"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/cross-source-interoperability/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "15bdbeeea2e8fb24e1dff246bc8e78f5003d9b4d0f564617f0d51834bbc120e3"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/native-shopify-network-normalization/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "970f6388ec529338a0ea3c6198bd178d6ce73071d036209a1934299fe60bb31b"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/native-shopify-network-normalization/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "589827367f2aeff86fe169c271b3f53c62523da0fcc0a5e713bff249d066a2d5"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "revision": "v2",
+  "run_history": [
+    {
+      "finished_at": "2026-09-09T16:56:50.534034+00:00",
+      "prior_finished_at": "2026-09-09T16:49:47.560669+00:00",
+      "resumed_at": "2026-09-09T16:56:00.939948+00:00"
+    }
+  ],
+  "source_archive_sha256": "1c6764baeed1e6fee7d3b0384a4c1a91713e8aa85b76e1e249405d03a693d5e0",
+  "started_at": "2026-09-09T16:42:07.115292+00:00",
+  "summaries": [
+    {
+      "checks": 174,
+      "condition": "with-skill",
+      "model": "claude-fable-5-1",
+      "passed": 174,
+      "usable_calls": 3
+    },
+    {
+      "checks": 174,
+      "condition": "without-skill",
+      "model": "claude-fable-5-1",
+      "passed": 140,
+      "usable_calls": 3
+    },
+    {
+      "checks": 174,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 174,
+      "usable_calls": 3
+    },
+    {
+      "checks": 174,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 123,
+      "usable_calls": 3
+    },
+    {
+      "checks": 174,
+      "condition": "with-skill",
+      "model": "qwen3:4b",
+      "passed": 139,
+      "usable_calls": 3
+    },
+    {
+      "checks": 174,
+      "condition": "without-skill",
+      "model": "qwen3:4b",
+      "passed": 110,
+      "usable_calls": 3
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 18,
+  "verified_cells": [
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "claude-fable-5-1",
+      "passed": 41,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "ac048698b61a35478feff5233c677defef4702eca421cd9df2c47d7743870894",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "claude-fable-5-1",
+      "passed": 92,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "beab2e4013a161ea69b8e66c67e6b7d69a696ded2c6fd491a7d8b6044453e3a5",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "claude-fable-5-1",
+      "passed": 41,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "7bbd15fe7e70d90aa6d6e7c4578815bdba5d98c0705b15c4107b7fc240211a47",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "claude-fable-5-1",
+      "passed": 29,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "82149c380d80b98c888ae9ff4e790b56244193755faaef12678f598df5033960",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "claude-fable-5-1",
+      "passed": 82,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "6e9f5780c1f8a88ebae36cc3eca0cc591db2976f93d8ee7ed406e97148b5893d",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "claude-fable-5-1",
+      "passed": 29,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "b3c1a3272e052f42d19c1530a44afd1be0b0f0cb1e2524b91257092df8ecb470",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "claude-sonnet-5",
+      "passed": 41,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "35922f59850d6e11324fee139c765c504b4749e63f42762f70aff35cda29eea7",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "claude-sonnet-5",
+      "passed": 92,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "e554b255019c9ec2ff05829e8a3d249e4be7a518f60deefc571795c38bb51001",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "claude-sonnet-5",
+      "passed": 41,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "dc9aa7bbf04b104cb7ef529879e7f218240511811fa1e9515515f5d527825a8a",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "claude-sonnet-5",
+      "passed": 24,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "f2cc574f98e0d861e5930aeabdd17aafa50dbd7d4f110b4d67dcfe30f47d68ff",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "claude-sonnet-5",
+      "passed": 72,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "650efd99efc87f0bad290666d8f5416f8914d509a66f1e190254b5ef2f85011b",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "claude-sonnet-5",
+      "passed": 27,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "d9ebf10d837a2778736312bcc6b5d0a30b7f115cd374483b0000809ff6c12a7b",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "qwen3:4b",
+      "passed": 37,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "dc77653d09fcbc7f8b88c0e11daedc77b5349a632c7e6c94786bec84ad5e74e5",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "qwen3:4b",
+      "passed": 62,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "29716fca885aaf512d6449b6bd587369908073901993938b45b046189c4e4d4a",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "qwen3:4b",
+      "passed": 40,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "7fdded2a3d71eb52b2253497ad636e6b80fdba718c34d472af50e2938017ac29",
+      "schema_passed": true,
+      "system_prompt_sha256": "21f864d937ee3bdc30e7f2d7566d711e101d8839f93cc6074e176e25eec3153a",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "conflicting-acquisition-evidence",
+      "model": "qwen3:4b",
+      "passed": 27,
+      "prompt_sha256": "0b84ba75a3f9132d99ce85257e0a082306d8d633cdf403b2a3a1366d26b5cb8e",
+      "raw_model_content_sha256": "443bcbd6e48aefb11f0ffe8acd1e6f9419e1d58c7ba29c5d35814959d7872663",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 92,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "cross-source-interoperability",
+      "model": "qwen3:4b",
+      "passed": 60,
+      "prompt_sha256": "6a9fb74faccabab1c75e0669c17f983742ca96a7475f2f811f55eaf89b27c78b",
+      "raw_model_content_sha256": "33a11a4c76178526fccbd95b66166fb11e56bfad45bbf32bacf56ee66ee54516",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 41,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "native-shopify-network-normalization",
+      "model": "qwen3:4b",
+      "passed": 23,
+      "prompt_sha256": "e3523f71440641ce0fef233038f16d8e137171e0b5468fbf5a5366dec38d48cd",
+      "raw_model_content_sha256": "66579f16c0ec9a880f99279e4f4694cdaf3c346a9466c58f9a6aa21519b1e527",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.266 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}

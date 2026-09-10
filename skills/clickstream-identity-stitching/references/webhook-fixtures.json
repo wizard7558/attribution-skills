@@ -1,0 +1,2899 @@
+{
+  "version": "1.0",
+  "cases": [
+    {
+      "name": "visitor_field_precedes_page_and_recent",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "visitor_key": "v1",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "visitor_field",
+          "confidence": 1,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "visitor_field",
+            "confidence": 1,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "page_rule_precedes_recent",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2"
+          },
+          "method": "page_rule",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v2"
+            },
+            "method": "page_rule",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_identity_match",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "no_identity_creates_deterministic_visitor",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "identity_unavailable"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "identity_unavailable"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "unknown_explicit_visitor_continues_ladder",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "visitor_key": "missing",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "cd57911412a972ec4db136a33eadb35956a2bac951877e09bc5e595a1f3d417a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "page_rule",
+          "confidence": 0.8,
+          "diagnostics": [
+            {
+              "code": "visitor_field_unknown"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "cd57911412a972ec4db136a33eadb35956a2bac951877e09bc5e595a1f3d417a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "page_rule",
+            "confidence": 0.8,
+            "diagnostics": [
+              {
+                "code": "visitor_field_unknown"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "page_inclusive_lower",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "page_rule",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "page_rule",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "page_inclusive_submission",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T12:00:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "page_rule",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "page_rule",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "page_before_window",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:49:59Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": [
+            {
+              "code": "page_rule_out_of_window"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": [
+              {
+                "code": "page_rule_out_of_window"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "page_future_excluded",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T12:00:01Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": [
+            {
+              "code": "page_rule_out_of_window"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": [
+              {
+                "code": "page_rule_out_of_window"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_inclusive_lower",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:30:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:30:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_inclusive_submission",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T12:00:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T12:00:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_old_evidence",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:29:59Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_old_last_seen",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:29:59Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_future_evidence",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T12:00:01Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "recent_future_last_seen",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T12:00:01Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "exact_source_scope_isolation",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "visitor_key": "v1",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "other-site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "other-site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "other-site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "visitor_field_unknown"
+            },
+            {
+              "code": "page_rule_not_found"
+            },
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "visitor_field_unknown"
+              },
+              {
+                "code": "page_rule_not_found"
+              },
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "exact_source_system_isolation",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "visitor_key": "v1",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "other-pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "other-pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "other-pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "visitor_field_unknown"
+            },
+            {
+              "code": "page_rule_not_found"
+            },
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "a982a368d59ee8c9ed3f4c5e752b21111c0f17d5b9ab61709a676c8d2c0bb15c",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "visitor_field_unknown"
+              },
+              {
+                "code": "page_rule_not_found"
+              },
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "email_phone_union_ambiguous_no_newest_winner",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "phone": "+14155550123"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "evidence_key": "e2",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": null,
+            "phone_hash": "36a2cef4ff9bf7a1abd2a93359136b870393be4106e6c5d19b72ff564f9deca4"
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "66e72b9387c1c9594458a83d9e5d38e51469b94b52da3d0f547abdb954778482",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_ambiguous",
+              "candidates": [
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v1"
+                },
+                {
+                  "source_system": "pixel",
+                  "source_scope": "site",
+                  "visitor_key": "v2"
+                }
+              ]
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "66e72b9387c1c9594458a83d9e5d38e51469b94b52da3d0f547abdb954778482",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_ambiguous",
+                "candidates": [
+                  {
+                    "source_system": "pixel",
+                    "source_scope": "site",
+                    "visitor_key": "v1"
+                  },
+                  {
+                    "source_system": "pixel",
+                    "source_scope": "site",
+                    "visitor_key": "v2"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "identical_rows_idempotent",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "page_rule_requires_known_visitor",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "p1"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "absent",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": [
+            {
+              "code": "page_rule_unknown_visitor"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "394d686bccace2b03f4f4f0632e7bab95b63a3879a242c53f05b63a5113ed60a",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": [
+              {
+                "code": "page_rule_unknown_visitor"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "missing_page_key_continues_ladder",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "page_rule_event_key": "missing"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "dfc4243a27d0472966ef863a6889bf3ea5f4da1ea9070cb92e3c9e4b0006bd5e",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": [
+            {
+              "code": "page_rule_not_found"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "dfc4243a27d0472966ef863a6889bf3ea5f4da1ea9070cb92e3c9e4b0006bd5e",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": [
+              {
+                "code": "page_rule_not_found"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "both_hashes_same_visitor_are_one_candidate",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com",
+          "phone": "+14155550123"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": "36a2cef4ff9bf7a1abd2a93359136b870393be4106e6c5d19b72ff564f9deca4"
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "66e72b9387c1c9594458a83d9e5d38e51469b94b52da3d0f547abdb954778482",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "66e72b9387c1c9594458a83d9e5d38e51469b94b52da3d0f547abdb954778482",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "ip_and_url_proximity_never_identify",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "unknown@example.com",
+          "ip": "203.0.113.9",
+          "page_url": "https://private.example/form"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z",
+            "ip": "203.0.113.9"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "1dfe7c2f3c157a279fab2edc9efcac00dd0e71d61d8300ff1f99090ee15ec972",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "1dfe7c2f3c157a279fab2edc9efcac00dd0e71d61d8300ff1f99090ee15ec972",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "multirow_distinct_candidates",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "page_rule_event_key": "p2",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          },
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v2",
+            "evidence_key": "e2",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "5b71ed5f946240dc76f3b7c24bdcbbc3528284ec5f4519249fb702686f0df5b8",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"other-form\",\"s1\"]",
+            "payload_sha256": "c6c49f11f4492b7ebf7f3ca3a59264f38e7407b7cc220b44b3d94d8efece53e6",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          },
+          {
+            "receipt_key": "[\"pixel\",\"other-site\",\"form\",\"s1\"]",
+            "payload_sha256": "6e80c604ef53e04e276336cd906dd32339e5654c4211fd6d7c5d129d4f660696",
+            "resolution": {
+              "status": "created",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "other-site",
+                "visitor_key": "webhook_45e9c1ba667547eacb61ba51edb9a0c8d52303462a5b2e72eea68e51945fef14"
+              },
+              "method": "new_visitor",
+              "confidence": 0,
+              "diagnostics": [
+                {
+                  "code": "recent_visitor_no_match"
+                }
+              ]
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "receipt_replays_prior_after_candidate_state_changes",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [],
+        "page_rule_events": [],
+        "recent_identity_edges": [],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": true,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "canonical_payload_receipt_replay",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T07:00:00-05:00",
+          "email": " PERSON@EXAMPLE.COM "
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          },
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+        "replayed": true,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "receipt_provider_is_not_global_duplicate",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "other-form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"other-form\",\"s1\"]",
+        "payload_sha256": "c6c49f11f4492b7ebf7f3ca3a59264f38e7407b7cc220b44b3d94d8efece53e6",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"other-form\",\"s1\"]",
+          "payload_sha256": "c6c49f11f4492b7ebf7f3ca3a59264f38e7407b7cc220b44b3d94d8efece53e6",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    },
+    {
+      "name": "receipt_source_scope_is_not_global_duplicate",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "other-site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "c715577ec1d9e25c56fb5ef716c67c06dfe49724c234a018d4de611491c03d40",
+            "resolution": {
+              "status": "matched",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "v1"
+              },
+              "method": "recent_visitor",
+              "confidence": 0.8,
+              "diagnostics": []
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"other-site\",\"form\",\"s1\"]",
+        "payload_sha256": "6e80c604ef53e04e276336cd906dd32339e5654c4211fd6d7c5d129d4f660696",
+        "replayed": false,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "other-site",
+            "visitor_key": "webhook_45e9c1ba667547eacb61ba51edb9a0c8d52303462a5b2e72eea68e51945fef14"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "recent_visitor_no_match"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"other-site\",\"form\",\"s1\"]",
+          "payload_sha256": "6e80c604ef53e04e276336cd906dd32339e5654c4211fd6d7c5d129d4f660696",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "other-site",
+              "visitor_key": "webhook_45e9c1ba667547eacb61ba51edb9a0c8d52303462a5b2e72eea68e51945fef14"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "recent_visitor_no_match"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "new_visitor_receipt_replay",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T11:50:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T11:50:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [
+          {
+            "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+            "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+            "resolution": {
+              "status": "created",
+              "visitor": {
+                "source_system": "pixel",
+                "source_scope": "site",
+                "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+              },
+              "method": "new_visitor",
+              "confidence": 0,
+              "diagnostics": [
+                {
+                  "code": "identity_unavailable"
+                }
+              ]
+            }
+          }
+        ],
+        "policy": {
+          "page_rule_window_minutes": 10,
+          "recent_visitor_window_minutes": 30,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+        "replayed": true,
+        "resolution": {
+          "status": "created",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+          },
+          "method": "new_visitor",
+          "confidence": 0,
+          "diagnostics": [
+            {
+              "code": "identity_unavailable"
+            }
+          ]
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "809d04aad9ccc7ec53263b37f9d92986214bb4dac8584cb183e5cf2787097f42",
+          "resolution": {
+            "status": "created",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "webhook_dce73e63fd60283d0ce7ac12da5da257978223decc01a928edec0c9942998178"
+            },
+            "method": "new_visitor",
+            "confidence": 0,
+            "diagnostics": [
+              {
+                "code": "identity_unavailable"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "zero_window_exact_timestamp",
+      "kind": "resolution",
+      "input": {
+        "submission": {
+          "source_system": "pixel",
+          "source_scope": "site",
+          "provider": "form",
+          "submission_key": "s1",
+          "occurred_at": "2026-01-10T12:00:00Z",
+          "email": "person@example.com"
+        },
+        "visitors": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "last_seen_at": "2026-01-10T12:00:00Z"
+          }
+        ],
+        "page_rule_events": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "page_rule_event_key": "p1",
+            "event_at": "2026-01-10T11:55:00Z"
+          }
+        ],
+        "recent_identity_edges": [
+          {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1",
+            "evidence_key": "e1",
+            "evidence_at": "2026-01-10T12:00:00Z",
+            "email_hash": "542d240129883c019e106e3b1b2d3f3cb3537c43c425364de8e951d5a3083345",
+            "phone_hash": null
+          }
+        ],
+        "receipts": [],
+        "policy": {
+          "page_rule_window_minutes": 0,
+          "recent_visitor_window_minutes": 0,
+          "confidence": {
+            "visitor_field": 1,
+            "page_rule": 0.8,
+            "recent_visitor": 0.8,
+            "new_visitor": 0
+          }
+        }
+      },
+      "expected": {
+        "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+        "payload_sha256": "9de9412f064bc37c22967418da0b6756b059afaa7963c8faccb3f4824a277b31",
+        "replayed": false,
+        "resolution": {
+          "status": "matched",
+          "visitor": {
+            "source_system": "pixel",
+            "source_scope": "site",
+            "visitor_key": "v1"
+          },
+          "method": "recent_visitor",
+          "confidence": 0.8,
+          "diagnostics": []
+        },
+        "receipt": {
+          "receipt_key": "[\"pixel\",\"site\",\"form\",\"s1\"]",
+          "payload_sha256": "9de9412f064bc37c22967418da0b6756b059afaa7963c8faccb3f4824a277b31",
+          "resolution": {
+            "status": "matched",
+            "visitor": {
+              "source_system": "pixel",
+              "source_scope": "site",
+              "visitor_key": "v1"
+            },
+            "method": "recent_visitor",
+            "confidence": 0.8,
+            "diagnostics": []
+          }
+        }
+      }
+    }
+  ]
+}

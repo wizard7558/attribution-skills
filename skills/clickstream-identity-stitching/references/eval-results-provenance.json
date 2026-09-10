@@ -1,0 +1,457 @@
+{
+  "attempts": 18,
+  "context_hashes": {
+    "SKILL.md": "5d2a539b0342df5102114fd07dd73a07afcce132c2770b2aa72f57ae84a83f59",
+    "references/identity-quick-reference.md": "de64e9d6aeda9c9672df90b75bfc00ae79bd405d972dd683e24f922cd265a9cf"
+  },
+  "finished_at": "2026-09-09T07:10:21.614120+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_mismatch": {
+    "context_hashes_match_current": true,
+    "current_manifest_sha256": "71a0c119cd2642e44e6372a18b72108a2cf6ddfccc0910b569e48e203985d2c6",
+    "reason": "Historical evidence archived under a prior eval-cases.json manifest; scores are preserved from the original execution without recomputation against the revised manifest.",
+    "rescore_skipped": true,
+    "source_cases_sha256": "9e2b5e6e057e2005dd976f8f8806e2b716ac3d246800fd599d8da5caffb96d22"
+  },
+  "manifest_sha256": "9e2b5e6e057e2005dd976f8f8806e2b716ac3d246800fd599d8da5caffb96d22",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "clickstream-identity-model-matrix-20260909.json",
+  "public_results_sha256": "e899b2749535444fae2dcee2437b5cf48f4c96aa026b41ca8a16e33685141502",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/dedup-and-direct-entry/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c0a81bee30009bec38d4621a06513f5b9d435cca7345853e9c349c5f937a04cf"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/dedup-and-direct-entry/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "7ba1226105853a7030aebfa36cab8a24673eae82ff594dc64509a251bd472325"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "dd43e68ed144b809aa262d39efcaaaba29f1f4d97f09634678c8f863ec4a381c"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c24aeba679b4d0b94a4644a5e04e5ce06751930b99ed51c6bcee65063f382891"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/webhook-stitch-and-receipts/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "ac434e994f3cfbda6b5a9c9f7ed0da54b51a00bb7d73ff44a0b821d71960444e"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/webhook-stitch-and-receipts/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "38084bb0e55c378acf21bb2f2a21016737694e93b7e39b94f23617c8ea013cf6"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/dedup-and-direct-entry/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "361a55f1a4f1446ddfdfd78d97df88971b67ed0f2748c7c30dc8f3055b426eb5"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/dedup-and-direct-entry/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0c56c436b2414889184b0b23058291ce71b26190b7857c5eef97b461fa668918"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "ea4cc1caa4a49b2f7029e6015f88bfae6c7e2eeddde8ebb661808ebda13cebb4"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "bab0b04ba6dc7c0b60297691b992031d95f14604692b9dd4a2462eac5d9c6b2e"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/webhook-stitch-and-receipts/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "b374a60e85a4f186befe2792d5d9b3b81ef31388a10662629c23f931af5cbc61"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/webhook-stitch-and-receipts/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "f7f547dc6f02a76f93a1fa12ad7e92045bcf8ae1e241b9a4dca753c48ea08ffb"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/dedup-and-direct-entry/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "6927bf9c2ee8ed543d1a88d262ac1a3be3d7fa117552157bbb1711d8d5f89d96"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/with-skill/dedup-and-direct-entry/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "34399c033ac1042fd9dc94202ac94c970be5c0a78d033424f17d4253adf84e5f"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/dedup-and-direct-entry/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "1aa459109496fdc1c6114294a9b90fc7e648842ceb3b326c5d0c0034d97c66c7"
+    },
+    {
+      "pointer": "/models/claude-sonnet-5/without-skill/dedup-and-direct-entry/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "e1e230774d237180f2b82d9db6171ee569470190e72a5a96265568238d03a2a1"
+    }
+  ],
+  "rescore": "Skipped: source cases_sha256 does not match current eval-cases.json. Recorded scores and check statuses are preserved from the original execution.",
+  "source_archive_sha256": "616639b76d9b32502ad7325d4a7065390a6536eabf7cdd284fb6150542b2a7d8",
+  "started_at": "2026-09-09T06:28:34.086573+00:00",
+  "summaries": [
+    {
+      "checks": 2016,
+      "condition": "with-skill",
+      "model": "claude-fable-5-1",
+      "passed": 2004,
+      "usable_calls": 3
+    },
+    {
+      "checks": 2016,
+      "condition": "without-skill",
+      "model": "claude-fable-5-1",
+      "passed": 1910,
+      "usable_calls": 3
+    },
+    {
+      "checks": 312,
+      "condition": "with-skill",
+      "model": "claude-sonnet-5",
+      "passed": 312,
+      "usable_calls": 1
+    },
+    {
+      "checks": 312,
+      "condition": "without-skill",
+      "model": "claude-sonnet-5",
+      "passed": 288,
+      "usable_calls": 1
+    },
+    {
+      "checks": 828,
+      "condition": "with-skill",
+      "model": "qwen3:4b",
+      "passed": 534,
+      "usable_calls": 2
+    },
+    {
+      "checks": 2016,
+      "condition": "without-skill",
+      "model": "qwen3:4b",
+      "passed": 619,
+      "usable_calls": 3
+    }
+  ],
+  "transport_failures": 4,
+  "usable_calls": 13,
+  "verified_cells": [
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "claude-fable-5-1",
+      "passed": 312,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "6ded0bf895e4aef910f53c83d0a7a2b498a779a632d61c5179eb0f5bf6dfbafd",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-fable-5-1",
+      "passed": 1176,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": "5e9c8f7fbaec750fd724f144241fec14dd6895eb0a4351876054b78ab5906a75",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-fable-5-1",
+      "passed": 516,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "e682478be07a8118c45ec0c4c7f58c52228c8cf2874529632e1a18c4573ad0de",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "claude-fable-5-1",
+      "passed": 294,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "743926674772eec69f70e752e56eb5c19a31b7deb0d4ae6c6b571cdbffe247ab",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-fable-5-1",
+      "passed": 1128,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": "c0a66935d28552eb8bc1cdc67bfcf9ba00bab45c9a0deb8da5a7d8dd5779db80",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-fable-5-1",
+      "passed": 488,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "06c719f73c647ba08cd616d5d74827922d4cafe5452118e76b50ebca7d2bcf92",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "claude-sonnet-5",
+      "passed": 312,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "d190e536250901980fcb8633dd481d26f4420a7f1d2bc562754f73e23f9d0cd0",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "transport_failure",
+      "condition": "with-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": false
+    },
+    {
+      "checks": 516,
+      "completion_status": "transport_failure",
+      "condition": "with-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": false
+    },
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "claude-sonnet-5",
+      "passed": 288,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "8511eb5a8c2f8aca5e3147b9f37e3235bd19c12fa9f07a854c60c62eb8491239",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "transport_failure",
+      "condition": "without-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": false
+    },
+    {
+      "checks": 516,
+      "completion_status": "transport_failure",
+      "condition": "without-skill",
+      "errors": [
+        "transport_failure",
+        "model_identity_missing",
+        "invalid_structure"
+      ],
+      "group": "webhook-stitch-and-receipts",
+      "model": "claude-sonnet-5",
+      "passed": 0,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": null,
+      "schema_passed": false,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": false
+    },
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "qwen3:4b",
+      "passed": 182,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "8d605b49a1ad50076b80e7178bb4fd4ba2c6ef218494011f14fa10b4b0a4e12f",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "incomplete",
+      "condition": "with-skill",
+      "errors": [
+        "JSONDecodeError: Expecting property name enclosed in double quotes: line 2128 column 33 (char 40948)",
+        "invalid_structure",
+        "incomplete_output"
+      ],
+      "group": "non-destructive-identity-graph",
+      "model": "qwen3:4b",
+      "passed": 0,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": "172db9c8849384a91c86d82bae2eeb8616b51cb5d1d17115abec86195364bab2",
+      "schema_passed": false,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": false
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "qwen3:4b",
+      "passed": 352,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "dc7533c4d41be598fe9a8dc52eafc6f361764ca444ada0bf304bfd1e421aab2d",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 312,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "dedup-and-direct-entry",
+      "model": "qwen3:4b",
+      "passed": 149,
+      "prompt_sha256": "302d4689d83f9c5e68bbccccc121cff20d72abb2cd645a6a900a9fc02e02927c",
+      "raw_model_content_sha256": "0862dd5c5680f7c96895510fd41de3e593597eb7df1db9cc22fb5c38e4c88b9c",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "qwen3:4b",
+      "passed": 122,
+      "prompt_sha256": "3adcc49d479aee369085f2bf981d1d04033ea0e7d073993085f72b9015771106",
+      "raw_model_content_sha256": "f1c011e128db21cef7b965c0164b64f4390f0bca2780f84e287e4457c09360ec",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    },
+    {
+      "checks": 516,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "webhook-stitch-and-receipts",
+      "model": "qwen3:4b",
+      "passed": 348,
+      "prompt_sha256": "8919a1bbf159e117698c63061b4b84adc7be91cf89ff36adbc9a81a43eef2dc5",
+      "raw_model_content_sha256": "06725323a9c51460b1b5f98dfa9d1c709ba2e7d09aa9aba679cefbc976583836",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.266 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}

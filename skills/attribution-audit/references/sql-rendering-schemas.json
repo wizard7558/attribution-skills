@@ -1,0 +1,1054 @@
+{
+  "contract_version": "0.1.0",
+  "entries": {
+    "crm-paid-attribution/attribute_leads_sql": {
+      "sql_path": "references/sql/attribute_leads.sql",
+      "source_sha256": "ffddf128be3f17148543e7edf4281c9ba5b4fbd04870f0ab906c538a821bf09c",
+      "result_kind": "rows",
+      "mode": "crm",
+      "tables": {
+        "crm_configuration": {
+          "options_json": "STRING"
+        },
+        "crm_lead_input": {
+          "input_position": "INT64",
+          "lead_json": "STRING"
+        }
+      }
+    },
+    "funnel-truth-and-cost-per-stage/stage_truth": {
+      "sql_path": "references/sql/stage_truth.sql",
+      "source_sha256": "caa6f6efc0d3d542185cb91ca8ea5a9d9f491a9e863cb099543d2d84b03b9298",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/scripts/test-stage-truth.mjs",
+        "sha256": "974576a99744bc03a7b5f0e5c44c0c1108ea8e723e14e129dac41717797a2dcd",
+        "start_line": 15,
+        "end_line": 23
+      },
+      "configuration_table": "invocation_input",
+      "tables": {
+        "invocation_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "report_timezone": "STRING",
+          "as_of": "TIMESTAMP",
+          "opportunities_complete": "BOOL"
+        },
+        "lead_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "created_at": "TIMESTAMP",
+          "status": "STRING",
+          "is_converted": "BOOL",
+          "converted_at": "TIMESTAMP",
+          "qualified_at": "TIMESTAMP",
+          "is_attribution_primary": "BOOL",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "ad_key": "STRING"
+        },
+        "stage_input": {
+          "invocation_key": "STRING",
+          "stage_key": "STRING",
+          "stage_order": "FLOAT64",
+          "stage_kind": "STRING"
+        },
+        "exclusion_input": {
+          "invocation_key": "STRING",
+          "stage_key": "STRING",
+          "status": "STRING"
+        },
+        "opportunity_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "opportunity_key": "STRING",
+          "lead_source_system": "STRING",
+          "lead_source_scope": "STRING",
+          "lead_key": "STRING",
+          "is_won": "BOOL",
+          "won_at": "TIMESTAMP",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING"
+        },
+        "event_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "event_key": "STRING",
+          "lead_source_system": "STRING",
+          "lead_source_scope": "STRING",
+          "lead_key": "STRING",
+          "stage_key": "STRING",
+          "occurred_at": "TIMESTAMP"
+        }
+      },
+      "input_keys": {
+        "invocation_input": "configuration",
+        "lead_input": "leads",
+        "stage_input": "stages",
+        "exclusion_input": "exclusions",
+        "opportunity_input": "opportunities",
+        "event_input": "events"
+      }
+    },
+    "funnel-truth-and-cost-per-stage/cost_per_stage": {
+      "sql_path": "references/sql/cost_per_stage.sql",
+      "source_sha256": "4b358ef9d8569d1a52e1da44a79dda6eb2bb799d5a8aecfc26afb9cbe197951c",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/scripts/test-cost-per-stage.mjs",
+        "sha256": "545dbf9dca21ab6c8b1197c35ff2e02b307f0a2cf7dfb0e0aad5b3250b8e2aae",
+        "start_line": 15,
+        "end_line": 26
+      },
+      "configuration_table": "invocation_input",
+      "tables": {
+        "invocation_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "spend_complete": "BOOL"
+        },
+        "stage_input": {
+          "invocation_key": "STRING",
+          "stage_key": "STRING",
+          "stage_order": "FLOAT64",
+          "stage_kind": "STRING"
+        },
+        "stage_ledger_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "stage_key": "STRING",
+          "stage_order": "FLOAT64",
+          "stage_kind": "STRING",
+          "achieved": "BOOL",
+          "cohort_at": "TIMESTAMP",
+          "stage_entered_at": "TIMESTAMP",
+          "is_attribution_primary": "BOOL",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING",
+          "stage_truth_status": "STRING",
+          "attribution": {
+            "channel": "STRING",
+            "taxonomy_version": "STRING",
+            "network_id": "STRING",
+            "campaign_key": "STRING",
+            "ad_source_system": "STRING",
+            "ad_source_scope": "STRING",
+            "ad_key": "STRING"
+          }
+        },
+        "crm_attribution_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "quality_status": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "ad_key": "STRING",
+          "ad_match_status": "STRING",
+          "candidate_ads": [
+            {
+              "source_system": "STRING",
+              "source_scope": "STRING",
+              "ad_key": "STRING",
+              "campaign_key": "STRING"
+            }
+          ]
+        },
+        "account_currency_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "network_id": "STRING",
+          "currency": "STRING"
+        },
+        "campaign_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING"
+        },
+        "binding_input": {
+          "invocation_key": "STRING",
+          "crm_source_system": "STRING",
+          "crm_source_scope": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "platform": "STRING",
+          "entity_type": "STRING"
+        },
+        "spend_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "spend_key": "STRING",
+          "event_date": "DATE",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING",
+          "spend": "NUMERIC",
+          "currency": "STRING",
+          "spend_status": "STRING"
+        }
+      },
+      "input_keys": {
+        "invocation_input": "configuration",
+        "stage_input": "stage_input",
+        "stage_ledger_input": "stage_ledger_input",
+        "crm_attribution_input": "crm_attribution_input",
+        "account_currency_input": "account_currency_input",
+        "campaign_input": "campaign_input",
+        "binding_input": "binding_input",
+        "spend_input": "spend_input"
+      }
+    },
+    "funnel-truth-and-cost-per-stage/refresh_partitions": {
+      "sql_path": "references/sql/refresh_partitions.sql",
+      "source_sha256": "8b6f92380bb7b6fbdfb7ccddcf5067e8bbf5535b1e2c67300922dc857a264fd4",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/funnel-truth-and-cost-per-stage/scripts/test-refresh-partitions.mjs",
+        "sha256": "6511c039ecb061b7c5b7bb07d2e48c614fa8b7ad0c4e9ecb54e4002a746d975b",
+        "start_line": 12,
+        "end_line": 15
+      },
+      "configuration_table": "invocation_input",
+      "tables": {
+        "invocation_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "report_timezone": "STRING",
+          "prior_report_timezone": "STRING",
+          "prior_watermark": "TIMESTAMP",
+          "as_of": "TIMESTAMP",
+          "overlap_days": "INT64",
+          "change_feed_complete": "BOOL",
+          "prior_snapshot_complete": "BOOL",
+          "current_snapshot_complete": "BOOL"
+        },
+        "prior_ledger_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "stage_key": "STRING",
+          "stage_order": "INT64",
+          "stage_kind": "STRING",
+          "achieved": "BOOL",
+          "cohort_at": "TIMESTAMP",
+          "stage_entered_at": "TIMESTAMP",
+          "cohort_date": "DATE",
+          "activity_date": "DATE",
+          "is_attribution_primary": "BOOL",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING",
+          "evidence_keys": [
+            {
+              "source_system": "STRING",
+              "source_scope": "STRING",
+              "record_kind": "STRING",
+              "record_key": "STRING"
+            }
+          ],
+          "stage_truth_status": "STRING",
+          "attribution": {
+            "channel": "STRING",
+            "taxonomy_version": "STRING",
+            "network_id": "STRING",
+            "campaign_key": "STRING",
+            "ad_source_system": "STRING",
+            "ad_source_scope": "STRING",
+            "ad_key": "STRING"
+          }
+        },
+        "current_ledger_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "stage_key": "STRING",
+          "stage_order": "INT64",
+          "stage_kind": "STRING",
+          "achieved": "BOOL",
+          "cohort_at": "TIMESTAMP",
+          "stage_entered_at": "TIMESTAMP",
+          "cohort_date": "DATE",
+          "activity_date": "DATE",
+          "is_attribution_primary": "BOOL",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING",
+          "evidence_keys": [
+            {
+              "source_system": "STRING",
+              "source_scope": "STRING",
+              "record_kind": "STRING",
+              "record_key": "STRING"
+            }
+          ],
+          "stage_truth_status": "STRING",
+          "attribution": {
+            "channel": "STRING",
+            "taxonomy_version": "STRING",
+            "network_id": "STRING",
+            "campaign_key": "STRING",
+            "ad_source_system": "STRING",
+            "ad_source_scope": "STRING",
+            "ad_key": "STRING"
+          }
+        },
+        "change_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "change_key": "STRING",
+          "changed_at": "TIMESTAMP",
+          "reason": "STRING"
+        }
+      },
+      "input_keys": {
+        "invocation_input": "configuration",
+        "prior_ledger_input": "prior_ledger_input",
+        "current_ledger_input": "current_ledger_input",
+        "change_input": "change_input"
+      }
+    },
+    "multi-touch-models-sql/credit_ledger": {
+      "sql_path": "references/sql/credit_ledger.sql",
+      "source_sha256": "22093241c0f7aefa976f53dc17336f30f81325549f4eeea12cb367c804394a1d",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/multi-touch-models-sql/scripts/test-credit-ledger.mjs",
+        "sha256": "3400cbe6b7a4b1ffc7d43e38262ba592932191ac3c889929e46b9ba7dee53e03",
+        "start_line": 14,
+        "end_line": 20
+      },
+      "configuration_table": "invocation_input",
+      "tables": {
+        "invocation_input": {
+          "invocation_key": "STRING",
+          "report_timezone": "STRING",
+          "report_start_date": "DATE",
+          "report_end_date": "DATE",
+          "as_of": "TIMESTAMP",
+          "requested_lookback_days": "INT64",
+          "min_lookback_days": "INT64",
+          "max_lookback_days": "INT64",
+          "half_life_days": "FLOAT64",
+          "conversion_window_mode": "STRING"
+        },
+        "touch_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "touch_key": "STRING",
+          "visitor_key": "STRING",
+          "occurred_at": "TIMESTAMP",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "subject_source_system": "STRING",
+          "subject_source_scope": "STRING",
+          "subject_key": "STRING"
+        },
+        "conversion_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "conversion_key": "STRING",
+          "occurred_at": "TIMESTAMP",
+          "subject_source_system": "STRING",
+          "subject_source_scope": "STRING",
+          "subject_key": "STRING",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING"
+        }
+      },
+      "input_keys": {
+        "invocation_input": "configuration",
+        "touch_input": "touches",
+        "conversion_input": "conversions"
+      }
+    },
+    "multi-touch-models-sql/attribution_metrics": {
+      "sql_path": "references/sql/attribution_metrics.sql",
+      "source_sha256": "fd41bbd4c6056f6f7e009aa0ab2aafdf285dfeddc250045e562676fee84b040e",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/multi-touch-models-sql/scripts/test-attribution-metrics.mjs",
+        "sha256": "a5a55c322522f10f5cb177ad2ad5aaa897d8a3120a65fcbfb6286657a7d8a3ae",
+        "start_line": 11,
+        "end_line": 12
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start_date": "DATE",
+          "report_end_date": "DATE",
+          "as_of": "TIMESTAMP",
+          "selected_model": "STRING",
+          "conversion_window_mode": "STRING",
+          "spend_complete": "BOOL",
+          "outcome_kind": "STRING",
+          "acquisition_history_complete": "BOOL"
+        },
+        "conversion_scope_input": {
+          "source_system": "STRING",
+          "source_scope": "STRING"
+        },
+        "spend_scope_input": {
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "currency": "STRING"
+        },
+        "ledger_input": {
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "conversion_key": "STRING",
+          "touch_source_system": "STRING",
+          "touch_source_scope": "STRING",
+          "touch_key": "STRING",
+          "conversion_at": "TIMESTAMP",
+          "conversion_date": "DATE",
+          "touch_at": "TIMESTAMP",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "model": "STRING",
+          "credit": "FLOAT64",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING",
+          "conversion_window_mode": "STRING",
+          "report_timezone": "STRING",
+          "report_start_date": "DATE",
+          "report_end_date": "DATE",
+          "as_of": "TIMESTAMP"
+        },
+        "coverage_input": {
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "conversion_key": "STRING",
+          "model": "STRING",
+          "conversion_at": "TIMESTAMP",
+          "conversion_date": "DATE",
+          "value": "NUMERIC",
+          "currency": "STRING",
+          "value_status": "STRING",
+          "conversion_window_mode": "STRING",
+          "eligible_touch_count": "INT64",
+          "total_credit": "FLOAT64",
+          "status": "STRING"
+        },
+        "spend_input": {
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "spend_key": "STRING",
+          "event_date": "DATE",
+          "date_timezone": "STRING",
+          "channel": "STRING",
+          "taxonomy_version": "STRING",
+          "spend": "NUMERIC",
+          "currency": "STRING",
+          "spend_status": "STRING"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "conversion_scope_input": "conversion_scopes",
+        "spend_scope_input": "spend_scopes",
+        "ledger_input": "ledger",
+        "coverage_input": "coverage",
+        "spend_input": "spend"
+      }
+    },
+    "attribution-data-quality-tripwires/spend_conservation": {
+      "sql_path": "scripts/spend-conservation.sql",
+      "source_sha256": "1243c093c40f857678df9b73071a268a0bce2591e1729d636503944bbffb2a24",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/reconciliation-fixtures.json",
+        "sha256": "b6705f4bbd56012a8e0c0bf14c5bdfe99315b2006f888eabd311d457a5cc82e9"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "crm_source_system": "STRING",
+          "crm_source_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "stage_key": "STRING",
+          "source_complete": "BOOL",
+          "report_complete": "BOOL",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "abs_tolerance": "NUMERIC",
+          "relative_tolerance": "NUMERIC"
+        },
+        "source_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "spend_key": "STRING",
+          "event_date": "DATE",
+          "spend": "NUMERIC",
+          "currency": "STRING",
+          "spend_status": "STRING",
+          "included": "BOOL"
+        },
+        "report_input": {
+          "invocation_key": "STRING",
+          "report_date": "DATE",
+          "stage_key": "STRING",
+          "stage_order": "INT64",
+          "stage_kind": "STRING",
+          "channel": "STRING",
+          "channel_status": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "bucket": "STRING",
+          "crm_source_system": "STRING",
+          "crm_source_scope": "STRING",
+          "date_mode": "STRING",
+          "report_timezone": "STRING",
+          "taxonomy_version": "STRING",
+          "spend_fact_count": "INT64",
+          "observed_spend": "NUMERIC",
+          "observed_spend_currency": "STRING",
+          "observed_spend_status": "STRING"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "source_input": "source",
+        "report_input": "report",
+        "membership_input": "membership"
+      }
+    },
+    "attribution-data-quality-tripwires/funnel_additivity": {
+      "sql_path": "scripts/funnel-additivity.sql",
+      "source_sha256": "330f372ca987210cdc1599eae2c117499798d961cacc84f689bb861dd9a89ed4",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/reconciliation-fixtures.json",
+        "sha256": "b6705f4bbd56012a8e0c0bf14c5bdfe99315b2006f888eabd311d457a5cc82e9"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "crm_source_system": "STRING",
+          "crm_source_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "stage_key": "STRING",
+          "source_complete": "BOOL",
+          "report_complete": "BOOL",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING"
+        },
+        "source_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "lead_key": "STRING",
+          "stage_key": "STRING",
+          "report_date": "DATE",
+          "included": "BOOL",
+          "achieved": "BOOL",
+          "is_attribution_primary": "BOOL"
+        },
+        "report_input": {
+          "invocation_key": "STRING",
+          "report_date": "DATE",
+          "stage_key": "STRING",
+          "stage_order": "INT64",
+          "stage_kind": "STRING",
+          "channel": "STRING",
+          "channel_status": "STRING",
+          "network_id": "STRING",
+          "campaign_key": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "bucket": "STRING",
+          "crm_source_system": "STRING",
+          "crm_source_scope": "STRING",
+          "date_mode": "STRING",
+          "report_timezone": "STRING",
+          "taxonomy_version": "STRING",
+          "lead_count": "INT64",
+          "stage_count_total": "INT64",
+          "stage_count_primary": "INT64",
+          "stage_unknown_count": "INT64"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "source_input": "source",
+        "report_input": "report"
+      }
+    },
+    "attribution-data-quality-tripwires/unmapped_share": {
+      "sql_path": "scripts/unmapped-share.sql",
+      "source_sha256": "220b4a8d9d6b88f6c7237971d7093ccec4d7c30ecaf4a00ec1d3e2fef1f30a26",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "source_complete": "BOOL",
+          "threshold": "NUMERIC",
+          "min_eligible_count": "INT64"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING"
+        },
+        "source_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "record_key": "STRING",
+          "included": "BOOL",
+          "eligible": "BOOL",
+          "meets_condition": "BOOL"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "source_input": "source"
+      }
+    },
+    "attribution-data-quality-tripwires/match_rate": {
+      "sql_path": "scripts/match-rate.sql",
+      "source_sha256": "9c574a429119029c74abbd32abf57133424233efe019db37572b3d96577d4e07",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "source_complete": "BOOL",
+          "threshold": "NUMERIC",
+          "min_eligible_count": "INT64"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING"
+        },
+        "source_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "record_key": "STRING",
+          "included": "BOOL",
+          "eligible": "BOOL",
+          "meets_condition": "BOOL"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "source_input": "source"
+      }
+    },
+    "attribution-data-quality-tripwires/primary_uniqueness": {
+      "sql_path": "scripts/primary-uniqueness.sql",
+      "source_sha256": "fa1821d6528b15009122fefc0ba60a99f907de73774e8ce5781ec8f81e0bf940",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "source_complete": "BOOL"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING"
+        },
+        "source_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "record_key": "STRING",
+          "included": "BOOL",
+          "group_key": "STRING",
+          "is_attribution_primary": "BOOL"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "source_input": "source"
+      }
+    },
+    "attribution-data-quality-tripwires/source_parity": {
+      "sql_path": "scripts/source-parity.sql",
+      "source_sha256": "b4483f986cde5d7d16916e886ba9d4855600f7c3d5f5ea1c02e6053a0371e861",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/population-fixtures.json",
+        "sha256": "88e561bd4e1d0086e6a7934986a4b0cac014860958c2401be5c31b0fa7eef7da"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "metric_name": "STRING",
+          "unit": "STRING",
+          "abs_tolerance": "NUMERIC",
+          "relative_tolerance": "NUMERIC"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "reference_complete": "BOOL",
+          "observed_complete": "BOOL",
+          "reference_evidence_ref": "STRING",
+          "observed_evidence_ref": "STRING"
+        },
+        "reference_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "event_date": "DATE",
+          "count": "INT64",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "date_mode": "STRING",
+          "metric_name": "STRING"
+        },
+        "observed_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "event_date": "DATE",
+          "count": "INT64",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "date_mode": "STRING",
+          "metric_name": "STRING"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "reference_input": "reference",
+        "observed_input": "observed"
+      }
+    },
+    "attribution-data-quality-tripwires/no_pii_columns": {
+      "sql_path": "scripts/no-pii-columns.sql",
+      "source_sha256": "2c3fed3dfa233f4b11f531f6f26258cb08765a5780422dfab47c27b51b90340b",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/schema-fixtures.json",
+        "sha256": "5b5cbe7c67bc3e1769c3c847ac6e5e0f59489de87ff27d32cf47e518a4daabf1"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "table_key": "STRING",
+          "schema_complete": "BOOL",
+          "table_exists": "BOOL"
+        },
+        "column_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "table_key": "STRING",
+          "field_path": "STRING",
+          "data_type": "STRING"
+        },
+        "policy_input": {
+          "invocation_key": "STRING",
+          "rule_key": "STRING",
+          "match_kind": "STRING",
+          "pattern": "STRING"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "column_input": "columns",
+        "policy_input": "policy"
+      }
+    },
+    "attribution-data-quality-tripwires/empty_column_probe": {
+      "sql_path": "scripts/empty-column-probe.sql",
+      "source_sha256": "92b23fb4cb3e5cd735e002b884f37c86bae34fbb3ef155aa96fa9a8fddca89a1",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/empty-column-fixtures.json",
+        "sha256": "4adcc5533be8a71fa6d352d4ead1e3f8b784ab25a5a5b42828a4da460e2886a8"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "population_mode": "STRING"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "table_key": "STRING",
+          "column_key": "STRING",
+          "schema_complete": "BOOL",
+          "table_exists": "BOOL",
+          "column_exists": "BOOL",
+          "scan_complete": "BOOL"
+        },
+        "observation_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "table_key": "STRING",
+          "column_key": "STRING",
+          "row_count": "INT64",
+          "non_null_count": "INT64",
+          "population_mode": "STRING",
+          "observed_start": "DATE",
+          "observed_end": "DATE"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "observation_input": "observations"
+      }
+    },
+    "attribution-data-quality-tripwires/deleted_ad_coverage": {
+      "sql_path": "scripts/deleted-ad-coverage.sql",
+      "source_sha256": "abed98f034ce895284a8e5b1039d7f681a1697ed06d15d12c541f77b60349256",
+      "result_kind": "single_result_json",
+      "mode": "marked",
+      "schema_derivation": {
+        "path": "skills/attribution-data-quality-tripwires/references/deleted-ad-coverage-fixtures.json",
+        "sha256": "932e4dadbc9d6570b3e6bd5405fce22c4ac2d8727674b0358f9fa901308d267e"
+      },
+      "configuration_table": "configuration_input",
+      "tables": {
+        "configuration_input": {
+          "invocation_key": "STRING",
+          "report_scope": "STRING",
+          "report_timezone": "STRING",
+          "report_start": "DATE",
+          "report_end": "DATE",
+          "date_mode": "STRING",
+          "source_evidence_ref": "STRING",
+          "report_evidence_ref": "STRING",
+          "abs_tolerance": "NUMERIC",
+          "relative_tolerance": "NUMERIC"
+        },
+        "membership_input": {
+          "invocation_key": "STRING",
+          "pair_key": "STRING",
+          "ad_source_system": "STRING",
+          "ad_source_scope": "STRING",
+          "reference_source_system": "STRING",
+          "reference_source_scope": "STRING",
+          "ad_complete": "BOOL",
+          "reference_complete": "BOOL",
+          "ad_timezone": "STRING",
+          "reference_timezone": "STRING",
+          "ad_history_start": "DATE",
+          "reference_history_start": "DATE",
+          "ad_includes_deleted": "BOOL",
+          "reference_includes_deleted": "BOOL",
+          "ad_status_filter": "STRING",
+          "reference_status_filter": "STRING",
+          "ad_capture_mode": "STRING",
+          "reference_capture_mode": "STRING",
+          "comparability_evidence_ref": "STRING"
+        },
+        "ad_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "fact_key": "STRING",
+          "event_date": "DATE",
+          "campaign_key": "STRING",
+          "spend": "NUMERIC",
+          "currency": "STRING",
+          "spend_status": "STRING",
+          "ad_key": "STRING"
+        },
+        "reference_input": {
+          "invocation_key": "STRING",
+          "source_system": "STRING",
+          "source_scope": "STRING",
+          "fact_key": "STRING",
+          "event_date": "DATE",
+          "campaign_key": "STRING",
+          "spend": "NUMERIC",
+          "currency": "STRING",
+          "spend_status": "STRING"
+        }
+      },
+      "input_keys": {
+        "configuration_input": "configuration",
+        "membership_input": "membership",
+        "ad_input": "ads",
+        "reference_input": "reference"
+      }
+    },
+    "attribution-data-quality-tripwires/inspect_schema": {
+      "sql_path": "scripts/inspect-schema.sql",
+      "source_sha256": "c5c71c5265c34c93240ebd5383e6c543e96cac1db6f881ed818fa6b7ad5f24a7",
+      "result_kind": "single_result_json",
+      "mode": "parameters",
+      "parameters": {
+        "project": "STRING",
+        "dataset": "STRING",
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "table_keys": [
+          "STRING"
+        ]
+      }
+    },
+    "attribution-data-quality-tripwires/inspect_column_population": {
+      "sql_path": "scripts/inspect-column-population.sql",
+      "source_sha256": "2e4d22e033b77edd4d2cbac802b9178f49df8a63a5d36b14782033ea02828fd6",
+      "result_kind": "single_result_json",
+      "mode": "parameters",
+      "parameters": {
+        "project": "STRING",
+        "dataset": "STRING",
+        "table_name": "STRING",
+        "column_names": [
+          "STRING"
+        ],
+        "source_system": "STRING",
+        "source_scope": "STRING",
+        "population_mode": "STRING",
+        "report_timezone": "STRING",
+        "start_date": "DATE",
+        "end_date": "DATE",
+        "date_column": "STRING"
+      }
+    }
+  }
+}

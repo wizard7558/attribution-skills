@@ -21,6 +21,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import pg from "pg";
+import { createPgDatabase } from "../transaction-db.mjs";
 import { handleCollect } from "../core.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -37,7 +38,7 @@ if (!DATABASE_URL) {
 }
 
 const pool = new pg.Pool({ connectionString: DATABASE_URL });
-const db = { query: (text, params) => pool.query(text, params) };
+const db = createPgDatabase(pool);
 
 function readBody(req) {
   return new Promise((resolve, reject) => {

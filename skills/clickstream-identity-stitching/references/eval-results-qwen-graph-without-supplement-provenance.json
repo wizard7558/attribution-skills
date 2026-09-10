@@ -1,0 +1,60 @@
+{
+  "attempts": 1,
+  "context_hashes": {
+    "SKILL.md": "5d2a539b0342df5102114fd07dd73a07afcce132c2770b2aa72f57ae84a83f59",
+    "references/identity-quick-reference.md": "de64e9d6aeda9c9672df90b75bfc00ae79bd405d972dd683e24f922cd265a9cf"
+  },
+  "finished_at": "2026-09-09T20:42:59.187720+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "71a0c119cd2642e44e6372a18b72108a2cf6ddfccc0910b569e48e203985d2c6",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "identity-qwen-graph-without-raw.json",
+  "public_results_sha256": "729f55cad7deaadf553f49c53e71c598b76fcfb449caa0d4331c7b05d6153cbd",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "729f55cad7deaadf553f49c53e71c598b76fcfb449caa0d4331c7b05d6153cbd",
+  "started_at": "2026-09-09T20:41:06.310016+00:00",
+  "summaries": [
+    {
+      "checks": 1188,
+      "condition": "without-skill",
+      "model": "qwen3:4b",
+      "passed": 574,
+      "usable_calls": 1
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 1,
+  "verified_cells": [
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "qwen3:4b",
+      "passed": 574,
+      "prompt_sha256": "aff1eb0517abb87343731438ea4cbc21404fbaf03beadfbe3505b7e676a65982",
+      "raw_model_content_sha256": "d55fa52a3f09c7f0c8ce0a54127f3c7d2f5a4154e0983506c6d00c232aadf80e",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}

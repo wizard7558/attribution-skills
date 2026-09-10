@@ -11,6 +11,7 @@
 // query string with $1-style placeholders, same as `pg`.
 import postgres from "npm:postgres";
 import { handleCollect } from "../core.js";
+import { createPostgresDatabase } from "../transaction-db.mjs";
 
 const DATABASE_URL = Deno.env.get("DATABASE_URL");
 if (!DATABASE_URL) {
@@ -19,12 +20,7 @@ if (!DATABASE_URL) {
 
 // Supabase's transaction-mode pooler (port 6543) rejects prepared statements.
 const sql = postgres(DATABASE_URL, { max: 5, prepare: false });
-const db = {
-  query: async (text: string, params: unknown[]) => {
-    const rows = await sql.unsafe(text, params as never[]);
-    return { rows: Array.from(rows) };
-  },
-};
+const db = createPostgresDatabase(sql);
 
 const IP_SALT = Deno.env.get("PIXEL_IP_SALT") || "";
 const IP_RETENTION_DAYS = Number(Deno.env.get("PIXEL_IP_RETENTION_DAYS")) || 7;

@@ -1,0 +1,6005 @@
+{
+  "version": "0.1.0",
+  "cases": [
+    {
+      "id": "complete-snapshot-stage-gaps",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "all-wins-survive-later-loss",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+B",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-05T00:00:00Z",
+            "value": 50,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "LaterLoss",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": false,
+            "won_at": "2026-01-20T00:00:00Z",
+            "value": null,
+            "currency": null,
+            "value_status": "unknown"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": 150,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "identical-duplicates-idempotent",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          },
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          },
+          {
+            "stage_key": "qualified",
+            "status": " REJECTED "
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "Event+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-03T00:00:00Z"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "Event+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-03T00:00:00Z"
+          }
+        ]
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-03T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-03",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "event",
+                "record_key": "Event+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 1,
+          "duplicate_stages_collapsed": 1,
+          "duplicate_opportunities_collapsed": 1,
+          "duplicate_events_collapsed": 1
+        }
+      }
+    },
+    {
+      "id": "unknown-winning-money",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+B",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": "USD",
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "mixed-winning-currencies",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+B",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "EUR",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "mixed_currency",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "incomplete-feed-and-nonprimary-metadata",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": false
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": false,
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "network_id": "google_ads",
+            "campaign_key": "Campaign+Case",
+            "ad_source_system": "synthetic_ads",
+            "ad_source_scope": "account-a",
+            "ad_key": "Ad+Case"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Win+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": false,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": "Paid Search",
+              "taxonomy_version": "0.1.0",
+              "network_id": "google_ads",
+              "campaign_key": "Campaign+Case",
+              "ad_source_system": "synthetic_ads",
+              "ad_source_scope": "account-a",
+              "ad_key": "Ad+Case"
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": false,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": "Paid Search",
+              "taxonomy_version": "0.1.0",
+              "network_id": "google_ads",
+              "campaign_key": "Campaign+Case",
+              "ad_source_system": "synthetic_ads",
+              "ad_source_scope": "account-a",
+              "ad_key": "Ad+Case"
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": false,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": "Paid Search",
+              "taxonomy_version": "0.1.0",
+              "network_id": "google_ads",
+              "campaign_key": "Campaign+Case",
+              "ad_source_system": "synthetic_ads",
+              "ad_source_scope": "account-a",
+              "ad_key": "Ad+Case"
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": false,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": "Paid Search",
+              "taxonomy_version": "0.1.0",
+              "network_id": "google_ads",
+              "campaign_key": "Campaign+Case",
+              "ad_source_system": "synthetic_ads",
+              "ad_source_scope": "account-a",
+              "ad_key": "Ad+Case"
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": false,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": "Paid Search",
+              "taxonomy_version": "0.1.0",
+              "network_id": "google_ads",
+              "campaign_key": "Campaign+Case",
+              "ad_source_system": "synthetic_ads",
+              "ad_source_scope": "account-a",
+              "ad_key": "Ad+Case"
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": null,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "unknown",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 1,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "excluded-and-unknown-status",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": " REJECTED ",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": null,
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "  ",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": null,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "unknown",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+C"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": null,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "unknown",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "undated-flags-and-explicit-zero",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": null,
+            "status": "accepted",
+            "is_converted": true,
+            "converted_at": null,
+            "qualified_at": null,
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": null,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "ZeroWin",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": null,
+            "value": 0,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "UnknownFlag",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "is_won": null,
+            "won_at": null,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown"
+          }
+        ],
+        "events": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "UndatedEvent",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": null
+          }
+        ]
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": null,
+            "stage_entered_at": null,
+            "cohort_date": null,
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": null,
+            "stage_entered_at": null,
+            "cohort_date": null,
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": true,
+            "cohort_at": null,
+            "stage_entered_at": null,
+            "cohort_date": null,
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": null,
+            "stage_entered_at": null,
+            "cohort_date": null,
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": 0,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "ZeroWin"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": true,
+            "cohort_at": null,
+            "stage_entered_at": null,
+            "cohort_date": null,
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "event",
+                "record_key": "UndatedEvent"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": null,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "unknown",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": null,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "unknown",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+B",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+C"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+C"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+C",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "future-evidence-and-leads-excluded",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": true,
+            "converted_at": "2026-02-02T00:00:00Z",
+            "qualified_at": "2026-02-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "FutureLead",
+            "created_at": "2026-02-02T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "FutureWin",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-02-02T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "FutureEvent",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-02-02T00:00:00Z"
+          }
+        ]
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "pending_future_evidence",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "pending_future_evidence",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "pending_future_evidence",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "pending_future_evidence",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 1,
+          "future_events_excluded": 1,
+          "future_qualified_timestamps": 1,
+          "future_converted_timestamps": 1,
+          "future_wins_excluded": 1,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "timezone-offset-asof-inclusive-event-tie",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "America/Los_Angeles",
+          "as_of": "2026-01-02T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:30:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": null,
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "Event+Z",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-01T16:00:00-08:00"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "Event+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-02T00:00:00Z"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "Event+Future",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-02T00:00:00.001Z"
+          }
+        ]
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:30:00Z",
+            "stage_entered_at": "2026-01-01T00:30:00Z",
+            "cohort_date": "2025-12-31",
+            "activity_date": "2025-12-31",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:30:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2025-12-31",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved_undated",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:30:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2025-12-31",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:30:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2025-12-31",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:30:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2025-12-31",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "event",
+                "record_key": "Event+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 1,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "earliest-known-win-includes-undated-value",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "UndatedWin",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": null,
+            "value": 50,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "DatedWin",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-05T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-05T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-05",
+            "is_attribution_primary": true,
+            "value": 150,
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "DatedWin"
+              },
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "UndatedWin"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "complete-all-known-losses",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Loss+A",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": false,
+            "won_at": null,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "Loss+B",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": false,
+            "won_at": null,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "mixed-status-input-preserved",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "MixedWin",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": null,
+            "currency": null,
+            "value_status": "mixed_currency"
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "mixed_currency",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "opportunity",
+                "record_key": "MixedWin"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "empty-lead-population",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expected": {
+        "ledger": [],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "conflicting-stage-key",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          },
+          {
+            "stage_key": "lead",
+            "stage_order": 5,
+            "stage_kind": "lead"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "conflicting stage key"
+    },
+    {
+      "id": "conflicting-stage-order",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          },
+          {
+            "stage_key": "another",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "conflicting stage order"
+    },
+    {
+      "id": "fractional-stage-order",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 1.5,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid stage configuration"
+    },
+    {
+      "id": "conflicting-lead-snapshot",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "different",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "conflicting lead snapshot"
+    },
+    {
+      "id": "conflicting-opportunity-payload",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "SameID",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "SameID",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 50,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expectedError": "conflicting opportunity payload"
+    },
+    {
+      "id": "conflicting-event-payload",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "SameID",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-03T00:00:00Z"
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "event_key": "SameID",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "occurred_at": "2026-01-04T00:00:00Z"
+          }
+        ]
+      },
+      "expectedError": "conflicting event payload"
+    },
+    {
+      "id": "cross-source-lead-reference",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "CrossSource",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "other-scope",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": 100,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expectedError": "invalid qualified lead reference"
+    },
+    {
+      "id": "unknown-money-cannot-be-known-zero",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "opportunity_key": "InvalidMoney",
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "value": null,
+            "currency": "USD",
+            "value_status": "known"
+          }
+        ],
+        "events": []
+      },
+      "expectedError": "invalid monetary value contract"
+    },
+    {
+      "id": "invalid-timezone",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "Mars/Olympus",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "Invalid time zone"
+    },
+    {
+      "id": "missing-completeness-flag",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z"
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid required invocation configuration"
+    },
+    {
+      "id": "missing-invocation-config",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": [],
+        "configuration_rows": []
+      },
+      "expectedError": "input has no invocation configuration"
+    },
+    {
+      "id": "duplicate-invocation-config",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": [],
+        "configuration_rows": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "report_timezone": "UTC",
+            "as_of": "2026-02-01T00:00:00Z",
+            "opportunities_complete": true
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "report_timezone": "UTC",
+            "as_of": "2026-02-01T00:00:00Z",
+            "opportunities_complete": true
+          }
+        ]
+      },
+      "expectedError": "duplicate invocation configuration"
+    },
+    {
+      "id": "cross-origin-qualified-reference-exact-decimals",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [
+          {
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "currency": "USD",
+            "value_status": "known",
+            "source_system": "external_crm",
+            "source_scope": "external-a",
+            "opportunity_key": "Win+A",
+            "value": 0.1
+          },
+          {
+            "lead_source_system": "synthetic_crm",
+            "lead_source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "is_won": true,
+            "won_at": "2026-01-04T00:00:00Z",
+            "currency": "USD",
+            "value_status": "known",
+            "source_system": "external_crm",
+            "source_scope": "external-a",
+            "opportunity_key": "Win+B",
+            "value": 0.2
+          }
+        ],
+        "events": []
+      },
+      "expected": {
+        "ledger": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-01T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-01",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-02T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-02",
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [
+              {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "record_kind": "lead",
+                "record_key": "Lead+A"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won",
+            "achieved": true,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": "2026-01-04T00:00:00Z",
+            "cohort_date": "2026-01-01",
+            "activity_date": "2026-01-04",
+            "is_attribution_primary": true,
+            "value": "0.3",
+            "currency": "USD",
+            "value_status": "known",
+            "evidence_keys": [
+              {
+                "source_system": "external_crm",
+                "source_scope": "external-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+A"
+              },
+              {
+                "source_system": "external_crm",
+                "source_scope": "external-a",
+                "record_kind": "opportunity",
+                "record_key": "Win+B"
+              }
+            ],
+            "stage_truth_status": "achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          },
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event",
+            "achieved": false,
+            "cohort_at": "2026-01-01T00:00:00Z",
+            "stage_entered_at": null,
+            "cohort_date": "2026-01-01",
+            "activity_date": null,
+            "is_attribution_primary": true,
+            "value": null,
+            "currency": null,
+            "value_status": "unknown",
+            "evidence_keys": [],
+            "stage_truth_status": "not_achieved",
+            "attribution": {
+              "channel": null,
+              "taxonomy_version": null,
+              "network_id": null,
+              "campaign_key": null,
+              "ad_source_system": null,
+              "ad_source_scope": null,
+              "ad_key": null
+            }
+          }
+        ],
+        "diagnostics": {
+          "future_leads_excluded": 0,
+          "future_events_excluded": 0,
+          "future_qualified_timestamps": 0,
+          "future_converted_timestamps": 0,
+          "future_wins_excluded": 0,
+          "incomplete_opportunity_source": 0,
+          "duplicate_leads_collapsed": 0,
+          "duplicate_stages_collapsed": 0,
+          "duplicate_opportunities_collapsed": 0,
+          "duplicate_events_collapsed": 0
+        }
+      }
+    },
+    {
+      "id": "whitespace-ad-identity",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": "ads ",
+            "ad_source_scope": "account",
+            "ad_key": "id"
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid lead identity or attribution metadata"
+    },
+    {
+      "id": "noncanonical-channel",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": "Display",
+            "taxonomy_version": "0.1.0",
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid lead identity or attribution metadata"
+    },
+    {
+      "id": "unpaired-channel-version",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": "Paid Search",
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid lead identity or attribution metadata"
+    },
+    {
+      "id": "invalid-optional-network_id",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": "   ",
+            "campaign_key": null,
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid lead identity or attribution metadata"
+    },
+    {
+      "id": "invalid-optional-campaign_key",
+      "input": {
+        "configuration": {
+          "source_system": "synthetic_crm",
+          "source_scope": "scope-a",
+          "report_timezone": "UTC",
+          "as_of": "2026-02-01T00:00:00Z",
+          "opportunities_complete": true
+        },
+        "leads": [
+          {
+            "source_system": "synthetic_crm",
+            "source_scope": "scope-a",
+            "lead_key": "Lead+A",
+            "created_at": "2026-01-01T00:00:00Z",
+            "status": "accepted",
+            "is_converted": false,
+            "converted_at": null,
+            "qualified_at": "2026-01-02T00:00:00Z",
+            "is_attribution_primary": true,
+            "channel": null,
+            "taxonomy_version": null,
+            "network_id": null,
+            "campaign_key": " Campaign+Case ",
+            "ad_source_system": null,
+            "ad_source_scope": null,
+            "ad_key": null
+          }
+        ],
+        "stages": [
+          {
+            "stage_key": "lead",
+            "stage_order": 0,
+            "stage_kind": "lead"
+          },
+          {
+            "stage_key": "qualified",
+            "stage_order": 10,
+            "stage_kind": "qualified"
+          },
+          {
+            "stage_key": "converted",
+            "stage_order": 30,
+            "stage_kind": "converted"
+          },
+          {
+            "stage_key": "won",
+            "stage_order": 70,
+            "stage_kind": "won"
+          },
+          {
+            "stage_key": "engaged",
+            "stage_order": 95,
+            "stage_kind": "event"
+          }
+        ],
+        "exclusions": [
+          {
+            "stage_key": "qualified",
+            "status": "rejected"
+          }
+        ],
+        "opportunities": [],
+        "events": []
+      },
+      "expectedError": "invalid lead identity or attribution metadata"
+    }
+  ]
+}

@@ -1,0 +1,1653 @@
+{
+  "contract_version": "0.1.0",
+  "normalization": "Only native UUID labels, native-created timestamp, transaction timestamp and database snapshot provenance are normalized for literal comparison; raw evidence retains every original value. Arrays are reordered by normalized qualified keys; graph arrays by normalized serialized objects. No business fields or identity statuses are removed.",
+  "snapshot_goldens": {
+    "main": {
+      "contract_version": "0.1.0",
+      "snapshot_evidence_ref": "snapshot-native-fixture",
+      "site_keys": [
+        "snap_a",
+        "snap_b",
+        "snap_missing"
+      ],
+      "site_presence": [
+        {
+          "site_key": "snap_a",
+          "exists": true
+        },
+        {
+          "site_key": "snap_b",
+          "exists": true
+        },
+        {
+          "site_key": "snap_missing",
+          "exists": false
+        }
+      ],
+      "transaction_started_at": "<transaction-started-at>",
+      "database_snapshot": "<database-snapshot>",
+      "source_sql_sha256": {
+        "touches": "afc2f6b1a0093c180dc226fbf3673f00106f08e309c52700b1573b9941ae3219",
+        "observations": "deba18798a6a9d7e04d1daa70f9bf1fb7ed2a20dd5241e8b3add27123863830a",
+        "contacts": "ee589cd58c5c79ddc84ba0c7d32d5906113ec2a779c480850ef3a0ec2acff932"
+      },
+      "touches": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "touch_key": "t-shared",
+          "visitor_key": "v-shared",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "touch_key": "t-unique",
+          "visitor_key": "v-unique",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_b",
+          "touch_key": "t-unique",
+          "visitor_key": "v-unique",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        }
+      ],
+      "observations": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-a",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-b",
+          "occurred_at": "2026-09-03T00:20:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-form",
+          "occurred_at": "2026-09-03T00:30:00.000000001Z",
+          "source_event_type": "form_submit",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-unique",
+          "observation_key": "o-unique-form",
+          "occurred_at": "2026-09-03T00:20:00.000000001Z",
+          "source_event_type": "form_submit",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-unique",
+          "observation_key": "o-unique-identify",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_b",
+          "visitor_key": "v-unique",
+          "observation_key": "o-unique-identify",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        }
+      ],
+      "contacts": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-a",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-b",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-legacy",
+          "email_hash": null,
+          "phone_hash": null,
+          "email_hash_format": null,
+          "phone_hash_format": null,
+          "email_hash_status": "legacy_unverified",
+          "phone_hash_status": "missing",
+          "capture_status": "no_attested_identity",
+          "native_created_at": "<native-created-at>"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_b",
+          "contact_key": "c-a",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        }
+      ]
+    },
+    "only_a": {
+      "contract_version": "0.1.0",
+      "snapshot_evidence_ref": "snapshot-native-fixture",
+      "site_keys": [
+        "snap_a"
+      ],
+      "site_presence": [
+        {
+          "site_key": "snap_a",
+          "exists": true
+        }
+      ],
+      "transaction_started_at": "<transaction-started-at>",
+      "database_snapshot": "<database-snapshot>",
+      "source_sql_sha256": {
+        "touches": "afc2f6b1a0093c180dc226fbf3673f00106f08e309c52700b1573b9941ae3219",
+        "observations": "deba18798a6a9d7e04d1daa70f9bf1fb7ed2a20dd5241e8b3add27123863830a",
+        "contacts": "ee589cd58c5c79ddc84ba0c7d32d5906113ec2a779c480850ef3a0ec2acff932"
+      },
+      "touches": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "touch_key": "t-shared",
+          "visitor_key": "v-shared",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "touch_key": "t-unique",
+          "visitor_key": "v-unique",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        }
+      ],
+      "observations": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-a",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-b",
+          "occurred_at": "2026-09-03T00:20:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-shared",
+          "observation_key": "o-shared-form",
+          "occurred_at": "2026-09-03T00:30:00.000000001Z",
+          "source_event_type": "form_submit",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-unique",
+          "observation_key": "o-unique-form",
+          "occurred_at": "2026-09-03T00:20:00.000000001Z",
+          "source_event_type": "form_submit",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "visitor_key": "v-unique",
+          "observation_key": "o-unique-identify",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        }
+      ],
+      "contacts": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-a",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-b",
+          "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        },
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_a",
+          "contact_key": "c-legacy",
+          "email_hash": null,
+          "phone_hash": null,
+          "email_hash_format": null,
+          "phone_hash_format": null,
+          "email_hash_status": "legacy_unverified",
+          "phone_hash_status": "missing",
+          "capture_status": "no_attested_identity",
+          "native_created_at": "<native-created-at>"
+        }
+      ]
+    },
+    "missing": {
+      "contract_version": "0.1.0",
+      "snapshot_evidence_ref": "snapshot-native-fixture",
+      "site_keys": [
+        "snap_missing"
+      ],
+      "site_presence": [
+        {
+          "site_key": "snap_missing",
+          "exists": false
+        }
+      ],
+      "transaction_started_at": "<transaction-started-at>",
+      "database_snapshot": "<database-snapshot>",
+      "source_sql_sha256": {
+        "touches": "afc2f6b1a0093c180dc226fbf3673f00106f08e309c52700b1573b9941ae3219",
+        "observations": "deba18798a6a9d7e04d1daa70f9bf1fb7ed2a20dd5241e8b3add27123863830a",
+        "contacts": "ee589cd58c5c79ddc84ba0c7d32d5906113ec2a779c480850ef3a0ec2acff932"
+      },
+      "touches": [],
+      "observations": [],
+      "contacts": []
+    },
+    "consistency_before": {
+      "contract_version": "0.1.0",
+      "snapshot_evidence_ref": "consistency-snapshot",
+      "site_keys": [
+        "snap_consistency"
+      ],
+      "site_presence": [
+        {
+          "site_key": "snap_consistency",
+          "exists": true
+        }
+      ],
+      "transaction_started_at": "<transaction-started-at>",
+      "database_snapshot": "<database-snapshot>",
+      "source_sql_sha256": {
+        "touches": "afc2f6b1a0093c180dc226fbf3673f00106f08e309c52700b1573b9941ae3219",
+        "observations": "deba18798a6a9d7e04d1daa70f9bf1fb7ed2a20dd5241e8b3add27123863830a",
+        "contacts": "ee589cd58c5c79ddc84ba0c7d32d5906113ec2a779c480850ef3a0ec2acff932"
+      },
+      "touches": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_consistency",
+          "touch_key": "t-consistency",
+          "visitor_key": "v-consistency",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        }
+      ],
+      "observations": [],
+      "contacts": []
+    },
+    "consistency_after": {
+      "contract_version": "0.1.0",
+      "snapshot_evidence_ref": "consistency-snapshot",
+      "site_keys": [
+        "snap_consistency"
+      ],
+      "site_presence": [
+        {
+          "site_key": "snap_consistency",
+          "exists": true
+        }
+      ],
+      "transaction_started_at": "<transaction-started-at>",
+      "database_snapshot": "<database-snapshot>",
+      "source_sql_sha256": {
+        "touches": "afc2f6b1a0093c180dc226fbf3673f00106f08e309c52700b1573b9941ae3219",
+        "observations": "deba18798a6a9d7e04d1daa70f9bf1fb7ed2a20dd5241e8b3add27123863830a",
+        "contacts": "ee589cd58c5c79ddc84ba0c7d32d5906113ec2a779c480850ef3a0ec2acff932"
+      },
+      "touches": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_consistency",
+          "touch_key": "t-consistency",
+          "visitor_key": "v-consistency",
+          "occurred_at": "2026-09-03T00:00:00.000000001Z",
+          "channel": "Paid Search",
+          "taxonomy_version": "0.1.0",
+          "utm_campaign": null,
+          "click_ids": {
+            "dclid": null,
+            "gclid": "Snapshot+Click",
+            "gbraid": null,
+            "wbraid": null,
+            "msclkid": null,
+            "fbclid": null,
+            "ttclid": null,
+            "rdt_cid": null,
+            "li_fat_id": null,
+            "twclid": null,
+            "epik": null,
+            "sccid": null,
+            "srsltid": null
+          },
+          "native_contact_id": null,
+          "export_status": "eligible"
+        }
+      ],
+      "observations": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_consistency",
+          "visitor_key": "v-consistency",
+          "observation_key": "o-consistency",
+          "occurred_at": "2026-09-03T00:10:00.000000001Z",
+          "source_event_type": "identify",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "identity_input_format": "canonical_sha256_v1",
+          "identity_normalization_version": "0.1.0",
+          "capture_status": "eligible"
+        }
+      ],
+      "contacts": [
+        {
+          "source_system": "first_party_pixel",
+          "source_scope": "snap_consistency",
+          "contact_key": "c-consistency",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": "<native-created-at>"
+        }
+      ]
+    }
+  },
+  "projection_cases": [
+    {
+      "name": "native_bindings",
+      "config": {
+        "invocation_key": "snapshot-projection",
+        "as_of": "2026-09-03T01:00:00.000000001Z",
+        "lookback_days": 1,
+        "identity_scope_bindings": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_source_system": "first_party_pixel",
+            "contact_source_scope": "snap_a"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "contact_source_system": "first_party_pixel",
+            "contact_source_scope": "snap_b"
+          }
+        ],
+        "identity_input_format": "canonical_sha256_v1",
+        "identity_normalization_version": "0.1.0"
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "snapshot-projection",
+        "snapshot_evidence_ref": "snapshot-native-fixture",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-a\"]",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "contact_key": "c-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-b\"]",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "contact_key": "c-b"
+              },
+              "evidence": {
+                "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-form\"]",
+              "occurred_at": "2026-09-03T00:30:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "contact_key": "c-b"
+              },
+              "evidence": {
+                "email_hash": "76db397ce98c18d482631701b2d3f53abf66d5126ee83bb747372320f4d10d30",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-form\"]",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "contact_key": "c-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-identify\"]",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "contact_key": "c-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_b\",\"v-unique\",\"o-unique-identify\"]",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "contact": {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_b",
+                "contact_key": "c-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-a",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-b",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-form",
+              "occurred_at": "2026-09-03T00:30:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-form",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "contact_key": "c-a"
+                }
+              ]
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "touch_key": "t-shared",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "ambiguous",
+              "reason": "shared_device",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a"
+                },
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-b"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-a\"]",
+                "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-b\"]",
+                "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-form\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_a",
+                  "contact_key": "c-a"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-form\"]",
+                "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-identify\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "first_party_pixel",
+                  "source_scope": "snap_b",
+                  "contact_key": "c-a"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"snap_b\",\"v-unique\",\"o-unique-identify\"]"
+              ]
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-09-03T01:00:00.000000001Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [
+              {
+                "source_system": "first_party_pixel",
+                "source_scope": "snap_a",
+                "visitor_key": "v-shared",
+                "contacts": [
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "snap_a",
+                    "contact_key": "c-a"
+                  },
+                  {
+                    "source_system": "first_party_pixel",
+                    "source_scope": "snap_a",
+                    "contact_key": "c-b"
+                  }
+                ]
+              }
+            ],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-shared",
+            "visitor_key": "v-shared",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "ambiguous",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "snap_a",
+            "subject_key": "c-a"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "matched",
+            "subject_source_system": "first_party_pixel",
+            "subject_source_scope": "snap_b",
+            "subject_key": "c-a"
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-b",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-legacy",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing_binding",
+      "config": {
+        "invocation_key": "snapshot-projection",
+        "as_of": "2026-09-03T01:00:00.000000001Z",
+        "lookback_days": 1,
+        "identity_scope_bindings": [],
+        "identity_input_format": "canonical_sha256_v1",
+        "identity_normalization_version": "0.1.0"
+      },
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "snapshot-projection",
+        "snapshot_evidence_ref": "snapshot-native-fixture",
+        "external_contact_evidence_ref": null,
+        "graph": {
+          "edges": [],
+          "observations": [
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-a",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-b",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-form",
+              "occurred_at": "2026-09-03T00:30:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-form",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "touch_key": "t-shared",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-09-03T01:00:00.000000001Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-shared",
+            "visitor_key": "v-shared",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-b",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-legacy",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "external_crm_only",
+      "config": {
+        "invocation_key": "snapshot-projection",
+        "as_of": "2026-09-03T01:00:00.000000001Z",
+        "lookback_days": 1,
+        "identity_scope_bindings": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_source_system": "crm",
+            "contact_source_scope": "crm-snapshot"
+          }
+        ],
+        "identity_input_format": "canonical_sha256_v1",
+        "identity_normalization_version": "0.1.0"
+      },
+      "external_contacts": [
+        {
+          "source_system": "crm",
+          "source_scope": "crm-snapshot",
+          "contact_key": "crm-a",
+          "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+          "phone_hash": null,
+          "email_hash_format": "canonical_sha256_v1",
+          "phone_hash_format": null,
+          "email_hash_status": "attested",
+          "phone_hash_status": "missing",
+          "capture_status": "eligible",
+          "native_created_at": null
+        }
+      ],
+      "external_contact_evidence_ref": "external-crm-evidence",
+      "expected": {
+        "contract_version": "0.1.0",
+        "invocation_key": "snapshot-projection",
+        "snapshot_evidence_ref": "snapshot-native-fixture",
+        "external_contact_evidence_ref": "external-crm-evidence",
+        "graph": {
+          "edges": [
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-a\"]",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "contact": {
+                "source_system": "crm",
+                "source_scope": "crm-snapshot",
+                "contact_key": "crm-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-form\"]",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "contact": {
+                "source_system": "crm",
+                "source_scope": "crm-snapshot",
+                "contact_key": "crm-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            },
+            {
+              "edge_key": "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-identify\"]",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "contact": {
+                "source_system": "crm",
+                "source_scope": "crm-snapshot",
+                "contact_key": "crm-a"
+              },
+              "evidence": {
+                "email_hash": "4c6209ba4193e3ab08b48721b81f5007de90c2a6cd938a03a3056dd152bd5937",
+                "phone_hash": null
+              }
+            }
+          ],
+          "observations": [
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-a",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-form",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a"
+                }
+              ]
+            },
+            {
+              "status": "matched",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a"
+                }
+              ]
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-b",
+              "occurred_at": "2026-09-03T00:20:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "observation_key": "o-shared-form",
+              "occurred_at": "2026-09-03T00:30:00.000000001Z",
+              "candidates": []
+            },
+            {
+              "status": "unresolved",
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "observation_key": "o-unique-identify",
+              "occurred_at": "2026-09-03T00:10:00.000000001Z",
+              "candidates": []
+            }
+          ],
+          "touch_links": [
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-shared",
+              "touch_key": "t-shared",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"snap_a\",\"v-shared\",\"o-shared-a\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_a",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "matched",
+              "contacts": [
+                {
+                  "source_system": "crm",
+                  "source_scope": "crm-snapshot",
+                  "contact_key": "crm-a"
+                }
+              ],
+              "edge_evidence_keys": [
+                "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-form\"]",
+                "[\"first_party_pixel\",\"snap_a\",\"v-unique\",\"o-unique-identify\"]"
+              ]
+            },
+            {
+              "source_system": "first_party_pixel",
+              "source_scope": "snap_b",
+              "visitor_key": "v-unique",
+              "touch_key": "t-unique",
+              "occurred_at": "2026-09-03T00:00:00.000000001Z",
+              "status": "unresolved",
+              "contacts": [],
+              "edge_evidence_keys": []
+            }
+          ],
+          "diagnostics": {
+            "as_of": "2026-09-03T01:00:00.000000001Z",
+            "lookback_days": 1,
+            "future_excluded": {
+              "identifies": 0,
+              "touches": 0
+            },
+            "shared_devices": [],
+            "retrospective_edge_use": true,
+            "no_ip_inference": true
+          }
+        },
+        "touches": [
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-shared",
+            "visitor_key": "v-shared",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "matched",
+            "subject_source_system": "crm",
+            "subject_source_scope": "crm-snapshot",
+            "subject_key": "crm-a"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "matched",
+            "subject_source_system": "crm",
+            "subject_source_scope": "crm-snapshot",
+            "subject_key": "crm-a"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "touch_key": "t-unique",
+            "visitor_key": "v-unique",
+            "occurred_at": "2026-09-03T00:00:00.000000001Z",
+            "channel": "Paid Search",
+            "taxonomy_version": "0.1.0",
+            "utm_campaign": null,
+            "click_ids": {
+              "dclid": null,
+              "gclid": "Snapshot+Click",
+              "gbraid": null,
+              "wbraid": null,
+              "msclkid": null,
+              "fbclid": null,
+              "ttclid": null,
+              "rdt_cid": null,
+              "li_fat_id": null,
+              "twclid": null,
+              "epik": null,
+              "sccid": null,
+              "srsltid": null
+            },
+            "native_contact_id": null,
+            "export_status": "eligible",
+            "invocation_key": "snapshot-projection",
+            "identity_status": "unresolved",
+            "subject_source_system": null,
+            "subject_source_scope": null,
+            "subject_key": null
+          }
+        ],
+        "suppressed_touches": [],
+        "excluded_touches": [],
+        "excluded_observations": [],
+        "contact_diagnostics": [
+          {
+            "source_system": "crm",
+            "source_scope": "crm-snapshot",
+            "contact_key": "crm-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-b",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_a",
+            "contact_key": "c-legacy",
+            "email_hash_status": "legacy_unverified",
+            "phone_hash_status": "missing"
+          },
+          {
+            "source_system": "first_party_pixel",
+            "source_scope": "snap_b",
+            "contact_key": "c-a",
+            "email_hash_status": "attested",
+            "phone_hash_status": "missing"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -128,6 +128,31 @@ function normalizeChannelLabel(value) {
   return direct[label] || 'Other';
 }
 
+// Select the original encoded tracking values without decoding them for storage.
+// Validation uses the same helpers as classification; callers still classify the
+// original input once, rather than feeding this projection back to the classifier.
+function extractRawTrackingEvidence(input) {
+  const value = input && typeof input === 'object' ? input : {};
+  const params = hostOf(value.landing_url) ? queryParams(value.landing_url) : {};
+  const result = {};
+  for (const field of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+    result[field] = text(value[field]) ? value[field] : text(params[field]) ? params[field] : null;
+  }
+  const clickNames = ['dclid', 'gclid', 'gbraid', 'wbraid', 'msclkid', 'fbclid', 'ttclid', 'rdt_cid', 'li_fat_id', 'twclid', 'epik', 'sccid', 'srsltid'];
+  result.click_ids = {};
+  for (const name of clickNames) {
+    let raw = null;
+    const clicks = value.click_ids;
+    if (Array.isArray(clicks)) {
+      for (const entry of clicks) {
+        if (entry && lower(entry.name) === name && validClickId(entry.value)) { raw = entry.value; break; }
+      }
+    } else if (clicks && typeof clicks === 'object' && validClickId(clicks[name])) raw = clicks[name];
+    result.click_ids[name] = raw !== null ? raw : validClickId(params[name]) ? params[name] : null;
+  }
+  return result;
+}
+
 function classify(input) {
   const value = input && typeof input === 'object' ? input : {};
   const landing = text(value.landing_url);
@@ -224,4 +249,4 @@ function classify(input) {
 
 function classifyChannel(input) { return classify(input).channel; }
 
-export { CHANNELS, TAXONOMY_VERSION, classifyChannel, classify, normalizeChannelLabel };
+export { CHANNELS, TAXONOMY_VERSION, classifyChannel, classify, normalizeChannelLabel, extractRawTrackingEvidence };

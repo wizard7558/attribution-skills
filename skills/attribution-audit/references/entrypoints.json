@@ -1,0 +1,563 @@
+{
+  "contract_version": "0.1.0",
+  "execution_mode": "artifact_composition",
+  "entries": [
+    {
+      "skill": "channel-taxonomy",
+      "id": "classify",
+      "path": "scripts/channel-taxonomy.mjs",
+      "api": "classify(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "channel-taxonomy",
+          "path": "scripts/channel-taxonomy.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "ga4-bigquery-export",
+      "id": "sessions",
+      "path": "references/sql/sessions.sql",
+      "api": "BigQuery rows",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "references/sql/sessions.sql"
+        }
+      ]
+    },
+    {
+      "skill": "ga4-bigquery-export",
+      "id": "channel_daily",
+      "path": "references/sql/channel_daily.sql",
+      "api": "BigQuery rows",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "references/sql/channel_daily.sql"
+        }
+      ]
+    },
+    {
+      "skill": "first-party-pixel",
+      "id": "identity_snapshot",
+      "path": "scripts/read-identity-snapshot.mjs",
+      "api": "readIdentitySnapshot(db, options)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "first-party-pixel",
+          "path": "scripts/read-identity-snapshot.mjs"
+        },
+        {
+          "skill": "first-party-pixel",
+          "path": "references/sql/identity_touches.sql"
+        },
+        {
+          "skill": "first-party-pixel",
+          "path": "references/sql/identity_observations.sql"
+        },
+        {
+          "skill": "first-party-pixel",
+          "path": "references/sql/identity_contacts.sql"
+        }
+      ]
+    },
+    {
+      "skill": "first-party-pixel",
+      "id": "identity_projection",
+      "path": "scripts/project-identity.mjs",
+      "api": "projectIdentity(input, {identitySkillRoot})",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "first-party-pixel",
+          "path": "scripts/project-identity.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-graph.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-primitives.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-normalization.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "first-party-pixel",
+      "id": "native_views",
+      "path": "assets/schema.sql",
+      "api": "read existing pixel.sessions and pixel.channel_daily; never apply schema during audit",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "first-party-pixel",
+          "path": "assets/schema.sql"
+        }
+      ]
+    },
+    {
+      "skill": "clickstream-identity-stitching",
+      "id": "dedupe_touches",
+      "path": "scripts/identity-primitives.mjs",
+      "api": "dedupeTouches(touches, options)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-primitives.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-normalization.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "clickstream-identity-stitching",
+      "id": "identity_graph",
+      "path": "scripts/identity-graph.mjs",
+      "api": "buildIdentityGraph(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-graph.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-normalization.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-primitives.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "clickstream-identity-stitching",
+      "id": "webhook_resolution",
+      "path": "scripts/webhook-stitch.mjs",
+      "api": "resolveWebhookStitch(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/webhook-stitch.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-normalization.mjs"
+        },
+        {
+          "skill": "clickstream-identity-stitching",
+          "path": "scripts/identity-primitives.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "crm-attribution-profiler",
+      "id": "profile",
+      "path": "scripts/profile.mjs",
+      "api": "profileCrmAttribution(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "crm-attribution-profiler",
+          "path": "scripts/profile.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "crm-paid-attribution",
+      "id": "attribute_leads",
+      "path": "scripts/attribute-leads.mjs",
+      "api": "attributeLeads(leads, options)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "crm-paid-attribution",
+          "path": "scripts/attribute-leads.mjs"
+        },
+        {
+          "skill": "crm-paid-attribution",
+          "path": "scripts/channel-taxonomy.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "crm-paid-attribution",
+      "id": "attribute_leads_sql",
+      "path": "references/sql/attribute_leads.sql",
+      "api": "BigQuery resolved rows",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "crm-paid-attribution",
+          "path": "references/sql/attribute_leads.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "funnel-truth-and-cost-per-stage",
+      "id": "stage_truth",
+      "path": "references/sql/stage_truth.sql",
+      "api": "BigQuery result_json",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "funnel-truth-and-cost-per-stage",
+          "path": "references/sql/stage_truth.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "funnel-truth-and-cost-per-stage",
+      "id": "cost_per_stage",
+      "path": "references/sql/cost_per_stage.sql",
+      "api": "BigQuery result_json",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "funnel-truth-and-cost-per-stage",
+          "path": "references/sql/cost_per_stage.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "funnel-truth-and-cost-per-stage",
+      "id": "refresh_partitions",
+      "path": "references/sql/refresh_partitions.sql",
+      "api": "BigQuery result_json",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "funnel-truth-and-cost-per-stage",
+          "path": "references/sql/refresh_partitions.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "multi-touch-models-sql",
+      "id": "credit_ledger",
+      "path": "references/sql/credit_ledger.sql",
+      "api": "BigQuery result_json",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "multi-touch-models-sql",
+          "path": "references/sql/credit_ledger.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "multi-touch-models-sql",
+      "id": "attribution_metrics",
+      "path": "references/sql/attribution_metrics.sql",
+      "api": "BigQuery result_json",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "multi-touch-models-sql",
+          "path": "references/sql/attribution_metrics.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "mmm-and-incrementality-framing",
+      "id": "weekly_mlr",
+      "path": "scripts/weekly_mlr.py",
+      "api": "fit_weekly_mlr(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "mmm-and-incrementality-framing",
+          "path": "scripts/weekly_mlr.py"
+        }
+      ]
+    },
+    {
+      "skill": "mmm-and-incrementality-framing",
+      "id": "response_curves",
+      "path": "scripts/response_curves.py",
+      "api": "calibrate_response_curves(result); evaluate_response_scenario(curves, scenario)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "mmm-and-incrementality-framing",
+          "path": "scripts/response_curves.py"
+        }
+      ]
+    },
+    {
+      "skill": "mmm-and-incrementality-framing",
+      "id": "framing",
+      "path": "scripts/framing.py",
+      "api": "compare_attribution_shares(input); project_assumption_bands(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "mmm-and-incrementality-framing",
+          "path": "scripts/framing.py"
+        }
+      ]
+    },
+    {
+      "skill": "capi-match-keys",
+      "id": "conversion_preparation",
+      "path": "scripts/conversion-events.mjs",
+      "api": "conversionFromStage(row); prepareConversion(input)",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "capi-match-keys",
+          "path": "scripts/conversion-events.mjs"
+        },
+        {
+          "skill": "capi-match-keys",
+          "path": "scripts/match-keys.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "capi-match-keys",
+      "id": "provider_payloads",
+      "path": "scripts/provider-payloads.mjs",
+      "api": "buildGooglePayload; buildLinkedInPayload; buildMetaPayload; buildTikTokPayload; buildRedditPayload",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "capi-match-keys",
+          "path": "scripts/provider-payloads.mjs"
+        },
+        {
+          "skill": "capi-match-keys",
+          "path": "scripts/conversion-events.mjs"
+        },
+        {
+          "skill": "capi-match-keys",
+          "path": "scripts/match-keys.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "spend_conservation",
+      "path": "scripts/spend-conservation.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "spend_conservation",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/spend-conservation.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "funnel_additivity",
+      "path": "scripts/funnel-additivity.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "funnel_additivity",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/funnel-additivity.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "unmapped_share",
+      "path": "scripts/unmapped-share.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "unmapped_share",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/unmapped-share.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "match_rate",
+      "path": "scripts/match-rate.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "match_rate",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/match-rate.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "primary_uniqueness",
+      "path": "scripts/primary-uniqueness.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "primary_uniqueness",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/primary-uniqueness.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "source_parity",
+      "path": "scripts/source-parity.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "source_parity",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/source-parity.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "no_pii_columns",
+      "path": "scripts/no-pii-columns.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "no_pii_columns",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/no-pii-columns.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "empty_column_probe",
+      "path": "scripts/empty-column-probe.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "empty_column_probe",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/empty-column-probe.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "deleted_ad_coverage",
+      "path": "scripts/deleted-ad-coverage.sql",
+      "api": "BigQuery full native finding",
+      "quality_check_id": "deleted_ad_coverage",
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/deleted-ad-coverage.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "inspect_schema",
+      "path": "scripts/inspect-schema.sql",
+      "api": "BigQuery metadata/population snapshot",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/inspect-schema.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    },
+    {
+      "skill": "attribution-data-quality-tripwires",
+      "id": "inspect_column_population",
+      "path": "scripts/inspect-column-population.sql",
+      "api": "BigQuery metadata/population snapshot",
+      "quality_check_id": null,
+      "source_refs": [
+        {
+          "skill": "attribution-data-quality-tripwires",
+          "path": "scripts/inspect-column-population.sql"
+        },
+        {
+          "skill": "ga4-bigquery-export",
+          "path": "scripts/run-export-checks.mjs"
+        }
+      ]
+    }
+  ]
+}

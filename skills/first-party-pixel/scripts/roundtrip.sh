@@ -19,11 +19,40 @@ set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MIGRATION_MODE=0
+IDENTITY_SNAPSHOT_MODE=0
+MTA_INTEGRATION_MODE=0
+NATIVE_METRICS_MODE=0
 if [[ "${1:-}" == "--migration" ]]; then
   MIGRATION_MODE=1
+elif [[ "${1:-}" == "--identity-snapshot" ]]; then
+  IDENTITY_SNAPSHOT_MODE=1
+elif [[ "${1:-}" == "--mta-integration" ]]; then
+  MTA_INTEGRATION_MODE=1
+elif [[ "${1:-}" == "--native-metrics" ]]; then
+  NATIVE_METRICS_MODE=1
 elif [[ -n "${1:-}" ]]; then
-  echo "usage: $0 [--migration]" >&2
+  echo "usage: $0 [--migration|--identity-snapshot|--mta-integration|--native-metrics]" >&2
   exit 2
+fi
+if [[ "${PIXEL_TOUCH_INTEGRATION:-0}" == "1" && -n "${DATABASE_URL:-}" ]]; then
+  echo "touch integration must start with DATABASE_URL unset" >&2
+  exit 2
+fi
+if [[ "$IDENTITY_SNAPSHOT_MODE" == "1" && -n "${DATABASE_URL:-}" ]]; then
+  echo "identity snapshot integration must start with DATABASE_URL unset" >&2
+  exit 2
+fi
+if [[ "$MTA_INTEGRATION_MODE" == "1" ]]; then
+  if [[ -n "${DATABASE_URL:-}" || -z "${PIXEL_MTA_PROJECT:-}" ]]; then
+    echo "MTA integration requires DATABASE_URL unset and explicit PIXEL_MTA_PROJECT" >&2
+    exit 2
+  fi
+fi
+if [[ "$NATIVE_METRICS_MODE" == "1" ]]; then
+  if [[ -n "${DATABASE_URL:-}" || -z "${PIXEL_METRICS_PROJECT:-}" ]]; then
+    echo "native metrics requires DATABASE_URL unset and explicit PIXEL_METRICS_PROJECT" >&2
+    exit 2
+  fi
 fi
 PGPORT_TEST="${PGPORT_TEST:-$((55000 + RANDOM % 1000))}"
 COLLECTOR_PORT="${COLLECTOR_PORT:-$((18000 + RANDOM % 1000))}"
@@ -151,6 +180,8 @@ if [[ "$MIGRATION_MODE" == "1" ]]; then
     "SELECT (t.taxonomy_version IS NULL AND s.channel = 'Paid Other' AND s.native_channel = 'Display' AND s.taxonomy_version = 'legacy')
      FROM pixel.touchpoints t JOIN pixel.sessions s ON s.source_scope = 'site_legacy' AND s.visitor_key = t.visitor_id::text
      WHERE t.site_key = 'site_legacy' AND t.channel = 'Display';"
+  assert_migration_sql "historical events retain NULL raw UTM/click evidence" \
+    "SELECT (count(*) = 1 AND bool_and(utm IS NULL AND click_ids IS NULL)) FROM pixel.events WHERE site_key = 'site_legacy';"
   assert_migration_sql "historical session columns remain first and new aliases append" \
     "SELECT (min(ordinal_position) FILTER (WHERE column_name = 'session_key') = 1
              AND min(ordinal_position) FILTER (WHERE column_name = 'visitor_id') = 2
@@ -200,7 +231,10 @@ RUNTIME_DIR="$(mktemp -d "${TMPDIR:-/tmp}/pixel-roundtrip-runtime-XXXXXX")"
 mkdir -p "$RUNTIME_DIR/assets/collector/node"
 cp "$SKILL_DIR/assets/pixel.js" "$RUNTIME_DIR/assets/pixel.js"
 cp "$SKILL_DIR/assets/collector/core.js" "$RUNTIME_DIR/assets/collector/core.js"
+cp "$SKILL_DIR/assets/collector/transaction-db.mjs" "$RUNTIME_DIR/assets/collector/transaction-db.mjs"
+cp "$SKILL_DIR/assets/collector/timestamp.mjs" "$RUNTIME_DIR/assets/collector/timestamp.mjs"
 cp "$SKILL_DIR/assets/collector/channel-taxonomy.mjs" "$RUNTIME_DIR/assets/collector/channel-taxonomy.mjs"
+cp "$SKILL_DIR/assets/collector/identity-normalization.mjs" "$RUNTIME_DIR/assets/collector/identity-normalization.mjs"
 cp "$SKILL_DIR/assets/collector/node/server.js" "$RUNTIME_DIR/assets/collector/node/server.js"
 ln -s "$NODE_MODULES_SOURCE/node_modules" "$RUNTIME_DIR/node_modules"
 # core.js/server.js use `import`/`export` (ES modules); mark the scratch
@@ -264,8 +298,8 @@ assert_sql "visitors = 1" \
 assert_sql "events = 5" \
   "SELECT (count(*) = 5) FROM pixel.events WHERE visitor_id = $VISITOR_FILTER;"
 
-assert_sql "touchpoints = 2 with channels {Paid Search, Direct}" \
-  "SELECT (string_agg(channel, ',' ORDER BY occurred_at) = 'Paid Search,Direct')
+assert_sql "touchpoints = 3 with channels {Paid Search, Direct, Direct}" \
+  "SELECT (string_agg(channel, ',' ORDER BY occurred_at) = 'Paid Search,Direct,Direct')
    FROM pixel.touchpoints WHERE visitor_id = $VISITOR_FILTER;"
 
 assert_sql "contacts = 1 with email_canonical = 'test.user@example.com'" \
@@ -275,8 +309,8 @@ assert_sql "contacts = 1 with email_canonical = 'test.user@example.com'" \
 assert_sql "identity_links = 1" \
   "SELECT (count(*) = 1) FROM pixel.identity_links WHERE visitor_id = $VISITOR_FILTER;"
 
-assert_sql "both touchpoints have contact_id set (back-fill)" \
-  "SELECT (count(*) = 0) FROM pixel.touchpoints WHERE visitor_id = $VISITOR_FILTER AND contact_id IS NULL;"
+assert_sql "all three native touchpoints remain unassigned (no identity back-fill)" \
+  "SELECT (count(*) = 0) FROM pixel.touchpoints WHERE visitor_id = $VISITOR_FILTER AND contact_id IS NOT NULL;"
 
 assert_sql "conversion_events = 2" \
   "SELECT (count(*) = 2) FROM pixel.conversion_events WHERE visitor_id = $VISITOR_FILTER;"
@@ -329,6 +363,44 @@ assert_sql "mixed currency across two sessions counts both sessions and conversi
 assert_sql "new shared aliases and source scope are present" \
   "SELECT (new_users = 1 AND key_events = conversions AND source_system = 'first_party_pixel' AND attribution_basis = 'first_touch')
    FROM pixel.channel_daily WHERE source_scope = 'site_test' AND channel = 'Paid Search';"
+
+if [[ "$STARTED_CLUSTER" == "1" ]]; then
+  log "running atomic request transaction checks on the owned disposable database"
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" \
+    node "$SKILL_DIR/scripts/test-transactions.mjs" --connected
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" COLLECTOR_URL="$COLLECTOR_URL" \
+    node "$SKILL_DIR/scripts/test-identity-capture.mjs" --connected
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" COLLECTOR_URL="$COLLECTOR_URL" \
+    node "$SKILL_DIR/scripts/test-identity-resolution.mjs" --connected
+fi
+
+if [[ "$IDENTITY_SNAPSHOT_MODE" == "1" ]]; then
+  log "running consistent identity snapshot integration on the owned disposable database"
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" COLLECTOR_URL="$COLLECTOR_URL" \
+    node "$SKILL_DIR/scripts/test-identity-snapshot.mjs" --connected
+fi
+
+if [[ "$MTA_INTEGRATION_MODE" == "1" ]]; then
+  log "running pixel snapshot to native BigQuery MTA integration on owned synthetic inputs"
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" COLLECTOR_URL="$COLLECTOR_URL" \
+    node "$SKILL_DIR/scripts/test-mta-integration.mjs" --connected
+fi
+
+if [[ "$NATIVE_METRICS_MODE" == "1" ]]; then
+  log "running pixel snapshot through native MTA ledger and money metrics"
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_TRANSACTION_RUNTIME="$RUNTIME_DIR" COLLECTOR_URL="$COLLECTOR_URL" \
+    PIXEL_METRICS_COLLECTOR_PID="$SERVER_PID" node "$SKILL_DIR/scripts/test-metrics-handoff.mjs" --connected
+fi
+
+if [[ "${PIXEL_TOUCH_INTEGRATION:-0}" == "1" ]]; then
+  if [[ "$STARTED_CLUSTER" != "1" ]]; then
+    echo "touch integration requires a roundtrip-owned disposable cluster" >&2
+    exit 1
+  fi
+  log "running repository touch export integration"
+  PIXEL_DISPOSABLE_TEST=1 PIXEL_PSQL_BIN="$PSQL_BIN" COLLECTOR_URL="$COLLECTOR_URL" \
+    node "$SKILL_DIR/scripts/test-touch-integration.mjs" --connected
+fi
 
 echo ""
 echo "[roundtrip] $PASS_COUNT passed, $FAIL_COUNT failed"

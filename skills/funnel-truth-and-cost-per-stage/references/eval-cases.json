@@ -1,0 +1,4338 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/stage-contract.md",
+    "references/cost-contract.md",
+    "references/refresh-contract.md"
+  ],
+  "groups": [
+    {
+      "id": "stage-truth",
+      "prompt": "Resolve each supplied funnel stage input independently. Return cases A onward in input order. For each case return ledger rows with the requested identity, timestamps, booleans, money, and truth fields, preserving row order, nulls, false values, and exact numbers. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "report_timezone": "UTC",
+                "as_of": "2026-02-01T00:00:00Z",
+                "opportunities_complete": true
+              },
+              "leads": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "created_at": "2026-01-01T00:00:00Z",
+                  "status": "accepted",
+                  "is_converted": false,
+                  "converted_at": null,
+                  "qualified_at": "2026-01-02T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "channel": null,
+                  "taxonomy_version": null,
+                  "network_id": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null
+                }
+              ],
+              "stages": [
+                {
+                  "stage_key": "lead",
+                  "stage_order": 0,
+                  "stage_kind": "lead"
+                },
+                {
+                  "stage_key": "qualified",
+                  "stage_order": 10,
+                  "stage_kind": "qualified"
+                },
+                {
+                  "stage_key": "converted",
+                  "stage_order": 30,
+                  "stage_kind": "converted"
+                },
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                },
+                {
+                  "stage_key": "engaged",
+                  "stage_order": 95,
+                  "stage_kind": "event"
+                }
+              ],
+              "exclusions": [
+                {
+                  "stage_key": "qualified",
+                  "status": "rejected"
+                }
+              ],
+              "opportunities": [],
+              "events": []
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "report_timezone": "UTC",
+                "as_of": "2026-02-01T00:00:00Z",
+                "opportunities_complete": true
+              },
+              "leads": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "created_at": "2026-01-01T00:00:00Z",
+                  "status": "accepted",
+                  "is_converted": false,
+                  "converted_at": null,
+                  "qualified_at": "2026-01-02T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "channel": null,
+                  "taxonomy_version": null,
+                  "network_id": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null
+                }
+              ],
+              "stages": [
+                {
+                  "stage_key": "lead",
+                  "stage_order": 0,
+                  "stage_kind": "lead"
+                },
+                {
+                  "stage_key": "qualified",
+                  "stage_order": 10,
+                  "stage_kind": "qualified"
+                },
+                {
+                  "stage_key": "converted",
+                  "stage_order": 30,
+                  "stage_kind": "converted"
+                },
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                },
+                {
+                  "stage_key": "engaged",
+                  "stage_order": 95,
+                  "stage_kind": "event"
+                }
+              ],
+              "exclusions": [
+                {
+                  "stage_key": "qualified",
+                  "status": "rejected"
+                }
+              ],
+              "opportunities": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+A",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-04T00:00:00Z",
+                  "value": 100,
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+B",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-05T00:00:00Z",
+                  "value": 50,
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "LaterLoss",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": false,
+                  "won_at": "2026-01-20T00:00:00Z",
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown"
+                }
+              ],
+              "events": []
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "report_timezone": "UTC",
+                "as_of": "2026-02-01T00:00:00Z",
+                "opportunities_complete": true
+              },
+              "leads": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "created_at": "2026-01-01T00:00:00Z",
+                  "status": "accepted",
+                  "is_converted": false,
+                  "converted_at": null,
+                  "qualified_at": "2026-01-02T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "channel": null,
+                  "taxonomy_version": null,
+                  "network_id": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null
+                }
+              ],
+              "stages": [
+                {
+                  "stage_key": "lead",
+                  "stage_order": 0,
+                  "stage_kind": "lead"
+                },
+                {
+                  "stage_key": "qualified",
+                  "stage_order": 10,
+                  "stage_kind": "qualified"
+                },
+                {
+                  "stage_key": "converted",
+                  "stage_order": 30,
+                  "stage_kind": "converted"
+                },
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                },
+                {
+                  "stage_key": "engaged",
+                  "stage_order": 95,
+                  "stage_kind": "event"
+                }
+              ],
+              "exclusions": [
+                {
+                  "stage_key": "qualified",
+                  "status": "rejected"
+                }
+              ],
+              "opportunities": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+A",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-04T00:00:00Z",
+                  "value": 100,
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+B",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-04T00:00:00Z",
+                  "value": null,
+                  "currency": "USD",
+                  "value_status": "unknown"
+                }
+              ],
+              "events": []
+            }
+          },
+          {
+            "case_id": "D",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "scope-a",
+                "report_timezone": "UTC",
+                "as_of": "2026-02-01T00:00:00Z",
+                "opportunities_complete": true
+              },
+              "leads": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "created_at": "2026-01-01T00:00:00Z",
+                  "status": "accepted",
+                  "is_converted": false,
+                  "converted_at": null,
+                  "qualified_at": "2026-01-02T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "channel": null,
+                  "taxonomy_version": null,
+                  "network_id": null,
+                  "campaign_key": null,
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null
+                }
+              ],
+              "stages": [
+                {
+                  "stage_key": "lead",
+                  "stage_order": 0,
+                  "stage_kind": "lead"
+                },
+                {
+                  "stage_key": "qualified",
+                  "stage_order": 10,
+                  "stage_kind": "qualified"
+                },
+                {
+                  "stage_key": "converted",
+                  "stage_order": 30,
+                  "stage_kind": "converted"
+                },
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                },
+                {
+                  "stage_key": "engaged",
+                  "stage_order": 95,
+                  "stage_kind": "event"
+                }
+              ],
+              "exclusions": [
+                {
+                  "stage_key": "qualified",
+                  "status": "rejected"
+                }
+              ],
+              "opportunities": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+A",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-04T00:00:00Z",
+                  "value": 100,
+                  "currency": "USD",
+                  "value_status": "known"
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "scope-a",
+                  "opportunity_key": "Win+B",
+                  "lead_source_system": "synthetic_crm",
+                  "lead_source_scope": "scope-a",
+                  "lead_key": "Lead+A",
+                  "is_won": true,
+                  "won_at": "2026-01-04T00:00:00Z",
+                  "value": 100,
+                  "currency": "EUR",
+                  "value_status": "known"
+                }
+              ],
+              "events": []
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "ledger"
+                  ],
+                  "properties": {
+                    "ledger": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "lead_key",
+                          "stage_key",
+                          "achieved",
+                          "activity_date",
+                          "is_attribution_primary",
+                          "value",
+                          "currency",
+                          "value_status",
+                          "stage_truth_status"
+                        ],
+                        "properties": {
+                          "lead_key": {
+                            "type": "string"
+                          },
+                          "stage_key": {
+                            "type": "string"
+                          },
+                          "achieved": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "activity_date": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "is_attribution_primary": {
+                            "type": "boolean"
+                          },
+                          "value": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "currency": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "value_status": {
+                            "type": "string"
+                          },
+                          "stage_truth_status": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger",
+          "op": "array_length_equals",
+          "expected": 5,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/stage_key",
+          "op": "equals",
+          "expected": "lead",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/activity_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/0/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/stage_key",
+          "op": "equals",
+          "expected": "qualified",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/activity_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/1/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/stage_key",
+          "op": "equals",
+          "expected": "converted",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/2/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/3/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/stage_key",
+          "op": "equals",
+          "expected": "engaged",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/ledger/4/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger",
+          "op": "array_length_equals",
+          "expected": 5,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/stage_key",
+          "op": "equals",
+          "expected": "lead",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/activity_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/0/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/stage_key",
+          "op": "equals",
+          "expected": "qualified",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/activity_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/1/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/stage_key",
+          "op": "equals",
+          "expected": "converted",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/2/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/activity_date",
+          "op": "equals",
+          "expected": "2026-01-04",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/value",
+          "op": "approximately",
+          "expected": 150,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/3/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/stage_key",
+          "op": "equals",
+          "expected": "engaged",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/ledger/4/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger",
+          "op": "array_length_equals",
+          "expected": 5,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/stage_key",
+          "op": "equals",
+          "expected": "lead",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/activity_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/0/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/stage_key",
+          "op": "equals",
+          "expected": "qualified",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/activity_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/1/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/stage_key",
+          "op": "equals",
+          "expected": "converted",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/2/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/activity_date",
+          "op": "equals",
+          "expected": "2026-01-04",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/3/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/stage_key",
+          "op": "equals",
+          "expected": "engaged",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/ledger/4/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/case_id",
+          "op": "equals",
+          "expected": "D",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger",
+          "op": "array_length_equals",
+          "expected": 5,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/stage_key",
+          "op": "equals",
+          "expected": "lead",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/activity_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/0/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/stage_key",
+          "op": "equals",
+          "expected": "qualified",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/activity_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/1/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/stage_key",
+          "op": "equals",
+          "expected": "converted",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/2/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/activity_date",
+          "op": "equals",
+          "expected": "2026-01-04",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/value_status",
+          "op": "equals",
+          "expected": "mixed_currency",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/3/stage_truth_status",
+          "op": "equals",
+          "expected": "achieved",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/lead_key",
+          "op": "equals",
+          "expected": "Lead+A",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/stage_key",
+          "op": "equals",
+          "expected": "engaged",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/achieved",
+          "op": "equals",
+          "expected": false,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/activity_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/is_attribution_primary",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/value",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/value_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/3/output/ledger/4/stage_truth_status",
+          "op": "equals",
+          "expected": "not_achieved",
+          "provenance": "fixture-literal"
+        }
+      ]
+    },
+    {
+      "id": "cost-reconciliation",
+      "prompt": "Reconcile each supplied funnel cost input independently. Return cases A onward in input order. For each case return the requested report rows and undated-row count, preserving row order, nulls, false values, and exact numbers. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "cohort",
+                "spend_complete": true
+              },
+              "stage_input": [
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                }
+              ],
+              "stage_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Matched",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": "2026-01-04T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unmatched",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": "2026-01-04T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Ambiguous",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": "2026-01-04T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Missing",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": "2026-01-04T00:00:00Z",
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "crm_attribution_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Matched",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unmatched",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "NoCatalog",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Ambiguous",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Ambiguous",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "ambiguous",
+                  "candidate_ads": [
+                    {
+                      "source_system": "synthetic_ads",
+                      "source_scope": "ads-a",
+                      "ad_key": "Ad+One",
+                      "campaign_key": "Ambiguous"
+                    }
+                  ]
+                }
+              ],
+              "campaign_input": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case"
+                },
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "network_id": "google_ads",
+                  "campaign_key": "Ambiguous"
+                }
+              ],
+              "binding_input": [
+                {
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "platform": "google_ads",
+                  "entity_type": "campaign"
+                }
+              ],
+              "spend_input": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Spend+A",
+                  "event_date": "2026-01-02",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "spend": 20,
+                  "currency": "USD",
+                  "spend_status": "known"
+                },
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Spend+B",
+                  "event_date": "2026-01-02",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "network_id": "google_ads",
+                  "campaign_key": "Ambiguous",
+                  "spend": 12,
+                  "currency": "USD",
+                  "spend_status": "known"
+                },
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "unbound",
+                  "spend_key": "Spend+C",
+                  "event_date": "2026-01-02",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "network_id": "google_ads",
+                  "campaign_key": "NoCatalog",
+                  "spend": 9,
+                  "currency": "USD",
+                  "spend_status": "known"
+                }
+              ],
+              "account_currency_input": []
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "America/Los_Angeles",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-01",
+                "date_mode": "cohort",
+                "spend_complete": true
+              },
+              "stage_input": [
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                }
+              ],
+              "stage_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Lead+A",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:30:00Z",
+                  "stage_entered_at": "2026-01-03T00:30:00Z",
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "crm_attribution_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Lead+A",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                }
+              ],
+              "campaign_input": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case"
+                }
+              ],
+              "binding_input": [
+                {
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "platform": "google_ads",
+                  "entity_type": "campaign"
+                }
+              ],
+              "spend_input": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Spend+A",
+                  "event_date": "2026-01-01",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "spend": 20,
+                  "currency": "USD",
+                  "spend_status": "known"
+                },
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "spend_key": "Outside",
+                  "event_date": "2025-12-31",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "spend": 8,
+                  "currency": "USD",
+                  "spend_status": "known"
+                }
+              ],
+              "account_currency_input": []
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "report_start": "2026-01-01",
+                "report_end": "2026-01-31",
+                "date_mode": "activity",
+                "spend_complete": true
+              },
+              "stage_input": [
+                {
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won"
+                }
+              ],
+              "stage_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Undated",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": null,
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "achieved_undated",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unknown",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": null,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": null,
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "unknown",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "NoActivity",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": false,
+                  "cohort_at": "2026-01-02T00:00:00Z",
+                  "stage_entered_at": null,
+                  "is_attribution_primary": true,
+                  "value": null,
+                  "currency": null,
+                  "value_status": "unknown",
+                  "stage_truth_status": "not_achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "crm_attribution_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Undated",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unknown",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "NoActivity",
+                  "channel": "Paid Search",
+                  "taxonomy_version": "0.1.0",
+                  "quality_status": "matched",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case",
+                  "ad_source_system": null,
+                  "ad_source_scope": null,
+                  "ad_key": null,
+                  "ad_match_status": "unmatched",
+                  "candidate_ads": []
+                }
+              ],
+              "campaign_input": [
+                {
+                  "source_system": "synthetic_ads",
+                  "source_scope": "ads-a",
+                  "network_id": "google_ads",
+                  "campaign_key": "Campaign+Case"
+                }
+              ],
+              "binding_input": [
+                {
+                  "crm_source_system": "synthetic_crm",
+                  "crm_source_scope": "crm-a",
+                  "ad_source_system": "synthetic_ads",
+                  "ad_source_scope": "ads-a",
+                  "platform": "google_ads",
+                  "entity_type": "campaign"
+                }
+              ],
+              "spend_input": [],
+              "account_currency_input": []
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "report",
+                    "undated_stage_rows"
+                  ],
+                  "properties": {
+                    "report": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "report_date",
+                          "stage_key",
+                          "channel",
+                          "campaign_key",
+                          "bucket",
+                          "lead_count",
+                          "stage_count_total",
+                          "stage_count_primary",
+                          "stage_unknown_count",
+                          "revenue",
+                          "revenue_currency",
+                          "revenue_status",
+                          "spend",
+                          "spend_currency",
+                          "spend_status",
+                          "cost_per_stage",
+                          "cost_status"
+                        ],
+                        "properties": {
+                          "report_date": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "stage_key": {
+                            "type": "string"
+                          },
+                          "channel": {
+                            "type": "string"
+                          },
+                          "campaign_key": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "bucket": {
+                            "type": "string"
+                          },
+                          "lead_count": {
+                            "type": "integer"
+                          },
+                          "stage_count_total": {
+                            "type": "integer"
+                          },
+                          "stage_count_primary": {
+                            "type": "integer"
+                          },
+                          "stage_unknown_count": {
+                            "type": "integer"
+                          },
+                          "revenue": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "revenue_currency": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "revenue_status": {
+                            "type": "string"
+                          },
+                          "spend": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "spend_currency": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "spend_status": {
+                            "type": "string"
+                          },
+                          "cost_per_stage": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "cost_status": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "undated_stage_rows": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/report",
+          "op": "array_length_equals",
+          "expected": 6,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/channel",
+          "op": "equals",
+          "expected": "Other",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/campaign_key",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/bucket",
+          "op": "equals",
+          "expected": "unattributed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/lead_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/spend",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/spend_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/spend_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/0/cost_status",
+          "op": "equals",
+          "expected": "campaign_not_matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/campaign_key",
+          "op": "equals",
+          "expected": "Ambiguous",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/bucket",
+          "op": "equals",
+          "expected": "ambiguous",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/lead_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/spend",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/spend_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/spend_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/1/cost_status",
+          "op": "equals",
+          "expected": "campaign_not_matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/campaign_key",
+          "op": "equals",
+          "expected": "Campaign+Case",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/bucket",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/lead_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/spend",
+          "op": "approximately",
+          "expected": 20,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/spend_currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/spend_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/cost_per_stage",
+          "op": "approximately",
+          "expected": 20,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/2/cost_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/campaign_key",
+          "op": "equals",
+          "expected": "Ambiguous",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/bucket",
+          "op": "equals",
+          "expected": "spend_only",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/lead_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/stage_count_total",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/stage_count_primary",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/spend",
+          "op": "approximately",
+          "expected": 12,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/spend_currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/spend_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/3/cost_status",
+          "op": "equals",
+          "expected": "campaign_not_matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/campaign_key",
+          "op": "equals",
+          "expected": "NoCatalog",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/bucket",
+          "op": "equals",
+          "expected": "spend_only",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/lead_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/stage_count_total",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/stage_count_primary",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/spend",
+          "op": "approximately",
+          "expected": 9,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/spend_currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/spend_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/4/cost_status",
+          "op": "equals",
+          "expected": "campaign_not_matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/report_date",
+          "op": "equals",
+          "expected": "2026-01-02",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/campaign_key",
+          "op": "equals",
+          "expected": "NoCatalog",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/bucket",
+          "op": "equals",
+          "expected": "unmatched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/lead_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/spend",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/spend_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/spend_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/report/5/cost_status",
+          "op": "equals",
+          "expected": "campaign_not_matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/undated_stage_rows",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/report",
+          "op": "array_length_equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/campaign_key",
+          "op": "equals",
+          "expected": "Campaign+Case",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/bucket",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/lead_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/stage_unknown_count",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/spend",
+          "op": "approximately",
+          "expected": 20,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/spend_currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/spend_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/cost_per_stage",
+          "op": "approximately",
+          "expected": 20,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/report/0/cost_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/undated_stage_rows",
+          "op": "equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/report",
+          "op": "array_length_equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/report_date",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/channel",
+          "op": "equals",
+          "expected": "Paid Search",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/campaign_key",
+          "op": "equals",
+          "expected": "Campaign+Case",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/bucket",
+          "op": "equals",
+          "expected": "matched",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/lead_count",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/stage_count_total",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/stage_count_primary",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/stage_unknown_count",
+          "op": "equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/revenue",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/revenue_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/revenue_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/spend",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/spend_currency",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/spend_status",
+          "op": "equals",
+          "expected": "unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/cost_per_stage",
+          "op": "equals",
+          "expected": null,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/report/0/cost_status",
+          "op": "equals",
+          "expected": "spend_unknown",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/undated_stage_rows",
+          "op": "equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        }
+      ]
+    },
+    {
+      "id": "refresh-partitions",
+      "prompt": "Plan each supplied partition refresh independently. Return cases A onward in input order. For each case return the requested refresh fields, target partitions, and replacement rows, preserving array order, nulls, false values, and exact timestamps and numbers. Return JSON only.",
+      "input": {
+        "cases": [
+          {
+            "case_id": "A",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "prior_report_timezone": "UTC",
+                "prior_watermark": "2026-07-10T00:00:00Z",
+                "as_of": "2026-07-12T00:00:00Z",
+                "overlap_days": 2,
+                "change_feed_complete": true,
+                "prior_snapshot_complete": true,
+                "current_snapshot_complete": true
+              },
+              "prior_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Changed"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unaffected",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Unaffected"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "current_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-07-11T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-07-11",
+                  "is_attribution_primary": true,
+                  "value": 15,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Changed"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unaffected",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Unaffected"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "change_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "change_key": "Change+A",
+                  "changed_at": "2026-07-11T00:00:00Z",
+                  "reason": "opportunity"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "B",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "UTC",
+                "prior_report_timezone": "UTC",
+                "prior_watermark": "2026-07-10T00:00:00Z",
+                "as_of": "2026-07-12T00:00:00Z",
+                "overlap_days": 2,
+                "change_feed_complete": true,
+                "prior_snapshot_complete": true,
+                "current_snapshot_complete": true
+              },
+              "prior_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Changed"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                },
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unaffected",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Unaffected"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "current_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Unaffected",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Unaffected"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "change_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "change_key": "Change+A",
+                  "changed_at": "2026-07-11T00:00:00Z",
+                  "reason": "deletion"
+                }
+              ]
+            }
+          },
+          {
+            "case_id": "C",
+            "input": {
+              "configuration": {
+                "source_system": "synthetic_crm",
+                "source_scope": "crm-a",
+                "report_timezone": "America/Los_Angeles",
+                "prior_report_timezone": "UTC",
+                "prior_watermark": "2026-07-10T00:00:00Z",
+                "as_of": "2026-07-12T00:00:00Z",
+                "overlap_days": 2,
+                "change_feed_complete": true,
+                "prior_snapshot_complete": true,
+                "current_snapshot_complete": true
+              },
+              "prior_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Changed"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "current_ledger_input": [
+                {
+                  "source_system": "synthetic_crm",
+                  "source_scope": "crm-a",
+                  "lead_key": "Changed",
+                  "stage_key": "won",
+                  "stage_order": 70,
+                  "stage_kind": "won",
+                  "achieved": true,
+                  "cohort_at": "2026-01-01T00:00:00Z",
+                  "stage_entered_at": "2026-05-10T00:00:00Z",
+                  "cohort_date": "2026-01-01",
+                  "activity_date": "2026-05-10",
+                  "is_attribution_primary": true,
+                  "value": 10,
+                  "currency": "USD",
+                  "value_status": "known",
+                  "evidence_keys": [
+                    {
+                      "source_system": "synthetic_opportunities",
+                      "source_scope": "opportunity-a",
+                      "record_kind": "opportunity",
+                      "record_key": "Win+Changed"
+                    }
+                  ],
+                  "stage_truth_status": "achieved",
+                  "attribution": {
+                    "channel": null,
+                    "taxonomy_version": null,
+                    "network_id": null,
+                    "campaign_key": null,
+                    "ad_source_system": null,
+                    "ad_source_scope": null,
+                    "ad_key": null
+                  }
+                }
+              ],
+              "change_input": []
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cases"
+        ],
+        "properties": {
+          "cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "case_id",
+                "output"
+              ],
+              "properties": {
+                "case_id": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "mode",
+                    "fallback_reasons",
+                    "overlap_start",
+                    "proposed_next_watermark",
+                    "target_partitions",
+                    "replacement_ledger"
+                  ],
+                  "properties": {
+                    "mode": {
+                      "type": "string"
+                    },
+                    "fallback_reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "overlap_start": {
+                      "type": "string"
+                    },
+                    "proposed_next_watermark": {
+                      "type": "string"
+                    },
+                    "target_partitions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "date_mode",
+                          "report_date"
+                        ],
+                        "properties": {
+                          "date_mode": {
+                            "type": "string"
+                          },
+                          "report_date": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "replacement_ledger": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "date_mode",
+                          "report_date",
+                          "lead_key",
+                          "stage_key",
+                          "achieved",
+                          "value",
+                          "currency",
+                          "value_status"
+                        ],
+                        "properties": {
+                          "date_mode": {
+                            "type": "string"
+                          },
+                          "report_date": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "lead_key": {
+                            "type": "string"
+                          },
+                          "stage_key": {
+                            "type": "string"
+                          },
+                          "achieved": {
+                            "type": [
+                              "boolean",
+                              "null"
+                            ]
+                          },
+                          "value": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "currency": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "value_status": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "checks": [
+        {
+          "path": "/cases",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/case_id",
+          "op": "equals",
+          "expected": "A",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/0/output/mode",
+          "op": "equals",
+          "expected": "incremental",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/fallback_reasons",
+          "op": "array_length_equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/overlap_start",
+          "op": "equals",
+          "expected": "2026-07-08T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/proposed_next_watermark",
+          "op": "equals",
+          "expected": "2026-07-12T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions",
+          "op": "array_length_equals",
+          "expected": 3,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-10",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/1/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/1/report_date",
+          "op": "equals",
+          "expected": "2026-07-11",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/2/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/target_partitions/2/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-10",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Unaffected",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/0/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/report_date",
+          "op": "equals",
+          "expected": "2026-07-11",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Changed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/value",
+          "op": "approximately",
+          "expected": 15,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/1/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/lead_key",
+          "op": "equals",
+          "expected": "Changed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/value",
+          "op": "approximately",
+          "expected": 15,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/2/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/lead_key",
+          "op": "equals",
+          "expected": "Unaffected",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/0/output/replacement_ledger/3/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/case_id",
+          "op": "equals",
+          "expected": "B",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/1/output/mode",
+          "op": "equals",
+          "expected": "incremental",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/fallback_reasons",
+          "op": "array_length_equals",
+          "expected": 0,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/overlap_start",
+          "op": "equals",
+          "expected": "2026-07-08T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/proposed_next_watermark",
+          "op": "equals",
+          "expected": "2026-07-12T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/target_partitions",
+          "op": "array_length_equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/target_partitions/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/target_partitions/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-10",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/target_partitions/1/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/target_partitions/1/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger",
+          "op": "array_length_equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-10",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Unaffected",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/0/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Unaffected",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/1/output/replacement_ledger/1/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/case_id",
+          "op": "equals",
+          "expected": "C",
+          "provenance": "manifest-literal"
+        },
+        {
+          "path": "/cases/2/output/mode",
+          "op": "equals",
+          "expected": "full_reconciliation",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/fallback_reasons",
+          "op": "array_length_equals",
+          "expected": 1,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/fallback_reasons/0",
+          "op": "equals",
+          "expected": "timezone_changed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/overlap_start",
+          "op": "equals",
+          "expected": "2026-07-08T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/proposed_next_watermark",
+          "op": "equals",
+          "expected": "2026-07-12T00:00:00Z",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions",
+          "op": "array_length_equals",
+          "expected": 4,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-09",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/1/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/1/report_date",
+          "op": "equals",
+          "expected": "2026-05-10",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/2/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/2/report_date",
+          "op": "equals",
+          "expected": "2025-12-31",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/3/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/target_partitions/3/report_date",
+          "op": "equals",
+          "expected": "2026-01-01",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger",
+          "op": "array_length_equals",
+          "expected": 2,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/date_mode",
+          "op": "equals",
+          "expected": "activity",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/report_date",
+          "op": "equals",
+          "expected": "2026-05-09",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/lead_key",
+          "op": "equals",
+          "expected": "Changed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/0/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/date_mode",
+          "op": "equals",
+          "expected": "cohort",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/report_date",
+          "op": "equals",
+          "expected": "2025-12-31",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/lead_key",
+          "op": "equals",
+          "expected": "Changed",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/stage_key",
+          "op": "equals",
+          "expected": "won",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/achieved",
+          "op": "equals",
+          "expected": true,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/value",
+          "op": "approximately",
+          "expected": 10,
+          "tolerance": 1e-9,
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/currency",
+          "op": "equals",
+          "expected": "USD",
+          "provenance": "fixture-literal"
+        },
+        {
+          "path": "/cases/2/output/replacement_ledger/1/value_status",
+          "op": "equals",
+          "expected": "known",
+          "provenance": "fixture-literal"
+        }
+      ]
+    }
+  ]
+}

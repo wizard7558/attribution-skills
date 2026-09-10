@@ -1,0 +1,3565 @@
+{
+  "context_files": [
+    "SKILL.md",
+    "references/regression-contract.md",
+    "references/response-curve-contract.md",
+    "references/framing-contract.md",
+    "references/evaluation-output-contract.md"
+  ],
+  "groups": [
+    {
+      "checks": [
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/0/case"
+        },
+        {
+          "expected": "fitted",
+          "op": "equals",
+          "path": "/cases/0/result/status"
+        },
+        {
+          "expected": 5,
+          "op": "approximately",
+          "path": "/cases/0/result/intercept",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/channel_coefficients"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/0/result/channel_coefficients/0/key"
+        },
+        {
+          "expected": 3,
+          "op": "approximately",
+          "path": "/cases/0/result/channel_coefficients/0/coefficient",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/channel_coefficients/0/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/control_coefficients"
+        },
+        {
+          "expected": "Control+Case",
+          "op": "equals",
+          "path": "/cases/0/result/control_coefficients/0/key"
+        },
+        {
+          "expected": 4,
+          "op": "approximately",
+          "path": "/cases/0/result/control_coefficients/0/coefficient",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/limits"
+        },
+        {
+          "expected": "observational_association",
+          "op": "equals",
+          "path": "/cases/0/result/limits/0"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/0/result/limits/1"
+        },
+        {
+          "expected": "no_p_values_or_confidence_intervals",
+          "op": "equals",
+          "path": "/cases/0/result/limits/2"
+        },
+        {
+          "expected": "in_sample_fit_only",
+          "op": "equals",
+          "path": "/cases/0/result/limits/3"
+        },
+        {
+          "expected": 4,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/n"
+        },
+        {
+          "expected": 2,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/p"
+        },
+        {
+          "expected": 1,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/residual_df"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/diagnostics/missing_weeks"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/diagnostics/negative_coefficients"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/diagnostics/flags"
+        },
+        {
+          "expected": "B",
+          "op": "equals",
+          "path": "/cases/1/case"
+        },
+        {
+          "expected": "fitted",
+          "op": "equals",
+          "path": "/cases/1/result/status"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/1/result/intercept",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/channel_coefficients"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/1/result/channel_coefficients/0/key"
+        },
+        {
+          "expected": -2,
+          "op": "approximately",
+          "path": "/cases/1/result/channel_coefficients/0/coefficient",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 1.5,
+          "op": "approximately",
+          "path": "/cases/1/result/channel_coefficients/0/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/control_coefficients"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/limits"
+        },
+        {
+          "expected": "observational_association",
+          "op": "equals",
+          "path": "/cases/1/result/limits/0"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/1/result/limits/1"
+        },
+        {
+          "expected": "no_p_values_or_confidence_intervals",
+          "op": "equals",
+          "path": "/cases/1/result/limits/2"
+        },
+        {
+          "expected": "in_sample_fit_only",
+          "op": "equals",
+          "path": "/cases/1/result/limits/3"
+        },
+        {
+          "expected": 4,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/n"
+        },
+        {
+          "expected": 1,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/p"
+        },
+        {
+          "expected": 2,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/residual_df"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/diagnostics/missing_weeks"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/diagnostics/negative_coefficients"
+        },
+        {
+          "expected": "channel",
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/negative_coefficients/0/kind"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/negative_coefficients/0/key"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/diagnostics/flags"
+        },
+        {
+          "expected": "negative_coefficients",
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/flags/0"
+        },
+        {
+          "expected": "C",
+          "op": "equals",
+          "path": "/cases/2/case"
+        },
+        {
+          "expected": "insufficient_input",
+          "op": "equals",
+          "path": "/cases/2/result/status"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/intercept"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/channel_coefficients"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/2/result/channel_coefficients/0/key"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channel_coefficients/0/coefficient"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channel_coefficients/0/mean_spend"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/control_coefficients"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/limits"
+        },
+        {
+          "expected": "observational_association",
+          "op": "equals",
+          "path": "/cases/2/result/limits/0"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/2/result/limits/1"
+        },
+        {
+          "expected": "no_p_values_or_confidence_intervals",
+          "op": "equals",
+          "path": "/cases/2/result/limits/2"
+        },
+        {
+          "expected": "in_sample_fit_only",
+          "op": "equals",
+          "path": "/cases/2/result/limits/3"
+        },
+        {
+          "expected": 4,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/n"
+        },
+        {
+          "expected": 1,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/p"
+        },
+        {
+          "expected": 2,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/residual_df"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/diagnostics/missing_weeks"
+        },
+        {
+          "expected": "2026-01-12",
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/missing_weeks/0"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/diagnostics/negative_coefficients"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/diagnostics/flags"
+        },
+        {
+          "expected": "missing_weeks",
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/flags/0"
+        },
+        {
+          "expected": "D",
+          "op": "equals",
+          "path": "/cases/3/case"
+        },
+        {
+          "expected": "rank_deficient",
+          "op": "equals",
+          "path": "/cases/3/result/status"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/intercept"
+        },
+        {
+          "expected": 2,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/channel_coefficients"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/3/result/channel_coefficients/0/key"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channel_coefficients/0/coefficient"
+        },
+        {
+          "expected": 1,
+          "op": "approximately",
+          "path": "/cases/3/result/channel_coefficients/0/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "B",
+          "op": "equals",
+          "path": "/cases/3/result/channel_coefficients/1/key"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channel_coefficients/1/coefficient"
+        },
+        {
+          "expected": 2,
+          "op": "approximately",
+          "path": "/cases/3/result/channel_coefficients/1/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/control_coefficients"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/limits"
+        },
+        {
+          "expected": "observational_association",
+          "op": "equals",
+          "path": "/cases/3/result/limits/0"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/3/result/limits/1"
+        },
+        {
+          "expected": "no_p_values_or_confidence_intervals",
+          "op": "equals",
+          "path": "/cases/3/result/limits/2"
+        },
+        {
+          "expected": "in_sample_fit_only",
+          "op": "equals",
+          "path": "/cases/3/result/limits/3"
+        },
+        {
+          "expected": 4,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/n"
+        },
+        {
+          "expected": 2,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/p"
+        },
+        {
+          "expected": 1,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/residual_df"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/diagnostics/missing_weeks"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/diagnostics/negative_coefficients"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/diagnostics/flags"
+        },
+        {
+          "expected": "rank_deficient",
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/flags/0"
+        }
+      ],
+      "id": "regression-guards",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "input": {
+              "config": {
+                "as_of": "2026-02-02T00:00:00Z",
+                "channel_keys": [
+                  "Ads+Case"
+                ],
+                "control_keys": [
+                  "Control+Case"
+                ],
+                "end_week": "2026-01-26",
+                "max_condition_number": 1000000,
+                "min_residual_df": 1,
+                "min_weeks": 4,
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "declared_outcome",
+                "report_scope": "synthetic-weekly-population",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "rows": [
+                {
+                  "controls": {
+                    "Control+Case": -1
+                  },
+                  "outcome": 25,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 8
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-05"
+                },
+                {
+                  "controls": {
+                    "Control+Case": 1
+                  },
+                  "outcome": 33,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 8
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-12"
+                },
+                {
+                  "controls": {
+                    "Control+Case": -1
+                  },
+                  "outcome": 37,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 12
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-19"
+                },
+                {
+                  "controls": {
+                    "Control+Case": 1
+                  },
+                  "outcome": 45,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 12
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-26"
+                }
+              ]
+            }
+          },
+          {
+            "case": "B",
+            "input": {
+              "config": {
+                "as_of": "2026-02-02T00:00:00Z",
+                "channel_keys": [
+                  "Ads+Case"
+                ],
+                "control_keys": [],
+                "end_week": "2026-01-26",
+                "max_condition_number": 1000000,
+                "min_residual_df": 1,
+                "min_weeks": 4,
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "declared_outcome",
+                "report_scope": "synthetic-weekly-population",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "rows": [
+                {
+                  "controls": {},
+                  "outcome": 10,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 0
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-05"
+                },
+                {
+                  "controls": {},
+                  "outcome": 8,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 1
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-12"
+                },
+                {
+                  "controls": {},
+                  "outcome": 6,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 2
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-19"
+                },
+                {
+                  "controls": {},
+                  "outcome": 4,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 3
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-26"
+                }
+              ]
+            }
+          },
+          {
+            "case": "C",
+            "input": {
+              "config": {
+                "as_of": "2026-02-02T00:00:00Z",
+                "channel_keys": [
+                  "Ads+Case"
+                ],
+                "control_keys": [],
+                "end_week": "2026-01-26",
+                "max_condition_number": 1000000,
+                "min_residual_df": 1,
+                "min_weeks": 4,
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "declared_outcome",
+                "report_scope": "synthetic-weekly-population",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "rows": [
+                {
+                  "controls": {},
+                  "outcome": 2,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 0
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-05"
+                },
+                {
+                  "controls": {},
+                  "outcome": 8,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 2
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-19"
+                },
+                {
+                  "controls": {},
+                  "outcome": 11,
+                  "outcome_currency": null,
+                  "spend": {
+                    "Ads+Case": 3
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-26"
+                }
+              ]
+            }
+          },
+          {
+            "case": "D",
+            "input": {
+              "config": {
+                "as_of": "2026-02-02T00:00:00Z",
+                "channel_keys": [
+                  "A",
+                  "B"
+                ],
+                "control_keys": [],
+                "end_week": "2026-01-26",
+                "max_condition_number": 1000000,
+                "min_residual_df": 1,
+                "min_weeks": 4,
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "declared_outcome",
+                "report_scope": "synthetic-weekly-population",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "rows": [
+                {
+                  "controls": {},
+                  "outcome": 2,
+                  "outcome_currency": null,
+                  "spend": {
+                    "A": 0,
+                    "B": 0
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-05"
+                },
+                {
+                  "controls": {},
+                  "outcome": 5,
+                  "outcome_currency": null,
+                  "spend": {
+                    "A": 0,
+                    "B": 0
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-12"
+                },
+                {
+                  "controls": {},
+                  "outcome": 8,
+                  "outcome_currency": null,
+                  "spend": {
+                    "A": 2,
+                    "B": 4
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-19"
+                },
+                {
+                  "controls": {},
+                  "outcome": 11,
+                  "outcome_currency": null,
+                  "spend": {
+                    "A": 2,
+                    "B": 4
+                  },
+                  "spend_currency": "USD",
+                  "week": "2026-01-26"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "cases": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "channel_coefficients": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "coefficient": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "mean_spend": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "coefficient",
+                          "mean_spend"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "control_coefficients": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "coefficient": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "key": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "coefficient"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "diagnostics": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "flags": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "missing_weeks": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "n": {
+                          "type": "integer"
+                        },
+                        "negative_coefficients": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "kind": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "key"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "p": {
+                          "type": "integer"
+                        },
+                        "residual_df": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "n",
+                        "p",
+                        "residual_df",
+                        "missing_weeks",
+                        "negative_coefficients",
+                        "flags"
+                      ],
+                      "type": "object"
+                    },
+                    "intercept": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "limits": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "intercept",
+                    "channel_coefficients",
+                    "control_coefficients",
+                    "diagnostics",
+                    "limits"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "type": "object"
+      },
+      "prompt": "For every labeled input, fit the guarded weekly observational regression and return the specified regression projection in input case order. Use the declared complete-week grid, predictors and guards. Return only the required JSON."
+    },
+    {
+      "checks": [
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/0/case"
+        },
+        {
+          "expected": "ready",
+          "op": "equals",
+          "path": "/cases/0/result/curves/status"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/curves/channels"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/0/result/curves/channels/0/key"
+        },
+        {
+          "expected": 3,
+          "op": "approximately",
+          "path": "/cases/0/result/curves/channels/0/coefficient",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/curves/channels/0/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "ready",
+          "op": "equals",
+          "path": "/cases/0/result/curves/channels/0/status"
+        },
+        {
+          "expected": 120,
+          "op": "approximately",
+          "path": "/cases/0/result/curves/channels/0/a",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/curves/channels/0/b",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "complete",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/status"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/scenario/channels"
+        },
+        {
+          "expected": "Ads+Case",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/channels/0/key"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/channels/0/baseline_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/channels/0/proposed_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "ready",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/channels/0/status"
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/channels/0/baseline_response",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 90,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/channels/0/proposed_response",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/channels/0/response_delta",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/totals/baseline_response",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 90,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/totals/proposed_response",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/0/result/scenario/totals/response_delta",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/scenario/limits"
+        },
+        {
+          "expected": "assumed_media_response_only",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/limits/0"
+        },
+        {
+          "expected": "not_fitted_full_outcome",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/limits/1"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/limits/2"
+        },
+        {
+          "expected": "no_confidence_bands_or_budget_recommendations",
+          "op": "equals",
+          "path": "/cases/0/result/scenario/limits/3"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/bands"
+        },
+        {
+          "expected": "B",
+          "op": "equals",
+          "path": "/cases/1/case"
+        },
+        {
+          "expected": "incomplete",
+          "op": "equals",
+          "path": "/cases/1/result/curves/status"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/curves/channels"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/1/result/curves/channels/0/key"
+        },
+        {
+          "expected": -3,
+          "op": "approximately",
+          "path": "/cases/1/result/curves/channels/0/coefficient",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/1/result/curves/channels/0/mean_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "unsupported_negative_coefficient",
+          "op": "equals",
+          "path": "/cases/1/result/curves/channels/0/status"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/curves/channels/0/a"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/curves/channels/0/b"
+        },
+        {
+          "expected": "incomplete",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/status"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/scenario/channels"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/channels/0/key"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/1/result/scenario/channels/0/baseline_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/1/result/scenario/channels/0/proposed_spend",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": "unsupported_negative_coefficient",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/channels/0/status"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/channels/0/baseline_response"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/channels/0/proposed_response"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/channels/0/response_delta"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/totals/baseline_response"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/totals/proposed_response"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/scenario/totals/response_delta"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/scenario/limits"
+        },
+        {
+          "expected": "assumed_media_response_only",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/limits/0"
+        },
+        {
+          "expected": "not_fitted_full_outcome",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/limits/1"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/limits/2"
+        },
+        {
+          "expected": "no_confidence_bands_or_budget_recommendations",
+          "op": "equals",
+          "path": "/cases/1/result/scenario/limits/3"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/bands"
+        },
+        {
+          "expected": "C",
+          "op": "equals",
+          "path": "/cases/2/case"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/curves"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/scenario"
+        },
+        {
+          "expected": "available",
+          "op": "equals",
+          "path": "/cases/2/result/bands/status"
+        },
+        {
+          "expected": -30,
+          "op": "approximately",
+          "path": "/cases/2/result/bands/point_delta",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": -45,
+          "op": "approximately",
+          "path": "/cases/2/result/bands/lower_delta",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": -15,
+          "op": "approximately",
+          "path": "/cases/2/result/bands/upper_delta",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/bands/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/bands/limits"
+        },
+        {
+          "expected": "user_supplied_assumption_range",
+          "op": "equals",
+          "path": "/cases/2/result/bands/limits/0"
+        },
+        {
+          "expected": "not_confidence_or_credible_interval",
+          "op": "equals",
+          "path": "/cases/2/result/bands/limits/1"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/2/result/bands/limits/2"
+        },
+        {
+          "expected": "media_response_change_only",
+          "op": "equals",
+          "path": "/cases/2/result/bands/limits/3"
+        },
+        {
+          "expected": "D",
+          "op": "equals",
+          "path": "/cases/3/case"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/curves"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/scenario"
+        },
+        {
+          "expected": "unavailable",
+          "op": "equals",
+          "path": "/cases/3/result/bands/status"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/bands/point_delta"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/bands/lower_delta"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/bands/upper_delta"
+        },
+        {
+          "expected": "scenario_incomplete",
+          "op": "equals",
+          "path": "/cases/3/result/bands/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/bands/limits"
+        },
+        {
+          "expected": "user_supplied_assumption_range",
+          "op": "equals",
+          "path": "/cases/3/result/bands/limits/0"
+        },
+        {
+          "expected": "not_confidence_or_credible_interval",
+          "op": "equals",
+          "path": "/cases/3/result/bands/limits/1"
+        },
+        {
+          "expected": "not_causal_lift",
+          "op": "equals",
+          "path": "/cases/3/result/bands/limits/2"
+        },
+        {
+          "expected": "media_response_change_only",
+          "op": "equals",
+          "path": "/cases/3/result/bands/limits/3"
+        }
+      ],
+      "id": "response-and-assumptions",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "input": {
+              "regression_result": {
+                "channel_coefficients": [
+                  {
+                    "coefficient": 3,
+                    "key": "Ads+Case",
+                    "mean_spend": 10
+                  }
+                ],
+                "config": {
+                  "as_of": "2026-02-02T00:00:00Z",
+                  "channel_keys": [
+                    "Ads+Case"
+                  ],
+                  "control_keys": [
+                    "Control+Case"
+                  ],
+                  "end_week": "2026-01-26",
+                  "max_condition_number": 1000000,
+                  "min_residual_df": 1,
+                  "min_weeks": 4,
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "declared_outcome",
+                  "report_scope": "synthetic-weekly-population",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "contract_version": "0.1.0",
+                "control_coefficients": [
+                  {
+                    "coefficient": 4,
+                    "key": "Control+Case"
+                  }
+                ],
+                "diagnostics": {
+                  "condition_number": 1,
+                  "duplicate_weeks_collapsed": 0,
+                  "excluded_incomplete": [],
+                  "excluded_outside_window": [],
+                  "flags": [],
+                  "missing_fields": [],
+                  "missing_weeks": [],
+                  "n": 4,
+                  "negative_coefficients": [],
+                  "p": 2,
+                  "r2": 1,
+                  "rank": 3,
+                  "rcond": 8.881784197001252e-16,
+                  "residual_df": 1,
+                  "singular_values": [
+                    2,
+                    2,
+                    2
+                  ],
+                  "zero_variance_predictors": []
+                },
+                "intercept": 5,
+                "limits": [
+                  "observational_association",
+                  "not_causal_lift",
+                  "no_p_values_or_confidence_intervals",
+                  "in_sample_fit_only"
+                ],
+                "status": "fitted",
+                "weeks": [
+                  {
+                    "actual": 25,
+                    "predicted": 25,
+                    "residual": 0,
+                    "week": "2026-01-05"
+                  },
+                  {
+                    "actual": 33,
+                    "predicted": 33,
+                    "residual": 0,
+                    "week": "2026-01-12"
+                  },
+                  {
+                    "actual": 37,
+                    "predicted": 37,
+                    "residual": 0,
+                    "week": "2026-01-19"
+                  },
+                  {
+                    "actual": 45,
+                    "predicted": 45,
+                    "residual": 0,
+                    "week": "2026-01-26"
+                  }
+                ]
+              },
+              "scenario": {
+                "spend_by_channel": {
+                  "Ads+Case": {
+                    "baseline": 10,
+                    "proposed": 30
+                  }
+                }
+              }
+            },
+            "operation": "calibrate_and_evaluate"
+          },
+          {
+            "case": "B",
+            "input": {
+              "regression_result": {
+                "channel_coefficients": [
+                  {
+                    "coefficient": -3,
+                    "key": "A",
+                    "mean_spend": 10
+                  }
+                ],
+                "config": {
+                  "as_of": "2026-02-02T00:00:00Z",
+                  "channel_keys": [
+                    "A"
+                  ],
+                  "control_keys": [],
+                  "end_week": "2026-01-26",
+                  "max_condition_number": 1000000,
+                  "min_residual_df": 1,
+                  "min_weeks": 4,
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "declared_outcome",
+                  "report_scope": "synthetic-weekly-population",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "contract_version": "0.1.0",
+                "control_coefficients": [],
+                "diagnostics": {
+                  "condition_number": 1,
+                  "duplicate_weeks_collapsed": 0,
+                  "excluded_incomplete": [],
+                  "excluded_outside_window": [],
+                  "flags": [],
+                  "missing_fields": [],
+                  "missing_weeks": [],
+                  "n": 4,
+                  "negative_coefficients": [],
+                  "p": 1,
+                  "r2": 1,
+                  "rank": 2,
+                  "rcond": 8.881784197001252e-16,
+                  "residual_df": 2,
+                  "singular_values": [
+                    2,
+                    2
+                  ],
+                  "zero_variance_predictors": []
+                },
+                "intercept": 5,
+                "limits": [
+                  "observational_association",
+                  "not_causal_lift",
+                  "no_p_values_or_confidence_intervals",
+                  "in_sample_fit_only"
+                ],
+                "status": "fitted",
+                "weeks": [
+                  {
+                    "actual": 25,
+                    "predicted": 25,
+                    "residual": 0,
+                    "week": "2026-01-05"
+                  },
+                  {
+                    "actual": 33,
+                    "predicted": 33,
+                    "residual": 0,
+                    "week": "2026-01-12"
+                  },
+                  {
+                    "actual": 37,
+                    "predicted": 37,
+                    "residual": 0,
+                    "week": "2026-01-19"
+                  },
+                  {
+                    "actual": 45,
+                    "predicted": 45,
+                    "residual": 0,
+                    "week": "2026-01-26"
+                  }
+                ]
+              },
+              "scenario": {
+                "spend_by_channel": {
+                  "A": {
+                    "baseline": 10,
+                    "proposed": 30
+                  }
+                }
+              }
+            },
+            "operation": "calibrate_and_evaluate"
+          },
+          {
+            "case": "C",
+            "input": {
+              "assumption": {
+                "label": "Explicit planning assumption",
+                "lower_multiplier": 0.5,
+                "upper_multiplier": 1.5
+              },
+              "scenario_result": {
+                "channels": [
+                  {
+                    "baseline_response": 90,
+                    "baseline_spend": 30,
+                    "key": "A",
+                    "proposed_response": 60,
+                    "proposed_spend": 10,
+                    "response_delta": -30,
+                    "status": "ready"
+                  }
+                ],
+                "config": {
+                  "as_of": "2026-02-02T00:00:00Z",
+                  "channel_keys": [
+                    "A"
+                  ],
+                  "control_keys": [],
+                  "end_week": "2026-01-26",
+                  "max_condition_number": 1000000,
+                  "min_residual_df": 1,
+                  "min_weeks": 4,
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "declared_outcome",
+                  "report_scope": "synthetic-weekly-population",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "contract_version": "0.1.0",
+                "limits": [
+                  "assumed_media_response_only",
+                  "not_fitted_full_outcome",
+                  "not_causal_lift",
+                  "no_confidence_bands_or_budget_recommendations"
+                ],
+                "status": "complete",
+                "totals": {
+                  "baseline_response": 90,
+                  "proposed_response": 60,
+                  "response_delta": -30
+                }
+              }
+            },
+            "operation": "project_bands"
+          },
+          {
+            "case": "D",
+            "input": {
+              "assumption": {
+                "label": "Explicit planning assumption",
+                "lower_multiplier": 0.5,
+                "upper_multiplier": 1.5
+              },
+              "scenario_result": {
+                "channels": [
+                  {
+                    "baseline_response": 60,
+                    "baseline_spend": 10,
+                    "key": "A",
+                    "proposed_response": 90,
+                    "proposed_spend": 30,
+                    "response_delta": 30,
+                    "status": "ready"
+                  },
+                  {
+                    "baseline_response": null,
+                    "baseline_spend": 5,
+                    "key": "B",
+                    "proposed_response": null,
+                    "proposed_spend": 15,
+                    "response_delta": null,
+                    "status": "unsupported_negative_coefficient"
+                  }
+                ],
+                "config": {
+                  "as_of": "2026-02-02T00:00:00Z",
+                  "channel_keys": [
+                    "A",
+                    "B"
+                  ],
+                  "control_keys": [],
+                  "end_week": "2026-01-26",
+                  "max_condition_number": 1000000,
+                  "min_residual_df": 1,
+                  "min_weeks": 4,
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "declared_outcome",
+                  "report_scope": "synthetic-weekly-population",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "contract_version": "0.1.0",
+                "limits": [
+                  "assumed_media_response_only",
+                  "not_fitted_full_outcome",
+                  "not_causal_lift",
+                  "no_confidence_bands_or_budget_recommendations"
+                ],
+                "status": "incomplete",
+                "totals": {
+                  "baseline_response": null,
+                  "proposed_response": null,
+                  "response_delta": null
+                }
+              }
+            },
+            "operation": "project_bands"
+          }
+        ]
+      },
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "cases": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "bands": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "limits": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "lower_delta": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        },
+                        "point_delta": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        },
+                        "reason": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "upper_delta": {
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "point_delta",
+                        "lower_delta",
+                        "upper_delta",
+                        "reason",
+                        "limits"
+                      ],
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "curves": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "channels": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "a": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "b": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "coefficient": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "key": {
+                                "type": "string"
+                              },
+                              "mean_spend": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "key",
+                              "coefficient",
+                              "mean_spend",
+                              "status",
+                              "a",
+                              "b"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "channels"
+                      ],
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "scenario": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "channels": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "baseline_response": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "baseline_spend": {
+                                "type": "number"
+                              },
+                              "key": {
+                                "type": "string"
+                              },
+                              "proposed_response": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "proposed_spend": {
+                                "type": "number"
+                              },
+                              "response_delta": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "key",
+                              "baseline_spend",
+                              "proposed_spend",
+                              "status",
+                              "baseline_response",
+                              "proposed_response",
+                              "response_delta"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "limits": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "totals": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "baseline_response": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            },
+                            "proposed_response": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            },
+                            "response_delta": {
+                              "type": [
+                                "number",
+                                "null"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "baseline_response",
+                            "proposed_response",
+                            "response_delta"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "channels",
+                        "totals",
+                        "limits"
+                      ],
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "curves",
+                    "scenario",
+                    "bands"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "type": "object"
+      },
+      "prompt": "For every labeled input, perform its declared operation and return the specified response/assumption projection in input case order. Use the full supplied producer input and explicit scenario or assumption. Return only the required JSON."
+    },
+    {
+      "checks": [
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases"
+        },
+        {
+          "expected": "A",
+          "op": "equals",
+          "path": "/cases/0/case"
+        },
+        {
+          "expected": "complete",
+          "op": "equals",
+          "path": "/cases/0/result/status"
+        },
+        {
+          "expected": 2,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/channels"
+        },
+        {
+          "expected": "A+Case",
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/key"
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/mmm_contribution/reason"
+        },
+        {
+          "expected": 300,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/crm_spend/reason"
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.6,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/mmm_share/reason"
+        },
+        {
+          "expected": 0.3,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/crm_share/reason"
+        },
+        {
+          "expected": 2,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/factor/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/factor/reason"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/crm_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/crm_cpa/reason"
+        },
+        {
+          "expected": 5,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/0/adjusted_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/0/adjusted_cpa/reason"
+        },
+        {
+          "expected": "a+case",
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/key"
+        },
+        {
+          "expected": 40,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/mmm_contribution/reason"
+        },
+        {
+          "expected": 700,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/crm_spend/reason"
+        },
+        {
+          "expected": 70,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.4,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/mmm_share/reason"
+        },
+        {
+          "expected": 0.7,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/crm_share/reason"
+        },
+        {
+          "expected": 0.5714285714285714,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/factor/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/factor/reason"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/crm_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/crm_cpa/reason"
+        },
+        {
+          "expected": 17.5,
+          "op": "approximately",
+          "path": "/cases/0/result/channels/1/adjusted_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/channels/1/adjusted_cpa/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/limits"
+        },
+        {
+          "expected": "observational_share_ratio",
+          "op": "equals",
+          "path": "/cases/0/result/limits/0"
+        },
+        {
+          "expected": "not_causal_incrementality",
+          "op": "equals",
+          "path": "/cases/0/result/limits/1"
+        },
+        {
+          "expected": "no_budget_recommendation",
+          "op": "equals",
+          "path": "/cases/0/result/limits/2"
+        },
+        {
+          "expected": "no_population_join",
+          "op": "equals",
+          "path": "/cases/0/result/limits/3"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/mmm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/mmm/share_reason"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/0/result/diagnostics/mmm/negative_contribution_keys"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/crm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/0/result/diagnostics/crm/share_reason"
+        },
+        {
+          "expected": "B",
+          "op": "equals",
+          "path": "/cases/1/case"
+        },
+        {
+          "expected": "complete",
+          "op": "equals",
+          "path": "/cases/1/result/status"
+        },
+        {
+          "expected": 2,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/channels"
+        },
+        {
+          "expected": "A+Case",
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/key"
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/mmm_contribution/reason"
+        },
+        {
+          "expected": 300,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/crm_spend/reason"
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.6,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/mmm_share/reason"
+        },
+        {
+          "expected": 0.3,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/crm_share/reason"
+        },
+        {
+          "expected": 2,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/0/factor/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/factor/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/crm_cpa/value"
+        },
+        {
+          "expected": "not_conversion_count",
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/adjusted_cpa/value"
+        },
+        {
+          "expected": "not_conversion_count",
+          "op": "equals",
+          "path": "/cases/1/result/channels/0/adjusted_cpa/reason"
+        },
+        {
+          "expected": "a+case",
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/key"
+        },
+        {
+          "expected": 40,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/mmm_contribution/reason"
+        },
+        {
+          "expected": 700,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/crm_spend/reason"
+        },
+        {
+          "expected": 70,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.4,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/mmm_share/reason"
+        },
+        {
+          "expected": 0.7,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/crm_share/reason"
+        },
+        {
+          "expected": 0.5714285714285714,
+          "op": "approximately",
+          "path": "/cases/1/result/channels/1/factor/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/factor/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/crm_cpa/value"
+        },
+        {
+          "expected": "not_conversion_count",
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/adjusted_cpa/value"
+        },
+        {
+          "expected": "not_conversion_count",
+          "op": "equals",
+          "path": "/cases/1/result/channels/1/adjusted_cpa/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/limits"
+        },
+        {
+          "expected": "observational_share_ratio",
+          "op": "equals",
+          "path": "/cases/1/result/limits/0"
+        },
+        {
+          "expected": "not_causal_incrementality",
+          "op": "equals",
+          "path": "/cases/1/result/limits/1"
+        },
+        {
+          "expected": "no_budget_recommendation",
+          "op": "equals",
+          "path": "/cases/1/result/limits/2"
+        },
+        {
+          "expected": "no_population_join",
+          "op": "equals",
+          "path": "/cases/1/result/limits/3"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/mmm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/mmm/share_reason"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/1/result/diagnostics/mmm/negative_contribution_keys"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/crm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/1/result/diagnostics/crm/share_reason"
+        },
+        {
+          "expected": "C",
+          "op": "equals",
+          "path": "/cases/2/case"
+        },
+        {
+          "expected": "incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/status"
+        },
+        {
+          "expected": 2,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/channels"
+        },
+        {
+          "expected": "A+Case",
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/key"
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/0/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/mmm_contribution/reason"
+        },
+        {
+          "expected": 300,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/0/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_spend/reason"
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/0/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.6,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/0/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/mmm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_share/value"
+        },
+        {
+          "expected": "source_incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/factor/value"
+        },
+        {
+          "expected": "shares_unavailable",
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/factor/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_cpa/value"
+        },
+        {
+          "expected": "source_incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/adjusted_cpa/value"
+        },
+        {
+          "expected": "cpa_unavailable",
+          "op": "equals",
+          "path": "/cases/2/result/channels/0/adjusted_cpa/reason"
+        },
+        {
+          "expected": "a+case",
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/key"
+        },
+        {
+          "expected": 40,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/1/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/mmm_contribution/reason"
+        },
+        {
+          "expected": 700,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/1/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_spend/reason"
+        },
+        {
+          "expected": 70,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/1/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": 0.4,
+          "op": "approximately",
+          "path": "/cases/2/result/channels/1/mmm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/mmm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_share/value"
+        },
+        {
+          "expected": "source_incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/factor/value"
+        },
+        {
+          "expected": "shares_unavailable",
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/factor/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_cpa/value"
+        },
+        {
+          "expected": "source_incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/adjusted_cpa/value"
+        },
+        {
+          "expected": "cpa_unavailable",
+          "op": "equals",
+          "path": "/cases/2/result/channels/1/adjusted_cpa/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/limits"
+        },
+        {
+          "expected": "observational_share_ratio",
+          "op": "equals",
+          "path": "/cases/2/result/limits/0"
+        },
+        {
+          "expected": "not_causal_incrementality",
+          "op": "equals",
+          "path": "/cases/2/result/limits/1"
+        },
+        {
+          "expected": "no_budget_recommendation",
+          "op": "equals",
+          "path": "/cases/2/result/limits/2"
+        },
+        {
+          "expected": "no_population_join",
+          "op": "equals",
+          "path": "/cases/2/result/limits/3"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/mmm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/mmm/share_reason"
+        },
+        {
+          "expected": 0,
+          "op": "array_length_equals",
+          "path": "/cases/2/result/diagnostics/mmm/negative_contribution_keys"
+        },
+        {
+          "expected": false,
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/crm/complete"
+        },
+        {
+          "expected": "source_incomplete",
+          "op": "equals",
+          "path": "/cases/2/result/diagnostics/crm/share_reason"
+        },
+        {
+          "expected": "D",
+          "op": "equals",
+          "path": "/cases/3/case"
+        },
+        {
+          "expected": "incomplete",
+          "op": "equals",
+          "path": "/cases/3/result/status"
+        },
+        {
+          "expected": 2,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/channels"
+        },
+        {
+          "expected": "A+Case",
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/key"
+        },
+        {
+          "expected": 60,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/0/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/mmm_contribution/reason"
+        },
+        {
+          "expected": 300,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/0/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/crm_spend/reason"
+        },
+        {
+          "expected": 30,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/0/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/mmm_share/value"
+        },
+        {
+          "expected": "negative_model_contribution",
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/mmm_share/reason"
+        },
+        {
+          "expected": 0.3,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/0/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/crm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/factor/value"
+        },
+        {
+          "expected": "shares_unavailable",
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/factor/reason"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/0/crm_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/adjusted_cpa/value"
+        },
+        {
+          "expected": "factor_unavailable",
+          "op": "equals",
+          "path": "/cases/3/result/channels/0/adjusted_cpa/reason"
+        },
+        {
+          "expected": "a+case",
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/key"
+        },
+        {
+          "expected": 40,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/1/mmm_contribution/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/mmm_contribution/reason"
+        },
+        {
+          "expected": 700,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/1/crm_spend/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/crm_spend/reason"
+        },
+        {
+          "expected": 70,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/1/crm_outcome_quantity/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/crm_outcome_quantity/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/mmm_share/value"
+        },
+        {
+          "expected": "negative_model_contribution",
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/mmm_share/reason"
+        },
+        {
+          "expected": 0.7,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/1/crm_share/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/crm_share/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/factor/value"
+        },
+        {
+          "expected": "shares_unavailable",
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/factor/reason"
+        },
+        {
+          "expected": 10,
+          "op": "approximately",
+          "path": "/cases/3/result/channels/1/crm_cpa/value",
+          "tolerance": 1e-09
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/crm_cpa/reason"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/adjusted_cpa/value"
+        },
+        {
+          "expected": "factor_unavailable",
+          "op": "equals",
+          "path": "/cases/3/result/channels/1/adjusted_cpa/reason"
+        },
+        {
+          "expected": 4,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/limits"
+        },
+        {
+          "expected": "observational_share_ratio",
+          "op": "equals",
+          "path": "/cases/3/result/limits/0"
+        },
+        {
+          "expected": "not_causal_incrementality",
+          "op": "equals",
+          "path": "/cases/3/result/limits/1"
+        },
+        {
+          "expected": "no_budget_recommendation",
+          "op": "equals",
+          "path": "/cases/3/result/limits/2"
+        },
+        {
+          "expected": "no_population_join",
+          "op": "equals",
+          "path": "/cases/3/result/limits/3"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/mmm/complete"
+        },
+        {
+          "expected": "negative_model_contribution",
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/mmm/share_reason"
+        },
+        {
+          "expected": 1,
+          "op": "array_length_equals",
+          "path": "/cases/3/result/diagnostics/mmm/negative_contribution_keys"
+        },
+        {
+          "expected": "synthetic",
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/mmm/negative_contribution_keys/0/source_system"
+        },
+        {
+          "expected": "scope-one",
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/mmm/negative_contribution_keys/0/source_scope"
+        },
+        {
+          "expected": "negative-piece",
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/mmm/negative_contribution_keys/0/row_key"
+        },
+        {
+          "expected": true,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/crm/complete"
+        },
+        {
+          "expected": null,
+          "op": "equals",
+          "path": "/cases/3/result/diagnostics/crm/share_reason"
+        }
+      ],
+      "id": "observational-shares",
+      "input": {
+        "cases": [
+          {
+            "case": "A",
+            "input": {
+              "config": {
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ],
+                "end_week": "2026-01-26",
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "weighted_outcome_quantity",
+                "report_scope": "synthetic-window",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "crm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "outcome_quantity": 30,
+                    "row_key": "cA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 300
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "outcome_quantity": 70,
+                    "row_key": "cB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 700
+                  }
+                ]
+              },
+              "mmm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": 60,
+                    "row_key": "mA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "contribution": 40,
+                    "row_key": "mB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case": "B",
+            "input": {
+              "config": {
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ],
+                "end_week": "2026-01-26",
+                "outcome_currency": "EUR",
+                "outcome_kind": "revenue",
+                "outcome_name": "declared_revenue",
+                "report_scope": "synthetic-window",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "crm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": "EUR",
+                  "outcome_kind": "revenue",
+                  "outcome_name": "declared_revenue",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "outcome_quantity": 30,
+                    "row_key": "cA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 300
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "outcome_quantity": 70,
+                    "row_key": "cB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 700
+                  }
+                ]
+              },
+              "mmm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": "EUR",
+                  "outcome_kind": "revenue",
+                  "outcome_name": "declared_revenue",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": 60,
+                    "row_key": "mA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "contribution": 40,
+                    "row_key": "mB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case": "C",
+            "input": {
+              "config": {
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ],
+                "end_week": "2026-01-26",
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "weighted_outcome_quantity",
+                "report_scope": "synthetic-window",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "crm": {
+                "complete": false,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "outcome_quantity": 30,
+                    "row_key": "cA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 300
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "outcome_quantity": 70,
+                    "row_key": "cB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 700
+                  }
+                ]
+              },
+              "mmm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": 60,
+                    "row_key": "mA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "contribution": 40,
+                    "row_key": "mB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "case": "D",
+            "input": {
+              "config": {
+                "channel_keys": [
+                  "A+Case",
+                  "a+case"
+                ],
+                "end_week": "2026-01-26",
+                "outcome_currency": null,
+                "outcome_kind": "count",
+                "outcome_name": "weighted_outcome_quantity",
+                "report_scope": "synthetic-window",
+                "spend_currency": "USD",
+                "start_week": "2026-01-05",
+                "timezone": "UTC"
+              },
+              "crm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "outcome_quantity": 30,
+                    "row_key": "cA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 300
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "outcome_quantity": 70,
+                    "row_key": "cB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic",
+                    "spend": 700
+                  }
+                ]
+              },
+              "mmm": {
+                "complete": true,
+                "metadata": {
+                  "end_week": "2026-01-26",
+                  "outcome_currency": null,
+                  "outcome_kind": "count",
+                  "outcome_name": "weighted_outcome_quantity",
+                  "report_scope": "synthetic-window",
+                  "spend_currency": "USD",
+                  "start_week": "2026-01-05",
+                  "timezone": "UTC"
+                },
+                "rows": [
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": 60,
+                    "row_key": "mA",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "a+case",
+                    "contribution": 40,
+                    "row_key": "mB",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": -1,
+                    "row_key": "negative-piece",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  },
+                  {
+                    "channel_key": "A+Case",
+                    "contribution": 1,
+                    "row_key": "positive-piece",
+                    "source_scope": "scope-one",
+                    "source_system": "synthetic"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "cases": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "result": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "channels": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "adjusted_cpa": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "crm_cpa": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "crm_outcome_quantity": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "crm_share": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "crm_spend": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "factor": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "mmm_contribution": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          },
+                          "mmm_share": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "reason": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "reason"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "mmm_contribution",
+                          "crm_spend",
+                          "crm_outcome_quantity",
+                          "mmm_share",
+                          "crm_share",
+                          "factor",
+                          "crm_cpa",
+                          "adjusted_cpa"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "diagnostics": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "crm": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "complete": {
+                              "type": "boolean"
+                            },
+                            "share_reason": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "complete",
+                            "share_reason"
+                          ],
+                          "type": "object"
+                        },
+                        "mmm": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "complete": {
+                              "type": "boolean"
+                            },
+                            "negative_contribution_keys": {
+                              "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "row_key": {
+                                    "type": "string"
+                                  },
+                                  "source_scope": {
+                                    "type": "string"
+                                  },
+                                  "source_system": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "source_system",
+                                  "source_scope",
+                                  "row_key"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "share_reason": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "complete",
+                            "share_reason",
+                            "negative_contribution_keys"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "mmm",
+                        "crm"
+                      ],
+                      "type": "object"
+                    },
+                    "limits": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "channels",
+                    "diagnostics",
+                    "limits"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "case",
+                "result"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "cases"
+        ],
+        "type": "object"
+      },
+      "prompt": "For every labeled input, compare the declared observational MMM and CRM shares and return the specified share projection in input case order. Use the supplied population, outcome units and completeness declarations. Return only the required JSON."
+    }
+  ]
+}

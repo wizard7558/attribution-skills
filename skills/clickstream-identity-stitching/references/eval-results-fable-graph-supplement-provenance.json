@@ -1,0 +1,106 @@
+{
+  "attempts": 2,
+  "context_hashes": {
+    "SKILL.md": "5d2a539b0342df5102114fd07dd73a07afcce132c2770b2aa72f57ae84a83f59",
+    "references/identity-quick-reference.md": "de64e9d6aeda9c9672df90b75bfc00ae79bd405d972dd683e24f922cd265a9cf"
+  },
+  "finished_at": "2026-09-09T20:41:06.094768+00:00",
+  "harness_path": "scripts/run-skill-evals.py",
+  "harness_sha256": "b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45",
+  "manifest_sha256": "71a0c119cd2642e44e6372a18b72108a2cf6ddfccc0910b569e48e203985d2c6",
+  "model_reruns_during_publication": 0,
+  "native_queries_during_publication": 0,
+  "preserved": "All prompt/system text, model result/structured_output/message bytes as JSON string values, transport requests, parsed responses, check details, statuses, timestamps and scores unchanged. Only listed runtime correlation metadata fields differ; JSON formatting reserialization is not a new execution.",
+  "private_archive_basename": "identity-fable-graph-raw.json",
+  "public_results_sha256": "90557beb8f53acb8200d0b06fd05748426e50be2fe6d318842b82e77dfdcf64d",
+  "publication_kind": "metadata_redacted_derivative",
+  "redactions": [
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "d7c5fd5465fbb82328e2baeeb0a6fdd68b876259795f8fd1d28532ca8784d44d"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/with-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "3ca4ffc2c7ca15e15024a2d6466cc383c4f05143126bc8894eb413c015ddf834"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/non-destructive-identity-graph/raw_envelope/session_id",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "c2b29e72142d5cf6c61935be967800e550c66d2f4a29752a3eb6174bbb5e4e91"
+    },
+    {
+      "pointer": "/models/claude-fable-5-1/without-skill/non-destructive-identity-graph/raw_envelope/uuid",
+      "reason": "private_runtime_correlation_identifier",
+      "replacement": "[REDACTED_RUNTIME_CORRELATION_ID]",
+      "source_value_sha256": "0aafff9d446c6f6a38a3032bf94313f611da00ec123d2d47f6de32517c17d860"
+    }
+  ],
+  "rescore": "Frozen current harness parser/schema/scorer recomputed from actual original envelopes; exact comparison of parsed response, resolved model, completion, schema, all check statuses and errors.",
+  "source_archive_sha256": "ee8bd94cdb930bbd87087813e1eb170a6680a4254c1abc07def6101f00ed2074",
+  "started_at": "2026-09-09T20:36:47.996266+00:00",
+  "summaries": [
+    {
+      "checks": 1188,
+      "condition": "with-skill",
+      "model": "claude-fable-5-1",
+      "passed": 1188,
+      "usable_calls": 1
+    },
+    {
+      "checks": 1188,
+      "condition": "without-skill",
+      "model": "claude-fable-5-1",
+      "passed": 1158,
+      "usable_calls": 1
+    }
+  ],
+  "transport_failures": 0,
+  "usable_calls": 2,
+  "verified_cells": [
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "with-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-fable-5-1",
+      "passed": 1188,
+      "prompt_sha256": "aff1eb0517abb87343731438ea4cbc21404fbaf03beadfbe3505b7e676a65982",
+      "raw_model_content_sha256": "1dc9becf771ef6a46f9d5590fce684d94ac78de65a21fda7882adaa08c837f0d",
+      "schema_passed": true,
+      "system_prompt_sha256": "d2e049d132faad5a7b41af63dce2d6c1f56231c513e5b44974e712b3a2be5c4b",
+      "usable": true
+    },
+    {
+      "checks": 1188,
+      "completion_status": "complete",
+      "condition": "without-skill",
+      "errors": [],
+      "group": "non-destructive-identity-graph",
+      "model": "claude-fable-5-1",
+      "passed": 1158,
+      "prompt_sha256": "aff1eb0517abb87343731438ea4cbc21404fbaf03beadfbe3505b7e676a65982",
+      "raw_model_content_sha256": "c8adafad2c0a0225c9487a2dbcc9d6d7202267db0bf02bf7d5c4620511577c8c",
+      "schema_passed": true,
+      "system_prompt_sha256": "0cb2793687f4b50e295209a9a69b86202b02a71e1155cda47288853a127453bc",
+      "usable": true
+    }
+  ],
+  "versions": {
+    "claude_code": "2.1.267 (Claude Code)",
+    "ollama": "0.33.2",
+    "per_call_timeout_seconds": 300,
+    "qwen_digest": null,
+    "qwen_runtime": {
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "temperature": 0,
+      "think": false
+    }
+  }
+}
