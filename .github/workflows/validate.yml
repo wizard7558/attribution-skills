@@ -22,7 +22,7 @@ jobs:
           node-version: "22"
 
       - name: Install MMM Python dependencies
-        run: pip install -r skills/mmm-and-incrementality-framing/requirements.txt
+        run: pip install -r skills/mmm-and-incrementality-framing/requirements.txt tiktoken
 
       - name: Install skills-ref
         run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
