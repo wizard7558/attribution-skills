@@ -29,6 +29,7 @@ npx skills add wizard7558/attribution-skills --skill mmm-and-incrementality-fram
 npx skills add wizard7558/attribution-skills --skill capi-match-keys
 npx skills add wizard7558/attribution-skills --skill attribution-data-quality-tripwires
 npx skills add wizard7558/attribution-skills --skill attribution-audit
+npx skills add wizard7558/attribution-skills --skill budget-scenario-planning
 ```
 
 The GA4 and pixel skills each bundle their classifier and contract, so a single-skill installation does not need sibling skill directories. The audit skill requires explicitly installed upstream skill roots at invocation time.
@@ -49,6 +50,7 @@ The GA4 and pixel skills each bundle their classifier and contract, so a single-
 | [`capi-match-keys`](skills/capi-match-keys) | 0.1.0 | Conversion preparation, provider payloads, and transactional outbox delivery | Deterministic helpers pass; PostgreSQL outbox harness opt-in |
 | [`attribution-data-quality-tripwires`](skills/attribution-data-quality-tripwires) | 0.1.0 | Nine native quality checks plus schema and column population extractors | Deterministic suite passes; recorded model matrix complete for fixed prompts |
 | [`attribution-audit`](skills/attribution-audit) | 0.1.0 | Compose or invoke a bounded audit across upstream skills with explicit inventory and provenance | Offline compose/execute host verified; native BigQuery proof summarized; harness manifest authored; live matrix published 18/18 |
+| [`budget-scenario-planning`](skills/budget-scenario-planning) | 0.1.0 | Project marketing budget using Monte Carlo sampling, calibrate Hill-saturation curves, and optimize using KKT allocation | Deterministic harness opt-in |
 
 ## How they work together
 
