@@ -1,6 +1,6 @@
 # Native verification status
 
-Reviewed 2026-09-09. This record separates synthetic contract checks, bounded live export compatibility and model evaluation. The current [model evaluation](eval.md) reports **14/18 usable** published cells with four transport supplements outstanding. No query or model was rerun for this documentation alignment.
+Reviewed 2026-09-09. This record separates synthetic contract checks, bounded live export compatibility and model evaluation. The current [model evaluation](eval.md) reports **23/24 usable** published cells, with one preserved `claude-fable-5-1/without-skill/transactions-and-execution` `transport_failure`; the three completed Sonnet recovery cells and all six DeepSeek `deepseek-flash` cells are now published. No query or model was rerun for this documentation alignment.
 
 ## Current evidence boundaries
 
