@@ -39,6 +39,7 @@ for suite in "$@"; do
       node skills/capi-match-keys/scripts/test-eval-manifest.mjs
       node skills/attribution-data-quality-tripwires/scripts/test-eval-manifest.mjs
       python3 scripts/test-publish-eval-matrix.py
+      python3 scripts/test-run-skill-evals-recover.py
       bash scripts/test-standalone-install.sh
 
       node skills/first-party-pixel/scripts/build-eval-cases.mjs --check
