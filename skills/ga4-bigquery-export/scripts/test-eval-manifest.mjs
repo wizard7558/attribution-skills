@@ -8,6 +8,11 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {validateConfig,decodeRows,collectResults,runChecks,DEFAULT_CAP} from './run-export-checks.mjs';
 const root=fileURLToPath(new URL('..',import.meta.url));
+const harness=process.env.GA4_EVAL_HARNESS??path.resolve(root,'../../scripts/run-skill-evals.py');
+if(!fs.existsSync(harness)){
+ console.log('SKIP test-eval-manifest.mjs: repository-only check; requires the shared harness scripts/run-skill-evals.py or GA4_EVAL_HARNESS=<path> (not needed for an installed ga4-bigquery-export skill)');
+ process.exit(0);
+}
 const read=n=>JSON.parse(fs.readFileSync(path.join(root,'references',n+'-fixtures.json'),'utf8'));
 const C=read('companion-session'),P=read('parameter-diagnostic'),E=read('ecommerce'),L=read('integration');
 const clone=structuredClone,hash=x=>crypto.createHash('sha256').update(x).digest('hex');
@@ -25,7 +30,7 @@ const PINNED={
   "scripts/run-export-checks.mjs": "9eaedf7ec9e30895195196dfd6f0d7447f175c9e58255c907b92a3f1b6494f14",
   "scripts/test-export-checks.mjs": "f74c121a20a26c95ea9cd83052f37e5b707ff212eeb6ec027a10e7c309d1ae13",
   "scripts/test-parameter-diagnostics.mjs": "252358c194e14986f0e7cbdb887f2a4bee67325fe0e21eba2bc8441707da4a89",
-  "scripts/test-companion-sessions.mjs": "f09b2a98b203b151067277435e7afeecaced5c6564cbb0e56be529f7de2398af",
+  "scripts/test-companion-sessions.mjs": "6c3ece64d4569f45962f6a83fb9b21f46cd425cf31dc9454d7779541d4e1e2e8",
   "scripts/session-ctes.sql": "36bbd978128f3339bb285e70c0b74e18b7d85039cb97173a26342e602c010e36",
   "references/sql/key_events.sql": "222626d590d9c084318916b44cb40beac00a259a0ea1208f2360fa4cc90ebd73",
   "references/sql/ui_reconciliation.sql": "098c9c6009797cc2661e66218a1ebd93c3b422cd326ad298f6a879d4bbfbe2d8",
@@ -221,7 +226,7 @@ try{
   for(const [relative,h] of Object.entries(index.current_source_hashes))assert.equal(hash(fs.readFileSync(path.join(root,relative))),h,relative);
   nativeAudit={index_sha256:hash(fs.readFileSync(indexPath)),reports:Object.fromEntries(Object.entries(index.reports).map(([k,v])=>[k,v.sha256])),complete_native_jobs_verified:audited.length,jobs:audited};
  }
- const harness=process.env.GA4_EVAL_HARNESS??path.resolve(root,'../../scripts/run-skill-evals.py');assert.equal(hash(fs.readFileSync(harness)),'b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45');
+ assert.equal(hash(fs.readFileSync(harness)),'b12f6051d57135d23bdf5e4204c6d4866ddbb41d5602bb4ea63972ab45567b45');
  fs.writeFileSync(path.join(temp,'expected.json'),JSON.stringify(expected));
  const python=String.raw`
 import copy,hashlib,importlib.util,json,pathlib,re,sys

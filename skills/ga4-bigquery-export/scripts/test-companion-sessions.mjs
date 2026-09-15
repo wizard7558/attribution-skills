@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Native synthetic proof; offline checks never claim to execute SQL.
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { readFile, writeFile, mkdir, mkdtemp, cp, rm } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
@@ -8,6 +9,11 @@ import { homedir, tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url)), root=path.resolve(here,'..');
+const requiredCanonical = path.resolve(root, '../channel-taxonomy/scripts/channel-taxonomy.mjs');
+if (!existsSync(requiredCanonical)) {
+  console.log('SKIP test-companion-sessions.mjs: repository-only check; requires sibling skills/channel-taxonomy (not needed for an installed ga4-bigquery-export skill)');
+  process.exit(0);
+}
 const hash=x=>createHash('sha256').update(x).digest('hex');
 const flags=process.argv.slice(2), allowed=new Set(['--live','--project','--location','--report','--resume-report']);
 for(let i=0;i<flags.length;i++){assert.ok(allowed.has(flags[i]),`unknown flag ${flags[i]}`);if(flags[i]!=='--live')assert.ok(flags[++i]&&!flags[i].startsWith('--'),'missing flag value');}

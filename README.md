@@ -8,7 +8,7 @@ Created by Riley Sorenson, the founder of [Bellaso](https://bellaso.app). These 
 
 ## Install
 
-Install all twelve skills:
+Install all thirteen skills:
 
 ```bash
 npx skills add wizard7558/attribution-skills
@@ -109,6 +109,8 @@ bash scripts/run-tests.sh --offline
 The component commands include artifact checks, GA4 and pixel fixture suites, shared harness validation for every skill with `references/eval-cases.json`, audit compose/execute offline hosts, per-skill deterministic tests, and SQL rendering evidence. They do not execute live models, authenticated BigQuery jobs, or PostgreSQL roundtrips unless you add `--postgres` or `--bigquery`.
 
 To update shared artifacts, run the generator with `--repository` and omit `--check`. In a standalone channel-taxonomy installation, omit `--repository`; the generator then updates or checks only that skill's own reference SQL.
+
+An installed single `ga4-bigquery-export` skill runs its fixture suites (`test-integration`, `test-ecommerce`, `test-export-checks`, `test-parameter-diagnostics`) and `run_checks.sh` without sibling skills. Its repository-only checks (`test-artifacts`, `test-companion-sessions`, `test-eval-manifest`) print a `SKIP` line and exit 0 when the sibling `channel-taxonomy` skill or the shared harness is absent; `GA4_EVAL_HARNESS` points a copied skill at the shared harness.
 
 Run the standalone collector roundtrip and repository migration check as separate disposable PostgreSQL runs:
 

@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 // Repository-only regression for the bundler; never mutates working-tree artifacts.
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 const skills = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const requiredGenerator = path.join(skills, 'channel-taxonomy', 'scripts', 'build-artifacts.mjs');
+if (!existsSync(requiredGenerator)) {
+  console.log('SKIP test-artifacts.mjs: repository-only check; requires sibling skills/channel-taxonomy (not needed for an installed ga4-bigquery-export skill)');
+  process.exit(0);
+}
 const temp = await mkdtemp(path.join(tmpdir(), 'attribution-artifacts-'));
 const generator = 'channel-taxonomy/scripts/build-artifacts.mjs';
 const artifacts = [
