@@ -6,7 +6,7 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, riley-public-ci-linux-arm64]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,7 +64,7 @@ jobs:
         run: env -u DATABASE_URL PGPORT_TEST=55439 COLLECTOR_PORT=8799 PYTHON_EXECUTABLE=$(which python3) bash scripts/run-tests.sh --postgres
 
   confidentiality:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, riley-public-ci-linux-arm64]
     steps:
       - uses: actions/checkout@v4
 
